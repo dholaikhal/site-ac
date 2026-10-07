@@ -1,5 +1,6 @@
 ---
 import Base from "../layouts/Base.astro";
+import PhotoCredits from "../components/PhotoCredits.astro";
 import Sources from "../components/Sources.astro";
 ---
 <Base title="Trust and safety · Amader Cloud" description="We never hold your money. Every app is reviewed against scams and impersonation. How we handle data, backups and broken changes.">
@@ -56,7 +57,7 @@ import Sources from "../components/Sources.astro";
   </div>
 </section>
 
-<div class="wrap"><Sources ids={["pdpo"]} /></div>
+<div class="wrap"><Sources ids={["pdpo"]} /><PhotoCredits /></div>
 <div style="height:40px"></div>
 
 <style>

@@ -1,0 +1,12 @@
+---
+// Footnote list of photo credits (the only place credits are shown in full).
+import data from "../data/photos.json";
+---
+<aside class="sources" id="photo-credits" aria-label="Photo credits">
+  <strong>Photo credits</strong>
+  <ol>
+    {Object.values(data.photos).map((p) => (
+      <li><a href={p.source} rel="noopener" target="_blank">Photo</a> by <a href={p.profile} rel="noopener" target="_blank">{p.photographer}</a> on Unsplash, used on {p.usedOn}. <a href={data.licence.url} rel="noopener" target="_blank">{data.licence.name}</a>.</li>
+    ))}
+  </ol>
+</aside>

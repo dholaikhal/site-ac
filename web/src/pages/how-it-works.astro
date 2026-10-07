@@ -1,5 +1,6 @@
 ---
 import Base from "../layouts/Base.astro";
+import Photo from "../components/Photo.astro";
 import { plan } from "../data/facts";
 import Connectors from "../components/Connectors.astro";
 const steps = [
@@ -79,8 +80,12 @@ const run = [
 
 <section class="section">
   <div class="wrap">
-    <div class="head">
-      <h2>You run the business. We run the app.</h2>
+    <div class="run-head">
+      <div>
+        <h2>You run the business. We run the app.</h2>
+        <p class="lede">Your time goes on customers and stock. Everything behind the shop's address is ours to keep working.</p>
+      </div>
+      <Photo id="night-market" class="run-photo" sizes="(max-width: 860px) 100vw, 50vw" />
     </div>
     <div class="cards">
       {run.map(([t, d]) => <div class="card"><h3>{t}</h3><p>{d}</p></div>)}
@@ -109,6 +114,9 @@ const run = [
 </section>
 
 <style>
+.run-head { display: grid; grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr); gap: clamp(24px, 4vw, 56px); align-items: end; margin-bottom: clamp(26px, 4vw, 44px); }
+:global(.run-photo) { width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: cover; border-radius: 4px; }
+@media (max-width: 860px) { .run-head { grid-template-columns: 1fr; } }
 .steps-bp { list-style: none; margin: 0; padding: 0; display: grid; gap: 22px; grid-template-columns: repeat(3, minmax(0, 1fr)); }
 @media (max-width: 900px) { .steps-bp { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 @media (max-width: 580px) { .steps-bp { grid-template-columns: 1fr; } }

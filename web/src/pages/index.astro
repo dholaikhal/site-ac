@@ -1,5 +1,6 @@
 ---
 import Base from "../layouts/Base.astro";
+import Photo from "../components/Photo.astro";
 import Demo from "../components/Demo.astro";
 import Src from "../components/Src.astro";
 import Sources from "../components/Sources.astro";
@@ -67,12 +68,15 @@ const rates: [string, string, string][] = [
 </section>
 
 <section class="section">
-  <div class="wrap">
-    <h2 class="cod-h">Prepaid orders rarely come back.</h2>
-    <div class="cod">
+  <div class="wrap cod">
+    <Photo id="delivery-van" class="cod-photo" sizes="(max-width: 860px) 100vw, 40vw" />
+    <div>
+      <h2 class="cod-h">Prepaid orders rarely come back.</h2>
       <p class="lede">Most online orders in Bangladesh are paid in cash at the door, and many are refused when the courier arrives. Your own checkout lets buyers pay first, while your Facebook page keeps bringing them in.</p>
-      <div class="stat"><span class="n">{m.codShare.text}</span><span class="l">{m.codShare.label}.</span><Src id={m.codShare.source} /></div>
-      <div class="stat"><span class="n red">{m.codReturns.text}</span><span class="l">{m.codReturns.label}.</span><Src id={m.codReturns.source} /></div>
+      <div class="cod-stats">
+        <div class="stat"><span class="n">{m.codShare.text}</span><span class="l">{m.codShare.label}.</span><Src id={m.codShare.source} /></div>
+        <div class="stat"><span class="n red">{m.codReturns.text}</span><span class="l">{m.codReturns.label}.</span><Src id={m.codReturns.source} /></div>
+      </div>
     </div>
   </div>
 </section>
@@ -128,12 +132,14 @@ const rates: [string, string, string][] = [
 @media (max-width: 860px) { .rate-grid { grid-template-columns: 1fr; } }
 .rate-grid h2 { max-width: 12ch; }
 
-.cod-h { max-width: 14ch; }
-.cod { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr) minmax(0, 0.8fr); gap: clamp(24px, 4vw, 56px); align-items: start; margin-top: 12px; }
+.cod { display: grid; grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr); gap: clamp(28px, 5vw, 72px); align-items: center; }
+:global(.cod-photo) { width: 100%; height: auto; aspect-ratio: 4 / 5; object-fit: cover; border-radius: 4px; }
+.cod-h { max-width: 13ch; }
+.cod-stats { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(20px, 3vw, 40px); margin-top: 28px; }
 .cod .stat { border-left: 3px solid var(--rule); padding-left: 20px; }
 .cod .n.red { color: var(--red); }
-@media (max-width: 860px) { .cod { grid-template-columns: 1fr 1fr; } .cod .lede { grid-column: 1 / -1; } }
-@media (max-width: 480px) { .cod { grid-template-columns: 1fr; } }
+@media (max-width: 860px) { .cod { grid-template-columns: 1fr; } :global(.cod-photo) { aspect-ratio: 4 / 3; } }
+@media (max-width: 480px) { .cod-stats { grid-template-columns: 1fr; } }
 
 .closing { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr); gap: clamp(24px, 4vw, 56px); align-items: center; }
 @media (max-width: 860px) { .closing { grid-template-columns: 1fr; } }
