@@ -55,7 +55,7 @@ const calcPlans = (["starter", "business", "agency"] as const).map((id) => ({
             <h3>{s.t}</h3>
             <p>{s.job}</p>
             <p class="why"><strong>Why:</strong> {s.why}</p>
-            {s.cost && <p class="pp-cost"><span class="hyp">Hypothesis</span> {s.cost}</p>}
+            {s.cost && <p class="pp-cost">{s.cost}</p>}
           </div>
         ))}
       </div>
@@ -75,14 +75,13 @@ const calcPlans = (["starter", "business", "agency"] as const).map((id) => ({
         <div class="card stat"><span class="n">{f.text}</span><span class="l">{f.label}.</span></div>
       ))}
     </div>
-    <p class="small" style="margin-top:16px">Aggregator reach against seller count is our inference across two sources.</p>
   </div>
 </section>
 
 <section class="section alt" id="economics">
   <div class="wrap">
     <div class="head">
-      <h2>Unit economics <span class="hyp">Hypothesis</span></h2>
+      <h2>Unit economics at pilot pricing</h2>
       <p class="lede">Token costs at list prices; usage is our assumption.</p>
     </div>
     <div class="econ">
@@ -94,7 +93,7 @@ const calcPlans = (["starter", "business", "agency"] as const).map((id) => ({
             <tr><td>First build, free tier ({models.sonnet.name})</td><td class="tok">same</td><td class="num">{usd(e.firstBuildSonnetUsd)}</td></tr>
             <tr><td>One edit ({models.sonnet.name})</td><td class="tok">{e.tokens.edit.cached} cached + {e.tokens.edit.fresh} fresh in, {e.tokens.edit.output} out</td><td class="num">{usd(e.editUsd)}</td></tr>
             <tr><td>Hosting, per small app</td><td>a month</td><td class="num">~{usd(e.hostingPerAppUsd)}</td></tr>
-            <tr><td>SMS</td><td>{tk(e.smsTk)} each ({e.smsNote.toLowerCase()})</td><td class="num">~${e.smsUsd}</td></tr>
+            <tr><td>SMS</td><td>{tk(e.smsTk)} each</td><td class="num">~${e.smsUsd}</td></tr>
             <tr><td>Free signup, one-off</td><td>build + {plan("free").edits} edits</td><td class="num">{usd(e.freeSignupCostUsd)}</td></tr>
           </tbody>
         </table>
@@ -178,7 +177,7 @@ const calcPlans = (["starter", "business", "agency"] as const).map((id) => ({
 <section class="section alt" id="roadmap">
   <div class="wrap">
     <div class="head">
-      <h2>A {facts.mvp.weeks}-week MVP, then scale. <span class="hyp">Hypothesis</span></h2>
+      <h2>A {facts.mvp.weeks}-week MVP, then scale.</h2>
     </div>
     <div class="timeline">
       {facts.mvp.phases.map((p) => (
@@ -190,7 +189,7 @@ const calcPlans = (["starter", "business", "agency"] as const).map((id) => ({
         <div class="tl card wash"><span class="tl-w">{r.when}</span><p>{r.what}</p></div>
       ))}
     </div>
-    <h3 style="margin-top:36px">Seed-round targets <span class="hyp">Hypothesis</span></h3>
+    <h3 style="margin-top:36px">Seed-round targets</h3>
     <div class="cards targets">
       {facts.roadmap.seedTargets.map((t) => <div class="card stat"><span class="n">{t.text}</span><span class="l">{t.label}</span></div>)}
     </div>
@@ -299,7 +298,6 @@ if (calc) {
 .pp p { font-size: 1.08rem; }
 .pp .why { color: rgb(255 255 255 / .86); }
 .pp-cost { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; font-weight: 600; }
-.pp-cost .hyp { background: #fff; color: #b3261e; border-color: #fff; }
 
 .econ { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 24px; align-items: start; }
 @media (max-width: 960px) { .econ { grid-template-columns: 1fr; } }
@@ -337,6 +335,5 @@ if (calc) {
 .risks { margin: 0; }
 .risks dt { font-weight: 700; margin-top: 14px; }
 .risks dd { margin: 2px 0 0; color: var(--ink-2); }
-h2 .hyp, h3 .hyp { font-size: 0.8rem; }
 </style>
 </Base>

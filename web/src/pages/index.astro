@@ -46,7 +46,7 @@ const rates: [string, string, string][] = [
             <div class="b ink"><div class="pgrid">{products.map(([n, p, w]) => <div class="pc"><div class={`sw ${w}`}></div><span>{n}</span><b>{tk(p)}</b></div>)}</div></div>
           </div>
         </div>
-        <figcaption class="ba-cap">What you get <span class="tag">Sample</span></figcaption>
+        <figcaption class="ba-cap">What you get</figcaption>
       </div>
     </figure>
   </div>
@@ -57,7 +57,7 @@ const rates: [string, string, string][] = [
     <div>
       <h2>What comes with every store</h2>
       <p class="lede">Nothing to set up yourself. Ask for changes in plain words.</p>
-      <p class="small"><span class="hyp">Pilot pricing</span> <a href="pricing.html">All plans</a></p>
+      <p class="small"><a href="pricing.html">See the plans</a></p>
     </div>
     <ul class="rates">
       {rates.map(([item, note, val]) => <li><span class="item">{item}<small>{note}</small></span><span class="lead" aria-hidden="true"></span><span class="val">{val}</span></li>)}
@@ -93,7 +93,7 @@ const rates: [string, string, string][] = [
   <div class="wrap closing">
     <div class="signboard sign-yellow">
       <h2>Free to build. {tk(starter.tk)} a month to go&nbsp;live.</h2>
-      <span class="address">Paid by bKash</span>
+      <span class="address">Pilot pricing, paid by bKash</span>
     </div>
     <div>
       <p class="lede">The closed beta opens to a small group of businesses first.</p>
