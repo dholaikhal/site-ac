@@ -709,3 +709,12 @@ fieldset.field { border: 0; padding: 0; margin: 0; }
   .page-head.photo .head-scene { position: relative; order: 2; height: 56svh; min-height: 340px; margin-top: 24px; }
   .page-head.photo::before { display: none; }
 }
+
+/* ---------- Pictograms (blueprint line drawings, defined once in the footer sprite) ---------- */
+.pict { display: block; width: 48px; height: 48px; color: var(--amber-ink); fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; margin-bottom: 14px; }
+.pict .f, .sprite .f { fill: currentColor; stroke: none; }
+.dark .pict, .bp .pict, .panel-dusk .pict, .scale .pict { color: var(--amber); }
+.pict.lg { width: 64px; height: 64px; }
+.pict.inline { display: inline-block; width: 28px; height: 28px; margin: 0 8px -7px 0; }
+.pict { width: 56px; height: 56px; stroke-width: 1.8; }
+.value { background: var(--paper-2); }
