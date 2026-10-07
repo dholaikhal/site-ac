@@ -94,4 +94,5 @@ Never claim "carbon neutral", "CO₂ saved", or measured wattage until we've met
 | Social cards 1080×1080 | `marketing/out/card-*.png`: together (rooftops), backups held by neighbours (Uttara towers), screens instead of posters (blueprint), botnet warning |
 | Open Graph image | `site/assets/img/og.jpg` |
 | Investor deck | claude.ai artifact; source in `marketing/deck/` |
+| Facebook page kit | `marketing/facebook/`: setup and playbook, dated posts, reply bank, and 34 generated images in `marketing/out/facebook/` |
 | Render pipeline | `python3 marketing/render.py` (run `npm i --prefix marketing` first) |

@@ -8,6 +8,7 @@ Second jobs for old devices. This repo holds the product brief, the website (sta
 | `site/` | The website. Deploy this folder as-is to any static host |
 | `partials/` + `tools/sync_chrome.py` | Shared header and footer. Edit a partial, then run `python3 tools/sync_chrome.py` |
 | `marketing/` | Brand guide, copy deck, print and social sources, rendered outputs in `marketing/out/`, deck source in `marketing/deck/` |
+| `marketing/facebook/` | Facebook page kit: setup, post calendar with copy, replies, and the image generator (`build.py`) |
 
 ## Preview
 

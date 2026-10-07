@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 """Stamp shared fragments into marketing HTML, then render PDFs/PNGs with headless Chrome via playwright-core.
 
-  python3 marketing/render.py      (needs: npm i --prefix marketing playwright-core)
+  python3 marketing/render.py                 print + social (needs: npm i --prefix marketing playwright-core)
+  python3 marketing/render.py facebook/cards  only the given folders or files
 """
 import pathlib, re, subprocess, json
 M = pathlib.Path(__file__).resolve().parent
@@ -30,13 +31,21 @@ def static_mesh(scene, scale=1.0):
 for sc in SCENES:
     frags[f"mesh:{sc['id']}"] = static_mesh(sc)
     frags[f"mesh:{sc['id']}@2"] = static_mesh(sc, 2)  # heavier lines for small renders
+# Optional args limit the run to some sources, in order: `render.py facebook/cards facebook/contact-sheet.html`.
+srcs = []
+for arg in sys.argv[1:] or ["print", "social"]:
+    p = M / arg
+    srcs += sorted(p.glob("*.html")) if p.is_dir() else [p]
 jobs = []
-for f in list((M / "print").glob("*.html")) + list((M / "social").glob("*.html")):
+for f in srcs:
     s = f.read_text()
     for k, v in frags.items():
         s = re.sub(rf"<!--{re.escape(k)}-->.*?<!--/{re.escape(k)}-->", lambda _m: f"<!--{k}-->{v}<!--/{k}-->", s, flags=re.S)
     f.write_text(s)
-    out = M / "out" / (f.stem + (".pdf" if f.parent.name == "print" else ".png"))
+    sub = "facebook" if "facebook" in f.relative_to(M).parts else ""
+    fmt = re.search(r'<meta name="render" content="(\w+)">', s)
+    out = M / "out" / sub / (f.stem + (".pdf" if f.parent.name == "print" else "." + (fmt[1] if fmt else "png")))
+    out.parent.mkdir(parents=True, exist_ok=True)
     jobs.append({"src": f.as_uri(), "out": str(out)})
 (M / "out").mkdir(exist_ok=True)
 js = r"""
@@ -50,7 +59,8 @@ for (const j of jobs) {
   await p.waitForTimeout(400);
   if (j.out.endsWith(".pdf")) await p.pdf({ path: j.out, preferCSSPageSize: true, printBackground: true });
   else { const s = await p.evaluate(() => [document.body.scrollWidth, document.body.scrollHeight]);
-         await p.setViewportSize({ width: s[0], height: s[1] }); await p.screenshot({ path: j.out }); }
+         await p.setViewportSize({ width: s[0], height: s[1] });
+         await p.screenshot(j.out.endsWith(".jpg") ? { path: j.out, type: "jpeg", quality: 90 } : { path: j.out }); }
   console.log("rendered", j.out.split("/").pop());
 }
 await b.close();

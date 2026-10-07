@@ -1,0 +1,93 @@
+/* Facebook packet layouts. Tokens come from ../print/print.css. */
+.card { position: relative; padding: 72px; display: flex; flex-direction: column; overflow: hidden; }
+.brand { font-size: 34px; color: var(--chalk); } .brand svg { width: 48px; height: 44px; }
+.top { display: flex; justify-content: space-between; align-items: center; }
+.no { font-size: 22px; color: var(--bp-line); }
+.kick { font-family: "JetBrains Mono", monospace; color: var(--amber); font-size: 26px; margin-top: 56px; }
+h1 { font-size: 72px; margin-top: 16px; max-width: 920px; }
+.bn { color: var(--amber); font-size: 44px; margin-top: 18px; }
+p.sub { font-size: 30px; color: var(--chalk-2); margin-top: 20px; max-width: 900px; line-height: 1.35; }
+.foot { margin-top: auto; display: flex; justify-content: space-between; gap: 24px; font-size: 21px; color: var(--chalk-2); }
+
+/* photo cards: text on the graded top; the mesh sits under the grade so it fades out behind the headline */
+.p > svg { z-index: -2; } .p.grade::before { z-index: -1; }
+.p.grade::before { background: linear-gradient(180deg, rgba(10,22,34,.95) 0%, rgba(10,22,34,.85) 26%, rgba(10,22,34,.2) 46%, rgba(10,22,34,0) 62%, rgba(10,22,34,.6) 100%); }
+.p .kick { margin-top: 48px; }
+.p .txt { max-width: 920px; }
+.p .foot span:first-child { color: var(--amber); }
+.cover { padding: 0; }
+.cover .brand { display: none; }
+.cover .txt { position: absolute; left: 330px; right: 270px; top: 70px; text-align: center; max-width: none; }
+.cover h1 { font-size: 70px; max-width: none; margin: 0; }
+.cover .bn { font-size: 42px; }
+.cover .foot { position: absolute; left: 330px; right: 330px; bottom: 24px; font-size: 19px; justify-content: center; gap: 40px; }
+.cover .foot span:last-child { opacity: .8; }
+.cover.grade::before { background: linear-gradient(180deg, rgba(10,22,34,.92) 0%, rgba(10,22,34,.55) 45%, rgba(10,22,34,.1) 70%, rgba(10,22,34,.55) 100%); }
+.event h1 { font-size: 80px; max-width: 1400px; }
+.event .txt { max-width: 1500px; }
+.story { padding: 260px 72px 360px; }
+.story .brand { position: absolute; top: 120px; left: 72px; }
+.story h1 { font-size: 96px; }
+.story p.sub { font-size: 36px; }
+
+/* recipe cards: drawing on the left, the job's spec on the right, a title block at the foot */
+.r h1 { font-size: 66px; }
+.r p.sub { font-size: 28px; }
+svg.art { width: 100%; height: auto; margin-top: auto; overflow: visible; }
+.art .ln { fill: none; stroke: var(--chalk); stroke-width: 3; stroke-linejoin: round; stroke-linecap: round; }
+.art .th { fill: none; stroke: var(--bp-line); stroke-width: 2; stroke-linecap: round; }
+.art .dim { fill: none; stroke: var(--bp-line); stroke-width: 1.5; stroke-dasharray: 6 6; }
+.art .amb { fill: var(--amber); } .art .amb-f { fill: var(--amber); opacity: .8; }
+.art .arc, .art .wire { fill: none; stroke: var(--amber); stroke-width: 4; stroke-linecap: round; }
+.art .job { fill: rgba(10,22,34,.35); stroke: var(--amber); stroke-width: 2; stroke-dasharray: 10 8; }
+.art .jt { fill: var(--amber); font: 500 30px "JetBrains Mono", monospace; }
+.art .an { fill: var(--chalk-2); font: 400 21px "JetBrains Mono", monospace; }
+.tb { display: grid; grid-template-columns: .9fr 2.3fr 1.4fr; border: 2px solid var(--bp-line); margin-top: 28px; font-size: 20px; }
+.tb div { padding: 14px 16px; white-space: nowrap; display: flex; flex-direction: column; gap: 6px; color: var(--chalk); }
+.tb div + div { border-left: 2px solid var(--bp-line); }
+.tb .k { color: var(--bp-line); font-size: 16px; }
+.d svg.art { margin: 40px 0 30px; }
+
+/* fact cards */
+.fig.long { font-size: 168px; }
+.fig { font-size: 220px; font-weight: 500; font-stretch: 118%; letter-spacing: -.04em; line-height: .9; color: var(--amber); margin-top: 90px; }
+.f h1 { font-size: 60px; margin-top: 28px; }
+.do { margin-top: auto; border-left: 4px solid var(--amber); padding: 8px 0 8px 26px; }
+.do .k { color: var(--bp-line); font-size: 20px; } .do p { font-size: 32px; line-height: 1.3; margin-top: 8px; color: var(--chalk); }
+.f .foot { margin-top: 48px; }
+
+/* checklists and steps */
+.c h1, .s h1 { margin-top: 64px; }
+ol { list-style: none; margin-top: 44px; display: grid; gap: 26px; }
+.c li { display: flex; gap: 26px; align-items: flex-start; font-size: 40px; line-height: 1.25; }
+.c ol { gap: 36px; margin-top: 56px; }
+.c .box { flex: none; width: 40px; height: 40px; border: 3px solid var(--chalk); border-radius: 4px; margin-top: 2px; }
+.c .then { margin-top: auto; font-size: 34px; color: var(--amber); line-height: 1.3; }
+.c .foot { margin-top: 40px; }
+.s h1 { font-size: 84px; }
+.s ol { gap: 34px; margin-top: 60px; }
+.s li { display: flex; gap: 24px; font-size: 40px; line-height: 1.3; padding-top: 30px; border-top: 2px solid rgba(143,184,220,.35); }
+.s .n { color: var(--amber); font-size: 26px; padding-top: 6px; }
+.btn { align-self: flex-start; margin-top: auto; background: var(--amber); color: var(--night); font-size: 34px; font-weight: 600; padding: 22px 40px; border-radius: 999px; }
+.s .foot { margin-top: 36px; }
+.paper { background: var(--paper); color: var(--ink); }
+.paper .brand { color: var(--ink); } .paper .no { color: var(--ink-2); } .paper .bn { color: var(--amber-ink); }
+.paper p.sub, .paper .foot { color: var(--ink-2); } .paper .n { color: var(--amber-ink); }
+.paper .s li, .paper li { border-top-color: var(--rule); }
+
+/* story-sized versions of the blueprint layouts */
+.sz-1080x1920 .card:not(.story) { padding: 260px 72px 360px; }
+.sz-1080x1920 h1 { font-size: 92px; }
+
+/* profile picture: the mark, centred inside the circle Facebook crops to */
+.pf { padding: 0; align-items: center; justify-content: center; background-size: 160px 160px, 160px 160px, 32px 32px, 32px 32px; }
+.pf svg { width: 80%; }
+
+/* cover crop guide: never upload */
+.gd { padding: 0; }
+.gd iframe { position: absolute; inset: 0; border: 0; }
+.gd .z { position: absolute; border: 4px dashed #ff5c8a; }
+.gd .z span { position: absolute; left: 10px; top: 8px; background: #ff5c8a; color: #fff; font-size: 18px; padding: 2px 8px; }
+.gd .mob { left: 266px; width: 1108px; top: 0; height: 624px; }
+.gd .pp { left: 32px; bottom: -120px; width: 340px; height: 340px; border-radius: 50%; }
+.gd .pp span { top: 40px; left: 40px; }
