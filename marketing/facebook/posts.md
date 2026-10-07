@@ -9,8 +9,8 @@ Post at 20:30–22:00 Dhaka time until Insights says otherwise. "Story" lines ar
 | 1. Seed | Mon 12 – Sat 17 Oct | Six posts up before anyone is invited |
 | 2. Launch and listen | Sun 18 Oct – Sat 14 Nov | Followers, the drawer census, first nominations |
 | 3. Lend us your drawer | Sun 15 Nov – Thu 31 Dec | Device donations for the bench, drawer day, more nominations |
-| 4. Bench diary | Jan – early Feb 2027 | Show the work; close nominations; announce pilot buildings before Ramadan |
-| 5. Pilot | After Eid (≈ mid-March 2027) | Building stories, with consent |
+| 4. Bench diary | Jan – early Feb 2027 | Show the work; close nominations; announce pilot buildings by early February |
+| 5. Pilot | From mid-March 2027 | Building stories, with consent |
 
 ## Phase 1: seed
 
@@ -167,7 +167,7 @@ Image: `d02-nominate` · Story: `s02-story-nominate`
 >
 > 1. Message us your area and roughly how many flats.
 > 2. We visit, meet the committee and check the devices. Free.
-> 3. We choose two buildings before Ramadan.
+> 3. We choose two buildings by early February.
 >
 > You don't need to be on the committee to nominate. Tell us, and we'll talk to them with you.
 
@@ -379,8 +379,8 @@ One post a week, Sun or Tue, real photos only:
 - Week 4: a device that failed, and what we learned.
 - **Sun 31 Jan:** nominations close. Thank-you post with the count.
 - **Before ≈ 8 Feb:** announce the two pilot buildings (with their committees' written consent to be named).
-- **Ramadan (≈ 9 Feb – 9 Mar):** two posts a week, posted after iftar. No hard asks. Ramadan Mubarak and Eid greetings without a sales line.
+- **≈ 9 Feb – mid-March (a slow period for committees, ending with a long public holiday):** two posts a week, late evening. No hard asks. The page posts no religious or festival greetings. On 21 February (Shaheed Dibosh and International Mother Language Day) a plain, non-promotional post, or nothing.
 
 ## Phase 5: pilot (outline)
 
-After Eid. One building story a week with the committee's consent: install day, the first month's numbers (support minutes, uptime), what residents asked. Drawer census and donations stay open; nominations reopen for the launch phase.
+From mid-March. One building story a week with the committee's consent: install day, the first month's numbers (support minutes, uptime), what residents asked. Drawer census and donations stay open; nominations reopen for the launch phase.

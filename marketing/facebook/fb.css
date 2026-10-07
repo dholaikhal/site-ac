@@ -15,13 +15,16 @@ p.sub { font-size: 30px; color: var(--chalk-2); margin-top: 20px; max-width: 900
 .p .kick { margin-top: 48px; }
 .p .txt { max-width: 920px; }
 .p .foot span:first-child { color: var(--amber); }
+/* the credit must be there, never noticed first */
+.p .foot { align-items: flex-end; }
+.p .foot span:last-child { font-size: 12px; opacity: .55; letter-spacing: .01em; }
 .cover { padding: 0; }
 .cover .brand { display: none; }
 .cover .txt { position: absolute; left: 330px; right: 270px; top: 70px; text-align: center; max-width: none; }
 .cover h1 { font-size: 70px; max-width: none; margin: 0; }
 .cover .bn { font-size: 42px; }
 .cover .foot { position: absolute; left: 330px; right: 330px; bottom: 24px; font-size: 19px; justify-content: center; gap: 40px; }
-.cover .foot span:last-child { opacity: .8; }
+.cover .foot span:last-child { font-size: 10px; opacity: .5; }
 .cover.grade::before { background: linear-gradient(180deg, rgba(10,22,34,.92) 0%, rgba(10,22,34,.55) 45%, rgba(10,22,34,.1) 70%, rgba(10,22,34,.55) 100%); }
 .event h1 { font-size: 80px; max-width: 1400px; }
 .event .txt { max-width: 1500px; }

@@ -11,7 +11,7 @@ The page's job between now and the pilot is to collect the four things the [road
 | Need (roadmap) | When it's needed | Page ask | Proposed target by 31 Jan 2027 |
 |---|---|---|---|
 | ~40 donated devices for the bench | Jan–Feb 2027 | "Lend us your drawer" (d03) | 60 pledged, 40 collected |
-| 2 pilot buildings | Chosen before Ramadan (≈ 8 Feb 2027) | "Nominate your building" (d02) | 15 nominations, 6 visits |
+| 2 pilot buildings | Chosen by early February 2027 | "Nominate your building" (d02) | 15 nominations, 6 visits |
 | 1 corporate retirement → 1 school lab | Pilot, Mar–May 2027 | "Retiring office laptops?" (d04) | 3 company conversations |
 | Proof that people care, for investors | Continuous | Drawer census (d01) and safety posts | 300 census replies; message volume |
 
@@ -54,7 +54,7 @@ Type these in as written. Fields marked *unverified* depend on what Facebook's f
 
 | Automation | Text |
 |---|---|
-| Instant reply | Assalamu alaikum / Nomoshkar, thanks for writing to amader.cloud. A person (not a bot) will reply within a day. If it's about your building, tell us your area and roughly how many flats. |
+| Instant reply | Hi, thanks for writing to amader.cloud. A person (not a bot) will reply within a day. If it's about your building, tell us your area and roughly how many flats. |
 | Away message | We're away right now and will reply in the morning. |
 | Frequently asked questions (*unverified* how many the form allows; four is safe) | "Can my building join the pilot?" · "I want to donate an old device" · "Is my old TV box safe?" · "How much does it cost?" Answers: [replies.md](replies.md) §1 |
 
@@ -100,7 +100,7 @@ Sizes follow third-party 2026 guides, since Meta's help pages don't publish one 
 
 **Mix per fortnight (about 6–7 posts):** 2 recipes, 1 safety post, 1–2 community scenes, 1 ask, 1 behind-the-scenes or reply-to-comments post. Every ask is followed by at least two posts that give something.
 
-**Cadence:** 3 feed posts a week (Sun, Tue, Thu) plus 1–2 stories. The best hour is unknown: start at 20:30–22:00 Dhaka time, then use Insights after four weeks (*hypothesis*: evening after work and Isha is when building committees read Facebook).
+**Cadence:** 3 feed posts a week (Sun, Tue, Thu) plus 1–2 stories. The best hour is unknown: start at 20:30–22:00 Dhaka time, then use Insights after four weeks (*hypothesis*: late evening, after work and dinner, is when building committees read Facebook).
 
 **Rules**
 
@@ -110,7 +110,8 @@ Sizes follow third-party 2026 guides, since Meta's help pages don't publish one 
 4. **Bengali.** Every Bengali line goes through a native speaker before posting. New lines this packet introduces: আপনার ড্রয়ারে কী আছে? (d01). The plan is English-first with Bengali touches, as the site is. See §8 on going Bangla-first.
 5. **People and places.** No identifiable people, flat numbers or building names without written consent. Never post a camera's live view or a screenshot of anyone's files.
 6. **Security questions get a straight answer within a day**, in public where possible ([replies.md](replies.md) §2). Being the people who answer them is the brand.
-7. **Credit photos** in the image (cards already do) and in the post if it's cropped out.
+7. **Credit photos** in the image (cards already do: small and quiet, never competing with the headline) and in the post if it's cropped out.
+8. **Bangladesh-standard and secular.** Bangla as written in Bangladesh (Bangla Academy, Dhaka spelling) and Bangladeshi English usage: Bangla not Bengali, Tk, flat, lift, current, load-shedding, para, bhangari, bKash/Nagad. Nothing West Bengal–coded. No religious greetings, phrases or festival posts from the page (no "Assalamu alaikum", "Nomoshkar", "Ramadan Mubarak", "Shubho …"). Open with "Hi" or the person's name. The native reviewer checks both, including পুরনো vs the Bangla Academy spelling পুরোনো, and ডেটা vs ডাটা.
 
 ## 5. Getting the first people in
 

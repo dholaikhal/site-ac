@@ -35,7 +35,7 @@ Image: `card-backups.png` or `card-screens.png`
 
 ## 3. WhatsApp message to a building committee
 
-> Assalamu alaikum / Nomoshkar [name],
+> Hi [name],
 >
 > I'm [name] from amader.cloud. We turn the old phones, TV boxes, laptops and routers that residents no longer use into equipment for the building: stairwell and gate cameras, Wi‑Fi for the roof and guard room, and a notice screen in the lobby. We maintain all of it.
 >

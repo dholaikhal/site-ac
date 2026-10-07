@@ -247,7 +247,7 @@ ASSETS = [
          sub="Count the old devices at home and tell us. We're mapping what Dhaka's drawers hold, para by para.", foot="Tell us in the comments, with your area", title="Ask: drawer census"),
     dict(id="d02-nominate", kind="steps", size=FEED, light=True, kick="pilot · march 2027", h1="Nominate your building for the pilot.",
          sub="Two Dhaka buildings get their cameras, Wi‑Fi and lobby screen from their residents' own drawers.",
-         steps=["Message us your area and roughly how many flats.", "We visit, meet the committee and check the devices. Free.", "We choose two buildings before Ramadan."],
+         steps=["Message us your area and roughly how many flats.", "We visit, meet the committee and check the devices. Free.", "We choose two buildings by early February."],
          button="Nominate my building", foot=WA, title="Ask: nominate a building"),
     dict(id="d03-donate", kind="steps", size=FEED, kick="lend us your drawer · winter 2026", h1="Give an old device a job, and help us build the first ones.",
          sub="This winter we test every recipe on donated devices before the pilot.",

@@ -2,12 +2,12 @@
 
 v0.1, 2026-10-07. Answers match the website's plans and FAQ (`site/index.html`) and the [brand.md](../brand.md) claims policy. If the site changes, change these. Write in the language the person wrote in; the Bengali versions need a native writer, not a translation of these.
 
-Tone: a neighbour who fixes things. Answer the actual question in the first sentence. No "Dear valued customer", no exclamation marks, no emoji walls.
+Tone: a neighbour who fixes things. Secular and Bangladesh-standard: no religious greetings or phrases (open with "Hi" or the person's name), Bangladeshi usage throughout. Answer the actual question in the first sentence. No "Dear valued customer", no exclamation marks, no emoji walls.
 
 ## 1. Common questions
 
 **Can my building join the pilot?**
-> Yes, if it's in Dhaka. Tell us the area and roughly how many flats. We'll visit, meet the committee and check the residents' old devices, free. We're choosing two buildings before Ramadan, and we'll tell you either way.
+> Yes, if it's in Dhaka. Tell us the area and roughly how many flats. We'll visit, meet the committee and check the residents' old devices, free. We're choosing two buildings by early February, and we'll tell you either way.
 
 Then collect for the nominations sheet: name, phone, area, building name (kept private), flats, committee contact, devices they know of, best time to visit.
 
