@@ -21,10 +21,12 @@ const run = [
 ---
 <Base title="How it works · Amader Cloud" description="Describe, build, preview, change by asking, publish, get paid. What the AI does at each step, and what we run for you.">
 
-<section class="page-hero band band-cobalt">
+<section class="page-hero">
   <div class="wrap">
-    <p class="kicker">How it works</p>
-    <h1>From a sentence to a working app.</h1>
+    <div class="signboard sign-blue">
+      <h1>From a sentence to a working app.</h1>
+      <span class="address">From one sentence to a live app</span>
+    </div>
     <p class="lede">Six steps. You do the first one; the AI and our team handle the rest, and keep handling it after you go live.</p>
   </div>
 </section>
@@ -47,7 +49,6 @@ const run = [
 <section class="section">
   <div class="wrap split">
     <div>
-      <p class="kicker">Why it doesn't break</p>
       <h2>The AI builds on rails.</h2>
       <p class="lede">Generated code is reliable when it is constrained. So the agents don't start from a blank page.</p>
       <ul class="ticks">
@@ -79,7 +80,6 @@ const run = [
 <section class="section">
   <div class="wrap">
     <div class="head">
-      <p class="kicker">What we run for you</p>
       <h2>You run the business. We run the app.</h2>
     </div>
     <div class="cards">
@@ -88,16 +88,15 @@ const run = [
   </div>
 </section>
 
-<section class="section band band-ink" id="agencies">
+<section class="section ink-band" id="agencies">
   <div class="wrap split">
     <div>
-      <p class="kicker">For agencies and freelancers</p>
       <h2>Deliver client apps in a day.</h2>
       <p class="lede">Build on the same rails for your clients: describe, refine, hand over. The agency plan covers {plan("agency").apps} client apps and their hosting, so you stop babysitting servers and spend your time on the client.</p>
       <div class="btn-row"><a class="btn btn-go" href="contact.html?topic=agency">Agency enquiry</a><a class="btn" href="pricing.html">See the agency plan</a></div>
     </div>
-    <div class="card tint">
-      <span class="plate">Agency workflow</span>
+    <div class="card agency-card">
+      <h3>A client job, start to finish</h3>
       <ol class="aw">
         <li>Client brief in a sentence or two</li>
         <li>First build and preview the same day</li>
@@ -127,7 +126,6 @@ const run = [
 .rail.ai { background: var(--blue); color: #fff; border-color: #14213d; }
 .rail.out { background: var(--red); color: #fff; border-color: #14213d; justify-self: center; padding-inline: 40px; border-radius: 999px; }
 .aw { margin: 8px 0 0; padding-left: 20px; display: grid; gap: 8px; }
-#agencies .card { color: #14213d; background: var(--yellow); border-color: #14213d; }
-#agencies .plate { background: #fff; border-color: #14213d; color: #14213d; }
+#agencies .agency-card { color: #14213d; background: var(--yellow); border-color: var(--yellow); }
 </style>
 </Base>

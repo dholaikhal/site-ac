@@ -5,10 +5,12 @@ const to = "hello@amader.cloud";
 ---
 <Base title="Contact · Amader Cloud" description="Join the beta, make an agency enquiry, or contact us as an investor.">
 
-<section class="page-hero band band-red">
+<section class="page-hero">
   <div class="wrap">
-    <p class="kicker">Contact</p>
-    <h1>Build with us.</h1>
+    <div class="signboard ">
+      <h1>Build with us.</h1>
+      <span class="address">For businesses, agencies and investors</span>
+    </div>
     <p class="lede">The closed beta is opening to a small group of businesses first. Tell us what you sell or run, and we'll reach out.</p>
   </div>
 </section>
@@ -40,8 +42,7 @@ const to = "hello@amader.cloud";
     </form>
 
     <aside class="contact-side">
-      <div class="card tint">
-        <span class="plate">Direct</span>
+      <div class="card wash">
         <h3>Email</h3>
         <p class="url">{to}</p>
         <p class="small">Placeholder address until launch.</p>
@@ -62,6 +63,5 @@ const to = "hello@amader.cloud";
 .contact { display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); gap: 24px; align-items: start; }
 @media (max-width: 860px) { .contact { grid-template-columns: 1fr; } }
 .contact-side { display: grid; gap: 16px; }
-.contact-side .card.tint { padding-top: 30px; }
 </style>
 </Base>

@@ -4,10 +4,12 @@ import Sources from "../components/Sources.astro";
 ---
 <Base title="Trust and safety · Amader Cloud" description="We never hold your money. Every app is reviewed against scams and impersonation. How we handle data, backups and broken changes.">
 
-<section class="page-hero band band-plum">
+<section class="page-hero">
   <div class="wrap">
-    <p class="kicker">Trust and safety</p>
-    <h1>Your money, your customers, your app.</h1>
+    <div class="signboard sign-navy">
+      <h1>Your money, your customers, your app.</h1>
+      <span class="address">On every amader.cloud address</span>
+    </div>
     <p class="lede">Shared addresses like yourname.amader.cloud only work if people can trust them. Here is how we protect owners, their customers and everyone who clicks a link.</p>
   </div>
 </section>
@@ -15,25 +17,21 @@ import Sources from "../components/Sources.astro";
 <section class="section">
   <div class="wrap pillars">
     <article class="card pillar" id="money">
-      <span class="plate red">Money</span>
       <h2>We never hold your money.</h2>
       <p>Payments go to your own merchant accounts through a licensed payment partner. Amader Cloud builds and hosts the app; we are never in the flow of funds, so we never sit on your sales and we don't need to be a payment company.</p>
       <ul class="ticks"><li>Your own bKash, Nagad and card merchant accounts</li><li>We help with the gateway paperwork</li><li>Your money is yours from the first order</li></ul>
     </article>
     <article class="card pillar" id="review">
-      <span class="plate">Review</span>
       <h2>Every app is checked before it goes live.</h2>
       <p>Free subdomains attract people who want to fake a bank or mobile-money page. So every app is reviewed by AI and rules before it is published, and again while it runs.</p>
       <ul class="ticks"><li>No impersonation of banks, payment brands, government or other businesses</li><li>Payment brand names can't be used in app names</li><li>No prohibited goods or scams</li><li>Takedown within hours when something slips through</li><li>A verified-business badge for owners who confirm who they are</li></ul>
       <p class="small">See something wrong on an amader.cloud address? <a href="contact.html?topic=abuse">Report it</a>.</p>
     </article>
     <article class="card pillar" id="changes">
-      <span class="plate cobalt">Changes</span>
       <h2>A change can't quietly break your shop.</h2>
       <p>The AI builds on one fixed stack from tested components and connectors. Every change runs the tests and shows you a preview before it goes live, and any change can be rolled back in one click.</p>
     </article>
     <article class="card pillar" id="data">
-      <span class="plate green">Data</span>
       <h2>Data and backups.</h2>
       <p>Your app's orders, customers and payment records are stored and backed up by us. You can export them at any time.</p>
       <ul class="ticks"><li>We process your customers' data on your behalf, under data-processing terms with you, in line with Bangladesh's Personal Data Protection Ordinance 2025</li><li>Building and editing use AI services and hosting that may be outside Bangladesh; our terms set out the basis for that transfer</li><li>An option to keep data hosted in Bangladesh is planned</li></ul>
@@ -44,7 +42,6 @@ import Sources from "../components/Sources.astro";
 <section class="section alt">
   <div class="wrap">
     <div class="head">
-      <p class="kicker">Being put in place for the beta</p>
       <h2>What we are still finishing.</h2>
       <p class="lede">We would rather show you the list than pretend it's done.</p>
     </div>
@@ -65,7 +62,8 @@ import Sources from "../components/Sources.astro";
 <style>
 .pillars { display: grid; gap: 22px; grid-template-columns: 1fr 1fr; }
 @media (max-width: 860px) { .pillars { grid-template-columns: 1fr; } }
-.pillar { padding: 34px 28px 28px; }
+.pillar { padding: 28px; border-top: 6px solid var(--green); }
+.pillar:nth-child(2) { border-top-color: var(--yellow); } .pillar:nth-child(3) { border-top-color: var(--blue); } .pillar:nth-child(4) { border-top-color: var(--red); }
 .pillar h2 { font-size: clamp(1.5rem, 1.1rem + 1.2vw, 2rem); }
 .checklist { list-style: none; padding: 0; margin: 0; display: grid; gap: 10px; max-width: 820px; }
 .checklist li { position: relative; padding: 12px 14px 12px 46px; background: var(--card); border: 2px solid var(--line); border-radius: 10px; }
