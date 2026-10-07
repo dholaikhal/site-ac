@@ -101,11 +101,11 @@ Note: this is the launch post. Team members share it with a personal line on the
 
 ### P08 · Tue 20 Oct · who we are
 
-Image: founder photo (to shoot)
+Image: hands at the bench with a few old devices (no faces, no names)
 
-> I'm [name]. I started amader.cloud because [one honest sentence: the drawer at home, a hijacked TV box, a school without computers].
+> Who's behind amader.cloud? A small team in Dhaka that fixes things.
 >
-> We're [number] people in [area], Dhaka. We fix things, and we've spent [time] working out how to make old devices useful and safe again, and how to keep them that way.
+> We started because of the drawer every home has: [one honest sentence: a hijacked TV box, a school without computers, a building with no working cameras]. We've spent [time] working out how to make old devices useful and safe again, and how to keep them that way.
 >
 > Our pilot starts in 2027 with two apartment buildings. If you'd like to talk, message the page. A person reads every message.
 

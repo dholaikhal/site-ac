@@ -28,9 +28,9 @@ Type these in as written. Fields marked *unverified* depend on what Facebook's f
 | Page name | `amader.cloud`. If rejected for looking like a web address, `amader cloud` (*unverified*) |
 | Username | `amadercloud`. Facebook ignores periods when comparing usernames, so `amader.cloud` is the same name; usernames can't include domain extensions, so `.cloud` may be refused ([Uberall guide](https://uberall.helpjuice.com/guides/1737737-set-a-facebook-page-username)) |
 | Categories (up to 3) | Information Technology Company; Community Service; Computer Repair Service. Pick the closest names the form offers (*unverified* exact labels) |
-| Bio (101 characters max) | Second jobs for old devices: cameras, Wi‑Fi, photo clouds and school labs from Dhaka's drawers. *(95)* |
+| Bio (the form allows 255 characters) | Second jobs for old devices: cameras, Wi‑Fi, photo clouds and school labs from Dhaka's drawers. *(95)* |
 | Website | `https://amader.cloud/?utm_source=facebook&utm_medium=profile` |
-| Email | hello@amader.cloud *(mailbox not set up yet, see repo README)* |
+| Email | contact@amader.cloud (set on the page; the mailbox must exist before launch) |
 | Phone / WhatsApp | Leave empty until the real WhatsApp Business number exists. Then add it and link WhatsApp to the page |
 | Location | Service area: Dhaka. No street address until the legal entity and office exist |
 | Hours | "Always open" off. Leave hours empty; say "We reply within a day" in the instant reply instead |
@@ -60,10 +60,23 @@ Type these in as written. Fields marked *unverified* depend on what Facebook's f
 
 **Settings**
 
+- Applied 2026-10-07: username `amader.cloud`; categories Information Technology Company, Community Service, Computer Repair Service; bio; Send message button; five Services (Bari, Ghor, Dokan, Pathshala, device retirement, with pilot prices); only the page can post on it; tags and tagged posts need review; the page's following list is private; profanity filter on; seven blocked words. Messenger automations failed with a Meta server error (`field_exception`, not retryable): retry in a few days.
+
 - Two admins minimum, both with two-factor authentication. No shared passwords.
 - Moderation: turn on the profanity filter (medium). Block these words in comments: `IPTV`, `unlimited channels`, `crack`, `jailbreak`, `bitcoin`, `investment plan`, `job offer`. Review the hidden list weekly: real questions get caught too. Hidden comments stay visible to the writer and their friends, so this is quiet.
 - Turn off "Others can post on Page" until there's someone to moderate daily. Leave reviews on.
 - Turn on Messenger and keep "response time" visible only once the team really replies within a day.
+
+## 2a. Keeping the page apart from the founder's profile
+
+Facebook ties every Page to a personal account, and Meta allows one personal account per person, so a separate "work" profile isn't an option. What can be done:
+
+- **Never use "Invite friends"** (Business Suite → Grow your audience). It reads the personal friends list and tells friends who invited them.
+- **Act as the page, not as yourself.** Check the "interacting as" switcher before liking, commenting or replying anywhere. Never like or share page posts from the personal profile.
+- **Don't list the page on your profile**: no "Works at amader.cloud", no shares, no check-ins.
+- **Move ownership into a Meta business portfolio** (business.facebook.com → create a portfolio, then add the page). Admin access then runs through the business. Add a second admin so the page doesn't depend on one person.
+- **No founder name or face in page content.** P08 is written as the team, without names.
+- *Unverified:* Page transparency may show the country of the people who manage the page, and Facebook may suggest the page to the founder's friends. Neither can be switched off from the page.
 
 ## 3. Media packet
 
@@ -91,7 +104,7 @@ Sizes follow third-party 2026 guides, since Meta's help pages don't publish one 
 
 **Still to make (needs real material):**
 
-- Founder photo for the "who we are" post (P08). A real face does more for trust than any card here.
+- Bench photo for the "who we are" post (P08): hands and devices, no faces (§2a).
 - The 30-second drawer reel (script: copy deck §4). `s01-reel-drawer` is its cover.
 - Bench diary photos, Jan–Feb 2027: real devices on the bench, the wipe screen, a device passport. Shoot on a phone in daylight, no faces without consent.
 - Census results cards (P12, P34): built from the replies. Add a `kind="fact"` entry to `build.py` with the real counts.
@@ -117,7 +130,7 @@ Sizes follow third-party 2026 guides, since Meta's help pages don't publish one 
 
 In order. Don't invite anyone until the six seed posts are up (P01–P06), so the page looks lived-in.
 
-1. **Team and friends (launch day, Sun 18 Oct).** Each team member invites their own Facebook friends in Dhaka and shares the launch post with a personal line: why they're doing this. Personal shares reach further than page posts (*hypothesis*: true for most new pages).
+1. **Team and friends (launch day, Sun 18 Oct).** Team members other than the founder may invite their own Facebook friends in Dhaka and share the launch post with a personal line. The founder keeps the page separate from their personal profile (§2a), so the founder doesn't invite or share.
 2. **Building and area groups (from 20 Oct).** Use copy deck §2. Read each group's rules first; ask the admin when promotion isn't allowed. One post per group, never the same day in neighbouring areas, always answer every comment. Keep a list: group, date, admin OK, replies, messages.
 3. **The drawer census (from 18 Oct).** The low-effort entry point. Every reply is a lead with an area. Reply to every one with what their devices could become.
 4. **Live Q&A (Sat 7 Nov) and drawer day (Sat 5 Dec).** Facebook events give the page a reason to notify people. Drawer day needs a venue (a building's community room, a school or a para club), and a host: ask the first building that nominates itself.
