@@ -10,6 +10,8 @@ v0.2, 2026-10-07. Covers the redesign: real Dhaka photography, blueprint line-wo
 
 **The name:** *amader* (আমাদের) means "ours". The devices, the data and the network belong to the members.
 
+**One idea:** idle devices still have value, and we get it back out, for people and for companies: give it a job, or rent out what it isn't using.
+
 ## Lines
 
 | Use | English | Bengali | Meaning |

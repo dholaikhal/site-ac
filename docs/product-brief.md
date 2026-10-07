@@ -10,6 +10,15 @@ Bengali lines:
 - **পুরনো যন্ত্র, নতুন কাজ** — "old devices, new jobs" (company line)
 - **আমাদের ডেটা, আমাদের ঘরে** — "our data, in our homes" (cloud line)
 
+## Positioning (decided 2026-10-07)
+
+**The value proposition: getting use and value out of idle devices.** It's the same for both customer groups, **people** (homes, and communities of homes) and **companies**, and it comes in exactly two forms:
+
+1. **Give it a job.** The device does useful work again: a cloud, a camera, a screen, a server, a lab machine.
+2. **Rent out what it isn't using.** Spare storage and computing earn credit, later cash.
+
+Every section, page and asset should map to this two-by-two (people or companies, job or rent). Community uses (shared backups, shared screens) are how people get more from pooled devices. The public sector is an extension for companies (right-size, then reuse), not a third pillar.
+
 ## The model: devices × jobs, on one pipeline
 
 The company is the **pipeline**, not any single device. Every device, whatever its type, goes through the same seven steps. A *recipe* is the device-specific part: which OS, which checks, which job.
