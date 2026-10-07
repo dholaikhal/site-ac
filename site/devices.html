@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Check your device: amader.cloud</title>
+<meta name="description" content="Find out what your old TV box, phone, tablet, laptop, desktop or router can become: a private cloud, a camera, Wi‑Fi, a screen or a school lab machine.">
+<meta property="og:title" content="Check your device: amader.cloud">
+<meta property="og:description" content="Find out what your old TV box, phone, tablet, laptop, desktop or router can become: a private cloud, a camera, Wi‑Fi, a screen or a school lab machine.">
+<meta property="og:image" content="https://amader.cloud/assets/img/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anek+Bangla:wdth,wght@75..125,100..800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/site.css">
+</head>
+<body>
+<!-- chrome:header -->
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="./" aria-label="amader.cloud home">
+      <svg viewBox="0 0 44 40" aria-hidden="true"><path d="M7 31 L5 34 M28 31 L30 34" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/><rect x="1" y="15" width="33" height="16" rx="4.5" fill="currentColor"/><circle cx="26.5" cy="23" r="2.6" fill="#f5c04a"/><path d="M33 9.5 a6 6 0 0 1 5 5.5 M33 3.5 a12 12 0 0 1 10.5 11.5" fill="none" stroke="#f5c04a" stroke-width="2.4" stroke-linecap="round"/></svg>
+      <span>amader<span class="tld">.cloud</span></span>
+    </a>
+    <button class="nav-toggle" aria-expanded="false" aria-controls="nav">Menu</button>
+    <nav class="nav" id="nav" aria-label="Main">
+      <a href="devices.html" aria-current="page">Check your device</a>
+      <a href="./#plans">Plans</a>
+      <a href="companies.html">For companies</a>
+      <a href="investors.html">Investors</a>
+      <a class="btn btn-bulb" href="contact.html">Book a visit</a>
+    </nav>
+  </div>
+</header>
+<!-- /chrome:header -->
+
+<main id="main">
+<section class="page-head">
+  <div class="wrap">
+    <h1>What can your device become?</h1>
+    <p class="lede">Pick what you have. For TV boxes and routers, type the model and we'll tell you whether it can be rebuilt.</p>
+  </div>
+</section>
+
+<section class="wrap stack" style="padding-bottom:clamp(56px,8vw,112px)">
+  <form class="checker" id="checker" onsubmit="return false">
+    <fieldset class="type-picker">
+      <legend>I have an old…</legend>
+      <label><input type="radio" name="type" value="tvbox"> Android TV box</label>
+      <label><input type="radio" name="type" value="phone"> Phone</label>
+      <label><input type="radio" name="type" value="tablet"> Tablet</label>
+      <label><input type="radio" name="type" value="laptop"> Laptop</label>
+      <label><input type="radio" name="type" value="desktop"> Desktop PC</label>
+      <label><input type="radio" name="type" value="router"> Wi‑Fi router</label>
+      <label><input type="radio" name="type" value="screen"> TV or monitor</label>
+    </fieldset>
+    <div class="field" id="model-field" hidden>
+      <label for="model">Model or chip</label>
+      <input id="model" name="model" type="text" autocomplete="off" spellcheck="false">
+      <span class="hint">It's printed on the label underneath, or in Settings › About.</span>
+    </div>
+    <div class="verdict" aria-live="polite" hidden></div>
+    <noscript><p class="small">The checker needs JavaScript. The tables below have the same information.</p></noscript>
+  </form>
+
+  <div>
+    <h2>TV boxes we can rebuild</h2>
+    <p class="measure">What matters is the chip inside the box, not the brand on the outside. Two boxes with the same name can have different chips, so we always confirm by testing.</p>
+    <div class="table-scroll">
+      <table class="chip-table">
+        <thead><tr><th scope="col">Chip</th><th scope="col">Common boxes</th><th scope="col">Status</th></tr></thead>
+        <tbody>
+          <tr><td>Amlogic S905X3</td><td>X96 Max+, H96 Max X3, HK1 Box</td><td><span class="status yes">Supported</span></td></tr>
+          <tr><td>Amlogic S922X, A311D</td><td>Beelink GT‑King, Ugoos AM6</td><td><span class="status yes">Supported</span></td></tr>
+          <tr><td>Amlogic S905X2</td><td>X96 Max</td><td><span class="status yes">Supported</span></td></tr>
+          <tr><td>Amlogic S912</td><td>Various octa-core boxes</td><td><span class="status yes">Supported</span></td></tr>
+          <tr><td>Amlogic S905, S905X, S905W, S905D, S905L3A</td><td>X96 Mini, Phicomm N1, ZTE B860H, Fiberhome HG680P</td><td><span class="status yes">Supported</span></td></tr>
+          <tr><td>Amlogic S905X4, S905W2, S905Y4</td><td>Newer budget boxes</td><td><span class="status maybe">Testing</span></td></tr>
+          <tr><td>Rockchip RK3318, RK3328, RK3228/9</td><td>H96 Max (non‑X3), MXQ Pro variants</td><td><span class="status maybe">Testing</span></td></tr>
+          <tr><td>Allwinner H6, H616, H313</td><td>Tanix TX6, various</td><td><span class="status maybe">Testing</span></td></tr>
+          <tr><td>Locked brand and operator boxes</td><td>Mi Box, Fire TV, Chromecast, DTH set-top boxes</td><td><span class="status no">Recycle</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="small" style="margin-top:12px">Supported chips run community-maintained Armbian builds, which we test and harden ourselves. We move chips from "Testing" to "Supported" once 10 boxes pass 30 days in service.</p>
+  </div>
+
+  <div class="split">
+    <div>
+      <h2>Phones and tablets</h2>
+      <p>Android 8 or newer, a working camera, and a battery that isn't swollen. We usually keep the original software, lock it into a single job (camera or screen), and manage it remotely. We take a battery out or limit its charge when a device stays plugged in permanently.</p>
+    </div>
+    <div>
+      <h2>Laptops and desktops</h2>
+      <p>Any 64-bit machine from roughly the last 12 years. With 4 GB of memory or more, it can be a school lab machine. With less, it can still be a server or a camera recorder. We replace worn-out hard drives with second-hand SSDs where it's worth it.</p>
+    </div>
+    <div>
+      <h2>Wi‑Fi routers</h2>
+      <p>We rebuild routers with OpenWrt, an open firmware that still gets security updates. It needs at least 16 MB of storage and 128 MB of memory, which rules out many cheap routers. Check your exact model and hardware version in the <a href="https://openwrt.org/toh/start" rel="noopener">OpenWrt hardware table</a>.</p>
+    </div>
+    <div>
+      <h2>Not sure what you have?</h2>
+      <p>Send us a photo of the label on WhatsApp, or bring everything to a building collection day. We sort it on the spot.</p>
+      <p><a class="btn btn-bulb" href="contact.html">Book a visit</a></p>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- chrome:footer -->
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <a class="brand" href="./"><svg viewBox="0 0 44 40" aria-hidden="true"><path d="M7 31 L5 34 M28 31 L30 34" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/><rect x="1" y="15" width="33" height="16" rx="4.5" fill="currentColor"/><circle cx="26.5" cy="23" r="2.6" fill="#283b6b"/><path d="M33 9.5 a6 6 0 0 1 5 5.5 M33 3.5 a12 12 0 0 1 10.5 11.5" fill="none" stroke="#f5c04a" stroke-width="2.4" stroke-linecap="round"/></svg><span>amader<span class="tld">.cloud</span></span></a>
+        <p>Second jobs for the devices Dhaka already owns.</p>
+        <p class="bn" lang="bn">পুরনো যন্ত্র, নতুন কাজ</p>
+      </div>
+      <div>
+        <h2>Service</h2>
+        <ul><li><a href="./#how">How it works</a></li><li><a href="devices.html">Check your device</a></li><li><a href="./#plans">Plans</a></li><li><a href="companies.html">For companies</a></li><li><a href="hosts.html">Host a node</a></li></ul>
+      </div>
+      <div>
+        <h2>Company</h2>
+        <ul><li><a href="about.html">About</a></li><li><a href="investors.html">Investors</a></li><li><a href="contact.html">Contact</a></li><li><a href="mailto:hello@amader.cloud">hello@amader.cloud</a></li></ul>
+      </div>
+      <div>
+        <h2>Legal</h2>
+        <ul><li><a href="terms.html">Terms of service</a></li><li><a href="privacy.html">Privacy policy</a></li><li><a href="acceptable-use.html">Acceptable use</a></li></ul>
+      </div>
+    </div>
+    <div class="footer-base"><span>© <span data-year>2026</span> amader.cloud</span><span>Dhaka, Bangladesh</span></div>
+  </div>
+</footer>
+<!-- /chrome:footer -->
+<script src="assets/js/site.js" defer></script>
+</body>
+</html>

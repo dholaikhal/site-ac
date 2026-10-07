@@ -1,0 +1,20 @@
+{
+  "v": 4,
+  "createdOnFiles": { "v": 1, "at": "2026-10-07T14:30:00Z" },
+  "lists": "css",
+  "title": "amader.cloud investor deck",
+  "cover": "cover",
+  "order": ["cover", "problem", "gap", "solution", "pipeline", "customers", "model", "market", "dhaka", "economics", "moat", "landscape", "milestones", "team", "ask", "close"],
+  "sections": {
+    "s1": { "description": "The problem: working devices wasted, or worse, hijacked", "start": "cover" },
+    "s2": { "description": "The product: a second job for every device, run as a service", "start": "solution" },
+    "s3": { "description": "The business: paid at both ends, market, Dhaka beachhead, unit economics", "start": "model" },
+    "s4": { "description": "Why we win and what comes next", "start": "moat" },
+    "s5": { "description": "Team and the ask", "start": "team" }
+  },
+  "faces": {
+    "barlow-condensed": { "family": "Barlow Condensed", "href": "https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;700&display=swap" },
+    "anek-bangla": { "family": "Anek Bangla", "href": "https://fonts.googleapis.com/css2?family=Anek+Bangla:wght@400..700&display=swap" }
+  },
+  "designSystems": []
+}
