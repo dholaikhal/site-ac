@@ -399,3 +399,98 @@ if (consoleForm) {
   f.addEventListener("input", update);
   update();
 })();
+
+// Community: distributed backup demo. Your backup is split across four neighbours' flats; break your disk to restore it.
+(() => {
+  const svg = document.getElementById("restore-svg");
+  if (!svg) return;
+  const NS = "http://www.w3.org/2000/svg";
+  const el = (n, a = {}, parent = svg) => { const e = document.createElementNS(NS, n); for (const k in a) e.setAttribute(k, a[k]); parent.append(e); return e; };
+  const FLOORS = 6, COLS = 3, W = 128, H = 66, X0 = 50, Y0 = 70, GX = 14, GY = 14;
+  const flats = [];
+  el("path", { class: "roofline", d: `M30 ${Y0 - 14} H490 M60 ${Y0 - 14} V${Y0 - 40} H120 V${Y0 - 14} M400 ${Y0 - 14} V${Y0 - 34} H440 V${Y0 - 14}` });
+  el("text", { class: "note", x: 128, y: Y0 - 46 }).textContent = "water tank";
+  el("rect", { class: "shell", x: 30, y: Y0 - 14, width: 460, height: FLOORS * (H + GY) + 96 });
+  const gFlats = el("g"), gThreads = el("g"), gMove = el("g");
+  for (let f = FLOORS; f >= 1; f--) {
+    for (let c = 0; c < COLS; c++) {
+      const id = `${f}${"ABC"[c]}`, x = X0 + c * (W + GX), y = Y0 + (FLOORS - f) * (H + GY);
+      const g = el("g", { class: "flat", tabindex: 0, role: "button", "aria-label": `Flat ${id}. Make this your flat.` }, gFlats);
+      el("rect", { x, y, width: W, height: H, rx: 3 }, g);
+      el("text", { x: x + 10, y: y + 20 }, g).textContent = id;
+      flats.push({ id, g, cx: x + W / 2, cy: y + H / 2 + 6, x, y });
+    }
+  }
+  // Ground floor: lobby with a screen made from old monitors, and the gate.
+  const ly = Y0 + FLOORS * (H + GY);
+  const lobby = el("g", { class: "lobby" });
+  el("rect", { x: X0, y: ly, width: 3 * W + 2 * GX, height: 70, rx: 3 }, lobby);
+  el("rect", { class: "screen", x: X0 + 150, y: ly + 14, width: 110, height: 40, rx: 2 }, lobby);
+  el("rect", { class: "screen-glow", x: X0 + 158, y: ly + 22, width: 40, height: 6 }, lobby);
+  el("rect", { class: "screen-glow", x: X0 + 158, y: ly + 34, width: 70, height: 4, opacity: .6 }, lobby);
+  el("text", { x: X0 + 12, y: ly + 24 }, lobby).textContent = "lobby";
+  el("text", { x: X0 + 12, y: ly + 58 }, lobby).textContent = "gate";
+  el("text", { x: X0 + 272, y: ly + 30 }, lobby).textContent = "notices + ads";
+  el("text", { x: X0 + 272, y: ly + 46 }, lobby).textContent = "on old monitors";
+
+  const status = document.getElementById("restore-status");
+  let you = flats.findIndex((f) => f.id === "4B"), busy = false;
+  const holdersOf = (i) => [4, 8, 12, 17].map((d) => (i + d) % flats.length);
+
+  const draw = () => {
+    gThreads.innerHTML = ""; gMove.innerHTML = "";
+    const hs = holdersOf(you);
+    flats.forEach((f, i) => {
+      f.g.classList.toggle("you", i === you); f.g.classList.toggle("holder", hs.includes(i));
+      f.g.classList.remove("failed", "restored");
+      f.g.querySelectorAll(".piece").forEach((p) => p.remove());
+      f.g.querySelector("text").textContent = i === you ? `${f.id}  you` : f.id;
+    });
+    hs.forEach((h, k) => {
+      const a = flats[you], b = flats[h];
+      el("path", { class: "thread", d: `M${a.cx} ${a.cy} C ${a.cx} ${(a.cy + b.cy) / 2 - 20}, ${b.cx} ${(a.cy + b.cy) / 2 + 20}, ${b.cx} ${b.cy}` }, gThreads);
+      el("rect", { class: "piece", x: b.x + W - 30, y: b.y + 12, width: 16, height: 16, rx: 2 }, b.g);
+    });
+    status.textContent = `Flat ${flats[you].id}'s backup is encrypted and split into four pieces, kept by ${hs.map((h) => flats[h].id).join(", ")}. None of them can read it.`;
+  };
+
+  const kill = () => {
+    if (busy) return;
+    busy = true;
+    const me = flats[you], hs = holdersOf(you);
+    me.g.classList.add("failed");
+    me.g.querySelector("text").textContent = `${me.id}  disk failed`;
+    status.textContent = `Flat ${me.id}'s disk has failed. Fetching its pieces back from the neighbours…`;
+    const finish = () => {
+      me.g.classList.remove("failed"); me.g.classList.add("restored");
+      me.g.querySelector("text").textContent = `${me.id}  restored`;
+      status.textContent = `Restored on a new disk from ${hs.map((h) => flats[h].id).join(", ")}. Nothing was lost, and nobody could read it along the way.`;
+      busy = false;
+    };
+    if (reduceMotion) return setTimeout(finish, 400);
+    const dots = hs.map((h) => ({ from: flats[h], dot: el("circle", { class: "moving", r: 7, cx: flats[h].cx, cy: flats[h].cy }, gMove) }));
+    const t0 = performance.now() + 500, dur = 1100;
+    const step = (now) => {
+      let done = true;
+      dots.forEach(({ from, dot }, k) => {
+        const t = Math.min(1, Math.max(0, (now - t0 - k * 180) / dur));
+        if (t < 1) done = false;
+        const e = t < .5 ? 2 * t * t : 1 - (-2 * t + 2) ** 2 / 2;
+        dot.setAttribute("cx", from.cx + (me.cx - from.cx) * e);
+        dot.setAttribute("cy", from.cy + (me.cy - from.cy) * e);
+        dot.setAttribute("opacity", t >= 1 ? 0 : 1);
+      });
+      if (done) finish(); else requestAnimationFrame(step);
+    };
+    requestAnimationFrame(step);
+  };
+
+  flats.forEach((f, i) => {
+    const pick = () => { if (!busy) { you = i; draw(); } };
+    f.g.addEventListener("click", pick);
+    f.g.addEventListener("keydown", (e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); pick(); } });
+  });
+  document.getElementById("kill-disk").addEventListener("click", kill);
+  document.getElementById("reset-disk").addEventListener("click", () => { if (!busy) draw(); });
+  draw();
+})();

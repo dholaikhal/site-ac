@@ -564,3 +564,45 @@ fieldset.field { border: 0; padding: 0; margin: 0; }
 .earn-calc dt.total, .earn-calc dd.total { color: var(--chalk); font-weight: 650; border-top: 1px solid rgba(143,184,220,.25); padding-top: 10px; }
 .earn-calc dd.total { color: var(--amber); font-size: 1.5rem; }
 @media (max-width: 900px) { .earn-inner { grid-template-columns: 1fr; } }
+
+/* ---------- Community: stronger as a building ---------- */
+.community { background: var(--paper); }
+.community-top { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr); gap: clamp(32px, 6vw, 88px); align-items: center; }
+.community h2 { max-width: 12ch; }
+.community-bn { color: var(--amber-ink); font-size: 1.5rem; margin-top: -.3em; }
+.restore-actions { display: flex; gap: 12px; flex-wrap: wrap; margin: 18px 0; }
+.restore-actions .btn-line { color: var(--ink); }
+.restore-status { min-height: 3.2em; font-weight: 500; border-left: 3px solid var(--amber); padding-left: 14px; }
+.restore { margin: 0; }
+.restore svg { width: 100%; height: auto; max-height: 76svh; }
+.restore .shell { fill: none; stroke: var(--ink); stroke-width: 1.5; }
+.restore .roofline { stroke: var(--ink); stroke-width: 1.5; fill: none; }
+.restore .flat rect { fill: var(--paper-2); stroke: var(--ink-2); stroke-width: 1; transition: fill .4s, stroke .4s; cursor: pointer; }
+.restore .flat:hover rect, .restore .flat:focus-visible rect { stroke: var(--ink); stroke-width: 2; }
+.restore .flat:focus-visible { outline: none; }
+.restore .flat text { font-family: var(--mono); font-size: 13px; fill: var(--ink-2); pointer-events: none; }
+.restore .flat.you rect { stroke: var(--amber-ink); stroke-width: 3; }
+.restore .flat.you text { fill: var(--ink); font-weight: 500; }
+.restore .flat.holder rect { fill: color-mix(in srgb, var(--amber) 14%, var(--paper-2)); }
+.restore .flat.failed rect { fill: var(--ink); stroke: var(--warn); }
+.restore .flat.failed text { fill: var(--paper); }
+.restore .flat.restored rect { fill: color-mix(in srgb, var(--amber) 45%, var(--paper-2)); }
+.restore .piece { fill: var(--amber); stroke: var(--amber-ink); stroke-width: 1; }
+.restore .thread { fill: none; stroke: var(--amber-ink); stroke-width: 1.5; stroke-dasharray: 4 5; opacity: .7; }
+.restore .lobby rect { fill: var(--paper-2); stroke: var(--ink-2); }
+.restore .lobby .screen { fill: var(--ink); stroke: none; }
+.restore .lobby .screen-glow { fill: var(--amber); }
+.restore .lobby text, .restore .note { font-family: var(--mono); font-size: 12px; fill: var(--ink-2); }
+.restore .moving { fill: var(--amber); stroke: var(--amber-ink); }
+
+.together { list-style: none; padding: 0; margin: clamp(56px, 8vw, 96px) 0 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); border-top: 1px solid var(--ink); }
+.together li { padding: 26px 28px 28px 0; border-bottom: 1px solid var(--rule); }
+.together li:not(:nth-child(3n+1)) { padding-left: 28px; border-left: 1px solid var(--rule); }
+.together p { color: var(--ink-2); margin-bottom: 12px; }
+.together .mono { color: var(--amber-ink); }
+@media (max-width: 960px) {
+  .community-top { grid-template-columns: 1fr; }
+  .together { grid-template-columns: 1fr; }
+  .together li, .together li:not(:nth-child(3n+1)) { padding: 22px 0; border-left: 0; }
+}
+.restore .thread { pointer-events: none; opacity: .85; stroke-width: 1.8; }
