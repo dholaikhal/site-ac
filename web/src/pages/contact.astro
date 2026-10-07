@@ -14,7 +14,7 @@ import F from "../data/facts.json";
 
 <section class="wrap" style="padding-bottom:clamp(56px,8vw,112px)">
   <div class="split">
-    <form class="form" id="contact-form" data-endpoint="" action="mailto:{F.contact.email}" method="post" enctype="text/plain">
+    <form class="form" id="contact-form" data-endpoint={import.meta.env.PUBLIC_CONTACT_ENDPOINT ?? ""} action={`mailto:${F.contact.email}`} method="post" enctype="text/plain">
       <fieldset class="field">
         <legend>This is about</legend>
         <div class="choices">

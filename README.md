@@ -16,7 +16,7 @@ Second jobs for old devices. This repo holds the product brief, the website (Ast
 | `marketing/facebook/` | Facebook page kit: setup, post calendar with copy, replies, and the image generator (`build.py`) |
 | `tools/scenes.py` | Lets the Python marketing scripts read `scenes.json` |
 
-Needs Node 20 or newer (`~/.local/bin/node` is v26 on this machine).
+Needs Node 22.12 or newer (Astro 7's floor; `~/.local/bin/node` is v26 on this machine, CI uses 24).
 
 ## Work on the site
 
@@ -36,7 +36,17 @@ Opens on http://localhost:4321 (the preview pane in Claude Code uses port 8417 v
 npm run build --prefix web
 ```
 
-Deploy `web/dist/` to any static host. To build on every push instead, point Cloudflare Pages, Netlify or GitHub Pages at the repo with build command `npm run build --prefix web` and output directory `web/dist`.
+`.github/workflows/pages.yml` builds every push and pull request, and deploys `main` to GitHub Pages. One-time setup on GitHub:
+
+1. Settings → Pages → Source: **GitHub Actions**.
+2. Settings → Pages → Custom domain: `amader.cloud`, then tick Enforce HTTPS. DNS: apex `A` records to GitHub's Pages IPs, `www` `CNAME` to `<owner>.github.io`. Links are relative except the favicon, so the site only works at a domain root, not at `<owner>.github.io/<repo>/`.
+3. Settings → Secrets and variables → Actions → Variables: `CONTACT_ENDPOINT` (see below).
+
+### Forms on a static host
+
+The device checker, network model and earnings calculator run entirely in the browser; Pages serves them as-is. Only the contact form sends anything. It posts JSON to `PUBLIC_CONTACT_ENDPOINT` (set from the `CONTACT_ENDPOINT` repo variable at build time) and shows the reply inline. With no endpoint, or without JavaScript, it opens an email draft to `contact.email`.
+
+The endpoint must accept a cross-origin JSON `POST` and return 2xx: a form service such as Formspree (`https://formspree.io/f/<id>`, works with the current script as-is), or a small Cloudflare Worker or Google Apps Script that forwards to email, a sheet or WhatsApp. It is a public URL, so it is a variable, not a secret. Changing it needs a rebuild: re-run the workflow.
 
 ## Render marketing files
 
@@ -54,7 +64,7 @@ After re-rendering the OG image, copy `marketing/out/og.png` to `web/public/asse
 
 - [ ] Real WhatsApp number: `contact.whatsapp` in `web/src/data/facts.json` (the site, flyer and Facebook kit all read it)
 - [ ] Set up mailboxes: hello@, privacy@, security@, abuse@, invest@ amader.cloud
-- [ ] Contact form backend: set `data-endpoint` on `#contact-form` in `web/src/pages/contact.astro`. Without it, the form opens an email draft
+- [ ] Contact form backend: set the `CONTACT_ENDPOINT` repo variable (see Forms on a static host). Without it, the form opens an email draft
 - [ ] Legal entity name, address and trade licence are `entity` in `web/src/data/facts.json` (terms and privacy read it), as is the control-plane hosting location
 - [ ] Lawyer review of terms, privacy and acceptable use. Remove the "draft" notes after review
 - [ ] Native-speaker review of every Bengali line
