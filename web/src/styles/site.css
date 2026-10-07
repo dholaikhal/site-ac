@@ -737,19 +737,6 @@ fieldset.field { border: 0; padding: 0; margin: 0; }
 .ledger .fig .pict { width: 40px; height: 40px; margin-bottom: 10px; }
 
 /* ---------- Investors: flow figure ---------- */
-.flow-fig { margin: 0; display: grid; grid-template-columns: 1fr 64px 1fr 64px 1fr; align-items: center; gap: 12px; }
-.flow-col { display: grid; gap: 12px; }
-.flow-col > .mono { color: var(--amber-ink); }
-.flow-box { border: 1px solid var(--rule); background: var(--paper-2); border-radius: 4px; padding: 14px 16px; display: grid; grid-template-columns: 44px 1fr; column-gap: 12px; align-items: center; }
-.flow-box .pict { width: 40px; height: 40px; margin: 0; grid-row: span 2; }
-.flow-box b { font-stretch: 106%; }
-.flow-box span { color: var(--ink-2); font-size: .9rem; }
-.flow-core { background: var(--bp); color: var(--chalk); border-radius: 6px; padding: 26px 22px; text-align: center; display: grid; gap: 6px; background-image: linear-gradient(rgb(var(--line-rgb) / .1) 1px, transparent 1px), linear-gradient(90deg, rgb(var(--line-rgb) / .1) 1px, transparent 1px); background-size: 24px 24px; }
-.flow-core .mono { color: var(--amber); }
-.flow-core b { font-size: 1.25rem; font-stretch: 110%; }
-.flow-core span { color: var(--chalk-2); font-size: .9rem; }
-.flow-arrow { width: 64px; height: 20px; fill: none; stroke: var(--amber-ink); stroke-width: 2.5; }
-@media (max-width: 900px) { .flow-fig { grid-template-columns: 1fr; } .flow-arrow { transform: rotate(90deg); justify-self: center; } }
 
 /* ===================== Visual refresh below the hero ===================== */
 /* Section rhythm: stronger heads, a single amber tick before every kicker. */
@@ -828,11 +815,11 @@ fieldset.field { border: 0; padding: 0; margin: 0; }
    Light theme: blueprint bands are bright, so text inside them uses ink. Dark theme: they go dark again. */
 :root[data-theme="light"] { color-scheme: light; }
 :root[data-theme="dark"] { color-scheme: dark; }
-:root[data-theme="light"] :is(.bp, .panel-dusk, .page-head:not(.photo), .flow-core) { --chalk: #0d2a3a; --chalk-2: #4c6273; --chalk-rgb: 13 42 58; --line-rgb: 13 42 58; --night-rgb: 255 255 255; }
-@media (prefers-color-scheme: light) { :root:not([data-theme]) :is(.bp, .panel-dusk, .page-head:not(.photo), .flow-core) { --chalk: #0d2a3a; --chalk-2: #4c6273; --chalk-rgb: 13 42 58; --line-rgb: 13 42 58; --night-rgb: 255 255 255; } }
+:root[data-theme="light"] :is(.bp, .panel-dusk, .page-head:not(.photo)) { --chalk: #0d2a3a; --chalk-2: #4c6273; --chalk-rgb: 13 42 58; --line-rgb: 13 42 58; --night-rgb: 255 255 255; }
+@media (prefers-color-scheme: light) { :root:not([data-theme]) :is(.bp, .panel-dusk, .page-head:not(.photo)) { --chalk: #0d2a3a; --chalk-2: #4c6273; --chalk-rgb: 13 42 58; --line-rgb: 13 42 58; --night-rgb: 255 255 255; } }
 :root:not([data-theme="dark"]) :is(.bp, .page-head:not(.photo)) { background-image: linear-gradient(rgb(13 42 58 / .07) 1px, transparent 1px), linear-gradient(90deg, rgb(13 42 58 / .07) 1px, transparent 1px), linear-gradient(rgb(13 42 58 / .03) 1px, transparent 1px), linear-gradient(90deg, rgb(13 42 58 / .03) 1px, transparent 1px); }
-:root:not([data-theme="dark"]) :is(.bp, .panel-dusk, .page-head:not(.photo), .flow-core) .console { border-color: var(--rule); box-shadow: 0 16px 40px -24px rgb(13 42 58 / .35); backdrop-filter: none; }
-:root:not([data-theme="dark"]) :is(.bp, .panel-dusk, .page-head:not(.photo), .flow-core) .btn-line { color: var(--ink); }
+:root:not([data-theme="dark"]) :is(.bp, .panel-dusk, .page-head:not(.photo)) .console { border-color: var(--rule); box-shadow: 0 16px 40px -24px rgb(13 42 58 / .35); backdrop-filter: none; }
+:root:not([data-theme="dark"]) :is(.bp, .panel-dusk, .page-head:not(.photo)) .btn-line { color: var(--ink); }
 :root:not([data-theme="dark"]) .bp .tv-wire, :root:not([data-theme="dark"]) .bp .wire { filter: none; }
 @media (prefers-color-scheme: dark) { :root:not([data-theme]) :is(.bp, .page-head:not(.photo)) { background-image: linear-gradient(rgb(127 166 196 / .14) 1px, transparent 1px), linear-gradient(90deg, rgb(127 166 196 / .14) 1px, transparent 1px); background-size: 160px 160px, 160px 160px; } }
 

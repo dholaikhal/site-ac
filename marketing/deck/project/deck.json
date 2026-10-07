@@ -11,6 +11,7 @@
     "cover",
     "problem",
     "gap",
+    "value",
     "solution",
     "everyday",
     "pipeline",
@@ -35,7 +36,7 @@
     },
     "s2": {
       "description": "The product: a second job for every device, run as a service",
-      "start": "solution"
+      "start": "value"
     },
     "s3": {
       "description": "The business: paid at both ends, market, Dhaka beachhead, unit economics",
