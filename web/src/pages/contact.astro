@@ -1,5 +1,6 @@
 ---
 import Base from "../layouts/Base.astro";
+import forms from "../data/forms.json";
 // Placeholder address until the company and domain mail are set up.
 const to = "hello@amader.cloud";
 ---
@@ -17,7 +18,8 @@ const to = "hello@amader.cloud";
 
 <section class="section">
   <div class="wrap contact">
-    <form class="form card" id="contact-form" data-to={to}>
+    <form class="form card" id="contact-form" data-endpoint={forms.contact} data-fallback={forms.fallbackEmail} data-sent="Sent. We'll reply within one working day.">
+      <input class="hp" type="text" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true">
       <fieldset class="field">
         <legend>I'm getting in touch about</legend>
         <div class="choices">
@@ -38,7 +40,7 @@ const to = "hello@amader.cloud";
       <div class="field"><label for="message">What do you want to build, or ask?</label><textarea id="message" name="message" placeholder="A store for my handmade bags, bookings for my salon, fee collection for my coaching centre…"></textarea></div>
       <div><button class="btn btn-go" type="submit">Send</button></div>
       <p class="form-status" role="status"></p>
-      <p class="small" style="margin:0">Opens in your email app. We only use your details to reply.</p>
+      <p class="small" style="margin:0">We only use your details to reply.</p>
     </form>
 
     <aside class="contact-side">

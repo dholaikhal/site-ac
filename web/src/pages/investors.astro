@@ -1,6 +1,7 @@
 ---
 import Base from "../layouts/Base.astro";
 import facts from "../data/facts";
+import forms from "../data/forms.json";
 const { market: m, anchor: a, funding: f } = facts;
 const figures = [
   [m.fbSellerPages.text, "Facebook pages run by sellers in Bangladesh"],
@@ -86,7 +87,8 @@ const figures = [
       <h2>Request the deck</h2>
       <p class="lede">We'll send the deck and set up a call.</p>
     </div>
-    <form class="form deck-form" id="deck-form" data-to={f.deckEmail}>
+    <form class="form deck-form" id="deck-form" data-endpoint={forms.deck} data-fallback={forms.fallbackEmail} data-sent="Thanks. We'll send the deck shortly.">
+      <input class="hp" type="text" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true">
       <div class="field"><label for="d-name">Name</label><input id="d-name" name="name" required autocomplete="name"></div>
       <div class="field"><label for="d-firm">Firm</label><input id="d-firm" name="firm" autocomplete="organization"></div>
       <div class="field"><label for="d-email">Email</label><input id="d-email" name="email" type="email" required autocomplete="email"></div>
@@ -96,18 +98,6 @@ const figures = [
   </div>
 </section>
 
-<script>
-const form = document.querySelector<HTMLFormElement>("#deck-form");
-form?.addEventListener("submit", (e) => {
-  e.preventDefault();
-  if (!form.reportValidity()) return;
-  const d = Object.fromEntries(new FormData(form)) as Record<string, string>;
-  const body = `Name: ${d.name}\nFirm: ${d.firm || "-"}\nEmail: ${d.email}`;
-  location.href = `mailto:${form.dataset.to}?subject=${encodeURIComponent(`Deck request: ${d.firm || d.name}`)}&body=${encodeURIComponent(body)}`;
-  const s = form.querySelector(".form-status");
-  if (s) s.textContent = "Your email app should open with the request ready.";
-});
-</script>
 
 <style>
 .inv-top { display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(0, 0.8fr); gap: clamp(24px, 4vw, 56px); align-items: start; }

@@ -1,0 +1,6 @@
+{
+  "_about": "Formboost endpoints (dashboard.formboost.app). Both forms notify hello@amader.cloud. JSON bodies; 202 on success; _honey is the honeypot field.",
+  "contact": "https://formboost.app/f/y29lyw78",
+  "deck": "https://formboost.app/f/0tawhzpw",
+  "fallbackEmail": "hello@amader.cloud"
+}

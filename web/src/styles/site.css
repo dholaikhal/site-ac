@@ -212,6 +212,7 @@ fieldset.field { border: 0; padding: 0; margin: 0; }
 .choice:has(input:checked) { border-color: var(--green); background: var(--green-wash); }
 .choice input { accent-color: var(--green); }
 .form-status { min-height: 1.5em; font-size: 0.95rem; }
+.hp { position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0; }
 .form-status.ok { color: var(--ok); }
 .form-status.err { color: var(--warn); }
 .two { display: grid; gap: 16px; grid-template-columns: 1fr 1fr; }

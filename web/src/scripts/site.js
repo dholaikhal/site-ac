@@ -21,26 +21,39 @@ document.querySelectorAll(".theme-toggle").forEach((btn) => {
 
 document.querySelectorAll("[data-year]").forEach((el) => { el.textContent = String(new Date().getFullYear()); });
 
-// Contact form: preselect topic from ?topic=, then open an email draft (no backend yet).
-const form = document.getElementById("contact-form");
-if (form) {
+// Contact form: preselect the topic from ?topic=.
+const contact = document.getElementById("contact-form");
+if (contact) {
   const topic = new URLSearchParams(location.search).get("topic");
-  if (topic) {
-    const radio = form.querySelector(`input[name="topic"][value="${CSS.escape(topic)}"]`);
-    if (radio) radio.checked = true;
-  }
+  const radio = topic && contact.querySelector(`input[name="topic"][value="${CSS.escape(topic)}"]`);
+  if (radio) radio.checked = true;
+}
+
+// Forms with data-endpoint post JSON to Formboost (202 on success; _honey is the spam trap).
+document.querySelectorAll("form[data-endpoint]").forEach((form) => {
   const status = form.querySelector(".form-status");
-  form.addEventListener("submit", (e) => {
+  const button = form.querySelector('button[type="submit"]');
+  form.addEventListener("submit", async (e) => {
     e.preventDefault();
     if (!form.reportValidity()) return;
-    const data = Object.fromEntries(new FormData(form));
-    const to = form.dataset.to;
-    const lines = [
-      `Name: ${data.name}`, `Phone / WhatsApp: ${data.phone || "-"}`, `Email: ${data.email}`,
-      `About: ${data.topic}`, `Business or organisation: ${data.org || "-"}`, "", data.message || "",
-    ];
-    location.href = `mailto:${to}?subject=${encodeURIComponent(`[${data.topic}] ${data.name}`)}&body=${encodeURIComponent(lines.join("\n"))}`;
-    status.textContent = "Your email app should open with the message ready to send.";
-    status.className = "form-status ok";
+    button.disabled = true;
+    status.className = "form-status";
+    status.textContent = "Sending…";
+    try {
+      const res = await fetch(form.dataset.endpoint, {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify(Object.fromEntries(new FormData(form))),
+      });
+      if (!res.ok) throw new Error(String(res.status));
+      form.reset();
+      status.textContent = form.dataset.sent || "Sent. We'll be in touch.";
+      status.classList.add("ok");
+    } catch {
+      status.textContent = `Not sent. Try again, or email ${form.dataset.fallback}.`;
+      status.classList.add("err");
+    } finally {
+      button.disabled = false;
+    }
   });
-}
+});
