@@ -137,3 +137,16 @@ Each line is one instance of a pattern: pool storage, share screens, share eyes 
 > Could we take 30 minutes to look at [project name]?
 >
 > [Name], amader.cloud
+
+## 11. AI (post + ad)
+
+> **Your old gaming PC can earn from AI.**
+>
+> Its graphics card sleeps all night. Through amader.cloud, it can run AI jobs for Bangla-language startups and labs, such as speech transcription, translation and image generation, inside a sandbox that can't see your files. The data stays in Bangladesh, and you earn credit off your plan.
+>
+> Check what your PC could earn: amader.cloud/#earn
+
+| Variant | Headline | Primary text | CTA |
+|---|---|---|---|
+| AI | Your graphics card works nights now | Rent your idle GPU to AI teams in Bangladesh. Target Tk 3 per GPU-hour. | Estimate my earnings |
+| Private AI | An AI assistant that never leaves home | Your family's old laptop and phones, pooled into a private assistant: voice notes transcribed, photos searchable, nothing sent abroad. | Book a free visit |
