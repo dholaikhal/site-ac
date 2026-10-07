@@ -360,3 +360,42 @@ if (consoleForm) {
   new IntersectionObserver(([e]) => { holding = !e.isIntersecting; schedule(); }).observe(hero);
   schedule();
 })();
+
+// Earn estimator. Rates are pilot figures and targets, stated on the page.
+(() => {
+  const f = document.getElementById("earn-calc");
+  if (!f) return;
+  const KIND = { // cores, relative speed per core, extra watts while working
+    laptop: { cores: 4, speed: 1, watts: 20 },
+    desktop: { cores: 4, speed: 1.2, watts: 60 },
+    tvbox: { cores: 4, speed: 0.25, watts: 4 },
+  };
+  const RATE_CORE_HOUR = 0.30, STORAGE_PER_GB = 50 / 250, TK_PER_KWH = 9, DAYS = 30;
+  const fmt = new Intl.NumberFormat("en-IN", { maximumFractionDigits: 0 });
+  const counts = { laptop: 1, desktop: 0, tvbox: 1 };
+  const $ = (id) => f.querySelector(id);
+  const update = () => {
+    const h = +$("#idle-hours").value, gb = +$("#disk-gb").value;
+    $("#idle-out").textContent = `${h} h`;
+    $("#disk-out").textContent = `${fmt.format(gb)} GB`;
+    let coreHours = 0, kwh = 0;
+    for (const [k, n] of Object.entries(counts)) {
+      coreHours += n * KIND[k].cores * KIND[k].speed * h * DAYS;
+      kwh += n * KIND[k].watts * h * DAYS / 1000;
+    }
+    const storage = gb * STORAGE_PER_GB, compute = coreHours * RATE_CORE_HOUR, power = kwh * TK_PER_KWH;
+    $("#e-storage").textContent = `Tk ${fmt.format(storage)}`;
+    $("#e-corehours").textContent = fmt.format(coreHours);
+    $("#e-compute").textContent = `Tk ${fmt.format(compute)}`;
+    $("#e-power").textContent = `− Tk ${fmt.format(power)}`;
+    $("#e-net").textContent = `Tk ${fmt.format(Math.max(0, storage + compute - power))}`;
+    f.querySelectorAll(".count").forEach((c) => { c.querySelector("output").textContent = counts[c.dataset.kind]; });
+  };
+  f.querySelectorAll(".count button").forEach((b) => b.addEventListener("click", () => {
+    const k = b.closest(".count").dataset.kind;
+    counts[k] = Math.min(9, Math.max(0, counts[k] + +b.dataset.d));
+    update();
+  }));
+  f.addEventListener("input", update);
+  update();
+})();
