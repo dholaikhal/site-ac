@@ -155,6 +155,8 @@ One row per week in a shared sheet. Decide at four weeks; don't react to single 
 
 **Links:** use `https://amader.cloud/?utm_source=facebook&utm_medium=organic&utm_campaign=<phase>&utm_content=<post id>` on the website button and in link comments, with `<phase>` one of `seed`, `launch`, `drawer`, `pilot`. Keep visible links in posts short: `amader.cloud`.
 
+The contact form preselects its topic from the link, so asks go straight to the right form: `amader.cloud/contact.html?topic=building` (nominations), `?topic=donate` (donations), `?topic=company` (retirement). Add the UTM parameters after it, e.g. `contact.html?topic=building&utm_source=facebook&utm_medium=organic&utm_campaign=launch&utm_content=P13`. The site footer links to the page.
+
 ## 7. Launch checklist
 
 | When | Task | Owner |

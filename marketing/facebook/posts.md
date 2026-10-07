@@ -170,6 +170,8 @@ Image: `d02-nominate` · Story: `s02-story-nominate`
 > 3. We choose two buildings by early February.
 >
 > You don't need to be on the committee to nominate. Tell us, and we'll talk to them with you.
+>
+> Message the page, or fill in the form: amader.cloud/contact.html?topic=building
 
 ### P14 · Tue 3 Nov · recipe
 
@@ -237,7 +239,7 @@ Image: `d03-donate`
 >
 > Every one is wiped to NIST SP 800‑88 guidance, and you get the record. Then we tell you which job it got.
 >
-> Message us to arrange a drop-off or a pickup in [areas].
+> Message us to arrange a drop-off or a pickup in [areas], or fill in the form: amader.cloud/contact.html?topic=donate
 
 ### P21 · Tue 17 Nov · recipe + companies (two images)
 
