@@ -166,6 +166,36 @@ SCENES = sorted(SCENES, key=lambda s: ORDER.index(s["id"]))
 for s in SCENES:
     s["label"] = {"street": "Shops at night", "neighbourhood": "Neighbourhood"}.get(s["id"], s["label"])
 
+HEAD_SCENES = [
+    {
+        "id": "skyline", "label": "Public services", "photo": "skyline", "w": 2400, "h": 1600,
+        "fit": "cover", "pos": "50% 100%", "par": "xMidYMax slice",
+        "alt": "Dhaka's skyline of apartment and office towers under monsoon clouds.",
+        "credit": ("Dhaka. Photo: Al Amin Mir (Unsplash)", "https://unsplash.com/photos/jkW9ES-w79Q"),
+        "nodes": {
+            "g1": (820, 1300, "Upazila office", "A records server sized to real use, not to the brochure"),
+            "g2": (1300, 1250, "Public school", "A computer lab from retired laptops"),
+            "g3": (1700, 1350, "Public hospital", "Queue and notice screens from old monitors"),
+            "g4": (2150, 1300, "City corporation", "Notice screens at service points"),
+            "g5": (480, 1400, "Union digital centre", "Reconditioned desktops, each with a wipe certificate"),
+            "g6": (1500, 1450, "Agency storeroom", "Retired devices wiped, passported and reused"),
+        },
+        "links": "g5-g1 g1-g2 g2-g6 g6-g3 g3-g4".split(),
+        "radio": [], "far": [], "rings": None,
+    },
+]
+PAGE_HEADS = {"companies.html": "office", "hosts.html": "towers", "investors.html": "neighbourhood",
+              "about.html": "teastall", "contact.html": "street", "government.html": "skyline"}
+
+
+def head_html(s):
+    p = f'assets/img/photos/{s["photo"]}'
+    srcset = f'{p}-1200.jpg 1200w, {p}.jpg {Image.open(PHOTOS / (s["photo"] + ".jpg")).width}w'
+    img = f'<img src="{p}.jpg" srcset="{srcset}" sizes="100vw" alt="{s["alt"]}" style="object-position:{s["pos"]}">'
+    bg = f'<img class="scene-bg" src="{p}-1200.jpg" alt="" aria-hidden="true">' if s["fit"] == "right" else ""
+    return (f'<figure class="scene live head-scene" data-fit="{s["fit"]}">{bg}<div class="frame" style="--ar:{s["w"]}/{s["h"]}">{img}\n{scene_svg(s)}</div>'
+            f'<figcaption class="mono"><a href="{s["credit"][1]}" rel="noopener">{s["credit"][0]}</a></figcaption></figure>\n<div class="node-tip" role="status" hidden></div>')
+
 
 def scene_svg(s):
     n = s["nodes"]
@@ -227,3 +257,10 @@ if __name__ == "__main__":
     assert n == 1, "hero:scenes markers not found"
     page.write_text(html)
     print("hero rebuilt:", ", ".join(s["id"] for s in SCENES))
+    by_id = {x["id"]: x for x in SCENES + HEAD_SCENES}
+    for name, sid in PAGE_HEADS.items():
+        f = page.parent / name
+        t = f.read_text()
+        t, k = re.subn(r"<!-- head:scene -->.*?<!-- /head:scene -->", lambda _m: "<!-- head:scene -->\n" + head_html(by_id[sid]) + "\n<!-- /head:scene -->", t, flags=re.S)
+        if k:
+            f.write_text(t); print("page head:", name, "->", sid)

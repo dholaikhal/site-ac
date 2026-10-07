@@ -517,3 +517,6 @@ if (consoleForm) {
   };
   addEventListener("scroll", onScroll, { passive: true }); addEventListener("resize", onScroll); onScroll();
 })();
+
+// Photo page heads reuse the hero's node tooltips.
+document.querySelectorAll(".page-head.photo").forEach((h) => tipper(h, ".node"));

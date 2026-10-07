@@ -691,3 +691,21 @@ fieldset.field { border: 0; padding: 0; margin: 0; }
 .plans.two { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 @media (max-width: 960px) { .plans.two { grid-template-columns: 1fr; } }
 @media (max-width: 860px) { .vg-cell::before { content: attr(data-col); } }
+
+/* ---------- Photo page heads: a live scene behind the title ---------- */
+.page-head.photo { position: relative; overflow: hidden; isolation: isolate; background: var(--night); background-image: none; min-height: min(80svh, 780px); padding-block: clamp(56px, 8vh, 96px) 48px; display: flex; flex-direction: column; }
+.page-head.photo .head-scene { position: absolute; inset: 0; margin: 0; opacity: 1; z-index: 0; }
+.page-head.photo::before { content: ""; position: absolute; inset: 0; z-index: 1; pointer-events: none;
+  background: linear-gradient(90deg, rgba(10,22,34,.9) 0%, rgba(10,22,34,.62) 34%, rgba(10,22,34,0) 62%), linear-gradient(180deg, rgba(10,22,34,.6) 0%, rgba(10,22,34,0) 32%, rgba(10,22,34,0) 78%, rgba(10,22,34,.55) 100%); }
+.page-head.photo .wrap { position: relative; z-index: 2; width: 100%; pointer-events: none; text-shadow: 0 1px 22px rgba(10,22,34,.65); }
+.page-head.photo .wrap > * { pointer-events: none; width: fit-content; }
+.page-head.photo .wrap a, .page-head.photo .wrap button { pointer-events: auto; }
+.page-head.photo h1 { max-width: 14ch; }
+.page-head.photo .lede { max-width: 46ch; }
+.page-head.photo .node-tip { z-index: 5; }
+.page-head.photo .scene figcaption { top: auto; bottom: 10px; }
+@media (max-width: 900px) {
+  .page-head.photo { min-height: 0; padding-bottom: 0; }
+  .page-head.photo .head-scene { position: relative; order: 2; height: 56svh; min-height: 340px; margin-top: 24px; }
+  .page-head.photo::before { display: none; }
+}
