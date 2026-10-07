@@ -1,26 +1,24 @@
 ---
-// A static phone sketch for template cards: blueprint outline with annotated blocks.
-interface Props { url: string; blocks: [string, string][]; color?: string }
-const { url, blocks, color = "#9a4a24" } = Astro.props;
+// A small static phone showing a template's main screen (fictional business).
+import "../styles/app-screen.css";
+interface Props { url: string; name: string; banner: string; rows: [string, string][]; button: string; color?: string }
+const { url, name, banner, rows, button, color = "#9a4a24" } = Astro.props;
 ---
-<figure class="mini" style={`--brand:${color}`}>
-  <div class="mini-phone">
-    <div class="mini-url mono">{url}</div>
-    <div class="mini-screen">
-      {blocks.map(([label, text]) => <div class="mini-b"><span class="mini-l">{label}</span><span>{text}</span></div>)}
+<figure class="mini">
+  <div class="phone">
+    <div class="phone-notch" aria-hidden="true"></div>
+    <div class="phone-url"><span>{url}</span></div>
+    <div class="screen" style={`--brand:${color}`}>
+      <div class="b ink"><div class="ah"><strong>{name}</strong></div></div>
+      <div class="b ink"><div class="hero-b"><span>{banner}</span></div></div>
+      <div class="b ink">{rows.map(([a, b]) => <div class="row svc"><span>{a}</span><span>{b}</span></div>)}</div>
+      <div class="b ink"><div class="paybtn">{button}</div></div>
     </div>
   </div>
-  <figcaption class="mono">illustration · fictional business</figcaption>
+  <figcaption class="small">Illustration with a made-up business.</figcaption>
 </figure>
 
 <style>
-.mini { margin: 0; display: grid; justify-items: center; gap: 8px; }
-.mini-phone { width: min(240px, 100%); border: 2px solid var(--ink); border-radius: 28px; padding: 10px; background: var(--card); box-shadow: 0 0 0 6px var(--bp), 0 0 0 7px rgb(var(--line-rgb) / .5); }
-.mini-url { text-align: center; font-size: 0.62rem; color: var(--ink-2); padding: 6px 0 8px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-.mini-screen { display: grid; gap: 6px; }
-.mini-b { position: relative; border: 1.5px dashed var(--bp-line); border-radius: 8px; padding: 18px 10px 8px; font-size: 0.8rem; background: rgb(var(--line-rgb) / .06); }
-.mini-b:first-child { background: var(--brand); border: 0; color: #fff; padding: 10px; font-weight: 600; }
-.mini-b:first-child .mini-l { display: none; }
-.mini-l { position: absolute; top: 3px; left: 8px; font-family: var(--mono); font-size: 0.6rem; color: var(--bp-line); }
-.mini figcaption { font-size: 0.68rem; color: var(--ink-2); }
+.mini { margin: 0; display: grid; justify-items: center; gap: 14px; }
+.mini .phone { width: 250px; }
 </style>

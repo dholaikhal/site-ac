@@ -5,7 +5,7 @@ const to = "hello@amader.cloud";
 ---
 <Base title="Contact · Amader Cloud" description="Join the beta, make an agency enquiry, or contact us as an investor.">
 
-<section class="page-hero on-dark grid-night">
+<section class="page-hero band band-red">
   <div class="wrap">
     <p class="kicker">Contact</p>
     <h1>Build with us.</h1>
@@ -34,16 +34,16 @@ const to = "hello@amader.cloud";
         <div class="field"><label for="phone">Phone or WhatsApp</label><input id="phone" name="phone" type="tel" autocomplete="tel"></div>
       </div>
       <div class="field"><label for="message">What do you want to build, or ask?</label><textarea id="message" name="message" placeholder="A shop for my handmade bags, bookings for my salon, fee collection for my coaching centre…"></textarea></div>
-      <div><button class="btn btn-live" type="submit">Send</button></div>
+      <div><button class="btn btn-go" type="submit">Send</button></div>
       <p class="form-status" role="status"></p>
       <p class="small" style="margin:0">Sending opens your email app with the message ready. We use your details only to reply.</p>
     </form>
 
     <aside class="contact-side">
-      <div class="card bp">
-        <span class="mono-label">direct</span>
+      <div class="card tint">
+        <span class="plate">Direct</span>
         <h3>Email</h3>
-        <p class="mono">{to}</p>
+        <p class="url">{to}</p>
         <p class="small">Placeholder address until launch.</p>
       </div>
       <div class="card">
@@ -62,6 +62,6 @@ const to = "hello@amader.cloud";
 .contact { display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); gap: 24px; align-items: start; }
 @media (max-width: 860px) { .contact { grid-template-columns: 1fr; } }
 .contact-side { display: grid; gap: 16px; }
-.contact-side .card.bp .mono-label { background: var(--paper); }
+.contact-side .card.tint { padding-top: 30px; }
 </style>
 </Base>

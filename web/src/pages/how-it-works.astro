@@ -1,6 +1,7 @@
 ---
 import Base from "../layouts/Base.astro";
 import { plan } from "../data/facts";
+import Connectors from "../components/Connectors.astro";
 const steps = [
   { n: "01", t: "Describe it", d: "Type or say what you need, in Bangla, Banglish or English. “A shop for my handmade bags with bKash payment and an SMS when the order ships.”", m: "you" },
   { n: "02", t: "AI builds it", d: "Coding agents plan the app, set up its data, assemble pages from a tested component library, wire in the payment, courier and SMS connectors, and run the tests.", m: "Claude Opus 5.5" },
@@ -20,7 +21,7 @@ const run = [
 ---
 <Base title="How it works · Amader Cloud" description="Describe, build, preview, change by asking, publish, get paid. What the AI does at each step, and what we run for you.">
 
-<section class="page-hero on-dark grid-night">
+<section class="page-hero band band-cobalt">
   <div class="wrap">
     <p class="kicker">How it works</p>
     <h1>From a sentence to a working app.</h1>
@@ -28,15 +29,15 @@ const run = [
   </div>
 </section>
 
-<section class="section grid-paper">
+<section class="section">
   <div class="wrap">
     <ol class="steps-bp">
       {steps.map((s) => (
         <li>
-          <span class="n mono">{s.n}</span>
+          <span class="n">{s.n}</span>
           <h3>{s.t}</h3>
           <p>{s.d}</p>
-          <span class="who mono">{s.m}</span>
+          <span class="who">{s.m}</span>
         </li>
       ))}
     </ol>
@@ -57,21 +58,25 @@ const run = [
       </ul>
     </div>
     <div class="rails" aria-hidden="true">
-      <svg viewBox="0 0 400 320">
-        <g class="bpl2">
-          <rect x="20" y="20" width="360" height="56" rx="8" class="ai"/><text x="200" y="54">AI agents: plan, assemble, wire, test</text>
-          <rect x="20" y="104" width="170" height="56" rx="8"/><text x="105" y="128">component</text><text x="105" y="144">library</text>
-          <rect x="210" y="104" width="170" height="56" rx="8"/><text x="295" y="128">local</text><text x="295" y="144">connectors</text>
-          <rect x="20" y="188" width="360" height="44" rx="8"/><text x="200" y="215">one fixed stack · tests · rollback</text>
-          <rect x="120" y="258" width="160" height="44" rx="22" class="out"/><text x="200" y="285">your app</text>
-          <path d="M105 76v28M295 76v28M105 160v28M295 160v28M200 232v26"/>
-        </g>
-      </svg>
+      <div class="rail ai">AI agents plan, assemble, wire and test</div>
+      <div class="rail-row"><div class="rail">Tested components</div><div class="rail">Local connectors</div></div>
+      <div class="rail">One fixed stack, tests, rollback</div>
+      <div class="rail out">Your app</div>
     </div>
   </div>
 </section>
 
 <section class="section alt">
+  <div class="wrap">
+    <div class="head">
+      <h2>Connected from day one.</h2>
+      <p class="lede">The AI doesn't write payment code from scratch. It wires in tested connectors for the services Bangladeshi customers already use.</p>
+    </div>
+    <Connectors />
+  </div>
+</section>
+
+<section class="section">
   <div class="wrap">
     <div class="head">
       <p class="kicker">What we run for you</p>
@@ -83,16 +88,16 @@ const run = [
   </div>
 </section>
 
-<section class="section" id="agencies">
+<section class="section band band-ink" id="agencies">
   <div class="wrap split">
     <div>
       <p class="kicker">For agencies and freelancers</p>
       <h2>Deliver client apps in a day.</h2>
       <p class="lede">Build on the same rails for your clients: describe, refine, hand over. The agency plan covers {plan("agency").apps} client apps and their hosting, so you stop babysitting servers and spend your time on the client.</p>
-      <div class="btn-row"><a class="btn btn-live" href="contact.html?topic=agency">Agency enquiry</a><a class="btn btn-line" href="pricing.html">See the agency plan</a></div>
+      <div class="btn-row"><a class="btn btn-go" href="contact.html?topic=agency">Agency enquiry</a><a class="btn" href="pricing.html">See the agency plan</a></div>
     </div>
-    <div class="card bp">
-      <span class="mono-label">agency workflow</span>
+    <div class="card tint">
+      <span class="plate">Agency workflow</span>
       <ol class="aw">
         <li>Client brief in a sentence or two</li>
         <li>First build and preview the same day</li>
@@ -105,21 +110,24 @@ const run = [
 </section>
 
 <style>
-.steps-bp { list-style: none; margin: 0; padding: 0; display: grid; gap: 16px; grid-template-columns: repeat(3, minmax(0, 1fr)); counter-reset: s; }
+.steps-bp { list-style: none; margin: 0; padding: 0; display: grid; gap: 22px; grid-template-columns: repeat(3, minmax(0, 1fr)); }
 @media (max-width: 900px) { .steps-bp { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 @media (max-width: 580px) { .steps-bp { grid-template-columns: 1fr; } }
-.steps-bp li { position: relative; background: var(--card); border: 1px solid rgb(var(--line-rgb) / .55); border-radius: 10px; padding: 22px; display: grid; align-content: start; gap: 4px; }
-.steps-bp .n { color: var(--bp-line); }
-.steps-bp h3 { margin: 4px 0; }
-.steps-bp p { margin: 0 0 8px; color: var(--ink-2); }
-.steps-bp .who { justify-self: start; color: var(--amber-ink); border: 1px dashed currentColor; border-radius: 999px; padding: 3px 8px; font-size: 0.72rem; }
-.rails svg { width: 100%; height: auto; }
-.bpl2 rect { fill: var(--bp); stroke: var(--bp-line); stroke-width: 1.4; }
-.bpl2 rect.ai { stroke: var(--amber); stroke-width: 2; }
-.bpl2 rect.out { fill: var(--amber); stroke: none; }
-.bpl2 path { stroke: var(--bp-line); stroke-width: 1.4; stroke-dasharray: 4 4; fill: none; }
-.bpl2 text { font-family: var(--mono); font-size: 12px; fill: var(--ink); text-anchor: middle; }
-.bpl2 rect.out + text { fill: #0d2a3a; font-weight: 500; }
+.steps-bp li { position: relative; background: var(--card); border: 2px solid var(--line); border-radius: var(--radius); padding: 22px; display: grid; align-content: start; gap: 4px; box-shadow: var(--sh); }
+.steps-bp li:nth-child(3n+1) .n { background: var(--red); }
+.steps-bp li:nth-child(3n+2) .n { background: var(--green); }
+.steps-bp li:nth-child(3n) .n { background: var(--cobalt); }
+.steps-bp .n { justify-self: start; font-family: var(--display); font-weight: 800; font-size: 1.1rem; color: #fff; border: 2px solid #1b1510; border-radius: 10px; padding: 2px 10px; }
+.steps-bp h3 { margin: 8px 0 4px; font-size: 1.55rem; }
+.steps-bp p { margin: 0 0 10px; color: var(--ink-2); }
+.steps-bp .who { justify-self: start; font-weight: 700; font-size: 0.78rem; border-radius: 999px; padding: 3px 9px; background: var(--marigold); color: #1b1510; }
+.rails { display: grid; gap: 10px; }
+.rail-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.rail { border: 2px solid var(--line); border-radius: 12px; padding: 16px; text-align: center; font-family: var(--display); font-weight: 800; font-size: 1.1rem; letter-spacing: -0.01em; background: var(--card); }
+.rail.ai { background: var(--cobalt); color: #fff; border-color: #1b1510; }
+.rail.out { background: var(--red); color: #fff; border-color: #1b1510; justify-self: center; padding-inline: 40px; border-radius: 999px; box-shadow: var(--sh); }
 .aw { margin: 8px 0 0; padding-left: 20px; display: grid; gap: 8px; }
+#agencies .card { color: #1b1510; background: var(--marigold); border-color: #1b1510; box-shadow: 5px 5px 0 #000; }
+#agencies .plate { background: #fff; border-color: #1b1510; color: #1b1510; }
 </style>
 </Base>

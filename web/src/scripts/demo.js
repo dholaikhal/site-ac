@@ -166,7 +166,6 @@ function initDemo(root) {
   // ---------- State and rendering ----------
   let st = null;      // { app, off, green, cod, remind, late, flash, built, published, tab, undo: [] }
   let run = 0;        // bumps to cancel an in-flight script
-  let interacted = false;
 
   function paint(tabId, opts = {}) {
     if (!st) return;
@@ -228,7 +227,6 @@ function initDemo(root) {
   chips.addEventListener("click", (e) => {
     const btn = e.target.closest("[data-chip]");
     if (!btn) return;
-    interacted = true;
     chips._items[+btn.dataset.chip].go();
   });
 
@@ -341,9 +339,9 @@ function initDemo(root) {
     run++;
     st = null;
     msgs.innerHTML = "";
-    screen.innerHTML = `<div class="empty"><span>Your app appears here</span></div>`;
+    screen.innerHTML = `<div class="empty"><span>Pick a business on the left, or describe your own. Your app appears here.</span></div>`;
     tabs.innerHTML = ""; url.textContent = "yourname.amader.cloud";
-    setStatus("Waiting for a request");
+    setStatus("Waiting for your request");
     root.classList.remove("running");
     say("ai", `<p>Describe the app your business needs, or pick one below.</p>`, "Amader Cloud");
     startChips();
@@ -353,7 +351,6 @@ function initDemo(root) {
     ev.preventDefault();
     const text = input.value.trim();
     if (!text) return;
-    interacted = true;
     input.value = "";
     if (st?.built && !root.classList.contains("running")) {
       const app = APPS[st.app];
@@ -370,14 +367,4 @@ function initDemo(root) {
   });
 
   reset();
-  // Run the first example once the demo scrolls into view, unless the visitor has already started one.
-  // A tall demo (phone layout) never shows 35% of itself, so also accept "fills half the viewport".
-  const io = new IntersectionObserver((entries) => {
-    const en = entries[entries.length - 1];
-    if (en.intersectionRatio >= 0.35 || en.intersectionRect.height >= innerHeight * 0.5) {
-      io.disconnect();
-      setTimeout(() => { if (!interacted && !st) build("shop", APPS.shop.prompt); }, 700);
-    }
-  }, { threshold: [0, 0.1, 0.2, 0.35, 0.5] });
-  io.observe(root);
 }
