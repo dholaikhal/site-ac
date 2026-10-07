@@ -269,45 +269,10 @@
   </div>
 </section>
 
-<!-- Earn: rent out what your devices aren't using -->
-<section class="bp earn" id="earn" aria-labelledby="earn-title">
-  <div class="wrap earn-inner">
-    <div>
-      <span class="kicker">Earn</span>
-      <h2 id="earn-title">Your devices can pay you back.</h2>
-      <p class="lede">An old laptop sits idle most of the day. A disk sits half empty. Members rent that spare computing and storage to researchers, startups and other members through amader.cloud, and earn credit for it.</p>
-      <ul class="check-list">
-        <li>Jobs run in a sealed sandbox that can't see your files or your home network.</li>
-        <li>Nobody can browse the web through your connection. Your device only talks to our job server.</li>
-        <li>You choose the hours, and you can stop at any time.</li>
-        <li>Earnings go to you, or straight to your building's service-charge fund.</li>
-      </ul>
-      <p style="margin-top:24px"><a class="btn btn-bulb" href="hosts.html">How earning works</a> <a class="btn btn-line" href="contact.html?topic=host" style="color:var(--chalk);margin-left:8px">Join the earn list</a></p>
-    </div>
-    <form class="console earn-calc" id="earn-calc" onsubmit="return false" aria-label="Earnings estimate">
-      <fieldset class="counts">
-        <legend>What could you share?</legend>
-        <div class="count" data-kind="laptop"><span>Laptop</span><button type="button" data-d="-1" aria-label="One fewer laptop">−</button><output>1</output><button type="button" data-d="1" aria-label="One more laptop">+</button></div>
-        <div class="count" data-kind="desktop"><span>Desktop PC</span><button type="button" data-d="-1" aria-label="One fewer desktop">−</button><output>0</output><button type="button" data-d="1" aria-label="One more desktop">+</button></div>
-        <div class="count" data-kind="tvbox"><span>TV box</span><button type="button" data-d="-1" aria-label="One fewer TV box">−</button><output>1</output><button type="button" data-d="1" aria-label="One more TV box">+</button></div>
-      </fieldset>
-      <label for="idle-hours">Idle hours a day <output id="idle-out">10 h</output></label>
-      <input type="range" id="idle-hours" min="2" max="20" value="10">
-      <label for="disk-gb">Spare disk space to rent <output id="disk-out">500 GB</output></label>
-      <input type="range" id="disk-gb" min="0" max="2000" step="50" value="500">
-      <dl>
-        <dt>Storage credit</dt><dd id="e-storage">Tk 100</dd>
-        <dt>Computing, <span id="e-corehours">1,500</span> core-hours</dt><dd id="e-compute">Tk 450</dd>
-        <dt>Your extra electricity</dt><dd id="e-power">− Tk 60</dd>
-        <dt class="total">About, each month</dt><dd class="total" id="e-net">Tk 490</dd>
-      </dl>
-      <p class="small">An estimate, not a promise. Storage pays Tk 50 per 250 GB a month during the pilot. Computing starts in 2028 at a target of Tk 0.30 per core-hour, depending on demand. Electricity is counted at about Tk 9 a unit. Paid as plan credit first, then by bKash.</p>
-    </form>
-  </div>
-</section>
-
 <!-- Why: three facts -->
-<section class="section" aria-labelledby="why-title">
+<section class="section photo-band" aria-labelledby="why-title">
+  <img class="band-photo" src="assets/img/photos/monsoon-1200.jpg" srcset="assets/img/photos/monsoon-1200.jpg 1200w, assets/img/photos/monsoon.jpg 2400w" sizes="100vw" alt="" loading="lazy">
+  <a class="credit mono" href="https://www.pexels.com/photo/urban-flooding-in-a-residential-area-38551008/" rel="noopener">Dhaka. Photo: Faisal Ibne Kalam (Pexels)</a>
   <div class="wrap">
     <div class="section-head">
       <span class="kicker">The problem</span>
@@ -315,8 +280,8 @@
       <p>Every home has a drawer of them. Left there, they become waste. Left plugged in and never updated, they become a risk.</p>
     </div>
     <div class="stats">
-      <div class="stat"><div class="fig">367M kg</div><p>of e‑waste in Bangladesh in 2022. Very little of it was formally recycled, and much of it still worked.</p><cite>Global E‑waste Monitor 2024</cite></div>
-      <div class="stat"><div class="fig">1M+</div><p>home devices hijacked into a botnet that rents out people's internet to criminals.</p><cite>FBI, BADBOX 2.0 warning, June 2025</cite></div>
+      <div class="stat"><div class="fig" data-count="367" data-suffix="M kg">367M kg</div><p>of e‑waste in Bangladesh in 2022. Very little of it was formally recycled, and much of it still worked.</p><cite>Global E‑waste Monitor 2024</cite></div>
+      <div class="stat"><div class="fig" data-count="1" data-suffix="M+">1M+</div><p>home devices hijacked into a botnet that rents out people's internet to criminals.</p><cite>FBI, BADBOX 2.0 warning, June 2025</cite></div>
       <div class="stat"><div class="fig">0</div><p>new devices we need to manufacture. The hardware already exists and is already paid for.</p><cite>Some jobs need one extra part, such as a storage disk.</cite></div>
     </div>
   </div>
@@ -326,8 +291,9 @@
 <section class="bp bp-scroll tvbox" id="tvbox" aria-labelledby="tvbox-title">
   <div class="wrap bp-sticky">
     <div class="bp-text">
-      <span class="kicker">The box in your drawer</span>
-      <h2 id="tvbox-title">A TV box is a small computer. Here's what it can still do.</h2>
+      <span class="kicker">01  Give it a job</span>
+      <h2 id="tvbox-title">Take the TV box in your drawer.</h2>
+      <p class="lede">It's a small computer. Here's what's inside, and what it can do again.</p>
       <ol class="bp-steps tv-steps">
         <li class="on"><h3>The box in the drawer</h3><p>Plenty of homes that moved to a smart TV still have one. Here's what's inside a typical box.</p></li>
         <li><h3>A small computer, really</h3><p>Four ARM cores, 1–4 GB of memory, flash storage, Ethernet, USB and Wi‑Fi. Roughly a phone from a few years ago, without the screen or battery.</p></li>
@@ -420,6 +386,122 @@
   </div>
 </section>
 
+<!-- Blueprint: devices drawn and wired in as you scroll -->
+<section class="bp bp-scroll" id="how" aria-labelledby="bp-title">
+  <div class="wrap bp-sticky">
+    <div class="bp-text">
+      <span class="kicker">01  Give it a job</span>
+      <h2 id="bp-title">Every other device in the drawer, too.</h2>
+      <p class="lede">Phones, routers, tablets and laptops go through the same steps: collected, wiped, rebuilt for one job, and connected to one network that we look after.</p>
+      <ol class="bp-steps">
+        <li class="on"><h3>Old phone → stairwell camera</h3><p>A phone from a few years ago still has a better camera than cheap CCTV. Wiped and mounted, it watches the stairs.</p></li>
+        <li><h3>TV box → shop menu screen</h3><p>Plugged into an old TV, it shows today's prices or menu, updated from the owner's phone.</p></li>
+        <li><h3>Wi‑Fi router → rooftop Wi‑Fi</h3><p>Rebuilt with open software that still gets security updates, it covers the roof and the guard room.</p></li>
+        <li><h3>Tablet → lobby notice board</h3><p>Committee notices and the water schedule, on the wall where everyone sees them.</p></li>
+        <li><h3>Laptop → building server</h3><p>Its battery rides out load-shedding while it records the cameras and keeps the backups.</p></li>
+      </ol>
+    </div>
+    <svg class="bp-art" viewBox="0 0 1000 800" role="img" aria-labelledby="bp-art-title">
+      <title id="bp-art-title">Blueprint drawing: an old phone, a TV box, a router, a tablet and a laptop, each wired to a central network hub.</title>
+      <g class="hub" style="--d:1;--c:0">
+        <circle class="hub-ring" cx="520" cy="400" r="150" stroke-dasharray="4 8"/>
+        <circle class="hub-ring" cx="520" cy="400" r="96"/>
+        <circle class="hub-core" cx="520" cy="400" r="58"/>
+        <text class="hub-label" x="520" y="398">amader</text>
+        <text class="hub-sub" x="520" y="420">encrypted mesh</text>
+        <path class="wire" pathLength="1" d="M520 250 A150 150 0 1 1 519.9 250"/>
+      </g>
+      <g class="dev" data-step="0">
+        <path class="draw" pathLength="1" d="M124 70 h68 a14 14 0 0 1 14 14 v152 a14 14 0 0 1 -14 14 h-68 a14 14 0 0 1 -14 -14 v-152 a14 14 0 0 1 14 -14 z"/>
+        <path class="draw thin" pathLength="1" d="M122 94 h72 v130 h-72 z"/>
+        <path class="draw thin" pathLength="1" d="M152 82 h12 M146 238 h24"/>
+        <path class="dim" d="M88 70 v180 M82 70 h12 M82 250 h12 M110 268 h96 M110 262 v12 M206 262 v12"/>
+        <text class="anno" x="110" y="300">old phone</text>
+        <text class="anno job" x="110" y="322">→ stairwell camera</text>
+        <path class="wire" pathLength="1" d="M206 160 C 330 160, 390 300, 470 352"/>
+        <circle class="port" cx="206" cy="160" r="5"/>
+      </g>
+      <g class="dev" data-step="1">
+        <path class="draw" pathLength="1" d="M742 110 h176 a12 12 0 0 1 12 12 v34 a12 12 0 0 1 -12 12 h-176 a12 12 0 0 1 -12 -12 v-34 a12 12 0 0 1 12 -12 z"/>
+        <path class="draw thin" pathLength="1" d="M744 150 h172 M760 168 v8 h20 v-8 M880 168 v8 h20 v-8 M930 128 h14 v14 h-14"/>
+        <circle class="draw" pathLength="1" cx="904" cy="134" r="5"/>
+        <path class="dim" d="M730 92 h200 M730 86 v12 M930 86 v12"/>
+        <text class="anno" x="730" y="208">android tv box</text>
+        <text class="anno job" x="730" y="230">→ shop menu screen</text>
+        <path class="wire" pathLength="1" d="M730 140 C 640 140, 620 300, 572 352"/>
+        <circle class="port" cx="730" cy="140" r="5"/>
+      </g>
+      <g class="dev" data-step="2">
+        <path class="draw" pathLength="1" d="M770 470 h160 a10 10 0 0 1 10 10 v26 a10 10 0 0 1 -10 10 h-160 a10 10 0 0 1 -10 -10 v-26 a10 10 0 0 1 10 -10 z"/>
+        <path class="draw" pathLength="1" d="M782 470 L768 392 M918 470 L932 392 M850 470 L850 410"/>
+        <path class="draw thin" pathLength="1" d="M792 494 h6 M812 494 h6 M832 494 h6 M852 494 h6 M872 494 h6"/>
+        <path class="dim" d="M760 534 h180 M760 528 v12 M940 528 v12"/>
+        <text class="anno" x="760" y="566">wi‑fi router</text>
+        <text class="anno job" x="760" y="588">→ rooftop wi‑fi</text>
+        <path class="wire" pathLength="1" d="M760 494 C 680 494, 640 440, 588 424"/>
+        <circle class="port" cx="760" cy="494" r="5"/>
+      </g>
+      <g class="dev" data-step="3">
+        <path class="draw" pathLength="1" d="M476 600 h188 a12 12 0 0 1 12 12 v116 a12 12 0 0 1 -12 12 h-188 a12 12 0 0 1 -12 -12 v-116 a12 12 0 0 1 12 -12 z"/>
+        <path class="draw thin" pathLength="1" d="M482 614 h176 v112 h-176 z M498 636 h90 M498 656 h130 M498 676 h110 M498 696 h70"/>
+        <path class="dim" d="M446 600 v140 M440 600 h12 M440 740 h12"/>
+        <text class="anno" x="696" y="650">tablet</text>
+        <text class="anno job" x="696" y="672">→ lobby notice board</text>
+        <path class="wire" pathLength="1" d="M570 600 C 570 540, 540 500, 528 458"/>
+        <circle class="port" cx="570" cy="600" r="5"/>
+      </g>
+      <g class="dev" data-step="4">
+        <path class="draw" pathLength="1" d="M96 470 h204 a8 8 0 0 1 8 8 v128 h-220 v-128 a8 8 0 0 1 8 -8 z"/>
+        <path class="draw thin" pathLength="1" d="M102 482 h192 v114 h-192 z"/>
+        <path class="draw" pathLength="1" d="M62 606 h272 l-16 22 h-240 z"/>
+        <path class="draw thin" pathLength="1" d="M176 616 h44"/>
+        <path class="dim" d="M62 646 h272 M62 640 v12 M334 640 v12"/>
+        <text class="anno" x="62" y="680">laptop</text>
+        <text class="anno job" x="62" y="702">→ building server</text>
+        <path class="wire" pathLength="1" d="M308 540 C 390 540, 420 440, 466 420"/>
+        <circle class="port" cx="308" cy="540" r="5"/>
+      </g>
+    </svg>
+  </div>
+</section>
+
+<!-- Earn: rent out what your devices aren't using -->
+<section class="bp earn" id="earn" aria-labelledby="earn-title">
+  <div class="wrap earn-inner">
+    <div>
+      <span class="kicker">02  Rent out what it isn't using</span>
+      <h2 id="earn-title">Your devices can pay you back.</h2>
+      <p class="lede">An old laptop sits idle most of the day. A disk sits half empty. Members rent that spare computing and storage to researchers, startups and other members through amader.cloud, and earn credit for it.</p>
+      <ul class="check-list">
+        <li>Jobs run in a sealed sandbox that can't see your files or your home network.</li>
+        <li>Nobody can browse the web through your connection. Your device only talks to our job server.</li>
+        <li>You choose the hours, and you can stop at any time.</li>
+        <li>Earnings go to you, or straight to your building's service-charge fund.</li>
+      </ul>
+      <p style="margin-top:24px"><a class="btn btn-bulb" href="hosts.html">How earning works</a> <a class="btn btn-line" href="contact.html?topic=host" style="color:var(--chalk);margin-left:8px">Join the earn list</a></p>
+    </div>
+    <form class="console earn-calc" id="earn-calc" onsubmit="return false" aria-label="Earnings estimate">
+      <fieldset class="counts">
+        <legend>What could you share?</legend>
+        <div class="count" data-kind="laptop"><span>Laptop</span><button type="button" data-d="-1" aria-label="One fewer laptop">−</button><output>1</output><button type="button" data-d="1" aria-label="One more laptop">+</button></div>
+        <div class="count" data-kind="desktop"><span>Desktop PC</span><button type="button" data-d="-1" aria-label="One fewer desktop">−</button><output>0</output><button type="button" data-d="1" aria-label="One more desktop">+</button></div>
+        <div class="count" data-kind="tvbox"><span>TV box</span><button type="button" data-d="-1" aria-label="One fewer TV box">−</button><output>1</output><button type="button" data-d="1" aria-label="One more TV box">+</button></div>
+      </fieldset>
+      <label for="idle-hours">Idle hours a day <output id="idle-out">10 h</output></label>
+      <input type="range" id="idle-hours" min="2" max="20" value="10">
+      <label for="disk-gb">Spare disk space to rent <output id="disk-out">500 GB</output></label>
+      <input type="range" id="disk-gb" min="0" max="2000" step="50" value="500">
+      <dl>
+        <dt>Storage credit</dt><dd id="e-storage">Tk 100</dd>
+        <dt>Computing, <span id="e-corehours">1,500</span> core-hours</dt><dd id="e-compute">Tk 450</dd>
+        <dt>Your extra electricity</dt><dd id="e-power">− Tk 60</dd>
+        <dt class="total">About, each month</dt><dd class="total" id="e-net">Tk 490</dd>
+      </dl>
+      <p class="small">An estimate, not a promise. Storage pays Tk 50 per 250 GB a month during the pilot. Computing starts in 2028 at a target of Tk 0.30 per core-hour, depending on demand. Electricity is counted at about Tk 9 a unit. Paid as plan credit first, then by bKash.</p>
+    </form>
+  </div>
+</section>
+
 <!-- Community: what a building can do together -->
 <section class="section community" id="community" aria-labelledby="community-title">
   <div class="wrap">
@@ -480,85 +562,6 @@
 
 
 
-<!-- Blueprint: devices drawn and wired in as you scroll -->
-<section class="bp bp-scroll" id="how" aria-labelledby="bp-title">
-  <div class="wrap bp-sticky">
-    <div class="bp-text">
-      <span class="kicker">How it works</span>
-      <h2 id="bp-title">From drawer to network, one device at a time</h2>
-      <p class="lede">We collect each device, erase its old data, rebuild it for one job, and connect it to an encrypted network that we look after.</p>
-      <ol class="bp-steps">
-        <li class="on"><h3>Old phone → stairwell camera</h3><p>A phone from a few years ago still has a better camera than cheap CCTV. Wiped and mounted, it watches the stairs.</p></li>
-        <li><h3>TV box → family photo cloud</h3><p>With a storage disk attached, it holds every photo the family takes, at home rather than abroad.</p></li>
-        <li><h3>Wi‑Fi router → rooftop Wi‑Fi</h3><p>Rebuilt with open software that still gets security updates, it covers the roof and the guard room.</p></li>
-        <li><h3>Tablet → lobby notice board</h3><p>Committee notices and the water schedule, on the wall where everyone sees them.</p></li>
-        <li><h3>Laptop → building server</h3><p>Its battery rides out load-shedding while it records the cameras and keeps the backups.</p></li>
-      </ol>
-    </div>
-    <svg class="bp-art" viewBox="0 0 1000 800" role="img" aria-labelledby="bp-art-title">
-      <title id="bp-art-title">Blueprint drawing: an old phone, a TV box, a router, a tablet and a laptop, each wired to a central network hub.</title>
-      <g class="hub" style="--d:1;--c:0">
-        <circle class="hub-ring" cx="520" cy="400" r="150" stroke-dasharray="4 8"/>
-        <circle class="hub-ring" cx="520" cy="400" r="96"/>
-        <circle class="hub-core" cx="520" cy="400" r="58"/>
-        <text class="hub-label" x="520" y="398">amader</text>
-        <text class="hub-sub" x="520" y="420">encrypted mesh</text>
-        <path class="wire" pathLength="1" d="M520 250 A150 150 0 1 1 519.9 250"/>
-      </g>
-      <g class="dev" data-step="0">
-        <path class="draw" pathLength="1" d="M124 70 h68 a14 14 0 0 1 14 14 v152 a14 14 0 0 1 -14 14 h-68 a14 14 0 0 1 -14 -14 v-152 a14 14 0 0 1 14 -14 z"/>
-        <path class="draw thin" pathLength="1" d="M122 94 h72 v130 h-72 z"/>
-        <path class="draw thin" pathLength="1" d="M152 82 h12 M146 238 h24"/>
-        <path class="dim" d="M88 70 v180 M82 70 h12 M82 250 h12 M110 268 h96 M110 262 v12 M206 262 v12"/>
-        <text class="anno" x="110" y="300">old phone</text>
-        <text class="anno job" x="110" y="322">→ stairwell camera</text>
-        <path class="wire" pathLength="1" d="M206 160 C 330 160, 390 300, 470 352"/>
-        <circle class="port" cx="206" cy="160" r="5"/>
-      </g>
-      <g class="dev" data-step="1">
-        <path class="draw" pathLength="1" d="M742 110 h176 a12 12 0 0 1 12 12 v34 a12 12 0 0 1 -12 12 h-176 a12 12 0 0 1 -12 -12 v-34 a12 12 0 0 1 12 -12 z"/>
-        <path class="draw thin" pathLength="1" d="M744 150 h172 M760 168 v8 h20 v-8 M880 168 v8 h20 v-8 M930 128 h14 v14 h-14"/>
-        <circle class="draw" pathLength="1" cx="904" cy="134" r="5"/>
-        <path class="dim" d="M730 92 h200 M730 86 v12 M930 86 v12"/>
-        <text class="anno" x="730" y="208">android tv box</text>
-        <text class="anno job" x="730" y="230">→ family photo cloud</text>
-        <path class="wire" pathLength="1" d="M730 140 C 640 140, 620 300, 572 352"/>
-        <circle class="port" cx="730" cy="140" r="5"/>
-      </g>
-      <g class="dev" data-step="2">
-        <path class="draw" pathLength="1" d="M770 470 h160 a10 10 0 0 1 10 10 v26 a10 10 0 0 1 -10 10 h-160 a10 10 0 0 1 -10 -10 v-26 a10 10 0 0 1 10 -10 z"/>
-        <path class="draw" pathLength="1" d="M782 470 L768 392 M918 470 L932 392 M850 470 L850 410"/>
-        <path class="draw thin" pathLength="1" d="M792 494 h6 M812 494 h6 M832 494 h6 M852 494 h6 M872 494 h6"/>
-        <path class="dim" d="M760 534 h180 M760 528 v12 M940 528 v12"/>
-        <text class="anno" x="760" y="566">wi‑fi router</text>
-        <text class="anno job" x="760" y="588">→ rooftop wi‑fi</text>
-        <path class="wire" pathLength="1" d="M760 494 C 680 494, 640 440, 588 424"/>
-        <circle class="port" cx="760" cy="494" r="5"/>
-      </g>
-      <g class="dev" data-step="3">
-        <path class="draw" pathLength="1" d="M476 600 h188 a12 12 0 0 1 12 12 v116 a12 12 0 0 1 -12 12 h-188 a12 12 0 0 1 -12 -12 v-116 a12 12 0 0 1 12 -12 z"/>
-        <path class="draw thin" pathLength="1" d="M482 614 h176 v112 h-176 z M498 636 h90 M498 656 h130 M498 676 h110 M498 696 h70"/>
-        <path class="dim" d="M446 600 v140 M440 600 h12 M440 740 h12"/>
-        <text class="anno" x="696" y="650">tablet</text>
-        <text class="anno job" x="696" y="672">→ lobby notice board</text>
-        <path class="wire" pathLength="1" d="M570 600 C 570 540, 540 500, 528 458"/>
-        <circle class="port" cx="570" cy="600" r="5"/>
-      </g>
-      <g class="dev" data-step="4">
-        <path class="draw" pathLength="1" d="M96 470 h204 a8 8 0 0 1 8 8 v128 h-220 v-128 a8 8 0 0 1 8 -8 z"/>
-        <path class="draw thin" pathLength="1" d="M102 482 h192 v114 h-192 z"/>
-        <path class="draw" pathLength="1" d="M62 606 h272 l-16 22 h-240 z"/>
-        <path class="draw thin" pathLength="1" d="M176 616 h44"/>
-        <path class="dim" d="M62 646 h272 M62 640 v12 M334 640 v12"/>
-        <text class="anno" x="62" y="680">laptop</text>
-        <text class="anno job" x="62" y="702">→ building server</text>
-        <path class="wire" pathLength="1" d="M308 540 C 390 540, 420 440, 466 420"/>
-        <circle class="port" cx="308" cy="540" r="5"/>
-      </g>
-    </svg>
-  </div>
-</section>
-
 <!-- Plans -->
 <section class="section band" id="plans" aria-labelledby="plans-title">
   <div class="wrap">
@@ -570,7 +573,7 @@
     <h3 class="plans-group">For people</h3>
     <div class="plans two">
       <article class="plan lead">
-        <svg class="pict " aria-hidden="true"><use href="#p-home"/></svg><div class="plan-name"><h3>Ghor</h3><span class="bn" lang="bn">ঘর</span></div>
+        <div class="plan-photo"><img src="assets/img/photos/rooftops-1200.jpg" alt="" loading="lazy" style="object-position:50% 75%"></div><div class="plan-name"><h3>Ghor</h3><span class="bn" lang="bn">ঘর</span></div>
         <p class="plan-for">For one home</p>
         <div class="price">Tk 299<span> /month</span></div>
         <p class="setup small">Up to 3 devices</p>
@@ -582,7 +585,7 @@
         </ul>
       </article>
       <article class="plan">
-        <svg class="pict " aria-hidden="true"><use href="#p-building"/></svg><div class="plan-name"><h3>Bari</h3><span class="bn" lang="bn">বাড়ি</span></div>
+        <div class="plan-photo"><img src="assets/img/photos/towers-1200.jpg" alt="" loading="lazy" style="object-position:50% 40%"></div><div class="plan-name"><h3>Bari</h3><span class="bn" lang="bn">বাড়ি</span></div>
         <p class="plan-for">For a whole apartment building</p>
         <div class="price">Tk 2,500<span> /month</span></div>
         <p class="setup small">+ Tk 199 for each flat that joins</p>
@@ -597,7 +600,7 @@
     <h3 class="plans-group">For companies and institutions</h3>
     <div class="plans">
       <article class="plan">
-        <svg class="pict " aria-hidden="true"><use href="#p-shop"/></svg><div class="plan-name"><h3>Dokan</h3><span class="bn" lang="bn">দোকান</span></div>
+        <div class="plan-photo"><img src="assets/img/photos/street-1200.jpg" alt="" loading="lazy" style="object-position:30% 45%"></div><div class="plan-name"><h3>Dokan</h3><span class="bn" lang="bn">দোকান</span></div>
         <p class="plan-for">For a shop, clinic or small office</p>
         <div class="price">Tk 990<span> /month</span></div>
         <p class="setup small">Up to 5 devices</p>
@@ -608,7 +611,7 @@
         </ul>
       </article>
       <article class="plan">
-        <svg class="pict " aria-hidden="true"><use href="#p-briefcase"/></svg><div class="plan-name"><h3>Companies</h3></div>
+        <div class="plan-photo"><img src="assets/img/photos/office-1200.jpg" alt="" loading="lazy" style="object-position:68% 50%"></div><div class="plan-name"><h3>Companies</h3></div>
         <p class="plan-for">Offices with devices to reuse or retire</p>
         <div class="price">Quote<span> per device</span></div>
         <p class="setup small">Retire, reuse, or rent out</p>
@@ -619,7 +622,7 @@
         </ul>
       </article>
       <article class="plan">
-        <svg class="pict " aria-hidden="true"><use href="#p-school"/></svg><div class="plan-name"><h3>Pathshala</h3><span class="bn" lang="bn">পাঠশালা</span></div>
+        <div class="plan-photo"><img src="assets/img/photos/bazar-1200.jpg" alt="" loading="lazy" style="object-position:50% 20%"></div><div class="plan-name"><h3>Pathshala</h3><span class="bn" lang="bn">পাঠশালা</span></div>
         <p class="plan-for">Schools and public bodies</p>
         <div class="price">From Tk 1,500<span> /month per lab</span></div>
         <p class="setup small">Right-size reviews quoted per project</p>
@@ -659,7 +662,7 @@
 </section>
 
 <!-- Promises + roadmap -->
-<section class="section" aria-labelledby="promise-title">
+<section class="section dark promises-band" aria-labelledby="promise-title">
   <div class="wrap">
     <div class="section-head"><span class="kicker">Our promises</span><h2 id="promise-title">Your devices, your data</h2></div>
     <div class="promises">
@@ -683,8 +686,12 @@
 </section>
 
 <section class="section band" aria-labelledby="faq-title">
-  <div class="wrap">
-    <div class="section-head"><span class="kicker">FAQ</span><h2 id="faq-title">Questions people ask</h2></div>
+  <div class="wrap faq-layout">
+    <div class="faq-side">
+      <span class="kicker">FAQ</span><h2 id="faq-title">Questions people ask</h2>
+      <figure class="faq-photo"><img src="assets/img/photos/teastall-1200.jpg" alt="A roadside tea stall in Dhaka with a painted kettle on a blue wall." loading="lazy"><figcaption class="mono"><a href="https://www.pexels.com/photo/lonely-man-at-a-dhaka-tea-stall-33006139/" rel="noopener">Dhaka. Photo: Ahnaf Abror (Pexels)</a></figcaption></figure>
+      <p class="small">Something else? <a href="contact.html">Ask us on WhatsApp</a>.</p>
+    </div>
     <div class="faq">
       <details><summary>How does earning work?</summary><div><p>A device you choose rents out spare disk space, and from 2028 spare computing, to people who need it. It all happens inside a sandbox that can't see your files. You earn credit off your plan, and later cash by bKash.</p></div></details>
       <details><summary>We're a company. What can you do with our old devices?</summary><div><p>Three things: put them back to work in your office, rent out their idle capacity overnight, or retire them with a wipe certificate per device, with the working ones going to school labs. <a href="companies.html">For companies</a></p></div></details>

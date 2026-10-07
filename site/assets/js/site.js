@@ -520,3 +520,21 @@ if (consoleForm) {
 
 // Photo page heads reuse the hero's node tooltips.
 document.querySelectorAll(".page-head.photo").forEach((h) => tipper(h, ".node"));
+
+// Count-up for the problem figures, once, when they come into view.
+(() => {
+  const figs = document.querySelectorAll("[data-count]");
+  if (!figs.length || reduceMotion) return;
+  const io = new IntersectionObserver((entries) => entries.forEach((e) => {
+    if (!e.isIntersecting) return;
+    io.unobserve(e.target);
+    const el = e.target, end = +el.dataset.count, suf = el.dataset.suffix || "", t0 = performance.now(), dur = 1400;
+    const tick = (now) => {
+      const k = Math.min(1, (now - t0) / dur), v = Math.round(end * (1 - (1 - k) ** 3));
+      el.textContent = `${v}${suf}`;
+      if (k < 1) requestAnimationFrame(tick);
+    };
+    el.textContent = `0${suf}`; requestAnimationFrame(tick);
+  }), { threshold: 0.6 });
+  figs.forEach((f) => io.observe(f));
+})();

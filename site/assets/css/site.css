@@ -757,3 +757,75 @@ fieldset.field { border: 0; padding: 0; margin: 0; }
 .flow-core span { color: var(--chalk-2); font-size: .9rem; }
 .flow-arrow { width: 64px; height: 20px; fill: none; stroke: var(--amber-ink); stroke-width: 2.5; }
 @media (max-width: 900px) { .flow-fig { grid-template-columns: 1fr; } .flow-arrow { transform: rotate(90deg); justify-self: center; } }
+
+/* ===================== Visual refresh below the hero ===================== */
+/* Section rhythm: stronger heads, a single amber tick before every kicker. */
+.section-head h2 { font-size: clamp(2.2rem, 1.2rem + 3vw, 3.8rem); }
+.kicker { display: inline-flex; align-items: center; gap: 10px; }
+.kicker::before { content: ""; width: 22px; height: 2px; background: currentColor; }
+.section-head p { max-width: 52ch; }
+
+/* Photo band: the problem, told over a real street. */
+.photo-band { position: relative; isolation: isolate; color: var(--chalk); background: var(--night); overflow: hidden; }
+.photo-band .band-photo { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: -2; filter: saturate(.55) brightness(.5); }
+.photo-band::before { content: ""; position: absolute; inset: 0; z-index: -1; background: linear-gradient(180deg, rgba(10,22,34,.92) 0%, rgba(10,22,34,.55) 45%, rgba(10,22,34,.9) 100%); }
+.photo-band .credit { position: absolute; right: 12px; bottom: 10px; color: rgba(228,237,245,.6); font-size: .72rem; }
+.photo-band .section-head p, .photo-band .stat p, .photo-band .stat cite { color: var(--chalk-2); }
+.photo-band .kicker { color: var(--amber); }
+.photo-band .stats { border-top-color: rgba(228,237,245,.35); }
+.photo-band .stat + .stat { border-left-color: rgba(228,237,245,.18); }
+.photo-band .stat .fig { color: var(--amber); font-size: clamp(3rem, 1.6rem + 4.4vw, 6rem); }
+@media (max-width: 860px) { .photo-band .stat, .photo-band .stat + .stat { border-bottom-color: rgba(228,237,245,.18); } }
+
+/* Value grid: bigger, warmer, with a hover that shows it's a choice. */
+.value-grid { border-top-width: 2px; }
+.vg-col { font-size: clamp(1.3rem, 1rem + 1vw, 1.8rem); }
+.vg-col .mono { display: inline-grid; place-items: center; width: 2.1em; height: 2.1em; border-radius: 50%; background: var(--amber); color: var(--night); font-size: .55em; vertical-align: middle; }
+.vg-cell { transition: background-color .2s; }
+.vg-cell:hover { background: color-mix(in srgb, var(--amber) 8%, transparent); }
+.vg-cell p { font-size: 1.05rem; }
+
+/* Plans: photo-topped cards. */
+.plans { border-top: 0; gap: 20px; }
+.plans .plan, .plans .plan + .plan { padding: 0 0 26px; border: 1px solid var(--rule); border-radius: 6px; background: var(--paper); overflow: hidden; }
+.plans .plan > :not(.plan-photo) { margin-inline: 24px; }
+.plans .plan ul { margin-inline: 24px; }
+.plan-photo { height: 150px; margin: 0 0 18px; position: relative; overflow: hidden; background: var(--night); }
+.plan-photo img { width: 100%; height: 100%; object-fit: cover; transition: transform .6s ease; }
+.plan:hover .plan-photo img { transform: scale(1.04); }
+.plan-photo::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, transparent 40%, rgba(10,22,34,.35)); }
+.plan.lead { border-color: var(--amber-ink); box-shadow: 0 0 0 1px var(--amber-ink); }
+.plan.lead::before { display: none; }
+.plans-group { margin-top: 40px; }
+@media (prefers-reduced-motion: reduce) { .plan-photo img { transition: none; } }
+
+/* Promises + roadmap on night. */
+.promises-band .promises { border-top-color: rgba(228,237,245,.3); }
+.promises-band .promises p, .promises-band .road p, .promises-band .road .when { color: var(--chalk-2); }
+.promises-band .pict { color: var(--amber); width: 64px; height: 64px; }
+.promises-band .road { border-top-color: rgba(228,237,245,.25); }
+.promises-band .road li::before { background: var(--night); border-color: var(--chalk-2); }
+.promises-band .road li.now::before { background: var(--amber); border-color: var(--amber); }
+.promises-band a { color: var(--chalk); }
+
+/* FAQ: two columns, photo beside. */
+.faq-layout { display: grid; grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr); gap: clamp(32px, 6vw, 88px); align-items: start; }
+.faq-side { position: sticky; top: calc(var(--header-h) + 32px); }
+.faq-photo { margin: 24px 0 16px; position: relative; border-radius: 6px; overflow: hidden; aspect-ratio: 4 / 3; }
+.faq-photo img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 45%; }
+.faq-photo figcaption { position: absolute; right: 8px; bottom: 6px; font-size: .7rem; }
+.faq-photo figcaption a { color: rgba(255,255,255,.85); }
+.faq { max-width: none; }
+@media (max-width: 900px) { .faq-layout { grid-template-columns: 1fr; } .faq-side { position: static; } .faq-photo { aspect-ratio: 16 / 9; } }
+
+/* Shared components, sitewide. */
+.ledger .fig { color: var(--ink); }
+.ledger li { transition: background-color .2s; }
+.check-list li::before, .cross-list li::before { content: ""; width: 9px; height: 9px; top: 1.15em; border-radius: 2px; transform: rotate(45deg); background: var(--amber-ink); }
+.cross-list li::before { background: transparent; border: 1.5px solid var(--warn); }
+.panel-dusk .check-list li::before, .earn .check-list li::before, .bp .check-list li::before { background: var(--amber); }
+.steps li { border-top-width: 2px; }
+.steps li::before { font-size: 1.6rem; font-family: var(--sans); font-weight: 500; font-stretch: 118%; color: var(--amber-ink); letter-spacing: -.02em; }
+.page-head + .stack > div > h2, .stack > div > h2, .split > div > h2 { font-size: clamp(1.8rem, 1.2rem + 1.8vw, 2.8rem); }
+.photo-band .stat .fig { white-space: nowrap; font-size: clamp(2.6rem, 1.4rem + 3.6vw, 5rem); }
+.bp-text .lede { margin-top: -.2em; }
