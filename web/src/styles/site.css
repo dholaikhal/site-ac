@@ -475,6 +475,8 @@ fieldset.field { border: 0; padding: 0; margin: 0; }
 }
 .ledger li { grid-template-columns: minmax(10rem, 22rem) minmax(0, 1fr); }
 .ledger .fig { font-size: clamp(2rem, 1.4rem + 1.6vw, 3rem); font-stretch: 104%; }
+@media (max-width: 640px) { .ledger li { grid-template-columns: minmax(0, 1fr); gap: 6px; } }
+.ledger a { overflow-wrap: anywhere; }
 
 /* ---------- Hero scenes slideshow (supersedes the single-photo hero) ---------- */
 .hero { display: block; }
