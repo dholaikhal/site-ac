@@ -1,7 +1,7 @@
 ---
 import Base from "../layouts/Base.astro";
 import PlanCards from "../components/PlanCards.astro";
-import Src from "../components/Src.astro";
+import Sources from "../components/Sources.astro";
 import facts, { tk, usdOf } from "../data/facts";
 const plans = facts.pricing.plans;
 const yes = "✓";
@@ -45,7 +45,6 @@ const rows: [string, (p: (typeof plans)[number]) => string][] = [
         </tbody>
       </table>
     </div>
-    <p class="small" style="margin-top:14px">USD equivalents at Tk {facts.fx.tkPerUsd} = $1 (rate on {facts.fx.date}: {facts.fx.observed}) <Src id="fx" />. Extra AI edits are {tk(facts.pricing.extraEditTk)} each.</p>
   </div>
 </section>
 
@@ -59,6 +58,8 @@ const rows: [string, (p: (typeof plans)[number]) => string][] = [
     <details><summary>Why is it cheaper than a custom website?</summary><p>The AI builds from tested templates and connectors on one stack, so building and running your app costs us little. We pass that on.</p></details>
   </div>
 </section>
+
+<div class="wrap" style="padding-bottom:40px"><Sources ids={["fx"]} /></div>
 
 <section class="section tight ink-band">
   <div class="wrap split">

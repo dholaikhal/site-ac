@@ -1,12 +1,15 @@
 ---
+// The page's source list. Weak-source caveats live here, not next to the figures.
 import facts, { type SourceId } from "../data/facts";
 interface Props { ids: SourceId[] }
+const order = Object.keys(facts.sources);
+const ids = [...Astro.props.ids].sort((a, b) => order.indexOf(a) - order.indexOf(b));
 ---
 <aside class="sources" aria-label="Sources">
   <strong>Sources</strong>
   <ol>
-    {Astro.props.ids.map((id) => { const s = facts.sources[id]; return (
-      <li>{s.url ? <a href={s.url} rel="noopener" target="_blank">{s.title}</a> : s.title}{s.caveat && <span class="cav"> {s.caveat}</span>}</li>
+    {ids.map((id) => { const s = facts.sources[id]; return (
+      <li id={`src-${id}`} value={order.indexOf(id) + 1}>{s.url ? <a href={s.url} rel="noopener" target="_blank">{s.title}</a> : s.title}{s.caveat && <span class="cav"> {s.caveat}</span>}</li>
     ); })}
   </ol>
 </aside>

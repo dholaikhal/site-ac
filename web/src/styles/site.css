@@ -165,10 +165,11 @@ p { margin: 0 0 1em; }
 .stat { display: grid; gap: 6px; align-content: start; }
 .stat .n { font-family: var(--display); font-size: clamp(2.8rem, 1.8rem + 3vw, 4.2rem); font-weight: 800; line-height: 0.95; }
 .stat .l { color: var(--ink-2); }
-.src { font-size: 0.8rem; font-weight: 600; color: var(--ink-2); text-decoration: none; border-bottom: 1.5px dotted currentColor; justify-self: start; }
-.src.weak::after { content: " · weak source"; color: var(--warn); }
-.ink-band .src { color: #b4bfd6; }
-.ink-band .src.weak::after { color: #ff9d94; }
+.fn { font-size: 0.68em; line-height: 0; margin-left: 2px; }
+.fn a { color: var(--ink-2); text-decoration: none; font-weight: 700; }
+.fn a:hover { text-decoration: underline; }
+.ink-band .fn a, .signboard .fn a { color: inherit; }
+.sources li:target { background: var(--yellow-wash); }
 .hyp { display: inline-block; font-family: var(--sans); font-weight: 700; font-size: 0.76rem; line-height: 1.2; letter-spacing: 0; padding: 3px 8px; border-radius: 3px; background: var(--red-wash); color: var(--warn); white-space: nowrap; vertical-align: middle; }
 .signboard .hyp, .ink-band .hyp { background: #fff; color: #c0241a; }
 .sources { font-size: 0.875rem; color: var(--ink-2); border-top: 1px solid var(--rule); padding-top: 18px; margin-top: 40px; }

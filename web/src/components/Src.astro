@@ -1,10 +1,8 @@
 ---
-// Inline source tag for a figure: links to the source and flags weak ones.
+// Footnote marker for a figure: a small number linking to the page's source list.
+// Numbers follow the order of sources in facts.json, so they match on every page.
 import facts, { type SourceId } from "../data/facts";
 interface Props { id: SourceId }
-const s = facts.sources[Astro.props.id];
-const weak = Boolean(s.caveat) && Astro.props.id !== "fx" && Astro.props.id !== "plan";
+const n = Object.keys(facts.sources).indexOf(Astro.props.id) + 1;
 ---
-{s.url
-  ? <a class="src" class:list={{ weak }} href={s.url} title={s.caveat || s.title} rel="noopener" target="_blank">{s.short}</a>
-  : <span class="src" title={s.caveat}>{s.short}</span>}
+<sup class="fn"><a href={`#src-${Astro.props.id}`} title={facts.sources[Astro.props.id].short}>{n}</a></sup>
