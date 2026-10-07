@@ -3,7 +3,8 @@ import Base from "../layouts/Base.astro";
 import Sources from "../components/Sources.astro";
 import PhotoCredits from "../components/PhotoCredits.astro";
 import facts, { type SourceId } from "../data/facts";
-const ids = Object.keys(facts.sources) as SourceId[];
+// Only sources behind figures the site shows; the rest of facts.json stays internal.
+const ids: SourceId[] = ["ecab", "easysell", "vktr", "pdpo", "fx"];
 ---
 <Base title="Sources · Amader Cloud" description="Where the figures on this site come from, and photo credits.">
 <section class="page-hero">
