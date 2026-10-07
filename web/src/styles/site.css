@@ -1,227 +1,218 @@
-/* Amader Cloud — "market street" design language.
-   Hand-painted shop signage: saturated colour blocks on a light ground, chunky display type,
-   ink outlines with hard offset shadows, and a striped awning as the one recurring ornament.
-   Type: Bricolage Grotesque (display, heavy), Instrument Sans (body). */
+/* Amader Cloud — hand-painted signboard language.
+   Taken from the sign-painters' craft on Bangladeshi shop streets: a painted board with a pinstripe
+   frame, condensed lettering with an offset "drop shade" in a second colour, and a small "address" line.
+   One signboard per page carries the boldness; everything around it is flat, white and quiet.
+   Type: Big Shoulders Display (condensed, signage heritage) for display; Instrument Sans for reading. */
 
 :root {
-  --ground: #fbf5ea;     /* warm paper the signs are painted on */
-  --ground-2: #f4ead8;
+  --wash: #ffffff;        /* whitewashed wall */
+  --wash-2: #edf3ef;      /* lime-wash: alternate sections */
   --card: #ffffff;
-  --ink: #1b1510;
-  --ink-2: #5b4f44;
-  --line: #1b1510;       /* sign outlines */
-  --rule: #e6dac6;
-  --shadow: #1b1510;
+  --ink: #14213d;         /* lettering ink: deep navy, not black */
+  --ink-2: #4a5670;
+  --rule: #d5dde6;
+  --line: #14213d;
 
-  /* Signage colours: each page and block takes one */
-  --red: #d42a1f;
-  --marigold: #ffb81c;
-  --green: #0b7a4f;
-  --cobalt: #2347c9;
-  --plum: #7a2a6b;
-  --red-tint: #fde4dc;
-  --marigold-tint: #fff0c7;
-  --green-tint: #d9f2e4;
-  --cobalt-tint: #e1e8ff;
-  --on-color: #ffffff;
-  --ok: #0b7a4f;
-  --warn: #b3261e;
+  /* Sign paints */
+  --green: #0b5d3b;       /* the classic signboard green */
+  --yellow: #ffcc00;      /* chrome yellow lettering */
+  --red: #e2261b;         /* vermilion */
+  --blue: #1739a8;        /* royal blue */
+  --green-wash: #dcefe3;
+  --yellow-wash: #fff4c2;
+  --red-wash: #fde3df;
+  --blue-wash: #e2e8fb;
+  --ok: #0b6b44;
+  --warn: #c0241a;
 
-  --display: "Bricolage Grotesque", "Arial Black", system-ui, sans-serif;
+  --display: "Big Shoulders Display", "Arial Narrow", sans-serif;
   --sans: "Instrument Sans", system-ui, sans-serif;
   --code: ui-monospace, "SF Mono", Menlo, monospace;
 
-  --fs-hero: clamp(2.6rem, 1.3rem + 5vw, 5.6rem);
-  --fs-h2: clamp(2rem, 1.3rem + 2.6vw, 3.4rem);
+  --fs-sign: clamp(3.4rem, 2rem + 5.4vw, 6.6rem);
+  --fs-h2: clamp(2.3rem, 1.6rem + 2.6vw, 3.6rem);
   --fs-h3: 1.35rem;
-  --fs-lede: clamp(1.12rem, 1rem + 0.45vw, 1.32rem);
+  --fs-lede: clamp(1.12rem, 1rem + 0.4vw, 1.3rem);
   --fs-body: 1.0625rem;
   --fs-small: 0.94rem;
 
   --gutter: clamp(16px, 4vw, 48px);
   --max: 1200px;
   --header-h: 66px;
-  --radius: 14px;
-  --sh: 5px 5px 0 var(--shadow);
   color-scheme: light;
 }
+/* Dark: the same street after dark. Walls go deep navy; the signs keep their paint. */
 @media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) { --ground: #16120d; --ground-2: #1f1a13; --card: #241e17; --ink: #f8efe0; --ink-2: #c9bba7; --line: #f8efe0; --rule: #3a3127; --shadow: #000000; --red-tint: #3d1a14; --marigold-tint: #3a2c0b; --green-tint: #0f2e21; --cobalt-tint: #18224a; --ok: #4fd296; --warn: #ff8a7a; color-scheme: dark; }
+  :root:not([data-theme="light"]) { --wash: #0f1830; --wash-2: #142042; --card: #18244a; --ink: #eef2fb; --ink-2: #b4bfd6; --rule: #2a3966; --line: #eef2fb; --green-wash: #10332a; --yellow-wash: #3a3210; --red-wash: #3e1a1a; --blue-wash: #1b2a5e; --ok: #55d39a; --warn: #ff8d84; color-scheme: dark; }
 }
-:root[data-theme="dark"] { --ground: #16120d; --ground-2: #1f1a13; --card: #241e17; --ink: #f8efe0; --ink-2: #c9bba7; --line: #f8efe0; --rule: #3a3127; --shadow: #000000; --red-tint: #3d1a14; --marigold-tint: #3a2c0b; --green-tint: #0f2e21; --cobalt-tint: #18224a; --ok: #4fd296; --warn: #ff8a7a; color-scheme: dark; }
+:root[data-theme="dark"] { --wash: #0f1830; --wash-2: #142042; --card: #18244a; --ink: #eef2fb; --ink-2: #b4bfd6; --rule: #2a3966; --line: #eef2fb; --green-wash: #10332a; --yellow-wash: #3a3210; --red-wash: #3e1a1a; --blue-wash: #1b2a5e; --ok: #55d39a; --warn: #ff8d84; color-scheme: dark; }
 
 *, *::before, *::after { box-sizing: border-box; }
 [hidden] { display: none !important; }
 html { -webkit-text-size-adjust: 100%; scroll-padding-top: calc(var(--header-h) + 16px); }
-body { margin: 0; background: var(--ground); color: var(--ink); overflow-x: clip; font-family: var(--sans); font-size: var(--fs-body); line-height: 1.6; font-variant-numeric: tabular-nums; }
+body { margin: 0; background: var(--wash); color: var(--ink); overflow-x: clip; font-family: var(--sans); font-size: var(--fs-body); line-height: 1.6; font-variant-numeric: tabular-nums; }
 img, svg { max-width: 100%; display: block; }
-a { color: inherit; text-decoration-thickness: 2px; text-underline-offset: 0.18em; }
-:focus-visible { outline: 3px solid var(--cobalt); outline-offset: 3px; border-radius: 4px; }
-::selection { background: var(--marigold); color: #1b1510; }
+a { color: inherit; text-decoration-thickness: 1.5px; text-underline-offset: 0.18em; }
+a:hover { text-decoration-thickness: 2.5px; }
+:focus-visible { outline: 3px solid var(--blue); outline-offset: 3px; border-radius: 3px; }
+::selection { background: var(--yellow); color: #14213d; }
 
 .wrap { max-width: var(--max); margin-inline: auto; padding-inline: var(--gutter); }
-.measure { max-width: 64ch; }
-.skip { position: absolute; left: -999px; top: 8px; background: var(--marigold); color: #1b1510; padding: 8px 12px; z-index: 50; }
+.skip { position: absolute; left: -999px; top: 8px; background: var(--yellow); color: #14213d; padding: 8px 12px; z-index: 50; }
 .skip:focus { left: 8px; }
 .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 
-h1, h2, h3 { font-family: var(--display); margin: 0 0 0.45em; font-weight: 800; letter-spacing: -0.035em; line-height: 0.98; text-wrap: balance; font-variation-settings: "opsz" 96; }
-h1 { font-size: var(--fs-hero); }
+h1, h2, h3 { font-family: var(--display); margin: 0 0 0.4em; font-weight: 800; letter-spacing: -0.005em; line-height: 0.95; text-wrap: balance; }
+h1 { font-size: var(--fs-sign); }
 h2 { font-size: var(--fs-h2); }
-h3 { font-size: var(--fs-h3); font-weight: 750; letter-spacing: -0.02em; line-height: 1.15; font-variation-settings: "opsz" 24; }
+h3 { font-size: var(--fs-h3); font-family: var(--sans); font-weight: 700; letter-spacing: -0.01em; line-height: 1.25; }
 p { margin: 0 0 1em; }
-.lede { font-size: var(--fs-lede); line-height: 1.5; color: var(--ink-2); }
+.lede { font-size: var(--fs-lede); line-height: 1.5; color: var(--ink-2); max-width: 60ch; }
 .small { font-size: var(--fs-small); color: var(--ink-2); }
-.url { font-family: var(--code); font-size: 0.9em; white-space: nowrap; }
-/* Painted word: a word set on its own colour block, like a shop sign */
-.paint { display: inline-block; padding: 0 0.14em; margin: 0 -0.02em; border-radius: 0.12em; background: var(--marigold); color: #1b1510; transform: rotate(-1.5deg); box-shadow: 0.06em 0.06em 0 var(--shadow); }
-.paint.red { background: var(--red); color: #fff; }
-.paint.green { background: var(--green); color: #fff; }
-.paint.cobalt { background: var(--cobalt); color: #fff; }
+.url { font-family: var(--code); font-size: 0.88em; white-space: nowrap; }
 
-/* Small sign above a heading */
-.kicker { display: inline-block; font-weight: 700; font-size: 0.85rem; line-height: 1; padding: 7px 11px; border-radius: 999px; background: var(--ink); color: var(--ground); margin: 0 0 18px; }
-.band .kicker { background: rgb(0 0 0 / .22); color: inherit; }
-.band-marigold .kicker { background: #1b1510; color: var(--marigold); }
-.band-ink .kicker { background: var(--marigold); color: #1b1510; }
-.tag { display: inline-block; font-weight: 700; font-size: 0.75rem; line-height: 1; padding: 6px 9px; border-radius: 999px; background: var(--marigold); color: #1b1510; white-space: nowrap; }
-
-/* Awning: the striped canopy over a shop front. Two paint colours, scalloped edge. */
-.awning { --a1: var(--red); --a2: var(--marigold); height: 28px; background: repeating-linear-gradient(90deg, var(--a1) 0 48px, var(--a2) 48px 96px);
-  -webkit-mask: radial-gradient(circle 12px at 24px 0, #000 98%, transparent) 0 16px / 48px 12px repeat-x, linear-gradient(#000 0 0) 0 0 / 100% 16px no-repeat;
-          mask: radial-gradient(circle 12px at 24px 0, #000 98%, transparent) 0 16px / 48px 12px repeat-x, linear-gradient(#000 0 0) 0 0 / 100% 16px no-repeat; }
-.awning.green { --a1: var(--green); --a2: #fff7ea; }
-.awning.cobalt { --a1: var(--cobalt); --a2: #fff7ea; }
-.awning.plum { --a1: var(--plum); --a2: var(--marigold); }
+/* ---------- The signboard ----------
+   A painted board: flat colour, a pinstripe frame inset from the edge, four screw heads,
+   condensed lettering with an offset drop shade, and a small "address" line under the name. */
+.signboard { --board: var(--green); --letter: var(--yellow); --shade: var(--red); --pin: var(--yellow);
+  position: relative; background-color: var(--board); color: var(--letter); border-radius: 4px;
+  padding: clamp(26px, 3.4vw, 44px) clamp(24px, 4vw, 52px) clamp(22px, 3vw, 36px);
+  box-shadow: inset 0 0 0 8px var(--board), inset 0 0 0 10px var(--pin);
+  background-image:
+    radial-gradient(circle at 15px 15px, rgb(255 255 255 / .75) 0 2px, rgb(0 0 0 / .3) 2.5px 3.5px, transparent 4px),
+    radial-gradient(circle at calc(100% - 15px) 15px, rgb(255 255 255 / .75) 0 2px, rgb(0 0 0 / .3) 2.5px 3.5px, transparent 4px),
+    radial-gradient(circle at 15px calc(100% - 15px), rgb(255 255 255 / .75) 0 2px, rgb(0 0 0 / .3) 2.5px 3.5px, transparent 4px),
+    radial-gradient(circle at calc(100% - 15px) calc(100% - 15px), rgb(255 255 255 / .75) 0 2px, rgb(0 0 0 / .3) 2.5px 3.5px, transparent 4px); }
+.signboard h1, .signboard h2 { color: var(--letter); text-shadow: 0.05em 0.05em 0 var(--shade); margin: 0; }
+.signboard .address { display: block; margin-top: 16px; padding-top: 12px; border-top: 2px solid var(--pin); font-family: var(--sans); font-weight: 600; font-size: 0.98rem; color: var(--letter); }
+.sign-blue { --board: var(--blue); --letter: #ffffff; --shade: var(--red); --pin: var(--yellow); }
+.sign-red { --board: var(--red); --letter: var(--yellow); --shade: #14213d; --pin: #ffffff; }
+.sign-yellow { --board: var(--yellow); --letter: var(--red); --shade: #14213d; --pin: var(--red); }
+.sign-navy { --board: #14213d; --letter: var(--yellow); --shade: var(--red); --pin: var(--yellow); }
 
 /* ---------- Header ---------- */
-.site-header { position: sticky; top: 0; z-index: 30; background: var(--ground); border-bottom: 2px solid var(--line); }
+.site-header { position: sticky; top: 0; z-index: 30; background: var(--wash); border-bottom: 1px solid var(--rule); }
 .site-header .wrap { display: flex; align-items: center; gap: 20px; height: var(--header-h); }
-.brand { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; font-family: var(--display); font-weight: 800; font-size: 1.35rem; letter-spacing: -0.03em; white-space: nowrap; }
+.brand { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; font-family: var(--display); font-weight: 800; font-size: 1.6rem; white-space: nowrap; line-height: 1; }
 .brand svg { width: 34px; height: 34px; flex: none; }
 .nav { display: flex; gap: 22px; margin-left: auto; align-items: center; }
 .nav a { text-decoration: none; font-weight: 600; font-size: 0.96rem; white-space: nowrap; }
 .nav a:not(.btn):hover { text-decoration: underline; }
 .nav a[aria-current="page"]:not(.btn) { text-decoration: underline; text-decoration-color: var(--red); text-decoration-thickness: 3px; }
-.nav-toggle { display: none; margin-left: auto; background: var(--card); border: 2px solid var(--line); border-radius: 999px; padding: 6px 14px; font: inherit; font-weight: 700; color: inherit; cursor: pointer; }
-.theme-toggle { background: var(--card); border: 2px solid var(--line); color: var(--ink); width: 38px; height: 38px; border-radius: 999px; display: grid; place-items: center; cursor: pointer; flex: none; }
+.nav-toggle { display: none; margin-left: auto; background: var(--card); border: 1.5px solid var(--line); border-radius: 4px; padding: 6px 14px; font: inherit; font-weight: 700; color: inherit; cursor: pointer; }
+.theme-toggle { background: transparent; border: 1.5px solid var(--rule); color: var(--ink); width: 38px; height: 38px; border-radius: 50%; display: grid; place-items: center; cursor: pointer; flex: none; }
 .theme-toggle svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; }
 .theme-toggle .moon { display: none; }
 :root[data-theme="dark"] .theme-toggle .sun { display: none; }
 :root[data-theme="dark"] .theme-toggle .moon { display: block; }
 @media (max-width: 1000px) {
   .nav-toggle { display: inline-block; }
-  .nav { display: none; position: absolute; inset: var(--header-h) 0 auto 0; flex-direction: column; align-items: stretch; gap: 0; background: var(--ground); padding: 8px var(--gutter) 20px; border-bottom: 2px solid var(--line); }
+  .nav { display: none; position: absolute; inset: var(--header-h) 0 auto 0; flex-direction: column; align-items: stretch; gap: 0; background: var(--wash); padding: 8px var(--gutter) 20px; border-bottom: 1px solid var(--rule); }
   .nav.open { display: flex; }
   .nav a:not(.btn) { padding: 13px 0; border-bottom: 1px solid var(--rule); }
   .nav .btn { margin-top: 14px; }
   .nav .theme-toggle { margin-top: 14px; }
 }
 
-/* ---------- Buttons ---------- */
-.btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; padding: 13px 22px; border-radius: 999px; border: 2px solid var(--line); font: inherit; font-weight: 700; font-size: 1.02rem; line-height: 1.2; text-decoration: none; cursor: pointer; box-shadow: 3px 3px 0 var(--shadow); transition: transform .12s, box-shadow .12s; color: var(--ink); background: var(--card); }
-.btn:hover { transform: translate(-1px, -1px); box-shadow: 4px 4px 0 var(--shadow); }
-.btn:active { transform: translate(2px, 2px); box-shadow: 1px 1px 0 var(--shadow); }
-.btn-go { background: var(--red); color: #fff; border-color: #1b1510; box-shadow: 3px 3px 0 #1b1510; }
-.btn-quiet { background: transparent; box-shadow: none; }
-.btn-quiet:hover { box-shadow: none; transform: none; text-decoration: underline; }
-.band .btn { border-color: #1b1510; box-shadow: 3px 3px 0 #1b1510; }
-.band .btn:not(.btn-go) { background: #fff; color: #1b1510; }
+/* ---------- Buttons: small painted plates with their own pinstripe ---------- */
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; padding: 13px 22px; border-radius: 4px; border: 1.5px solid var(--line); font: inherit; font-weight: 700; font-size: 1.02rem; line-height: 1.2; text-decoration: none; cursor: pointer; color: var(--ink); background: transparent; transition: background-color .15s; }
+.btn:hover { background: color-mix(in srgb, currentColor 8%, transparent); }
+.btn-go { background: var(--red); color: #fff; border-color: var(--red); box-shadow: inset 0 0 0 3px var(--red), inset 0 0 0 4.5px rgb(255 255 255 / .8); }
+.btn-go:hover { background: #c81f15; border-color: #c81f15; box-shadow: inset 0 0 0 3px #c81f15, inset 0 0 0 4.5px rgb(255 255 255 / .8); }
+.btn-quiet { border-color: transparent; padding-inline: 4px; text-decoration: underline; }
 .nav .btn { padding: 8px 16px; font-size: 0.95rem; }
 .btn-row { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 26px; align-items: center; }
 
-/* ---------- Surfaces ---------- */
+/* ---------- Sections ---------- */
 .section { padding-block: clamp(56px, 8vw, 112px); }
 .section.tight { padding-block: clamp(40px, 5vw, 72px); }
-.alt { background: var(--ground-2); }
-.head { max-width: 780px; margin-bottom: clamp(28px, 4vw, 48px); }
+.alt { background: var(--wash-2); }
+.head { max-width: 760px; margin-bottom: clamp(26px, 4vw, 44px); }
 .head p:last-child { margin-bottom: 0; }
-
-/* Colour bands: whole sections painted one signage colour */
-.band { color: #fff; }
-.band .lede, .band .small { color: rgb(255 255 255 / .88); }
-.band-red { background: var(--red); }
-.band-green { background: var(--green); }
-.band-cobalt { background: var(--cobalt); }
-.band-plum { background: var(--plum); }
-.band-ink { background: #1b1510; color: #fbf5ea; }
-.band-ink .lede, .band-ink .small { color: #d9ccb8; }
-.band-marigold { background: var(--marigold); color: #1b1510; }
-.band-marigold .lede, .band-marigold .small { color: #3b2e17; }
+.ink-band { background: #14213d; color: #eef2fb; }
+.ink-band .lede, .ink-band .small { color: #b4bfd6; }
+.ink-band .btn:not(.btn-go) { color: #fff; border-color: #fff; }
 
 .cards { display: grid; gap: 18px; grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr)); }
-.card { background: var(--card); border: 2px solid var(--line); border-radius: var(--radius); padding: 24px; position: relative; box-shadow: var(--sh); color: var(--ink); }
+.card { background: var(--card); border: 1.5px solid var(--rule); border-radius: 6px; padding: 24px; position: relative; color: var(--ink); }
 .card h3 { margin-bottom: 8px; }
 .card p:last-child, .card ul:last-child { margin-bottom: 0; }
-.card.tint { background: var(--marigold-tint); }
-.card.tint.red { background: var(--red-tint); }
-.card.tint.green { background: var(--green-tint); }
-.card.tint.cobalt { background: var(--cobalt-tint); }
-/* Sign plate on a card's top edge */
-.plate { position: absolute; top: -14px; left: 18px; font-weight: 700; font-size: 0.78rem; line-height: 1; padding: 6px 10px; border-radius: 6px; border: 2px solid var(--line); background: var(--marigold); color: #1b1510; }
-.plate.red { background: var(--red); color: #fff; }
-.plate.green { background: var(--green); color: #fff; }
-.plate.cobalt { background: var(--cobalt); color: #fff; }
+.card.wash { background: var(--yellow-wash); border-color: transparent; }
+.card.wash.red { background: var(--red-wash); }
+.card.wash.green { background: var(--green-wash); }
+.card.wash.blue { background: var(--blue-wash); }
 
 .ticks { list-style: none; padding: 0; margin: 0 0 1em; }
-.ticks li { padding-left: 28px; position: relative; margin: 7px 0; }
-.ticks li::before { content: ""; position: absolute; left: 0; top: 0.3em; width: 18px; height: 18px; border-radius: 50%; background: var(--green) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 18 18'%3E%3Cpath d='M5 9.4l2.6 2.6L13 6.6' fill='none' stroke='%23fff' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center / 100% no-repeat; }
+.ticks li { padding-left: 26px; position: relative; margin: 7px 0; }
+.ticks li::before { content: ""; position: absolute; left: 2px; top: 0.5em; width: 11px; height: 6px; border-left: 2.5px solid var(--ok); border-bottom: 2.5px solid var(--ok); transform: rotate(-45deg); }
 
 .split { display: grid; gap: clamp(28px, 5vw, 64px); grid-template-columns: 1fr 1fr; align-items: center; }
 @media (max-width: 860px) { .split { grid-template-columns: 1fr; } }
 
+/* Rate board: the painted price list beside a shop counter. Dotted leaders join item to value. */
+.rates { list-style: none; margin: 0; padding: 0; }
+.rates li { display: flex; align-items: baseline; gap: 10px; padding: 13px 0; border-bottom: 1px solid var(--rule); }
+.rates li:last-child { border-bottom: 0; }
+.rates .item { font-weight: 600; font-size: 1.08rem; }
+.rates .item small { display: block; font-weight: 400; color: var(--ink-2); font-size: 0.92rem; }
+.rates .lead { flex: 1; min-width: 24px; border-bottom: 2px dotted var(--rule); transform: translateY(-0.35em); }
+.rates .val { font-family: var(--display); font-weight: 800; font-size: 1.45rem; color: var(--green); white-space: nowrap; }
+:root[data-theme="dark"] .rates .val { color: var(--yellow); }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .rates .val { color: var(--yellow); } }
+
 /* Figures with sources */
 .stat { display: grid; gap: 6px; align-content: start; }
-.stat .n { font-family: var(--display); font-size: clamp(2.3rem, 1.5rem + 2.4vw, 3.4rem); font-weight: 800; letter-spacing: -0.04em; line-height: 1; }
+.stat .n { font-family: var(--display); font-size: clamp(2.8rem, 1.8rem + 3vw, 4.2rem); font-weight: 800; line-height: 0.95; }
 .stat .l { color: var(--ink-2); }
-.src { font-size: 0.78rem; font-weight: 600; color: var(--ink-2); text-decoration: none; border-bottom: 1.5px dotted currentColor; justify-self: start; }
-.band .src { color: inherit; opacity: .85; }
+.src { font-size: 0.8rem; font-weight: 600; color: var(--ink-2); text-decoration: none; border-bottom: 1.5px dotted currentColor; justify-self: start; }
 .src.weak::after { content: " · weak source"; color: var(--warn); }
-.band .src.weak::after { color: inherit; font-weight: 800; }
-.hyp { display: inline-block; font-family: var(--sans); font-weight: 700; font-size: 0.74rem; line-height: 1.2; letter-spacing: 0; padding: 4px 9px; border-radius: 999px; background: var(--red-tint); color: var(--warn); border: 1.5px solid currentColor; white-space: nowrap; vertical-align: middle; }
-.band .hyp { background: #fff; color: #b3261e; border-color: #fff; }
-.sources { font-size: 0.875rem; color: var(--ink-2); border-top: 2px solid var(--rule); padding-top: 18px; margin-top: 40px; }
+.ink-band .src { color: #b4bfd6; }
+.ink-band .src.weak::after { color: #ff9d94; }
+.hyp { display: inline-block; font-family: var(--sans); font-weight: 700; font-size: 0.76rem; line-height: 1.2; letter-spacing: 0; padding: 3px 8px; border-radius: 3px; background: var(--red-wash); color: var(--warn); white-space: nowrap; vertical-align: middle; }
+.signboard .hyp, .ink-band .hyp { background: #fff; color: #c0241a; }
+.sources { font-size: 0.875rem; color: var(--ink-2); border-top: 1px solid var(--rule); padding-top: 18px; margin-top: 40px; }
 .sources ol { padding-left: 20px; margin: 8px 0 0; }
 .sources li { margin: 4px 0; }
 .sources .cav { color: var(--warn); }
 
 /* Tables */
-.table-wrap { overflow-x: auto; border: 2px solid var(--line); border-radius: var(--radius); background: var(--card); box-shadow: var(--sh); }
+.table-wrap { overflow-x: auto; border: 1.5px solid var(--rule); border-radius: 6px; background: var(--card); }
 table { border-collapse: collapse; width: 100%; font-size: 0.95rem; }
 th, td { text-align: left; padding: 12px 14px; border-bottom: 1px solid var(--rule); vertical-align: top; }
-th { font-weight: 700; font-size: 0.88rem; background: var(--ground-2); }
+th { font-weight: 700; font-size: 0.88rem; background: var(--wash-2); }
 tr:last-child td, tr:last-child th { border-bottom: 0; }
 td.num, th.num { text-align: right; white-space: nowrap; }
 
-/* ---------- Inner-page hero: a painted sign board ---------- */
-.page-hero { padding-block: clamp(48px, 7vw, 96px) clamp(40px, 6vw, 80px); }
-.page-hero h1 { font-size: clamp(2.4rem, 1.3rem + 4vw, 4.8rem); max-width: 16ch; }
-.page-hero .lede { max-width: 58ch; }
+/* ---------- Inner-page hero: the page's own signboard ---------- */
+.page-hero { padding-block: clamp(32px, 5vw, 64px) clamp(40px, 6vw, 72px); }
+.page-hero .signboard { max-width: 920px; }
+.page-hero h1 { font-size: clamp(2.8rem, 1.6rem + 4.4vw, 5.4rem); }
+.page-hero .lede { margin-top: 26px; }
 
 /* ---------- Footer ---------- */
-.site-footer { background: #1b1510; color: #d9ccb8; padding-block: 0 36px; font-size: 0.94rem; }
-.site-footer .awning { margin-bottom: 44px; }
+.site-footer { background: #14213d; color: #b4bfd6; padding-block: 52px 36px; font-size: 0.94rem; border-top: 6px solid var(--yellow); }
 .site-footer .cols { display: grid; gap: 28px; grid-template-columns: 1.4fr repeat(3, 1fr); }
 @media (max-width: 760px) { .site-footer .cols { grid-template-columns: 1fr 1fr; } .site-footer .cols > :first-child { grid-column: 1 / -1; } }
-.site-footer h2 { font-family: var(--sans); font-size: 0.85rem; font-weight: 700; color: #fbf5ea; letter-spacing: 0; margin-bottom: 10px; }
+.site-footer h2 { font-family: var(--sans); font-size: 0.88rem; font-weight: 700; color: #eef2fb; letter-spacing: 0; margin-bottom: 10px; line-height: 1.3; }
 .site-footer ul { list-style: none; padding: 0; margin: 0; }
 .site-footer li { margin: 6px 0; }
-.site-footer a { text-decoration: none; color: #d9ccb8; }
+.site-footer a { text-decoration: none; color: #b4bfd6; }
 .site-footer a:hover { color: #fff; text-decoration: underline; }
-.site-footer .brand { color: #fbf5ea; }
+.site-footer .brand { color: #fff; }
 .site-footer .fine { border-top: 1px solid rgb(255 255 255 / .14); margin-top: 32px; padding-top: 18px; font-size: 0.82rem; display: grid; gap: 6px; }
 
 /* ---------- Forms ---------- */
 .form { display: grid; gap: 16px; }
 .field { display: grid; gap: 6px; }
 .field label, .field legend { font-weight: 700; font-size: 0.96rem; }
-.field input, .field select, .field textarea { font: inherit; padding: 11px 12px; border: 2px solid var(--line); border-radius: 10px; background: var(--card); color: var(--ink); width: 100%; }
+.field input, .field select, .field textarea { font: inherit; padding: 11px 12px; border: 1.5px solid var(--rule); border-radius: 4px; background: var(--card); color: var(--ink); width: 100%; }
+.field input:focus, .field textarea:focus { border-color: var(--blue); }
 .field textarea { min-height: 120px; resize: vertical; }
 fieldset.field { border: 0; padding: 0; margin: 0; }
 .choices { display: flex; flex-wrap: wrap; gap: 8px; }
-.choice { display: inline-flex; align-items: center; gap: 8px; border: 2px solid var(--line); border-radius: 999px; padding: 8px 14px; cursor: pointer; background: var(--card); font-weight: 600; }
-.choice:has(input:checked) { background: var(--marigold); color: #1b1510; }
-.choice input { accent-color: var(--red); }
+.choice { display: inline-flex; align-items: center; gap: 8px; border: 1.5px solid var(--rule); border-radius: 4px; padding: 8px 14px; cursor: pointer; background: var(--card); font-weight: 600; }
+.choice:has(input:checked) { border-color: var(--green); background: var(--green-wash); }
+.choice input { accent-color: var(--green); }
 .form-status { min-height: 1.5em; font-size: 0.95rem; }
 .form-status.ok { color: var(--ok); }
 .form-status.err { color: var(--warn); }

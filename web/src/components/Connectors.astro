@@ -24,13 +24,13 @@ const items = [
 .conn { list-style: none; margin: 0; padding: 0; display: grid; gap: 16px; grid-template-columns: repeat(4, minmax(0, 1fr)); }
 @media (max-width: 960px) { .conn { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 @media (max-width: 520px) { .conn { grid-template-columns: 1fr; } }
-.conn-i { border: 2px solid var(--line); border-radius: var(--radius); padding: 18px; display: grid; gap: 4px; align-content: start; background: var(--card); box-shadow: 4px 4px 0 var(--shadow); }
+.conn-i { border: 2px solid var(--line); border-radius: 8px; padding: 18px; display: grid; gap: 4px; align-content: start; background: var(--card); }
 .conn-i strong { font-family: var(--display); font-weight: 800; font-size: 1.3rem; letter-spacing: -0.02em; }
 .conn-i span { font-size: 0.93rem; line-height: 1.45; }
 .conn-i em { font-style: normal; font-weight: 700; font-size: 0.75rem; justify-self: start; margin-top: 6px; padding: 3px 8px; border-radius: 999px; background: rgb(0 0 0 / .18); }
-.conn-i.red, .conn-i.green, .conn-i.cobalt { color: #fff; border-color: #1b1510; }
-.conn-i.red { background: var(--red); } .conn-i.green { background: var(--green); } .conn-i.cobalt { background: var(--cobalt); }
+.conn-i.red, .conn-i.green, .conn-i.cobalt { color: #fff; border-color: #14213d; }
+.conn-i.red { background: var(--red); } .conn-i.green { background: var(--green); } .conn-i.cobalt { background: var(--blue); }
 .conn-i.planned { background: transparent; border-style: dashed; box-shadow: none; }
 .conn-i.planned span { color: var(--ink-2); }
-.conn-i.planned em { background: var(--ground-2); }
+.conn-i.planned em { background: var(--wash-2); }
 </style>

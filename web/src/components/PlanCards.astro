@@ -21,11 +21,11 @@ const colors: Record<string, string> = { free: "", starter: "red", business: "gr
 .plans { display: grid; gap: 18px; grid-template-columns: repeat(4, minmax(0, 1fr)); }
 @media (max-width: 1000px) { .plans { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 @media (max-width: 560px) { .plans { grid-template-columns: 1fr; } }
-.plan { background: var(--card); border: 2px solid var(--line); border-radius: var(--radius); box-shadow: var(--sh); overflow: hidden; display: grid; align-content: start; }
-.plan-top { display: flex; justify-content: space-between; align-items: center; gap: 8px; padding: 16px 20px 14px; border-bottom: 2px solid var(--line); background: var(--ground-2); }
+.plan { background: var(--card); border: 2px solid var(--line); border-radius: 8px; overflow: hidden; display: grid; align-content: start; }
+.plan-top { display: flex; justify-content: space-between; align-items: center; gap: 8px; padding: 16px 20px 14px; border-bottom: 2px solid var(--line); background: var(--wash-2); }
 .plan.red .plan-top { background: var(--red); color: #fff; }
 .plan.green .plan-top { background: var(--green); color: #fff; }
-.plan.cobalt .plan-top { background: var(--cobalt); color: #fff; }
+.plan.cobalt .plan-top { background: var(--blue); color: #fff; }
 .plan h3 { margin: 0; font-size: 1.5rem; }
 .price { margin: 16px 20px 0; }
 .amt { font-family: var(--display); font-size: 2.3rem; font-weight: 800; letter-spacing: -0.04em; }
