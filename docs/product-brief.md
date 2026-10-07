@@ -61,6 +61,7 @@ What follows from the table:
 | **Ghor (ঘর)**: one home | "Back up the family's phones; stop the ads; use the stuff in the drawer." | Cloud, Wi‑Fi, Camera (doorbell) | Household |
 | **Bari (বাড়ি)**: an apartment building's owners' association | "Stairwell cameras, Wi‑Fi on the roof and in the guard room, one place for notices and records, backups for every flat." | All of: Cloud (building server + flats), Camera, Wi‑Fi, Screen | Association fund + flats that opt in |
 | **Dokan (দোকান)**: shop, clinic, small office | "Don't lose our files or CCTV if a PC dies or gets stolen; show our menu or prices on a screen." | Cloud (PC backups), Camera, Screen | Business |
+| **Public bodies** (B2G) | "Deliver this digital project without overpaying, and pass audit." | Right-size review; reconditioned supply; retirement | Agency budget or donor project |
 | **Pathshala (পাঠশালা)**: school, madrasa, coaching centre | "A computer lab and a library that work without reliable internet." | Lab, Screen, Cloud | School, or sponsored by a company (below) |
 | **Companies retiring devices** | "Get rid of 200 old laptops safely, with proof, and ideally with a CSR story." | Certified wipe + passport, then devices go to Pathshala labs | Company pays per device for wiping and reporting (*hypothesis* Tk 300–800/device), optionally sponsors a lab |
 | **Earners** | "Earn from a device and disk I already have." | Rented storage and computing | Buyers pay; we pass on most of it as credit, later bKash |
@@ -141,6 +142,27 @@ New revenue line: **para screens.** Local businesses buy slots on reused lobby a
 
 Specialised sensors (for example LoRa water-level sensors) are an optional add-on where an old device can't do the job. They aren't the core.
 
+## Public sector (B2G): right-size, then reuse
+
+**The idea:** public digital projects are often specified for a peak they never reach. We sell an independent, fixed-fee **right-size review** of the plan, tender or running system. Where reuse fits, we then supply **reconditioned devices processed to government standards**, starting with the agency's own retired devices.
+
+**Evidence to cite (and not go beyond):**
+- Servers in US data centres averaged 12–18% utilisation, and up to 30% were "comatose" (NRDC/Anthesis, 2014). This is general evidence; there's no Bangladesh-specific figure yet.
+- The ICT Division's white paper (8 Jan 2026) flagged major ICT projects, including the four-tier data centre, for questionable cost justification.
+- The Public Procurement Rules 2025 (28 Sep 2025) make e‑GP mandatory, formally introduce sustainable public procurement, and add asset-disposal provisions.
+
+| Offer | What it is | Price (*hypothesis*) | Route |
+|---|---|---|---|
+| Right-size review | Read plan → measure need → map to reuse → compare options → right-sized spec usable in e‑GP | Fixed fee per project, Tk 1.5–5 lakh by size; no commission on what's bought | Consultancy (services) under PPR 2025; or a donor-funded project's TA budget |
+| Reconditioned supply | Devices from the agency's own retirement or our stock, processed to the standard below | Per device; well below new | Goods tender via e‑GP; framework agreements |
+| Retirement for agencies | Collection, sanitisation, certificates, asset-register reconciliation, e‑waste | Per device | Asset disposal under PPR 2025 |
+
+**Conflict of interest:** an agency can hire us only to review, and we then step aside from supplying that project. This is offered up front.
+
+**Processing standard (what "government-grade" means for us):** chain of custody with asset-tag reconciliation; sanitisation to NIST SP 800‑88 Rev. 2 / IEEE 2883 with two-person certificates; physical destruction through a partner; electrical safety tests with IEC 62368‑1 as the reference, plus battery checks; CIS-aligned hardening and a vulnerability scan; radio country set to Bangladesh, on previously type-approved hardware only; data residency under PDPA 2026; registration as a repairer/collection centre under the E‑waste Rules 2021; device passports exported for CAG audit; ISO/IEC 27001 as the certification target.
+
+**Risks:** long procurement cycles; political exposure (stay evidence-led and non-partisan); the reviewer–supplier conflict (handled above); certifications we don't yet hold. **First step:** one pilot review for a city corporation, a public university or a donor-funded project. A donor project is likely fastest, because technical-assistance budgets are flexible.
+
 ## Platform architecture (proposed)
 
 Conventional tools first. Hand-rolling needs a reason that survives a check.
@@ -203,6 +225,7 @@ Never claim "carbon neutral" or emissions avoided until we have a method we can 
 - [ ] Written BTRC opinion that the overlay network and Wi‑Fi recipe need no licence.
 - [ ] E‑waste: formal recycler partnership, checked against current Bangladesh e‑waste rules.
 - [ ] bKash and Nagad merchant accounts.
+- [ ] e‑GP registration; DoE registration as repairer/collection centre (E‑waste Rules 2021); ISO/IEC 27001 roadmap.
 
 ## Roadmap
 

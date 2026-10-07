@@ -121,3 +121,19 @@ Each line is one instance of a pattern: pool storage, share screens, share eyes 
 - Two old laptops in the common room: a homework corner without mobile data.
 - Too old for you, a first phone for someone else. Wiped, fixed and passed on in the para.
 - Your building's idle laptops can help pay its service charge.
+
+## 10. Public sector: introduction letter (to a project director, city corporation or donor-funded project)
+
+**Subject:** A fixed-fee right-size review before [project name] is procured
+
+> Dear [name],
+>
+> Public digital projects are often specified for a load they may never reach. In US data centres, servers average 12–18% utilisation, and the ICT Division's white paper of January 2026 called for stronger independent review of public ICT spending.
+>
+> amader.cloud offers a fixed-fee review of a plan, a tender or a running system. We measure the real need and produce a right-sized specification you can use in e‑GP. Where it fits, the need can be met with reconditioned devices, starting with your own retired equipment, processed to NIST SP 800‑88 sanitisation, electrical safety and security baselines, with a certificate and passport for every device.
+>
+> If you prefer, we act only as reviewers and step aside from supplying the project.
+>
+> Could we take 30 minutes to look at [project name]?
+>
+> [Name], amader.cloud
