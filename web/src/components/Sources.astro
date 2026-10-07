@@ -1,0 +1,12 @@
+---
+import facts, { type SourceId } from "../data/facts";
+interface Props { ids: SourceId[] }
+---
+<aside class="sources" aria-label="Sources">
+  <strong>Sources</strong>
+  <ol>
+    {Astro.props.ids.map((id) => { const s = facts.sources[id]; return (
+      <li>{s.url ? <a href={s.url} rel="noopener" target="_blank">{s.title}</a> : s.title}{s.caveat && <span class="cav"> {s.caveat}</span>}</li>
+    ); })}
+  </ol>
+</aside>

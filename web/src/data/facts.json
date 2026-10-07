@@ -1,0 +1,169 @@
+{
+  "_about": "Every number shown on the site comes from this file. Each entry names its source (a key in `sources`). Entries marked hypothesis are pilot assumptions from docs/product-brief.md, not measurements.",
+
+  "sources": {
+    "ecab": {
+      "short": "e-CAB, via Financial Express",
+      "title": "Financial Express: f-commerce entrepreneurs rising, says Palak (e-CAB figures)",
+      "url": "https://old.thefinancialexpress.com.bd/trade/f-commerce-entrepreneurs-rising-significantly-says-palak-1618149539",
+      "caveat": "An older article; the page counts need rechecking."
+    },
+    "easysell": {
+      "short": "EasySell (vendor blog)",
+      "title": "EasySell: Bangladesh e-commerce, bKash, COD",
+      "url": "https://easysellapp.com/blogs/wiki/bangladesh-ecommerce-bkash-mobile-money-cod-shopify-market-entry-2026",
+      "caveat": "A vendor's blog; return rates are vendor-reported, not audited."
+    },
+    "ecosire": {
+      "short": "Ecosire listing (secondary)",
+      "title": "SSLCommerz WooCommerce gateway listing (Ecosire)",
+      "url": "https://ecosire.com/apps/woocommerce/woo-sslcommerz-gateway",
+      "caveat": "A secondary source, not SSLCommerz itself."
+    },
+    "bkashdev": {
+      "short": "bKash developer portal",
+      "title": "bKash developer portal",
+      "url": "https://developer.bka.sh/reference",
+      "caveat": ""
+    },
+    "tbs": {
+      "short": "TBS",
+      "title": "TBS: Bangladesh Bank on online payments through international cards",
+      "url": "https://www.tbsnews.net/node/135475",
+      "caveat": ""
+    },
+    "vktr": {
+      "short": "VKTR",
+      "title": "VKTR: Lovable raises $400M at $13.3B",
+      "url": "https://www.vktr.com/ai-platforms/lovable-raises-400-million-at-133-billion-valuation/",
+      "caveat": ""
+    },
+    "ecosistema": {
+      "short": "Ecosistema Startup",
+      "title": "Ecosistema Startup: Lovable crosses $600M ARR",
+      "url": "https://ecosistemastartup.com/lovable-cruza-us600m-arr-y-consolida-el-vibe-coding/",
+      "caveat": ""
+    },
+    "pdpo": {
+      "short": "Asia News Network",
+      "title": "Personal Data Protection Ordinance 2025: key takeaways",
+      "url": "https://asianews.network/?p=234602",
+      "caveat": ""
+    },
+    "anthropic": {
+      "short": "Anthropic API pricing",
+      "title": "Anthropic API pricing",
+      "url": "https://www.anthropic.com/pricing",
+      "caveat": ""
+    },
+    "fx": {
+      "short": "exchange-rates.org",
+      "title": "USD/BDT 122.91 on 2 Oct 2026 (exchange-rates.org)",
+      "url": "https://www.exchange-rates.org/converter/usd-bdt",
+      "caveat": "Rounded to Tk 123 = $1 throughout."
+    },
+    "plan": {
+      "short": "Amader Cloud pilot plan",
+      "title": "Amader Cloud product brief v0.1 (internal pilot plan, 2026-10-07)",
+      "url": "",
+      "caveat": "Our own assumptions. A pilot confirms or replaces them."
+    }
+  },
+
+  "market": {
+    "fbSellerPages": { "text": "200,000–250,000", "label": "Facebook pages run by sellers in Bangladesh", "source": "ecab" },
+    "fbSteadyPages": { "text": "about 60,000", "value": 60000, "label": "of those pages make consistent revenue", "source": "ecab" },
+    "codShare": { "text": "80–90%", "label": "of e-commerce transactions are cash on delivery", "source": "easysell" },
+    "codReturns": { "text": "20–30%", "label": "of cash-on-delivery orders come back undelivered, against near zero for orders prepaid by bKash", "source": "easysell" },
+    "sslcommerzBusinesses": { "text": "about 17,000", "label": "businesses use SSLCommerz, the largest payment aggregator", "source": "ecosire" },
+    "cardLimitUsd": { "text": "$300", "label": "limit per transaction on international card payments, for allowed purposes only", "source": "tbs" }
+  },
+
+  "anchor": {
+    "lovableValuation": { "text": "$13.3B", "label": "Lovable's valuation", "source": "vktr" },
+    "lovableArr": { "text": "about $600M", "label": "Lovable's annual revenue, less than two years after launch", "source": "ecosistema" }
+  },
+
+  "fx": { "tkPerUsd": 123, "observed": 122.91, "date": "2 Oct 2026", "source": "fx" },
+
+  "models": {
+    "source": "anthropic",
+    "unit": "USD per million tokens",
+    "opus": { "name": "Claude Opus 5.5", "input": 4, "output": 20, "cacheRead": 0.2 },
+    "sonnet": { "name": "Claude Sonnet 5.5", "input": 2, "output": 10, "cacheRead": 0.2 },
+    "haiku": { "name": "Claude Haiku 4.5", "input": 1, "output": 5 }
+  },
+
+  "pricing": {
+    "source": "plan",
+    "status": "pilot pricing",
+    "extraEditTk": 50,
+    "plans": [
+      { "id": "free", "name": "Free", "tk": 0, "apps": 1, "edits": 5, "sms": 0,
+        "includes": ["Build and preview one app", "5 AI edits", "Amader Cloud watermark", "No live payments"] },
+      { "id": "starter", "name": "Starter", "tk": 799, "apps": 1, "edits": 10, "sms": 0,
+        "includes": ["1 live app at yourname.amader.cloud", "Payments switched on", "10 AI edits a month"] },
+      { "id": "business", "name": "Business", "tk": 1999, "apps": 3, "edits": 30, "sms": 200,
+        "includes": ["3 live apps", "Your own domain (after the beta)", "30 AI edits a month", "200 SMS a month"] },
+      { "id": "agency", "name": "Agency", "tk": 4999, "apps": 10, "edits": 80, "sms": 0,
+        "includes": ["10 client apps", "80 AI edits a month", "Built for developers who deliver for clients"] }
+    ]
+  },
+
+  "economics": {
+    "source": "plan",
+    "status": "hypothesis",
+    "tokens": {
+      "firstBuild": { "cached": "1.2M", "fresh": "300k", "output": "100k" },
+      "edit": { "cached": "100k", "fresh": "20k", "output": "15k" }
+    },
+    "firstBuildOpusUsd": 3.44,
+    "firstBuildSonnetUsd": 1.84,
+    "editUsd": 0.21,
+    "hostingPerAppUsd": 0.5,
+    "smsTk": 0.3,
+    "smsUsd": 0.0024,
+    "smsNote": "SMS rate to confirm",
+    "freeSignupCostUsd": 2.89,
+    "planCosts": {
+      "starter": { "fixedUsd": 0.5, "fixedNote": "hosting for 1 app", "fullUseCostUsd": 2.6, "margin": 60 },
+      "business": { "fixedUsd": 1.99, "fixedNote": "hosting for 3 apps ($1.50) and 200 SMS ($0.49)", "fullUseCostUsd": 8.29, "margin": 49 },
+      "agency": { "fixedUsd": 5.0, "fixedNote": "hosting for 10 apps", "fullUseCostUsd": 21.8, "margin": 46 }
+    }
+  },
+
+  "mvp": {
+    "source": "plan",
+    "weeks": 12,
+    "phases": [
+      { "weeks": "0–3", "work": "Interview 30 sellers and 10 service businesses; build the component library and connectors in sandbox", "output": "Three templates working end to end with test payments" },
+      { "weeks": "3–8", "work": "Chat builder on top of the templates; preview, tests, rollback; app review", "output": "Closed beta: 30 businesses build and go live" },
+      { "weeks": "8–12", "work": "Open beta with paid plans", "output": "100 live businesses; measured go-live rate, orders, prepaid share, retention" }
+    ]
+  },
+
+  "roadmap": {
+    "source": "plan",
+    "status": "hypothesis",
+    "milestones": [
+      { "when": "Months 0–3", "what": "Three templates; 100 live businesses; first prepaid orders" },
+      { "when": "Months 3–9", "what": "1,000 live apps; custom domains; agency plan; template marketplace" },
+      { "when": "Months 9–18", "what": "5,000 live apps; payment-volume revenue share; second country pilot" }
+    ],
+    "seedTargets": [
+      { "text": "2,000", "label": "live apps" },
+      { "text": "40%", "label": "of orders prepaid" },
+      { "text": "under 5%", "label": "monthly churn" },
+      { "text": "above 60%", "label": "blended gross margin" }
+    ]
+  },
+
+  "killCriteria": {
+    "source": "plan",
+    "items": [
+      "Fewer than 30% of businesses that build an app take it live.",
+      "Live apps process no payments within 30 days.",
+      "More than 1 in 5 builds need staff to fix them."
+    ]
+  }
+}

@@ -1,0 +1,23 @@
+---
+import Logo from "./Logo.astro";
+const here = Astro.url.pathname.split("/").pop() || "index.html";
+const nav = [
+  ["templates.html", "Templates"],
+  ["how-it-works.html", "How it works"],
+  ["pricing.html", "Pricing"],
+  ["trust.html", "Trust and safety"],
+  ["investors.html", "Investors"],
+];
+---
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="./" aria-label="Amader Cloud home"><Logo /><span>Amader <span class="lt">Cloud</span></span></a>
+    <button class="nav-toggle" aria-expanded="false" aria-controls="nav">Menu</button>
+    <nav class="nav" id="nav" aria-label="Main">
+      {nav.map(([href, label]) => <a href={href} aria-current={here === href ? "page" : undefined}>{label}</a>)}
+      <a class="btn btn-live" href="contact.html?topic=beta" aria-current={here === "contact.html" ? "page" : undefined}>Join the beta</a>
+      <button type="button" class="theme-toggle" aria-label="Switch theme"><svg class="sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.5"/><path d="M12 2v2.5M12 19.5V22M2 12h2.5M19.5 12H22M4.9 4.9l1.8 1.8M17.3 17.3l1.8 1.8M4.9 19.1l1.8-1.8M17.3 6.7l1.8-1.8"/></svg><svg class="moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"/></svg></button>
+    </nav>
+  </div>
+</header>

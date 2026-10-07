@@ -1,0 +1,10 @@
+---
+// Inline source tag for a figure: links to the source and flags weak ones.
+import facts, { type SourceId } from "../data/facts";
+interface Props { id: SourceId }
+const s = facts.sources[Astro.props.id];
+const weak = Boolean(s.caveat) && Astro.props.id !== "fx" && Astro.props.id !== "plan";
+---
+{s.url
+  ? <a class="src" class:list={{ weak }} href={s.url} title={s.caveat || s.title} rel="noopener" target="_blank">{s.short}</a>
+  : <span class="src" title={s.caveat}>{s.short}</span>}
