@@ -161,7 +161,7 @@ SCENES += [
         "radio": [], "far": ["o5-o4"], "rings": None,
     },
 ]
-ORDER = ["rooftops", "towers", "office", "street", "bazar", "teastall", "monsoon", "neighbourhood"]
+ORDER = ["rooftops", "office", "towers", "street", "bazar", "teastall", "monsoon", "neighbourhood"]
 SCENES = sorted(SCENES, key=lambda s: ORDER.index(s["id"]))
 for s in SCENES:
     s["label"] = {"street": "Shops at night", "neighbourhood": "Neighbourhood"}.get(s["id"], s["label"])
