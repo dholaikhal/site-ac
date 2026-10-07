@@ -1,4 +1,5 @@
 ---
+import F from "../data/facts.json";
 import Base from "../layouts/Base.astro";
 ---
 <Base title="Terms of service: amader.cloud" description="The terms for amader.cloud's device rebuilding, management, hosting and collection services in Bangladesh." noindex>
@@ -81,6 +82,6 @@ import Base from "../layouts/Base.astro";
   <h2 id="law">11. Law and disputes</h2>
   <p>These terms are governed by the laws of Bangladesh. If something goes wrong, message us first, and we'll try to resolve it within 15 days. If we can't, the courts in Dhaka have jurisdiction.</p>
   <p>We may update these terms. We'll tell you about significant changes at least 30 days in advance.</p>
-  <p>Questions: <a href="mailto:hello@amader.cloud">hello@amader.cloud</a>.</p>
+  <p>Questions: <a href={`mailto:${F.contact.email}`}>{F.contact.email}</a>.</p>
 </section>
 </Base>

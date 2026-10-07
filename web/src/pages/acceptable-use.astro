@@ -1,4 +1,5 @@
 ---
+import F from "../data/facts.json";
 import Base from "../layouts/Base.astro";
 ---
 <Base title="Acceptable use policy: amader.cloud" description="What you can't do with devices and network capacity provided through amader.cloud." noindex>
@@ -32,6 +33,6 @@ import Base from "../layouts/Base.astro";
   <p>We'll usually contact you first and ask you to stop. If there's a risk to other members, to the public, or a legal requirement, we may disconnect a device from the network immediately, and then tell you why. Serious or repeated breaches can end your service under the terms. We cooperate with lawful requests from Bangladeshi authorities.</p>
 
   <h2>Reporting a problem</h2>
-  <p>To report abuse, email <a href="mailto:abuse@amader.cloud">abuse@amader.cloud</a>. To report a security vulnerability in anything we run, email <a href="mailto:security@amader.cloud">security@amader.cloud</a>. We acknowledge reports within 72 hours.</p>
+  <p>To report abuse, email <a href={`mailto:${F.contact.abuse}`}>{F.contact.abuse}</a>. To report a security vulnerability in anything we run, email <a href={`mailto:${F.contact.security}`}>{F.contact.security}</a>. We acknowledge reports within 72 hours.</p>
 </section>
 </Base>

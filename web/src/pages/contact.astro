@@ -1,7 +1,7 @@
 ---
 import Base from "../layouts/Base.astro";
 import SceneHead from "../components/SceneHead.astro";
-import site from "../data/site.json";
+import F from "../data/facts.json";
 ---
 <Base title="Contact: amader.cloud" description="Book a visit to check your devices, ask about a building, shop or school, or arrange a collection in Dhaka.">
 <section class="page-head photo">
@@ -14,7 +14,7 @@ import site from "../data/site.json";
 
 <section class="wrap" style="padding-bottom:clamp(56px,8vw,112px)">
   <div class="split">
-    <form class="form" id="contact-form" data-endpoint="" action="mailto:hello@amader.cloud" method="post" enctype="text/plain">
+    <form class="form" id="contact-form" data-endpoint="" action="mailto:{F.contact.email}" method="post" enctype="text/plain">
       <fieldset class="field">
         <legend>This is about</legend>
         <div class="choices">
@@ -71,9 +71,9 @@ import site from "../data/site.json";
     <div>
       <h2>Or reach us directly</h2>
       <ul class="ledger">
-        <li><div><strong>WhatsApp</strong></div><div><p>{site.contact.whatsapp}</p><p class="small">The fastest way. Send a photo of your device's label.</p></div></li>
-        <li><div><strong>Email</strong></div><div><p><a href="mailto:hello@amader.cloud">hello@amader.cloud</a></p></div></li>
-        <li><div><strong>Security issues</strong></div><div><p><a href="mailto:security@amader.cloud">security@amader.cloud</a></p><p class="small">Found a vulnerability in something we run? Tell us here first. We reply within 72 hours.</p></div></li>
+        <li><div><strong>WhatsApp</strong></div><div><p>{F.contact.whatsapp}</p><p class="small">The fastest way. Send a photo of your device's label.</p></div></li>
+        <li><div><strong>Email</strong></div><div><p><a href={`mailto:${F.contact.email}`}>{F.contact.email}</a></p></div></li>
+        <li><div><strong>Security issues</strong></div><div><p><a href={`mailto:${F.contact.security}`}>{F.contact.security}</a></p><p class="small">Found a vulnerability in something we run? Tell us here first. We reply within 72 hours.</p></div></li>
         <li><div><strong>Hours</strong></div><div><p>Saturday to Thursday, 10:00–19:00</p></div></li>
       </ul>
     </div>

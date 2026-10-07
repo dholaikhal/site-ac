@@ -1,8 +1,8 @@
 ---
 // Earnings estimator. Initial numbers are computed here with the same formula the script uses,
 // so the page is correct before (and without) JavaScript.
-import site from "../data/site.json";
-const { calculator: c, rates: r } = site;
+import F from "../data/facts.json";
+const { calculator: c, rates: r } = F;
 const fmt = new Intl.NumberFormat("en-IN", { maximumFractionDigits: 0 });
 const h = c.idleHours.start, gb = c.diskGB.start;
 let coreHours = 0, kwh = 0;

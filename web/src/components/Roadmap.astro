@@ -1,10 +1,10 @@
 ---
-import site from "../data/site.json";
+import F from "../data/facts.json";
 interface Props { variant: "home" | "investors" }
 const { variant } = Astro.props;
 ---
 <ol class="road">
-  {site.timeline.map((t: any) => (
+  {F.timeline.map((t: any) => (
     <li class:list={{ now: t.now }}>
       <span class="when">{t.when}{t.now && variant === "home" ? ", up next" : ""}</span>
       <h3>{variant === "investors" && t.investorsTitle ? t.investorsTitle : t.title}</h3>

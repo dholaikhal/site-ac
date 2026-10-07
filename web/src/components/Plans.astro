@@ -1,7 +1,7 @@
 ---
 import Photo from "./Photo.astro";
-import site from "../data/site.json";
-const groups = [["For people", site.plans.people, "plans two"], ["For companies and institutions", site.plans.institutions, "plans"]] as const;
+import F from "../data/facts.json";
+const groups = [["For people", F.plans.people, "plans two"], ["For companies and institutions", F.plans.institutions, "plans"]] as const;
 ---
 {groups.map(([title, plans, cls]) => (
   <>

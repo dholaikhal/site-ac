@@ -1,5 +1,6 @@
 ---
 import Base from "../layouts/Base.astro";
+import F from "../data/facts.json";
 import SceneHead from "../components/SceneHead.astro";
 ---
 <Base title="Public sector: amader.cloud" description="Right-size reviews of public digital projects, and reconditioned devices processed to government standards for data sanitisation, safety, security, radio compliance and e-waste rules." ogDescription="Size public digital projects to the real need, and meet it with reused devices processed to government standards.">
@@ -16,9 +17,9 @@ import SceneHead from "../components/SceneHead.astro";
   <div>
     <h2>Why this matters now</h2>
     <ul class="ledger">
-      <li><div class="fig">12–18%<small>typical server utilisation</small></div><div><p>In a study of US data centres, servers ran at 12–18% of their capacity on average, and up to 30% were "comatose": still powered, but no longer needed. Capacity bought for a peak that never comes is the most common waste in public and private IT alike.</p><cite>NRDC and Anthesis, Data Center Efficiency Assessment, 2014</cite></div></li>
-      <li><div class="fig">Jan 2026<small>ICT white paper</small></div><div><p>The ICT Division's white paper on 15 years of public ICT spending flagged major projects, including the four-tier data centre, for questionable cost justification, and called for stronger independent review.</p><cite>Dhaka Tribune, 8 January 2026</cite></div></li>
-      <li><div class="fig">PPR 2025<small>procurement rules</small></div><div><p>The Public Procurement Rules 2025 make e‑GP mandatory, formally introduce sustainable public procurement, and add clear provisions on asset disposal. Right-sizing and reuse now have a place in the rulebook.</p><cite>The Financial Express, 30 September 2025</cite></div></li>
+      <li><div class="fig">{F.stats.serverUtil.value}<small>typical server utilisation</small></div><div><p>In a study of US data centres, servers ran at {F.stats.serverUtil.value} of their capacity on average, and up to {F.stats.serverUtil.comatose} were "comatose": still powered, but no longer needed. Capacity bought for a peak that never comes is the most common waste in public and private IT alike.</p><cite>{F.stats.serverUtil.source}</cite></div></li>
+      <li><div class="fig">{F.stats.ictWhitePaper.value}<small>ICT white paper</small></div><div><p>The ICT Division's white paper on 15 years of public ICT spending flagged major projects, including the four-tier data centre, for questionable cost justification, and called for stronger independent review.</p><cite>{F.stats.ictWhitePaper.source}</cite></div></li>
+      <li><div class="fig">{F.stats.ppr.value}<small>procurement rules</small></div><div><p>The Public Procurement Rules 2025 make e‑GP mandatory, formally introduce sustainable public procurement, and add clear provisions on asset disposal. Right-sizing and reuse now have a place in the rulebook.</p><cite>{F.stats.ppr.source}</cite></div></li>
     </ul>
   </div>
 

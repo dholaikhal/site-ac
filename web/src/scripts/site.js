@@ -265,12 +265,13 @@ if (bp) {
 // Scale: a slider grows the network across the skyline. Figures are illustrative.
 const consoleForm = document.getElementById("scale-console");
 if (consoleForm) {
+  const NET = JSON.parse(consoleForm.dataset.config); // from src/data/facts.json
   const svg = document.querySelector(".scale-mesh");
   const NS = "http://www.w3.org/2000/svg";
   // Deterministic points in the band of the photo that is all buildings, grown outward from one building.
   let seed = 7;
   const rand = () => ((seed = (seed * 16807) % 2147483647) / 2147483647);
-  const pts = Array.from({ length: 120 }, () => [80 + rand() * 2240, 1190 + rand() * 370]);
+  const pts = Array.from({ length: NET.max }, () => [80 + rand() * 2240, 1190 + rand() * 370]);
   const origin = [1250, 1450];
   pts.sort((a, b) => Math.hypot(a[0] - origin[0], a[1] - origin[1]) - Math.hypot(b[0] - origin[0], b[1] - origin[1]));
   const edges = pts.map((p, i) => {
@@ -295,9 +296,9 @@ if (consoleForm) {
     const k = +range.value;
     svg.querySelectorAll("[data-i]").forEach((el) => { el.style.display = +el.dataset.i < k ? "" : "none"; });
     out("#b-out", k);
-    out("#o-devices", fmt.format(k * 14));
-    out("#o-homes", fmt.format(k * 10));
-    out("#o-rev", `Tk ${fmt.format(k * 4490)}`);
+    out("#o-devices", fmt.format(k * NET.devicesPerBuilding));
+    out("#o-homes", fmt.format(k * NET.homesPerBuilding));
+    out("#o-rev", `Tk ${fmt.format(k * NET.revenuePerBuilding)}`);
   };
   range.addEventListener("input", update);
   update();

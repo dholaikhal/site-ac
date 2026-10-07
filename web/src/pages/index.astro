@@ -1,5 +1,8 @@
 ---
 import Base from "../layouts/Base.astro";
+import F from "../data/facts.json";
+const N = F.network;
+const nf = (n: number) => new Intl.NumberFormat("en-IN").format(n);
 import EarnCalc from "../components/EarnCalc.astro";
 import HeroScenes from "../components/HeroScenes.astro";
 import Photo from "../components/Photo.astro";
@@ -59,8 +62,8 @@ import Roadmap from "../components/Roadmap.astro";
       <p>Every home has a drawer of them. Left there, they become waste. Left plugged in and never updated, they become a risk.</p>
     </div>
     <div class="stats">
-      <div class="stat"><div class="fig" data-count="367" data-suffix="M kg">367M kg</div><p>of e‑waste in Bangladesh in 2022. Very little of it was formally recycled, and much of it still worked.</p><cite>Global E‑waste Monitor 2024</cite></div>
-      <div class="stat"><div class="fig" data-count="1" data-suffix="M+">1M+</div><p>home devices hijacked into a botnet that rents out people's internet to criminals.</p><cite>FBI, BADBOX 2.0 warning, June 2025</cite></div>
+      <div class="stat"><div class="fig" data-count={F.stats.ewaste.count} data-suffix={F.stats.ewaste.suffix}>{F.stats.ewaste.value}</div><p>of e‑waste in Bangladesh in {F.stats.ewaste.year}. Very little of it was formally recycled, and much of it still worked.</p><cite>{F.stats.ewaste.source}</cite></div>
+      <div class="stat"><div class="fig" data-count={F.stats.badbox.count} data-suffix={F.stats.badbox.suffix}>{F.stats.badbox.value}</div><p>home devices hijacked into a botnet that rents out people's internet to criminals.</p><cite>{F.stats.badbox.source}</cite></div>
       <div class="stat"><div class="fig">0</div><p>new devices we need to manufacture. The hardware already exists and is already paid for.</p><cite>Some jobs need one extra part, such as a storage disk.</cite></div>
     </div>
   </div>
@@ -159,7 +162,7 @@ import Roadmap from "../components/Roadmap.astro";
       <text class="tv-seg-label hi" data-on="2.6,3" x="800" y="702">+ 1 TB disk</text>
       <!-- totals -->
       <g data-on="7.8,8.3">
-        <text class="tv-total" x="60" y="748">About 2.3 GB of 4 GB in use, around 5 W, all day: roughly Tk 30–65 of power a month.</text>
+        <text class="tv-total" x="60" y="748">About 2.3 GB of 4 GB in use, around 5 W, all day: roughly {F.economics.tvboxPowerMonth} of power a month.</text>
       </g>
     </svg>
   </div>
@@ -347,15 +350,15 @@ import Roadmap from "../components/Roadmap.astro";
       <p class="lede">Companies pay us to retire devices. Homes, buildings, shops and schools pay us monthly to run them. The hardware in between costs almost nothing, and every new building adds backup space for the others.</p>
       <div class="hero-actions"><a class="btn btn-bulb" href="investors.html">Investor overview</a><a class="btn btn-line" href="contact.html?topic=investor" style="color:var(--chalk)">Request the deck</a></div>
     </div>
-    <form class="console" id="scale-console" onsubmit="return false" aria-label="Network size model">
-      <label for="buildings">Buildings on the network <output id="b-out" for="buildings">24</output></label>
-      <input type="range" id="buildings" min="1" max="120" value="24">
+    <form class="console" id="scale-console" onsubmit="return false" aria-label="Network size model" data-config={JSON.stringify(F.network)}>
+      <label for="buildings">Buildings on the network <output id="b-out" for="buildings">{N.start}</output></label>
+      <input type="range" id="buildings" min="1" max={N.max} value={N.start}>
       <dl>
-        <dt>Devices with a second job</dt><dd id="o-devices">336</dd>
-        <dt>Homes with a safe off-site copy</dt><dd id="o-homes">240</dd>
-        <dt>Monthly revenue</dt><dd id="o-rev">Tk 1,07,760</dd>
+        <dt>Devices with a second job</dt><dd id="o-devices">{nf(N.start * N.devicesPerBuilding)}</dd>
+        <dt>Homes with a safe off-site copy</dt><dd id="o-homes">{nf(N.start * N.homesPerBuilding)}</dd>
+        <dt>Monthly revenue</dt><dd id="o-rev">Tk {nf(N.start * N.revenuePerBuilding)}</dd>
       </dl>
-      <p class="small">Illustrative, based on our pilot assumptions: 30-flat buildings where 10 flats join, about 14 devices per building, Tk 4,490 a month per building.</p>
+      <p class="small">Illustrative, based on our pilot assumptions: {F.building.flats}-flat buildings where {F.building.joined} flats join, about {N.devicesPerBuilding} devices per building, Tk {nf(N.revenuePerBuilding)} a month per building.</p>
     </form>
   </div>
 </section>

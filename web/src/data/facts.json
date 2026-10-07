@@ -1,11 +1,15 @@
 {
-  "_note": "Single source for prices, rates, dates and contact details. Pages read this at build time; marketing/render.py can read it too.",
+  "_note": "Every fact the site states: prices, rates, plans, dates, statistics (with sources), contact details and the legal entity. Pages and marketing read this file; don't type these into page text.",
   "contact": {
     "email": "hello@amader.cloud",
-    "invest": "invest@amader.cloud",
+    "privacy": "privacy@amader.cloud",
     "security": "security@amader.cloud",
+    "abuse": "abuse@amader.cloud",
+    "invest": "invest@amader.cloud",
     "whatsapp": "+880 1XXX‑XXXXXX",
-    "hours": "Saturday to Thursday, 10:00–19:00"
+    "hours": "Saturday to Thursday, 10:00–19:00",
+    "facebook": "https://www.facebook.com/amader.cloud",
+    "city": "Dhaka, Bangladesh"
   },
   "rates": {
     "storageTkPer250GB": 50,
@@ -184,5 +188,83 @@
       "home": "More device types, more schools, and a second city.",
       "investors": "A second city, more device types, and shared computing power from idle laptops."
     }
-  ]
+  ],
+  "entity": {
+    "name": "[registered company name]",
+    "address": "[registered address]",
+    "licence": "[number]",
+    "hosting": "[confirm hosting provider and location before launch]"
+  },
+  "legal": {
+    "updated": "7 October 2026",
+    "status": "Draft for legal review, not yet in force."
+  },
+  "stats": {
+    "ewaste": {
+      "value": "367M kg",
+      "count": 367,
+      "suffix": "M kg",
+      "perCapita": "2.2 kg",
+      "year": 2022,
+      "source": "Global E‑waste Monitor 2024"
+    },
+    "badbox": {
+      "value": "1M+",
+      "count": 1,
+      "suffix": "M+",
+      "source": "FBI, BADBOX 2.0 warning, June 2025"
+    },
+    "vo1d": {
+      "value": "1.3M",
+      "countries": 197,
+      "source": "Doctor Web, September 2024"
+    },
+    "serverUtil": {
+      "value": "12–18%",
+      "comatose": "30%",
+      "source": "NRDC and Anthesis, Data Center Efficiency Assessment, 2014"
+    },
+    "ictWhitePaper": {
+      "value": "Jan 2026",
+      "source": "Dhaka Tribune, 8 January 2026"
+    },
+    "ppr": {
+      "value": "PPR 2025",
+      "source": "The Financial Express, 30 September 2025"
+    },
+    "refurb": {
+      "value": "US$94–103B",
+      "label": "refurbished electronics, 2024–25",
+      "source": "Research and Markets; Global Industry Analysts. Estimates vary by firm."
+    },
+    "itad": {
+      "value": "US$17–21B",
+      "label": "IT asset disposition, 2025",
+      "source": "Global Market Insights; The Business Research Company. Estimates vary by firm."
+    },
+    "population": {
+      "bangladesh": "170 million",
+      "dhakaCity": "10.3M",
+      "source": "Population and Housing Census 2022"
+    }
+  },
+  "economics": {
+    "buildingRevenue": "Tk 4,490",
+    "buildingContribution": "Tk 2,600",
+    "retireFee": "Tk 500",
+    "retireCost": "Tk 250",
+    "laptopEarn": "Tk 360",
+    "laptopPower": "Tk 55",
+    "buyerCoreHour": "US$0.004",
+    "cloudCoreHour": "US$0.0055",
+    "tvboxPowerMonth": "Tk 30–65",
+    "reviewFee": "Tk 1.5–5 lakh"
+  },
+  "network": {
+    "start": 24,
+    "max": 120,
+    "devicesPerBuilding": 14,
+    "homesPerBuilding": 10,
+    "revenuePerBuilding": 4490
+  }
 }

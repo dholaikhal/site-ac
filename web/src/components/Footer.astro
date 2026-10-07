@@ -1,6 +1,6 @@
 ---
 import Sprite from "./Sprite.astro";
-import site from "../data/site.json";
+import F from "../data/facts.json";
 ---
 <Sprite />
 <footer class="site-footer">
@@ -17,7 +17,7 @@ import site from "../data/site.json";
       </div>
       <div>
         <h2>Company</h2>
-        <ul><li><a href="about.html">About</a></li><li><a href="investors.html">Investors</a></li><li><a href="contact.html">Contact</a></li><li><a href={`mailto:${site.contact.email}`}>{site.contact.email}</a></li><li><a href="https://www.facebook.com/amader.cloud" rel="noopener">Facebook</a></li></ul>
+        <ul><li><a href="about.html">About</a></li><li><a href="investors.html">Investors</a></li><li><a href="contact.html">Contact</a></li><li><a href={`mailto:${F.contact.email}`}>{F.contact.email}</a></li><li><a href="https://www.facebook.com/amader.cloud" rel="noopener">Facebook</a></li></ul>
       </div>
       <div>
         <h2>Legal</h2>

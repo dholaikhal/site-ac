@@ -28,6 +28,17 @@ def static_mesh(scene, scale=1.0):
     return "\n".join(out)
 
 
+# Facts (contact details, figures) from the website's facts file: <!--fact:contact.whatsapp-->…<!--/fact-->
+FACTS = json.loads((M.parent / "web" / "src" / "data" / "facts.json").read_text())
+
+
+def fact(path):
+    v = FACTS
+    for k in path.split("."):
+        v = v[k]
+    return str(v)
+
+
 for sc in SCENES:
     frags[f"mesh:{sc['id']}"] = static_mesh(sc)
     frags[f"mesh:{sc['id']}@2"] = static_mesh(sc, 2)  # heavier lines for small renders
@@ -41,6 +52,7 @@ for f in srcs:
     s = f.read_text()
     for k, v in frags.items():
         s = re.sub(rf"<!--{re.escape(k)}-->.*?<!--/{re.escape(k)}-->", lambda _m: f"<!--{k}-->{v}<!--/{k}-->", s, flags=re.S)
+    s = re.sub(r"<!--fact:([\w.]+)-->.*?<!--/fact-->", lambda m: f"<!--fact:{m.group(1)}-->{fact(m.group(1))}<!--/fact-->", s, flags=re.S)
     f.write_text(s)
     sub = "facebook" if "facebook" in f.relative_to(M).parts else ""
     fmt = re.search(r'<meta name="render" content="(\w+)">', s)

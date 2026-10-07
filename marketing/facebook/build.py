@@ -7,7 +7,7 @@
 Edit the data below, not the generated HTML. Meshes and the logo mark are stamped in by render.py.
 Copy for each post lives in posts.md; asset ids here match the "Image" column there.
 """
-import html, pathlib, sys
+import html, json, pathlib, sys
 
 F = pathlib.Path(__file__).resolve().parent
 OUT = F / "cards"
@@ -15,6 +15,7 @@ sys.path.insert(0, str(F.parent.parent / "tools"))
 from scenes import SCENES  # noqa: E402
 
 SCENE = {s["id"]: s for s in SCENES}
+FACTS = json.loads((F.parent.parent / "web" / "src" / "data" / "facts.json").read_text())  # contact details
 PHOTOS = "../../../web/src/assets/photos"
 MARK = "<!--mark--><!--/mark-->"
 BRAND = f'<span class="brand">{MARK}<span>amader<span class="tld">.cloud</span></span></span>'
@@ -256,7 +257,7 @@ ASSETS = [
     dict(id="d04-companies", kind="steps", size=FEED, light=True, kick="for companies", h1="Retiring office laptops? Retire them into a school lab.",
          sub="A wipe record for every device, and a lab you can visit.",
          steps=["Tell us how many devices and when.", "We collect, wipe and test each one, with a passport per device.", "Working ones become a school's lab. You get the report."],
-         button="Talk to us", foot="hello@amader.cloud", title="Ask: companies"),
+         button="Talk to us", foot=FACTS["contact"]["email"], title="Ask: companies"),
 
     # ---- stories and reel covers (keep text in the middle; top 250 px and bottom 340 px are covered by Facebook's buttons) ----
     dict(id="s01-reel-drawer", kind="drawer", size=STORY, kick="reel · 30 s", h1="Every home in Dhaka has this drawer.", bn="পুরনো যন্ত্র, নতুন কাজ",

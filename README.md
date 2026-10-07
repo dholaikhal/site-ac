@@ -6,7 +6,7 @@ Second jobs for old devices. This repo holds the product brief, the website (Ast
 |---|---|
 | `docs/product-brief.md` | Product definition: device × job model, customers, pricing hypotheses, architecture, unit economics, risks, roadmap, sources |
 | `web/` | The website, an [Astro](https://astro.build) project that builds to plain static HTML in `web/dist/` |
-| `web/src/data/site.json` | **Prices, rates, plans, timeline and contact details.** Change a number here and every page that shows it updates |
+| `web/src/data/facts.json` | **Every fact the site states:** prices, rates, plans, timeline, statistics with sources, contact details, legal entity. Pages and marketing (print, social, Facebook) read it; change it here, not in page text |
 | `web/src/data/scenes.json` | Hero slideshow and page-head scenes: photo, crop, and every node's position and label |
 | `web/src/pages/` | One `.astro` file per page (same URLs as before: `devices.html`, `companies.html`…) |
 | `web/src/components/` | Header, Footer, Scene/HeroScenes/SceneHead, Plans, Roadmap, EarnCalc, Photo |
@@ -52,7 +52,7 @@ After re-rendering the OG image, copy `marketing/out/og.png` to `web/public/asse
 
 ## Before launch
 
-- [ ] Real WhatsApp number: `contact.whatsapp` in `web/src/data/site.json`, and `marketing/print/flyer-a5.html`
+- [ ] Real WhatsApp number: `contact.whatsapp` in `web/src/data/facts.json` (the site, flyer and Facebook kit all read it)
 - [ ] Set up mailboxes: hello@, privacy@, security@, abuse@, invest@ amader.cloud
 - [ ] Contact form backend: set `data-endpoint` on `#contact-form` in `web/src/pages/contact.astro`. Without it, the form opens an email draft
 - [ ] Legal entity name, address and trade licence in `web/src/pages/terms.astro` and `privacy.astro`, plus the control-plane hosting location in privacy §6

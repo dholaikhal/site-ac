@@ -1,4 +1,5 @@
 ---
+import F from "../data/facts.json";
 import Base from "../layouts/Base.astro";
 ---
 <Base title="Privacy policy: amader.cloud" description="What personal information amader.cloud collects, why, who can see it, how long we keep it, and your rights under Bangladesh's Personal Data Protection Act, 2026." noindex>
@@ -16,7 +17,7 @@ import Base from "../layouts/Base.astro";
   </ol></nav>
 
   <h2 id="controller">1. Who is responsible</h2>
-  <p><strong>[Registered company name]</strong>, [registered address], Dhaka, is the data controller for the information described here. Our contact for data protection questions is <a href="mailto:privacy@amader.cloud">privacy@amader.cloud</a>.</p>
+  <p><strong>[Registered company name]</strong>, [registered address], Dhaka, is the data controller for the information described here. Our contact for data protection questions is <a href={`mailto:${F.contact.privacy}`}>{F.contact.privacy}</a>.</p>
   <p>For files and recordings stored on your own devices, <em>you</em> decide what's stored and who sees it. We only handle that content when you ask us to. For building plans, the building's owners' association decides who can see shared drives and camera recordings.</p>
 
   <h2 id="collect">2. What we collect</h2>
@@ -83,7 +84,7 @@ import Base from "../layouts/Base.astro";
     <li>delete your information, where we don't need to keep it by law;</li>
     <li>withdraw consent you've given, for example for news messages.</li>
   </ul>
-  <p>Email <a href="mailto:privacy@amader.cloud">privacy@amader.cloud</a> or message us on WhatsApp. We'll confirm who you are, then reply within 30 days. If you're not satisfied, you can complain to the data protection authority set up under the Act.</p>
+  <p>Email <a href={`mailto:${F.contact.privacy}`}>{F.contact.privacy}</a> or message us on WhatsApp. We'll confirm who you are, then reply within 30 days. If you're not satisfied, you can complain to the data protection authority set up under the Act.</p>
 
   <h2 id="children">10. Children</h2>
   <p>Our customers are adults, organisations and schools. We don't knowingly collect personal information from anyone under 18 without verifiable consent from a parent or guardian. In Pathshala labs, student accounts are managed by the school, and we don't need students' personal information to run the lab.</p>
@@ -93,6 +94,6 @@ import Base from "../layouts/Base.astro";
   <p>If a breach affects your personal information, we'll tell you within 72 hours of confirming it. We'll explain what happened, what it means for you, and what we're doing about it. We'll also notify the authority as the Act and its regulations require.</p>
 
   <h2 id="changes">12. Changes and contact</h2>
-  <p>We'll post changes here and tell customers about significant ones at least 30 days before they take effect. Questions: <a href="mailto:privacy@amader.cloud">privacy@amader.cloud</a>.</p>
+  <p>We'll post changes here and tell customers about significant ones at least 30 days before they take effect. Questions: <a href={`mailto:${F.contact.privacy}`}>{F.contact.privacy}</a>.</p>
 </section>
 </Base>

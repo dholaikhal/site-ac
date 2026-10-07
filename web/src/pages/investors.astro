@@ -1,5 +1,6 @@
 ---
 import Base from "../layouts/Base.astro";
+import F from "../data/facts.json";
 import Roadmap from "../components/Roadmap.astro";
 import SceneHead from "../components/SceneHead.astro";
 ---
@@ -11,7 +12,7 @@ import SceneHead from "../components/SceneHead.astro";
     <p class="lede">The world is learning to resell old devices. Nobody gets the value out of the ones people keep. amader.cloud does, for families and for companies: each idle device gets a new job, or rents out the capacity it isn't using, and we charge monthly to run it. We're starting in Dhaka.</p>
     <div class="hero-actions" style="margin-bottom:0">
       <a class="btn btn-bulb" href="contact.html?topic=investor">Request the deck</a>
-      <a class="btn btn-line" href="mailto:invest@amader.cloud">invest@amader.cloud</a>
+      <a class="btn btn-line" href={`mailto:${F.contact.invest}`}>{F.contact.invest}</a>
     </div>
   </div>
 </section>
@@ -20,9 +21,9 @@ import SceneHead from "../components/SceneHead.astro";
   <div>
     <h2>The market around us</h2>
     <ul class="ledger">
-      <li><div class="fig">US$94–103B<small>refurbished electronics, 2024–25</small></div><div><p>The global market for second-life devices. Almost all of it is one-off resale: the value ends at the sale.</p><cite>Research and Markets; Global Industry Analysts. Estimates vary by firm.</cite></div></li>
-      <li><div class="fig">US$17–21B<small>IT asset disposition, 2025</small></div><div><p>What companies pay each year to retire their devices safely. In Bangladesh this market barely exists as a formal service.</p><cite>Global Market Insights; The Business Research Company. Estimates vary by firm.</cite></div></li>
-      <li><div class="fig">367M kg<small>e‑waste, Bangladesh, 2022</small></div><div><p>Bangladesh, with 170 million people, produced this much e‑waste in a single year, and formally recycled very little of it.</p><cite>Global E‑waste Monitor 2024; Population and Housing Census 2022</cite></div></li>
+      <li><div class="fig">{F.stats.refurb.value}<small>{F.stats.refurb.label}</small></div><div><p>The global market for second-life devices. Almost all of it is one-off resale: the value ends at the sale.</p><cite>{F.stats.refurb.source}</cite></div></li>
+      <li><div class="fig">{F.stats.itad.value}<small>{F.stats.itad.label}</small></div><div><p>What companies pay each year to retire their devices safely. In Bangladesh this market barely exists as a formal service.</p><cite>{F.stats.itad.source}</cite></div></li>
+      <li><div class="fig">{F.stats.ewaste.value}<small>e‑waste, Bangladesh, {F.stats.ewaste.year}</small></div><div><p>Bangladesh, with {F.stats.population.bangladesh} people, produced this much e‑waste in a single year, and formally recycled very little of it.</p><cite>{F.stats.ewaste.source}; {F.stats.population.source}</cite></div></li>
     </ul>
   </div>
 
@@ -74,8 +75,8 @@ import SceneHead from "../components/SceneHead.astro";
       <h2>Early unit economics</h2>
       <p>These are our working assumptions. The pilot will test them.</p>
       <ul class="ledger">
-        <li><div class="fig">Tk 4,490<small>monthly revenue per building</small></div><div><p>A 30-flat building where 10 flats join. About Tk 2,600 a month is left after support, visits and network costs.</p></div></li>
-        <li><div class="fig">2×<small>retirement fee vs cost</small></div><div><p>About Tk 500 per laptop against roughly Tk 250 for wiping, testing and logistics. The device then goes into a monthly plan.</p></div></li>
+        <li><div class="fig">{F.economics.buildingRevenue}<small>monthly revenue per building</small></div><div><p>A {F.building.flats}-flat building where {F.building.joined} flats join. About {F.economics.buildingContribution} a month is left after support, visits and network costs.</p></div></li>
+        <li><div class="fig">2×<small>retirement fee vs cost</small></div><div><p>About {F.economics.retireFee} per laptop against roughly {F.economics.retireCost} for wiping, testing and logistics. The device then goes into a monthly plan.</p></div></li>
       </ul>
     </div>
     <div>
