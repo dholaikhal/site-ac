@@ -1,6 +1,7 @@
 ---
 import Base from "../layouts/Base.astro";
 import facts from "../data/facts";
+import SignAvatar from "../components/SignAvatar.astro";
 import forms from "../data/forms.json";
 const { market: m, anchor: a, funding: f } = facts;
 const figures = [
@@ -76,7 +77,7 @@ const figures = [
   <div class="wrap">
     <h2>Team</h2>
     <ul class="team">
-      {facts.team.members.map((t) => <li><span class="avatar" aria-hidden="true"></span><strong>{t.name}</strong><span class="role">{t.role}</span><span class="bio">{t.bio}</span></li>)}
+      {facts.team.members.map((t) => <li><SignAvatar initials={t.initials} sign={t.sign as any} /><strong>{t.name}</strong><span class="role">{t.role}</span></li>)}
     </ul>
   </div>
 </section>
@@ -132,9 +133,9 @@ const figures = [
 .team { list-style: none; margin: 18px 0 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; }
 @media (max-width: 760px) { .team { grid-template-columns: 1fr; } }
 .team li { display: grid; gap: 2px; }
-.team .avatar { width: 72px; height: 72px; border-radius: 50%; background: var(--wash-2); border: 1.5px dashed var(--rule); margin-bottom: 10px; }
+.team :global(.sign-avatar) { width: 96px; height: 96px; margin-bottom: 12px; }
+.team strong { font-size: 1.1rem; }
 .team .role { color: var(--green); font-weight: 600; }
-.team .bio { color: var(--ink-2); font-size: var(--fs-small); }
 
 .deck-form { max-width: 460px; }
 .deck-form .field input { border-color: rgb(255 255 255 / .3); }

@@ -1,0 +1,19 @@
+---
+// Team avatar: initials painted on a small signboard, in the site's sign colours.
+interface Props { initials: string; sign: "green" | "blue" | "red" | "yellow" | "navy" }
+const paints = {
+  green: ["#0b5d3b", "#ffcc00", "#e2261b"],
+  blue: ["#1739a8", "#ffffff", "#e2261b"],
+  red: ["#e2261b", "#ffcc00", "#14213d"],
+  yellow: ["#ffcc00", "#e2261b", "#14213d"],
+  navy: ["#14213d", "#ffcc00", "#e2261b"],
+} as const;
+const { initials, sign } = Astro.props;
+const [board, letter, shade] = paints[sign];
+---
+<svg class="sign-avatar" viewBox="0 0 160 160" role="img" aria-hidden="true">
+  <rect width="160" height="160" rx="10" fill={board} />
+  <rect x="9" y="9" width="142" height="142" rx="5" fill="none" stroke={letter} stroke-width="2.5" />
+  <text x="84" y="111" text-anchor="middle" font-family="Big Shoulders Display, Arial Narrow, sans-serif" font-weight="900" font-size="78" fill={shade}>{initials}</text>
+  <text x="80" y="107" text-anchor="middle" font-family="Big Shoulders Display, Arial Narrow, sans-serif" font-weight="900" font-size="78" fill={letter}>{initials}</text>
+</svg>

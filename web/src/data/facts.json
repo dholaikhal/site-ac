@@ -342,22 +342,24 @@
     ]
   },
   "team": {
-    "mock": true,
     "members": [
       {
-        "name": "[Founder name]",
+        "name": "Sammay Sarkar",
+        "initials": "SS",
         "role": "Co-founder, CEO",
-        "bio": "[Background in Bangladeshi commerce or payments]"
+        "sign": "green"
       },
       {
-        "name": "[Founder name]",
+        "name": "Uthson Chakraborty",
+        "initials": "UC",
         "role": "Co-founder, CTO",
-        "bio": "[Background in AI and developer tools]"
+        "sign": "blue"
       },
       {
-        "name": "[Advisor name]",
+        "name": "Sifat Ullah",
+        "initials": "SU",
         "role": "Advisor",
-        "bio": "[Background in mobile money or e-commerce]"
+        "sign": "red"
       }
     ]
   }
