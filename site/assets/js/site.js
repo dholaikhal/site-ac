@@ -538,3 +538,43 @@ document.querySelectorAll(".page-head.photo").forEach((h) => tipper(h, ".node"))
   }), { threshold: 0.6 });
   figs.forEach((f) => io.observe(f));
 })();
+
+// Theme toggle: light/dark, remembered once chosen; otherwise follows the system.
+(() => {
+  const root = document.documentElement;
+  const store = (k, v) => { try { v == null ? localStorage.removeItem(k) : localStorage.setItem(k, v); } catch {} };
+  const read = (k) => { try { return localStorage.getItem(k); } catch { return null; } };
+  const btn = document.querySelector(".theme-toggle");
+  const label = () => btn && btn.setAttribute("aria-label", root.dataset.theme === "dark" ? "Switch to light theme" : "Switch to dark theme");
+  if (btn) btn.addEventListener("click", () => { root.dataset.theme = root.dataset.theme === "dark" ? "light" : "dark"; store("ac-theme", root.dataset.theme); label(); });
+  matchMedia("(prefers-color-scheme: dark)").addEventListener("change", (e) => { if (!read("ac-theme")) { root.dataset.theme = e.matches ? "dark" : "light"; label(); } });
+  label();
+
+  // Palette demo: appears with ?palettes (or ?palette=…) in the URL, or after a palette was picked.
+  const PALETTES = [["current", "Current", "#0f3352", "#ffb547"], ["concrete", "Concrete", "#1f3b33", "#ff6a3d"], ["rickshaw", "Rickshaw", "#0e5c5e", "#ff4f7b"], ["daylight", "Daylight", "#eaf2f8", "#f29d1c"]];
+  const q = new URLSearchParams(location.search);
+  if (!(q.has("palettes") || q.has("palette") || read("ac-palette"))) return;
+  if (q.get("palette")) store("ac-palette", q.get("palette"));
+  const box = document.createElement("div");
+  box.className = "palette-demo"; box.setAttribute("role", "group"); box.setAttribute("aria-label", "Palette preview");
+  box.innerHTML = '<b>Palette preview (demo only)</b><div class="row"></div>';
+  const row = box.querySelector(".row");
+  const current = () => root.dataset.palette || "current";
+  PALETTES.forEach(([id, name, a, b]) => {
+    const btn = document.createElement("button");
+    btn.type = "button"; btn.dataset.id = id;
+    btn.innerHTML = `<i><span style="background:${a}"></span><span style="background:${b}"></span></i>${name}`;
+    btn.addEventListener("click", () => {
+      if (id === "current") { delete root.dataset.palette; store("ac-palette", "current"); } else { root.dataset.palette = id; store("ac-palette", id); }
+      sync();
+    });
+    row.append(btn);
+  });
+  const close = document.createElement("button");
+  close.type = "button"; close.className = "close"; close.textContent = "Hide"; close.setAttribute("aria-label", "Hide palette preview and reset");
+  close.addEventListener("click", () => { store("ac-palette", null); delete root.dataset.palette; box.remove(); });
+  row.append(close);
+  const sync = () => row.querySelectorAll("button[data-id]").forEach((b) => b.setAttribute("aria-pressed", String(b.dataset.id === current())));
+  sync();
+  document.body.append(box);
+})();

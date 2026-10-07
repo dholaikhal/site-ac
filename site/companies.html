@@ -17,11 +17,17 @@
 </head>
 <body>
 <!-- chrome:header -->
+<script>
+/* Apply saved theme and palette before paint. Theme: saved choice, else the system setting. */
+(function(){var d=document.documentElement,g=function(k){try{return localStorage.getItem(k)}catch(e){return null}};
+var t=g("ac-theme")||(matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light");d.setAttribute("data-theme",t);
+var p=new URLSearchParams(location.search).get("palette")||g("ac-palette");if(p)d.setAttribute("data-palette",p);})();
+</script>
 <a class="skip" href="#main">Skip to content</a>
 <header class="site-header">
   <div class="wrap">
     <a class="brand" href="./" aria-label="amader.cloud home">
-      <svg viewBox="0 0 44 40" aria-hidden="true"><path d="M7 31 L5 34 M28 31 L30 34" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/><rect x="1" y="15" width="33" height="16" rx="4.5" fill="currentColor"/><circle cx="26.5" cy="23" r="2.6" fill="#f5c04a"/><path d="M33 9.5 a6 6 0 0 1 5 5.5 M33 3.5 a12 12 0 0 1 10.5 11.5" fill="none" stroke="#f5c04a" stroke-width="2.4" stroke-linecap="round"/></svg>
+      <svg viewBox="0 0 44 40" aria-hidden="true"><path d="M7 31 L5 34 M28 31 L30 34" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/><rect x="1" y="15" width="33" height="16" rx="4.5" fill="currentColor"/><circle cx="26.5" cy="23" r="2.6" style="fill:var(--amber)"/><path d="M33 9.5 a6 6 0 0 1 5 5.5 M33 3.5 a12 12 0 0 1 10.5 11.5" fill="none" style="stroke:var(--amber)" stroke-width="2.4" stroke-linecap="round"/></svg>
       <span>amader<span class="tld">.cloud</span></span>
     </a>
     <button class="nav-toggle" aria-expanded="false" aria-controls="nav">Menu</button>
@@ -31,6 +37,7 @@
       <a href="companies.html" aria-current="page">For companies</a>
       <a href="investors.html">Investors</a>
       <a class="btn btn-bulb" href="contact.html">Book a free visit</a>
+      <button type="button" class="theme-toggle" aria-label="Switch to dark theme"><svg class="sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.5"/><path d="M12 2v2.5M12 19.5V22M2 12h2.5M19.5 12H22M4.9 4.9l1.8 1.8M17.3 17.3l1.8 1.8M4.9 19.1l1.8-1.8M17.3 6.7l1.8-1.8"/></svg><svg class="moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"/></svg></button>
     </nav>
   </div>
 </header>
@@ -150,7 +157,7 @@
   <div class="wrap">
     <div class="footer-grid">
       <div>
-        <a class="brand" href="./"><svg viewBox="0 0 44 40" aria-hidden="true"><path d="M7 31 L5 34 M28 31 L30 34" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/><rect x="1" y="15" width="33" height="16" rx="4.5" fill="currentColor"/><circle cx="26.5" cy="23" r="2.6" fill="#283b6b"/><path d="M33 9.5 a6 6 0 0 1 5 5.5 M33 3.5 a12 12 0 0 1 10.5 11.5" fill="none" stroke="#f5c04a" stroke-width="2.4" stroke-linecap="round"/></svg><span>amader<span class="tld">.cloud</span></span></a>
+        <a class="brand" href="./"><svg viewBox="0 0 44 40" aria-hidden="true"><path d="M7 31 L5 34 M28 31 L30 34" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/><rect x="1" y="15" width="33" height="16" rx="4.5" fill="currentColor"/><circle cx="26.5" cy="23" r="2.6" style="fill:var(--night)"/><path d="M33 9.5 a6 6 0 0 1 5 5.5 M33 3.5 a12 12 0 0 1 10.5 11.5" fill="none" style="stroke:var(--amber)" stroke-width="2.4" stroke-linecap="round"/></svg><span>amader<span class="tld">.cloud</span></span></a>
         <p>Second jobs for the devices Dhaka already owns.</p>
         <p class="bn" lang="bn">পুরনো যন্ত্র, নতুন কাজ</p>
       </div>
