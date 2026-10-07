@@ -369,29 +369,26 @@ if (consoleForm) {
     laptop: { cores: 4, speed: 1, watts: 20 },
     desktop: { cores: 4, speed: 1.2, watts: 60 },
     tvbox: { cores: 4, speed: 0.25, watts: 4 },
-    gpu: { cores: 6, speed: 1.2, watts: 160, gpu: 1 },
   };
-  const RATE_CORE_HOUR = 0.30, RATE_GPU_HOUR = 3, STORAGE_PER_GB = 50 / 250, TK_PER_KWH = 9, DAYS = 30;
+  const RATE_CORE_HOUR = 0.30, STORAGE_PER_GB = 50 / 250, TK_PER_KWH = 9, DAYS = 30;
   const fmt = new Intl.NumberFormat("en-IN", { maximumFractionDigits: 0 });
-  const counts = { gpu: 0, laptop: 1, desktop: 0, tvbox: 1 };
+  const counts = { laptop: 1, desktop: 0, tvbox: 1 };
   const $ = (id) => f.querySelector(id);
   const update = () => {
     const h = +$("#idle-hours").value, gb = +$("#disk-gb").value;
     $("#idle-out").textContent = `${h} h`;
     $("#disk-out").textContent = `${fmt.format(gb)} GB`;
-    let coreHours = 0, gpuHours = 0, kwh = 0;
+    let coreHours = 0, kwh = 0;
     for (const [k, n] of Object.entries(counts)) {
-      if (KIND[k].gpu) gpuHours += n * h * DAYS; else coreHours += n * KIND[k].cores * KIND[k].speed * h * DAYS;
+      coreHours += n * KIND[k].cores * KIND[k].speed * h * DAYS;
       kwh += n * KIND[k].watts * h * DAYS / 1000;
     }
-    const storage = gb * STORAGE_PER_GB, compute = coreHours * RATE_CORE_HOUR, ai = gpuHours * RATE_GPU_HOUR, power = kwh * TK_PER_KWH;
+    const storage = gb * STORAGE_PER_GB, compute = coreHours * RATE_CORE_HOUR, power = kwh * TK_PER_KWH;
     $("#e-storage").textContent = `Tk ${fmt.format(storage)}`;
     $("#e-corehours").textContent = fmt.format(coreHours);
     $("#e-compute").textContent = `Tk ${fmt.format(compute)}`;
-    $("#e-gpuhours").textContent = fmt.format(gpuHours);
-    $("#e-ai").textContent = `Tk ${fmt.format(ai)}`;
     $("#e-power").textContent = `− Tk ${fmt.format(power)}`;
-    $("#e-net").textContent = `Tk ${fmt.format(Math.max(0, storage + compute + ai - power))}`;
+    $("#e-net").textContent = `Tk ${fmt.format(Math.max(0, storage + compute - power))}`;
     f.querySelectorAll(".count").forEach((c) => { c.querySelector("output").textContent = counts[c.dataset.kind]; });
   };
   f.querySelectorAll(".count button").forEach((b) => b.addEventListener("click", () => {

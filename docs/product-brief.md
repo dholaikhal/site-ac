@@ -172,27 +172,6 @@ Specialised sensors (for example LoRa water-level sensors) are an optional add-o
 
 **Risks:** long procurement cycles; political exposure (stay evidence-led and non-partisan); the reviewer–supplier conflict (handled above); certifications we don't yet hold. **First step:** one pilot review for a city corporation, a public university or a donor-funded project. A donor project is likely fastest, because technical-assistance budgets are flexible.
 
-## AI: the most topical use of idle capacity
-
-AI work is the most valuable thing idle devices can be rented for, and private AI is a strong "give it a job" use. Be precise about which devices can do what:
-
-| Device | AI it can do | Sold as |
-|---|---|---|
-| PC with a discrete GPU (old gaming PC, design workstation, ex-mining rig), 6–12 GB VRAM | Image generation, speech-to-text (Whisper-class), translation, OCR, embeddings, small LLMs (7–8B quantised), light fine-tuning | **Rent:** GPU-hours |
-| Laptop / desktop, CPU only, 8–16 GB RAM | Batch transcription, OCR, embeddings, classification; slow LLM inference on small models | **Rent:** batch jobs; **Job:** part of a private AI cluster |
-| Phones, tablets, Apple-silicon laptops | Pooled into a household or office cluster for a private assistant (exo-style distributed inference) | **Job:** private AI |
-| TV boxes, routers | Can't usefully run AI; they host datasets and model files | **Rent:** storage |
-
-**Not offered:** training large models across homes. Home links are too slow and unreliable for it.
-
-**Pricing anchors (verify before quoting externally):** consumer GPUs rent for about US$0.03–0.05/GPU-hour (RTX 3060 on Salad and Vast.ai, Sept 2026). Our member payout target is Tk 3/GPU-hour (*unverified FX:* ~Tk 120 = US$1). An RTX 3060 idle 10 h/day makes ≈ 300 GPU-hours → Tk 900 gross, minus ≈ Tk 430 of electricity at 150–160 W. The margin is real but thin, so utilisation is the variable to test.
-
-**Why buyers would choose us:** data stays in Bangladesh (PDPA 2026), local billing, Bangla-language workloads, and a domestic GPU shortage. The government opened its first shared GPU cloud in Jan 2026 with 20+ V100s, a sign that local demand exceeds local supply. The global datacentre GPU shortage persists, with lead times of 36–52 weeks.
-
-**Risks:** demand and utilisation; job data confidentiality (route sensitive jobs only to company-owned or vetted nodes, encrypt inputs, prefer workloads where leaked inputs are low-harm); job sandboxing on consumer GPUs (containers with GPU passthrough, a narrower isolation boundary than a full VM, to be assessed); power cost at higher tariff slabs.
-
-**First step:** 2–3 letters of intent from Bangla AI teams (speech, OCR, translation) before building the GPU broker. Start with 10 member GPU PCs.
-
 ## Platform architecture (proposed)
 
 Conventional tools first. Hand-rolling needs a reason that survives a check.

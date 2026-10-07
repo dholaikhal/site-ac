@@ -60,7 +60,7 @@
 <g class="node" tabindex="0" role="button" data-from="Flat 3A" data-to="Holds one piece"><circle class="hit" cx="1040" cy="1180" r="44"/><circle class="halo" cx="1040" cy="1180" r="22" style="animation-delay:0.88s,1.8s"/><circle class="core" cx="1040" cy="1180" r="8" style="animation-delay:0.88s"/></g>
 <g class="node" tabindex="0" role="button" data-from="Old monitors" data-to="Lift-lobby screen: notices and local ads, so the walls stay clean"><circle class="hit" cx="1170" cy="1180" r="44"/><circle class="halo" cx="1170" cy="1180" r="22" style="animation-delay:1.00s,1.0s"/><circle class="core" cx="1170" cy="1180" r="8" style="animation-delay:1.00s"/></g>
 <g class="node" tabindex="0" role="button" data-from="Old laptop" data-to="Building server: committee records, and a map of who holds which piece"><circle class="hit" cx="1950" cy="1150" r="44"/><circle class="halo" cx="1950" cy="1150" r="22" style="animation-delay:1.12s,1.2s"/><circle class="core" cx="1950" cy="1150" r="8" style="animation-delay:1.12s"/></g>
-<g class="node" tabindex="0" role="button" data-from="Old gaming PC" data-to="AI jobs that pay into the service-charge fund"><circle class="hit" cx="2300" cy="1000" r="44"/><circle class="halo" cx="2300" cy="1000" r="22" style="animation-delay:1.24s,1.4s"/><circle class="core" cx="2300" cy="1000" r="8" style="animation-delay:1.24s"/></g>
+<g class="node" tabindex="0" role="button" data-from="Desktop PC" data-to="Rents out idle computing for the service-charge fund"><circle class="hit" cx="2300" cy="1000" r="44"/><circle class="halo" cx="2300" cy="1000" r="22" style="animation-delay:1.24s,1.4s"/><circle class="core" cx="2300" cy="1000" r="8" style="animation-delay:1.24s"/></g>
 <g class="node" tabindex="0" role="button" data-from="Two old laptops" data-to="Homework corner in the common room"><circle class="hit" cx="600" cy="1250" r="44"/><circle class="halo" cx="600" cy="1250" r="22" style="animation-delay:1.36s,1.6s"/><circle class="core" cx="600" cy="1250" r="8" style="animation-delay:1.36s"/></g>
 </g></svg></div><figcaption class="mono"><a href="https://www.pexels.com/photo/apartment-buildings-in-the-residential-district-of-dhaka-built-as-part-of-the-rajuk-uttara-apartment-project-18340726/" rel="noopener">Uttara, Dhaka. Photo: Robiul Islam Pailot (Pexels)</a></figcaption></figure>
 <div class="node-tip" role="status" hidden></div>
@@ -77,7 +77,6 @@
   <div class="bp earn earn-embed"><div class="earn-inner wrap-in"><div><span class="kicker">Estimate</span><h2>What could yours earn?</h2><p class="lede">Choose your devices, how long they sit idle, and how much disk you can spare.</p></div><form class="console earn-calc" id="earn-calc" onsubmit="return false" aria-label="Earnings estimate">
       <fieldset class="counts">
         <legend>What could you share?</legend>
-        <div class="count" data-kind="gpu"><span>Gaming PC (with GPU)</span><button type="button" data-d="-1" aria-label="One fewer gaming PC">−</button><output>0</output><button type="button" data-d="1" aria-label="One more gaming PC">+</button></div>
         <div class="count" data-kind="laptop"><span>Laptop</span><button type="button" data-d="-1" aria-label="One fewer laptop">−</button><output>1</output><button type="button" data-d="1" aria-label="One more laptop">+</button></div>
         <div class="count" data-kind="desktop"><span>Desktop PC</span><button type="button" data-d="-1" aria-label="One fewer desktop">−</button><output>0</output><button type="button" data-d="1" aria-label="One more desktop">+</button></div>
         <div class="count" data-kind="tvbox"><span>TV box</span><button type="button" data-d="-1" aria-label="One fewer TV box">−</button><output>1</output><button type="button" data-d="1" aria-label="One more TV box">+</button></div>
@@ -89,17 +88,15 @@
       <dl>
         <dt>Storage credit</dt><dd id="e-storage">Tk 100</dd>
         <dt>Computing, <span id="e-corehours">1,500</span> core-hours</dt><dd id="e-compute">Tk 450</dd>
-        <dt>AI jobs, <span id="e-gpuhours">0</span> GPU-hours</dt><dd id="e-ai">Tk 0</dd>
         <dt>Your extra electricity</dt><dd id="e-power">− Tk 60</dd>
         <dt class="total">About, each month</dt><dd class="total" id="e-net">Tk 490</dd>
       </dl>
-      <p class="small">An estimate, not a promise. Storage pays Tk 50 per 250 GB a month during the pilot. Computing and AI jobs start in 2028, at targets of Tk 0.30 per core-hour and Tk 3 per GPU-hour, depending on demand. Electricity is counted at about Tk 9 a unit. Paid as plan credit first, then by bKash.</p>
+      <p class="small">An estimate, not a promise. Storage pays Tk 50 per 250 GB a month during the pilot. Computing starts in 2028 at a target of Tk 0.30 per core-hour, depending on demand. Electricity is counted at about Tk 9 a unit. Paid as plan credit first, then by bKash.</p>
     </form></div></div>
   <div>
-    <h2>Three things you can rent</h2>
+    <h2>Two things you can rent</h2>
     <ul class="ledger">
       <li><div class="fig"><svg class="pict" aria-hidden="true"><use href="#p-pieces"/></svg>Storage<small>available in the pilot</small></div><div><p>Spare disk space holds encrypted backup copies for other members. You earn <strong>Tk 50 per 250 GB per month</strong> while your device stays online 95% of the time. You can't read what you store, and nobody can tell whose it is.</p></div></li>
-      <li><div class="fig"><svg class="pict" aria-hidden="true"><use href="#p-moon-desktop"/></svg>AI jobs<small>starting in 2028</small></div><div><p>A PC with a graphics card, such as an old gaming PC or a design workstation, runs AI work: image generation, Bangla speech transcription, translation, document reading, and small language models. Our target is <strong>Tk 3 per GPU-hour</strong>. Similar consumer graphics cards rent for about US$0.03–0.05 an hour on international platforms. An RTX 3060 idle 10 hours a day would make about Tk 900 a month, minus about Tk 430 of electricity. Demand decides the real figure.</p><cite>Rental prices: Salad and Vast.ai listings for RTX 3060, via computeprices.com, September 2026</cite></div></li>
       <li><div class="fig"><svg class="pict" aria-hidden="true"><use href="#p-sandbox"/></svg>Computing<small>starting in 2028</small></div><div><p>Your laptop or desktop runs short computing jobs during the hours you choose: rendering, video conversion, data processing, software builds, and science projects. Our target is <strong>Tk 0.30 per core-hour</strong>. A 4-core laptop idle 10 hours a day would make about Tk 360 a month, minus roughly Tk 55 of electricity. Final rates depend on demand.</p></div></li>
     </ul>
   </div>
@@ -108,7 +105,6 @@
     <div>
       <h2>Who rents it</h2>
       <ul class="check-list">
-        <li>AI startups and labs building Bangla speech, text and vision tools, who need affordable compute that keeps data in Bangladesh</li>
         <li>University and research groups in Bangladesh with batch jobs that don't need a data centre</li>
         <li>Local startups: media conversion, data processing, software builds and test runs</li>
         <li>Other members, whose backups need copies in more than one place</li>
