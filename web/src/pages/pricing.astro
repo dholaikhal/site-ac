@@ -1,0 +1,74 @@
+---
+import Base from "../layouts/Base.astro";
+import PlanCards from "../components/PlanCards.astro";
+import Src from "../components/Src.astro";
+import facts, { tk, usdOf } from "../data/facts";
+const plans = facts.pricing.plans;
+const yes = "✓";
+const rows: [string, (p: (typeof plans)[number]) => string][] = [
+  ["Price a month", (p) => (p.tk ? `${tk(p.tk)} (≈ ${usdOf(p.tk)})` : tk(0))],
+  ["Apps", (p) => (p.id === "free" ? "1, preview only" : `${p.apps} live`)],
+  ["AI edits included", (p) => (p.id === "free" ? `${p.edits} in total` : `${p.edits} a month`)],
+  ["Live payments", (p) => (p.id === "free" ? "–" : yes)],
+  ["yourname.amader.cloud", (p) => yes],
+  ["Your own domain", (p) => (p.id === "business" || p.id === "agency" ? "after the beta" : "–")],
+  ["SMS included", (p) => (p.sms ? `${p.sms} a month` : "pay as you go")],
+  ["Watermark", (p) => (p.id === "free" ? "yes" : "no")],
+];
+---
+<Base title="Pilot pricing · Amader Cloud" description="Pilot plans in taka with USD equivalents: free to build and preview, then Starter, Business and Agency plans when you go live.">
+
+<section class="page-hero on-dark grid-night">
+  <div class="wrap">
+    <p class="kicker">Pricing</p>
+    <h1>Build for free. Pay when you're live.</h1>
+    <p class="lede">Plans in taka, paid by bKash. <span class="hyp" style="color:var(--amber)">pilot pricing</span> These are the prices for the beta; we'll learn from it and may change them, with notice.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <PlanCards />
+  </div>
+</section>
+
+<section class="section alt">
+  <div class="wrap">
+    <div class="head"><h2>Compare plans</h2></div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th scope="col">Pilot pricing</th>{plans.map((p) => <th scope="col">{p.name}</th>)}</tr></thead>
+        <tbody>
+          {rows.map(([label, f]) => <tr><th scope="row">{label}</th>{plans.map((p) => <td>{f(p)}</td>)}</tr>)}
+        </tbody>
+      </table>
+    </div>
+    <p class="small" style="margin-top:14px">USD equivalents at Tk {facts.fx.tkPerUsd} = $1 (rate on {facts.fx.date}: {facts.fx.observed}) <Src id="fx" />. Extra AI edits are {tk(facts.pricing.extraEditTk)} each.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap faq">
+    <div class="head"><h2>Questions</h2></div>
+    <details><summary>What counts as an AI edit?</summary><p>One request that changes your app, such as “add 10% off for bKash” or “add a size option to every product”. Undoing a change is free.</p></details>
+    <details><summary>Who charges the payment fees?</summary><p>Your payment provider charges its own fees, under your merchant account with them. Our plans are a flat monthly price; we don't take a percentage of your sales.</p></details>
+    <details><summary>Do I need a bKash or Nagad merchant account?</summary><p>Yes, payments go to your own accounts. We help with the paperwork through our licensed payment partner, so you can start with test payments while it's approved.</p></details>
+    <details><summary>Can I leave?</summary><p>Yes. Export your orders, customers and payments at any time. Plans are monthly.</p></details>
+    <details><summary>Why is it cheaper than a custom website?</summary><p>The AI builds from tested templates and connectors on one stack, so building and running your app costs us little. We pass that on.</p></details>
+  </div>
+</section>
+
+<section class="section tight on-dark grid-night">
+  <div class="wrap split">
+    <h2 style="margin:0">Build your first app free in the beta.</h2>
+    <div class="btn-row" style="margin:0"><a class="btn btn-live" href="contact.html?topic=beta">Join the beta</a><a class="btn btn-line" href="contact.html?topic=agency">Agency enquiry</a></div>
+  </div>
+</section>
+
+<style>
+.faq details { border-bottom: 1px solid var(--rule); padding: 14px 0; max-width: 820px; }
+.faq summary { cursor: pointer; font-weight: 600; font-size: 1.05rem; }
+.faq details p { margin: 10px 0 0; color: var(--ink-2); }
+td { white-space: nowrap; }
+</style>
+</Base>

@@ -1,0 +1,67 @@
+---
+import Base from "../layouts/Base.astro";
+// Placeholder address until the company and domain mail are set up.
+const to = "hello@amader.cloud";
+---
+<Base title="Contact · Amader Cloud" description="Join the beta, make an agency enquiry, or contact us as an investor.">
+
+<section class="page-hero on-dark grid-night">
+  <div class="wrap">
+    <p class="kicker">Contact</p>
+    <h1>Build with us.</h1>
+    <p class="lede">The closed beta is opening to a small group of businesses first. Tell us what you sell or run, and we'll reach out.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap contact">
+    <form class="form card" id="contact-form" data-to={to}>
+      <fieldset class="field">
+        <legend>I'm getting in touch about</legend>
+        <div class="choices">
+          <label class="choice"><input type="radio" name="topic" value="beta" checked> Joining the beta</label>
+          <label class="choice"><input type="radio" name="topic" value="agency"> An agency or freelancer plan</label>
+          <label class="choice"><input type="radio" name="topic" value="investor"> Investing</label>
+          <label class="choice"><input type="radio" name="topic" value="abuse"> Reporting an app</label>
+        </div>
+      </fieldset>
+      <div class="two">
+        <div class="field"><label for="name">Name</label><input id="name" name="name" required autocomplete="name"></div>
+        <div class="field"><label for="org">Business or organisation</label><input id="org" name="org" autocomplete="organization"></div>
+      </div>
+      <div class="two">
+        <div class="field"><label for="email">Email</label><input id="email" name="email" type="email" required autocomplete="email"></div>
+        <div class="field"><label for="phone">Phone or WhatsApp</label><input id="phone" name="phone" type="tel" autocomplete="tel"></div>
+      </div>
+      <div class="field"><label for="message">What do you want to build, or ask?</label><textarea id="message" name="message" placeholder="A shop for my handmade bags, bookings for my salon, fee collection for my coaching centre…"></textarea></div>
+      <div><button class="btn btn-live" type="submit">Send</button></div>
+      <p class="form-status" role="status"></p>
+      <p class="small" style="margin:0">Sending opens your email app with the message ready. We use your details only to reply.</p>
+    </form>
+
+    <aside class="contact-side">
+      <div class="card bp">
+        <span class="mono-label">direct</span>
+        <h3>Email</h3>
+        <p class="mono">{to}</p>
+        <p class="small">Placeholder address until launch.</p>
+      </div>
+      <div class="card">
+        <h3>Investors</h3>
+        <p class="small">The deck and pilot plan are available on request. Choose “Investing” and we'll send them.</p>
+      </div>
+      <div class="card">
+        <h3>Company</h3>
+        <p class="small">Amader Cloud. Legal entity: [to be registered]. Registered address: [placeholder].</p>
+      </div>
+    </aside>
+  </div>
+</section>
+
+<style>
+.contact { display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); gap: 24px; align-items: start; }
+@media (max-width: 860px) { .contact { grid-template-columns: 1fr; } }
+.contact-side { display: grid; gap: 16px; }
+.contact-side .card.bp .mono-label { background: var(--paper); }
+</style>
+</Base>

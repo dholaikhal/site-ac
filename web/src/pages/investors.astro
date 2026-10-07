@@ -1,0 +1,355 @@
+---
+import Base from "../layouts/Base.astro";
+import Src from "../components/Src.astro";
+import Sources from "../components/Sources.astro";
+import facts, { tk, usd, usdOf, plan } from "../data/facts";
+const { market: m, anchor: a, economics: e, models } = facts;
+
+const stages = [
+  { id: "describe", t: "Describe", model: "Owner", job: "The owner types or speaks what they need, in Bangla, Banglish or English.", why: "No forms, no templates to browse. The request is the spec.", cost: "" },
+  { id: "build", t: "Plan and build", model: models.opus.name, job: "Plans the app, generates the data model and pages, wires the connectors and writes the tests.", why: "Multi-file generation with judgement. Reliability matters most on the first build.", cost: `${usd(e.firstBuildOpusUsd)} per first build (${usd(e.firstBuildSonnetUsd)} on ${models.sonnet.name} for the free tier)` },
+  { id: "rails", t: "Constrained assembly", model: "Fixed stack", job: "One TypeScript web app stack with a managed database, a tested component library and pre-built local connectors.", why: "Generated code is reliable when it is constrained. A broken shop is fatal; the agents assemble rather than invent.", cost: "" },
+  { id: "edit", t: "Edit by asking", model: models.sonnet.name, job: "“Add 10% off for bKash.” Edits and small features, each tested and previewed with one-click rollback.", why: "Fast and cheap, and good enough on a constrained stack.", cost: `${usd(e.editUsd)} per edit` },
+  { id: "review", t: "Safety review", model: `${models.haiku.name} + rules`, job: "Every published app is checked for phishing, impersonation and prohibited goods, before publishing and continuously.", why: "Shared subdomains invite fake bank and mobile-money pages. Review is what keeps amader.cloud trusted.", cost: "" },
+  { id: "support", t: "Support agent", model: models.sonnet.name, job: "Answers owners from their app's own logs: “Why didn't my bKash payment show?”", why: "Support is the hidden cost of small-business software. The agent can see what actually happened.", cost: "" },
+  { id: "evals", t: "Every build is eval data", model: "Flywheel", job: "Each build, edit and fix becomes evaluation data for this stack and these connectors.", why: "The agents get more reliable on Bangladeshi commerce with use: a moat global builders don't accumulate.", cost: "" },
+];
+const pc = e.planCosts;
+const calcPlans = (["starter", "business", "agency"] as const).map((id) => ({
+  id, name: plan(id).name, tk: plan(id).tk, rev: plan(id).tk / facts.fx.tkPerUsd, edits: plan(id).edits, fixed: pc[id].fixedUsd, fixedNote: pc[id].fixedNote,
+}));
+---
+<Base title="Investors · Amader Cloud" description="AI app building, the fastest-growing AI category, for markets that pay by mobile money. Where the AI is, sourced market numbers, unit economics as hypotheses, roadmap and kill criteria.">
+
+<section class="inv-hero on-dark grid-night">
+  <div class="wrap">
+    <p class="kicker">For investors</p>
+    <h1>The fastest-growing AI category, built for markets that pay by mobile money.</h1>
+    <p class="lede">Amader Cloud is an AI app builder for Bangladeshi businesses. Owners describe a shop, bookings or fee collection; coding agents build it on one fixed stack, with bKash, Nagad, card, courier and SMS connectors already wired in, and host it at name.amader.cloud.</p>
+    <div class="anchor">
+      <div class="stat"><span class="n">{a.lovableValuation.text}</span><span class="l">{a.lovableValuation.label}</span><Src id={a.lovableValuation.source} /></div>
+      <div class="stat"><span class="n">{a.lovableArr.text}</span><span class="l">{a.lovableArr.label}</span><Src id={a.lovableArr.source} /></div>
+      <p class="anchor-note">The global builders are priced in dollars and don't know mobile money, local couriers, SMS gateways, Bangladeshi addresses or VAT invoices. We apply the category to the markets they don't serve.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section grid-paper" id="ai">
+  <div class="wrap">
+    <div class="head">
+      <p class="kicker">Where the AI is</p>
+      <h2>The AI is the product, not a feature.</h2>
+      <p class="lede">Four jobs run on Anthropic models, each matched to what it needs. Select a stage.</p>
+    </div>
+    <div class="pipe" data-pipe>
+      <ol class="pipe-stages" role="tablist" aria-label="AI pipeline">
+        {stages.map((s, i) => (
+          <li><button type="button" role="tab" id={`tab-${s.id}`} aria-controls="pipe-panel" aria-selected={i === 1 ? "true" : "false"} data-stage={s.id}>
+            <span class="pn mono">{String(i + 1).padStart(2, "0")}</span><span class="pt">{s.t}</span><span class="pm mono">{s.model}</span>
+          </button></li>
+        ))}
+      </ol>
+      <div class="pipe-panel" id="pipe-panel" role="tabpanel">
+        {stages.map((s, i) => (
+          <div class="pp" data-panel={s.id} hidden={i !== 1}>
+            <p class="mono pp-model">{s.model}</p>
+            <h3>{s.t}</h3>
+            <p>{s.job}</p>
+            <p class="why"><strong>Why:</strong> {s.why}</p>
+            {s.cost && <p class="mono pp-cost"><span class="hyp">hypothesis</span> {s.cost}</p>}
+          </div>
+        ))}
+      </div>
+    </div>
+    <p class="small" style="margin-top:14px">Model prices: {models.opus.name} ${models.opus.input}/${models.opus.output}, {models.sonnet.name} ${models.sonnet.input}/${models.sonnet.output}, {models.haiku.name} ${models.haiku.input}/${models.haiku.output} per million input/output tokens; cache reads ${models.opus.cacheRead}. <Src id="anthropic" /></p>
+  </div>
+</section>
+
+<section class="section" id="problem">
+  <div class="wrap">
+    <div class="head">
+      <p class="kicker">The problem</p>
+      <h2>Bangladeshi commerce runs in Facebook inboxes.</h2>
+      <p class="lede">Orders are taken by message, tracked by hand and paid on delivery. Building software is slow and costly, and the global AI builders don't fit.</p>
+    </div>
+    <div class="cards">
+      {[m.fbSellerPages, m.fbSteadyPages, m.codShare, m.codReturns, m.sslcommerzBusinesses, m.cardLimitUsd].map((f) => (
+        <div class="card stat"><span class="n">{f.text}</span><span class="l">{f.label}.</span><Src id={f.source as any} /></div>
+      ))}
+    </div>
+    <p class="small" style="margin-top:16px">Reading across sources: payment-aggregator coverage looks like a fraction of active sellers. That is an inference from two different sources, not a measurement. Figures flagged “weak source” need confirming before diligence.</p>
+  </div>
+</section>
+
+<section class="section alt" id="economics">
+  <div class="wrap">
+    <div class="head">
+      <p class="kicker">Unit economics</p>
+      <h2>Cheap to build, cheap to change. <span class="hyp">hypothesis</span></h2>
+      <p class="lede">Token costs from list prices; usage assumptions are ours, and the pilot measures them.</p>
+    </div>
+    <div class="econ">
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Item</th><th>Tokens</th><th class="num">Cost</th></tr></thead>
+          <tbody>
+            <tr><td>First build ({models.opus.name})</td><td class="mono">{e.tokens.firstBuild.cached} cached + {e.tokens.firstBuild.fresh} fresh in, {e.tokens.firstBuild.output} out</td><td class="num">{usd(e.firstBuildOpusUsd)}</td></tr>
+            <tr><td>First build, free tier ({models.sonnet.name})</td><td class="mono">same</td><td class="num">{usd(e.firstBuildSonnetUsd)}</td></tr>
+            <tr><td>One edit ({models.sonnet.name})</td><td class="mono">{e.tokens.edit.cached} cached + {e.tokens.edit.fresh} fresh in, {e.tokens.edit.output} out</td><td class="num">{usd(e.editUsd)}</td></tr>
+            <tr><td>Hosting, per small app</td><td>a month</td><td class="num">~{usd(e.hostingPerAppUsd)}</td></tr>
+            <tr><td>SMS</td><td>{tk(e.smsTk)} each ({e.smsNote.toLowerCase()})</td><td class="num">~${e.smsUsd}</td></tr>
+            <tr><td>Free signup, one-off</td><td>build + {plan("free").edits} edits</td><td class="num">{usd(e.freeSignupCostUsd)}</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="calc card" data-calc data-edit={e.editUsd}>
+        <h3>Gross margin by plan</h3>
+        <label class="calc-l" for="use">Share of included AI edits used: <strong data-use-out>100%</strong></label>
+        <input id="use" type="range" min="0" max="100" step="5" value="100" data-use>
+        <div class="calc-rows">
+          {calcPlans.map((p) => (
+            <div class="calc-row" data-plan={p.id} data-rev={p.rev} data-edits={p.edits} data-fixed={p.fixed}>
+              <div class="cr-top"><strong>{p.name}</strong><span class="mono">{tk(p.tk)} ≈ {usdOf(p.tk)}</span></div>
+              <div class="bar"><span class="cost"></span><span class="margin"></span></div>
+              <div class="cr-bot mono"><span>cost <b data-cost></b></span><span>margin <b data-margin></b></span></div>
+            </div>
+          ))}
+        </div>
+        <p class="small">At full use: Starter {pc.starter.margin}%, Business {pc.business.margin}%, Agency {pc.agency.margin}%. Most owners won't use every edit, so blended margin should beat these; the seed target is above 60%. Edits cost {usd(e.editUsd)} each; fixed costs are {calcPlans.map((p) => `${p.fixedNote} (${usd(p.fixed)}) on ${p.name}`).join("; ")}.</p>
+        <p class="small">A paid first build (about {usd(e.firstBuildOpusUsd)}) is recovered within the first one or two months of a Starter plan.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap two-col">
+    <div>
+      <p class="kicker">Why now</p>
+      <h2>Three things changed.</h2>
+      <ul class="ticks">
+        <li>AI app builders are the fastest-growing software category: Lovable reached {a.lovableArr.text} in annual revenue in under two years. <Src id="ecosistema" /></li>
+        <li>Generated code is now good enough for small business apps when it is built on a tested component library.</li>
+        <li>Local payment rails have developer APIs (bKash has a developer portal <Src id="bkashdev" />; aggregators cover every method), but merchants can't use them without a developer.</li>
+      </ul>
+    </div>
+    <div>
+      <p class="kicker">Moat</p>
+      <h2>What compounds.</h2>
+      <ul class="ticks">
+        <li><strong>Local connectors and templates</strong> tuned on real Bangladeshi businesses: payments, couriers, SMS, invoices, addresses.</li>
+        <li><strong>Hosted apps are sticky.</strong> Once orders, customers and payments live on amader.cloud, owners stay.</li>
+        <li><strong>Payment-partner relationships</strong>, and later a revenue share on payment volume.</li>
+        <li><strong>Every build and fix is eval data</strong> that makes the agents more reliable on this stack.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="section on-dark grid-night" id="expansion">
+  <div class="wrap split">
+    <div>
+      <p class="kicker">Expansion</p>
+      <h2>One builder, a connector pack per country.</h2>
+      <p class="lede">The builder, the stack and the review stay the same. What changes by market is the pack: mobile money, couriers, SMS, address formats, invoices, language. Once the model is proven in Bangladesh, the playbook transfers to other mobile-money markets.</p>
+      <p class="small">Revenue grows with businesses' success: subscriptions now, payment volume later.</p>
+    </div>
+    <div class="packs" aria-label="Connector packs">
+      <div class="core"><span class="mono">core</span><strong>Builder · stack · review</strong></div>
+      <div class="pack live"><span class="mono">pack · first</span><strong>Bangladesh</strong><span>bKash, Nagad, cards, couriers, SMS</span></div>
+      <div class="pack"><span class="mono">pack · later</span><strong>M-Pesa markets</strong></div>
+      <div class="pack"><span class="mono">pack · later</span><strong>UPI markets</strong></div>
+      <div class="pack"><span class="mono">pack · later</span><strong>GCash markets</strong></div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="competition">
+  <div class="wrap">
+    <div class="head"><p class="kicker">Competition</p><h2>Where we sit.</h2></div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Who</th><th>What they do</th><th>Our difference</th></tr></thead>
+        <tbody>
+          <tr><td>Global AI app builders</td><td>Excellent generation, USD pricing, no local rails</td><td>Local payments, couriers, SMS, taka pricing, Bangla</td></tr>
+          <tr><td>Facebook and Instagram shops</td><td>Where buyers already are</td><td>We complement them: prepaid checkout and order management, linked from posts</td></tr>
+          <tr><td>Local website builders and agencies</td><td>Templates or custom projects</td><td>Built by asking, changed by asking, live the same day; agencies become a channel</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section class="section alt" id="roadmap">
+  <div class="wrap">
+    <div class="head">
+      <p class="kicker">Plan</p>
+      <h2>A {facts.mvp.weeks}-week MVP, then scale. <span class="hyp">hypothesis</span></h2>
+    </div>
+    <div class="timeline">
+      {facts.mvp.phases.map((p) => (
+        <div class="tl card"><span class="mono tl-w">Weeks {p.weeks}</span><p>{p.work}</p><p class="tl-out"><strong>Output:</strong> {p.output}</p></div>
+      ))}
+    </div>
+    <div class="timeline" style="margin-top:16px">
+      {facts.roadmap.milestones.map((r) => (
+        <div class="tl card bp"><span class="mono tl-w">{r.when}</span><p>{r.what}</p></div>
+      ))}
+    </div>
+    <h3 style="margin-top:36px">Seed-round targets <span class="hyp">hypothesis</span></h3>
+    <div class="cards targets">
+      {facts.roadmap.seedTargets.map((t) => <div class="card stat"><span class="n">{t.text}</span><span class="l">{t.label}</span></div>)}
+    </div>
+  </div>
+</section>
+
+<section class="section" id="kill">
+  <div class="wrap two-col">
+    <div>
+      <p class="kicker">Kill criteria</p>
+      <h2>When we would stop.</h2>
+      <p class="lede">We decided these before the pilot, so the pilot can't argue its way past them.</p>
+      <ul class="kill">{facts.killCriteria.items.map((k) => <li>{k}</li>)}</ul>
+    </div>
+    <div>
+      <p class="kicker">Risks</p>
+      <h2>And how we handle them.</h2>
+      <dl class="risks">
+        <dt>Scam sites on our subdomains</dt><dd>AI and rule-based review before publishing and continuously; no payment brands in app names; takedown in hours; a verified-business badge.</dd>
+        <dt>Payment licensing</dt><dd>We never hold funds; merchants use their own gateway accounts through a licensed partner.</dd>
+        <dt>Generated code breaks a live shop</dt><dd>Fixed stack, tests on every change, preview before publish, one-click rollback.</dd>
+        <dt>Build costs exceed plan price</dt><dd>Template-first generation, {models.sonnet.name} for edits, credit limits.</dd>
+        <dt>Global builders add local payments</dt><dd>Speed, depth of connectors, local support and distribution through agencies.</dd>
+        <dt>Customer data on hosted apps</dt><dd>Data-processing terms under the Personal Data Protection Ordinance 2025 <Src id="pdpo" />; backups; option to host in Bangladesh later.</dd>
+      </dl>
+    </div>
+  </div>
+</section>
+
+<section class="section tight on-dark grid-night">
+  <div class="wrap split">
+    <div>
+      <h2 style="margin-bottom:8px">Talk to us.</h2>
+      <p class="lede" style="margin:0">The deck, the pilot plan and the open questions are available on request.</p>
+    </div>
+    <div class="btn-row" style="margin:0"><a class="btn btn-live" href="contact.html?topic=investor">Investor contact</a><a class="btn btn-line" href="./#demo">See the demo</a></div>
+  </div>
+</section>
+
+<div class="wrap"><Sources ids={["ecab", "easysell", "ecosire", "tbs", "bkashdev", "vktr", "ecosistema", "anthropic", "pdpo", "fx", "plan"]} /></div>
+<div style="height:40px"></div>
+
+<script>
+// Pipeline tabs
+const pipe = document.querySelector("[data-pipe]");
+if (pipe) {
+  const tabs = [...pipe.querySelectorAll<HTMLButtonElement>("[data-stage]")];
+  const select = (id: string) => {
+    tabs.forEach((t) => t.setAttribute("aria-selected", String(t.dataset.stage === id)));
+    pipe.querySelectorAll<HTMLElement>("[data-panel]").forEach((p) => (p.hidden = p.dataset.panel !== id));
+  };
+  tabs.forEach((t, i) => {
+    t.addEventListener("click", () => select(t.dataset.stage!));
+    t.addEventListener("keydown", (e) => {
+      const d = e.key === "ArrowRight" || e.key === "ArrowDown" ? 1 : e.key === "ArrowLeft" || e.key === "ArrowUp" ? -1 : 0;
+      if (!d) return;
+      e.preventDefault();
+      const n = tabs[(i + d + tabs.length) % tabs.length];
+      n.focus(); select(n.dataset.stage!);
+    });
+  });
+}
+
+// Margin calculator: cost = edits used × edit cost + fixed costs; all inputs come from facts.json.
+const calc = document.querySelector<HTMLElement>("[data-calc]");
+if (calc) {
+  const editUsd = Number(calc.dataset.edit);
+  const range = calc.querySelector<HTMLInputElement>("[data-use]")!;
+  const out = calc.querySelector("[data-use-out]")!;
+  const update = () => {
+    const use = Number(range.value) / 100;
+    out.textContent = `${range.value}%`;
+    calc.querySelectorAll<HTMLElement>("[data-plan]").forEach((row) => {
+      const rev = Number(row.dataset.rev), cost = Number(row.dataset.edits) * use * editUsd + Number(row.dataset.fixed);
+      const margin = (rev - cost) / rev;
+      row.querySelector("[data-cost]")!.textContent = `$${cost.toFixed(2)} of $${rev.toFixed(2)}`;
+      row.querySelector("[data-margin]")!.textContent = `${Math.round(margin * 100)}%`;
+      row.querySelector<HTMLElement>(".cost")!.style.width = `${(cost / rev) * 100}%`;
+      row.querySelector<HTMLElement>(".margin")!.style.width = `${margin * 100}%`;
+    });
+  };
+  range.addEventListener("input", update);
+  update();
+}
+</script>
+
+<style>
+.inv-hero { padding-block: clamp(48px, 7vw, 96px); }
+.inv-hero h1 { font-size: clamp(2.2rem, 1.2rem + 3.6vw, 4.4rem); max-width: 20ch; }
+.inv-hero .lede { max-width: 64ch; }
+.anchor { margin-top: 36px; display: grid; grid-template-columns: auto auto 1fr; gap: 20px clamp(24px, 4vw, 56px); align-items: end; border-top: 1px solid rgb(var(--chalk-rgb) / .15); padding-top: 28px; }
+.anchor .n { color: var(--amber); }
+.anchor-note { margin: 0; color: var(--chalk-2); max-width: 46ch; }
+@media (max-width: 820px) { .anchor { grid-template-columns: 1fr 1fr; } .anchor-note { grid-column: 1 / -1; } }
+
+.pipe { display: grid; grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr); gap: 16px; }
+@media (max-width: 860px) { .pipe { grid-template-columns: 1fr; } }
+.pipe-stages { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; position: relative; }
+.pipe-stages::before { content: ""; position: absolute; left: 25px; top: 12px; bottom: 12px; border-left: 1.5px dashed var(--bp-line); }
+.pipe-stages button { position: relative; width: 100%; display: grid; grid-template-columns: 34px 1fr auto; gap: 10px; align-items: center; text-align: left; font: inherit; color: var(--ink); background: var(--card); border: 1px solid rgb(var(--line-rgb) / .5); border-radius: 10px; padding: 10px 12px; cursor: pointer; }
+.pipe-stages button:hover { border-color: var(--amber); }
+.pipe-stages button[aria-selected="true"] { border-color: var(--amber); box-shadow: inset 3px 0 0 var(--amber); }
+.pn { display: grid; place-items: center; width: 28px; height: 28px; border-radius: 50%; background: var(--bp); border: 1.5px solid var(--bp-line); font-size: 0.7rem; }
+[aria-selected="true"] .pn { background: var(--amber); border-color: var(--amber); color: #0d2a3a; }
+.pt { font-weight: 600; }
+.pm { font-size: 0.7rem; color: var(--ink-2); text-align: right; }
+@media (max-width: 480px) { .pipe-stages button { grid-template-columns: 34px 1fr; } .pm { grid-column: 2; text-align: left; } }
+.pipe-panel { background: var(--night); color: var(--chalk); border-radius: 12px; padding: clamp(22px, 3vw, 36px); position: relative; overflow: hidden; min-height: 280px; }
+.pipe-panel::before { content: ""; position: absolute; inset: 0; background-image: linear-gradient(rgb(var(--line-rgb) / .1) 1px, transparent 1px), linear-gradient(90deg, rgb(var(--line-rgb) / .1) 1px, transparent 1px); background-size: 24px 24px; pointer-events: none; }
+.pp { position: relative; }
+.pp h3 { font-size: clamp(1.5rem, 1.1rem + 1.2vw, 2.1rem); }
+.pp-model { color: var(--amber); margin-bottom: 8px; }
+.pp .why { color: var(--chalk-2); }
+.pp-cost { color: var(--chalk); display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+.pp-cost .hyp { color: #f07aa6; }
+
+.econ { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 20px; align-items: start; }
+@media (max-width: 960px) { .econ { grid-template-columns: 1fr; } }
+.econ td.mono { font-size: 0.75rem; }
+.calc input[type="range"] { width: 100%; accent-color: var(--amber); margin: 8px 0 16px; }
+.calc-l { font-size: 0.95rem; }
+.calc-rows { display: grid; gap: 14px; margin-bottom: 14px; }
+.cr-top, .cr-bot { display: flex; justify-content: space-between; gap: 8px; flex-wrap: wrap; }
+.cr-top .mono, .cr-bot { font-size: 0.75rem; color: var(--ink-2); }
+.bar { display: flex; height: 12px; border-radius: 999px; overflow: hidden; background: var(--rule); margin: 6px 0; }
+.bar .cost { background: var(--bp-line); transition: width .2s; }
+.bar .margin { background: var(--amber); transition: width .2s; }
+.cr-bot b { color: var(--ink); font-weight: 500; }
+
+.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(28px, 5vw, 72px); }
+@media (max-width: 860px) { .two-col { grid-template-columns: 1fr; } }
+.two-col h2 { font-size: clamp(1.7rem, 1.2rem + 1.6vw, 2.4rem); }
+
+.packs { display: grid; gap: 10px; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.packs > div { border: 1.5px dashed rgb(var(--line-rgb) / .6); border-radius: 10px; padding: 14px; display: grid; gap: 2px; }
+.packs .mono { color: var(--chalk-2); font-size: 0.7rem; }
+.packs span:not(.mono) { color: var(--chalk-2); font-size: 0.9rem; }
+.packs .core { grid-column: 1 / -1; border-style: solid; border-color: var(--chalk-2); background: rgb(var(--chalk-rgb) / .05); }
+.packs .live { border-style: solid; border-color: var(--amber); }
+.packs .live .mono { color: var(--amber); }
+
+.timeline { display: grid; gap: 14px; grid-template-columns: repeat(3, minmax(0, 1fr)); }
+@media (max-width: 860px) { .timeline { grid-template-columns: 1fr; } }
+.tl-w { color: var(--amber-ink); display: block; margin-bottom: 6px; }
+.tl p { margin: 0 0 6px; }
+.tl-out { color: var(--ink-2); font-size: 0.95rem; }
+.targets .n { font-size: 2rem; }
+.kill { list-style: none; padding: 0; margin: 0; display: grid; gap: 10px; }
+.kill li { border-left: 3px solid var(--warn); padding: 8px 0 8px 14px; background: var(--paper-2); border-radius: 0 8px 8px 0; }
+.risks { margin: 0; }
+.risks dt { font-weight: 600; margin-top: 14px; }
+.risks dd { margin: 2px 0 0; color: var(--ink-2); }
+h2 .hyp { vertical-align: middle; font-size: 0.75rem; letter-spacing: 0; font-stretch: 100%; }
+</style>
+</Base>
