@@ -93,3 +93,28 @@ Attach: `flyer-a5.pdf`
 > [Name], founder, amader.cloud
 
 Attach: `one-pager-a4.pdf` + deck link (share it from the deck's Share menu first).
+
+## 8. Earn (Facebook post + ad)
+
+> **Your old laptop can pay its own way.**
+>
+> Most laptops sit idle 15 hours a day. With amader.cloud, the spare computing and disk space are rented to researchers, startups and other members, and you earn credit off your plan.
+>
+> 🔒 Jobs run in a sealed sandbox that can't see your files.
+> 🚫 Nobody browses the web through your connection.
+> ⏰ You choose the hours.
+>
+> Estimate what yours could earn: amader.cloud/#earn
+
+| Variant | Headline | Primary text | CTA |
+|---|---|---|---|
+| Earn | Your old laptop can pay its own way | Rent out its idle hours and spare disk through amader.cloud. Storage pays Tk 50 per 250 GB a month in our pilot. | Estimate my earnings |
+
+## 9. Everyday Dhaka one-liners (for reels, posts, flyers)
+
+- Load-shedding? An old phone on its charger tells the building's WhatsApp when the current goes and when it's back.
+- Rooftop tank about to run dry? A LoRa sensor tells you before the taps do.
+- Monsoon lane flooding? Sensors on the wall alert the whole street.
+- The mosque's prayer times, on an old TV, kept up to date.
+- The bazar's prices, on a tablet the committee updates every morning.
+- The tea stall's bKash QR and the day's tally, on an old phone.

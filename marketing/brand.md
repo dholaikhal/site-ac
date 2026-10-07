@@ -16,7 +16,7 @@ v0.2, 2026-10-07. Covers the redesign: real Dhaka photography, blueprint line-wo
 |---|---|---|---|
 | Company line | Second jobs for old devices. | পুরনো যন্ত্র, নতুন কাজ | "Old devices, new work" |
 | Data promise | Your data stays home. | আমাদের ডেটা, আমাদের ঘরে | "Our data, in our homes" |
-| Hosting | Share what your devices aren't using. | আমাদের মেঘ, আমাদের হাতে | "Our cloud, in our hands" |
+| Earn | Rent out what your devices aren't using. | আমাদের মেঘ, আমাদের হাতে | "Our cloud, in our hands" |
 | Hero headline | Dhaka's next data centre is sitting in its drawers. | — | — |
 | Investor headline | Reuse that pays every month. | — | — |
 
@@ -88,7 +88,7 @@ Never claim "carbon neutral", "CO₂ saved", or measured wattage until we've met
 
 | Asset | File |
 |---|---|
-| Photos (Unsplash License) | `site/assets/img/photos/` (rooftops: Ahmed Hasan; façades: Ahmed Reyasat; skyline: Al Amin Mir; sunset: Hasnan Monir) |
+| Photos (Unsplash and Pexels licences) | `site/assets/img/photos/`. Unsplash: rooftops (Ahmed Hasan), façades (Ahmed Reyasat), skyline (Al Amin Mir), sunset (Hasnan Monir). Pexels: street at night (MD Shaha Riaz Rimon), bazar and mosque (Ferdous Hasan), tea stall (Ahnaf Abror), monsoon lane (Faisal Ibne Kalam), classroom (Nirjon Nakib) |
 | A5 building flyer | `marketing/out/flyer-a5.pdf` |
 | A4 investor one-pager | `marketing/out/one-pager-a4.pdf` |
 | Social cards 1080×1080 | `marketing/out/card-*.png` |
