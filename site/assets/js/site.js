@@ -302,3 +302,61 @@ if (consoleForm) {
   range.addEventListener("input", update);
   update();
 }
+
+// Hero scenes: crossfade between photographs, each replaying its network; pause on interaction.
+(() => {
+  const hero = document.querySelector(".hero");
+  const scenes = hero ? [...hero.querySelectorAll(".scene")] : [];
+  if (scenes.length < 2) return;
+  const tabsWrap = hero.querySelector(".scene-tabs");
+  const tabs = [...tabsWrap.querySelectorAll("button")];
+  const pauseBtn = hero.querySelector(".scene-pause");
+  const tip = hero.querySelector(".node-tip");
+  const DWELL = 9000;
+  let i = 0, timer = 0, paused = reduceMotion, holding = false;
+  tabsWrap.style.setProperty("--dwell", `${DWELL}ms`);
+
+  const schedule = () => {
+    clearTimeout(timer);
+    const run = !paused && !holding;
+    tabsWrap.classList.toggle("playing", run);
+    const bar = tabs[i];
+    bar.classList.remove("run"); void bar.offsetWidth; bar.classList.add("run");
+    if (run) timer = setTimeout(() => show((i + 1) % scenes.length), DWELL);
+  };
+  const show = (k) => {
+    if (k === i) return schedule();
+    const old = scenes[i];
+    old.classList.remove("live"); old.classList.add("leaving"); old.inert = true;
+    setTimeout(() => old.classList.remove("leaving"), 1200);
+    const next = scenes[k];
+    next.inert = false; void next.offsetWidth; next.classList.add("live");
+    tabs.forEach((t, j) => t.setAttribute("aria-selected", String(j === k)));
+    if (tip) tip.hidden = true;
+    i = k; schedule();
+  };
+  tabs.forEach((t, k) => t.addEventListener("click", () => show(k)));
+  tabsWrap.addEventListener("keydown", (e) => {
+    if (e.key !== "ArrowRight" && e.key !== "ArrowLeft") return;
+    const k = (i + (e.key === "ArrowRight" ? 1 : scenes.length - 1)) % scenes.length;
+    show(k); tabs[k].focus();
+  });
+  if (pauseBtn) {
+    if (paused) { pauseBtn.textContent = "Play"; pauseBtn.setAttribute("aria-pressed", "true"); }
+    pauseBtn.addEventListener("click", () => {
+      paused = !paused;
+      pauseBtn.textContent = paused ? "Play" : "Pause";
+      pauseBtn.setAttribute("aria-pressed", String(paused));
+      schedule();
+    });
+  }
+  // Hold the current scene while someone is reading a node.
+  hero.querySelectorAll(".node").forEach((n) => {
+    const hold = (v) => () => { holding = v; schedule(); };
+    n.addEventListener("pointerenter", hold(true)); n.addEventListener("pointerleave", hold(false));
+    n.addEventListener("focus", hold(true)); n.addEventListener("blur", hold(false));
+  });
+  // Only advance while the hero is on screen.
+  new IntersectionObserver(([e]) => { holding = !e.isIntersecting; schedule(); }).observe(hero);
+  schedule();
+})();
