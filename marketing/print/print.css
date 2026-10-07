@@ -1,6 +1,6 @@
 /* Shared tokens for printed and social pieces. Mirrors site/assets/css/site.css. */
 @import url("https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=JetBrains+Mono:wght@400;500&family=Tiro+Bangla&display=swap");
-:root { --night:#0a1622; --bp:#0f3352; --bp-line:#8fb8dc; --chalk:#e4edf5; --chalk-2:#a9bfd3; --amber:#ffb547; --amber-ink:#8a5a00; --paper:#eef1f3; --paper-2:#f8fafb; --ink:#0e1b2a; --ink-2:#4d5e70; --rule:#cfd8df; }
+:root { --night:#0d2a3a; --bp:#eaf2f8; --bp-line:#5f87a6; --chalk:#f2f7fa; --chalk-2:#b7cad6; --amber:#f29d1c; --amber-ink:#9a5a00; --paper:#ffffff; --paper-2:#f5f8fb; --ink:#0d2a3a; --ink-2:#4c6273; --rule:#d9e2ea; }
 * { box-sizing: border-box; margin: 0; padding: 0; }
 html, body { background: var(--night); }
 body { font-family: "Archivo", sans-serif; color: var(--ink); -webkit-print-color-adjust: exact; print-color-adjust: exact; font-variant-numeric: tabular-nums; }
@@ -10,9 +10,9 @@ h1, h2, h3 { font-weight: 560; font-stretch: 112%; letter-spacing: -0.02em; line
 .photo { position: relative; overflow: hidden; background: var(--night); color: var(--chalk); isolation: isolate; }
 .photo > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: -3; }
 .photo > svg { position: absolute; inset: 0; width: 100%; height: 100%; z-index: -1; }
-.grade::before { content: ""; position: absolute; inset: 0; z-index: -2; background: linear-gradient(180deg, rgba(10,22,34,.94) 0%, rgba(10,22,34,.6) 38%, rgba(10,22,34,.1) 62%, rgba(10,22,34,.5) 100%); }
-.blueprint { background-color: var(--bp); color: var(--chalk);
-  background-image: linear-gradient(rgba(143,184,220,.16) 1px, transparent 1px), linear-gradient(90deg, rgba(143,184,220,.16) 1px, transparent 1px), linear-gradient(rgba(143,184,220,.06) 1px, transparent 1px), linear-gradient(90deg, rgba(143,184,220,.06) 1px, transparent 1px);
+.grade::before { content: ""; position: absolute; inset: 0; z-index: -2; background: linear-gradient(180deg, rgba(13,42,58,.94) 0%, rgba(13,42,58,.6) 38%, rgba(13,42,58,.1) 62%, rgba(13,42,58,.5) 100%); }
+.blueprint { background-color: var(--bp); color: var(--ink); --chalk: #0d2a3a; --chalk-2: #4c6273;
+  background-image: linear-gradient(rgba(13,42,58,.08) 1px, transparent 1px), linear-gradient(90deg, rgba(13,42,58,.08) 1px, transparent 1px), linear-gradient(rgba(13,42,58,.035) 1px, transparent 1px), linear-gradient(90deg, rgba(13,42,58,.035) 1px, transparent 1px);
   background-size: 120px 120px, 120px 120px, 24px 24px, 24px 24px; }
 .brand { display: inline-flex; align-items: center; gap: 10px; font-weight: 640; font-stretch: 112%; letter-spacing: -0.02em; }
 .brand .tld { opacity: .7; font-weight: 400; }

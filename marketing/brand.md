@@ -61,21 +61,21 @@ Never claim "carbon neutral", "CO₂ saved", or measured wattage until we've met
 **Three layers, each with one job:**
 
 1. **Photograph: the real city.** Dhaka rooftops, façades and skylines. Dusk or overcast, never postcard-sunny. Always credited in place: photographer name, plus "Unsplash" where it applies.
-2. **Blueprint: how it works.** Chalk line drawings of devices on Prussian-blue grid paper, with dimension lines and mono annotations. It explains; it never decorates.
+2. **Blueprint: how it works.** Ink line drawings of devices on pale-blue grid paper, with dimension lines and mono annotations. It explains; it never decorates.
 3. **Amber: something alive.** Amber is used only for connections, active devices, and the primary button. Don't use it as a general accent.
 
-**Palette**
+**Palette: Daylight** (decided 2026-10-07). Bright pages and bright blueprints with ink line-work. Dark night-blue is reserved for the hero, header, footer and photo bands. Every colour comes from a token in `site/assets/css/site.css`, and a dark-theme variant exists (visitors can toggle it).
 
-| Token | Hex | Use |
-|---|---|---|
-| night | `#0a1622` | Photo grading, header, footer |
-| blueprint | `#0f3352` | Blueprint sections, page heads, panels |
-| blueprint line | `#8fb8dc` | Grid and secondary line-work |
-| chalk | `#e4edf5` | Text and primary lines on dark |
-| amber | `#ffb547` | Connections, live nodes, primary button |
-| amber ink | `#8a5a00` | Amber as text on light (passes AA) |
-| tracing paper | `#eef1f3` | Light sections |
-| ink | `#0e1b2a` | Text on light |
+| Token | Light | Dark theme | Use |
+|---|---|---|---|
+| night | `#0d2a3a` | `#0d2a3a` | Hero grade, header, footer, photo bands |
+| paper / paper-2 | `#ffffff` / `#f5f8fb` | `#0b1620` / `#102030` | Page sections |
+| bp (blueprint) | `#eaf2f8` with ink grid lines | `#0f2434` | Scroll stories, Earn, panels |
+| bp-line | `#5f87a6` | `#7fa6c4` | Line-work and dimensions on blueprint |
+| ink / ink-2 | `#0d2a3a` / `#4c6273` | `#e6eef4` / `#9fb3c2` | Text |
+| amber | `#f29d1c` | `#f29d1c` | Connections, live nodes, primary button |
+| amber-ink | `#9a5a00` | `#f6b44f` | Amber as text on light (passes AA) |
+| rule | `#d9e2ea` | `#1f3346` | Hairlines |
 
 **Type**
 

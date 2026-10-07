@@ -15,7 +15,7 @@ from build_hero import SCENES
 
 
 def static_mesh(scene, scale=1.0):
-    n = scene["nodes"]; out = ['<g fill="none" stroke="#ffb547" stroke-linecap="round">']
+    n = scene["nodes"]; out = ['<g fill="none" stroke="#f29d1c" stroke-linecap="round">']
     for kind, pairs in (("solid", scene["links"]), ("dash", scene["radio"] + scene["far"])):
         for pr in pairs:
             a, b = pr.split("-"); (x1, y1), (x2, y2) = n[a][:2], n[b][:2]
@@ -23,7 +23,7 @@ def static_mesh(scene, scale=1.0):
             out.append(f'<path d="M{x1} {y1} L{x2} {y2}" {style}/>')
     out.append("</g><g>")
     for x, y, *_ in n.values():
-        out.append(f'<circle cx="{x}" cy="{y}" r="{26 * scale}" fill="rgba(255,181,71,.22)" stroke="#ffb547" stroke-width="{2.5 * scale}"/><circle cx="{x}" cy="{y}" r="{10 * scale}" fill="#ffb547"/>')
+        out.append(f'<circle cx="{x}" cy="{y}" r="{26 * scale}" fill="rgba(242,157,28,.22)" stroke="#f29d1c" stroke-width="{2.5 * scale}"/><circle cx="{x}" cy="{y}" r="{10 * scale}" fill="#f29d1c"/>')
     out.append("</g>")
     return "\n".join(out)
 
