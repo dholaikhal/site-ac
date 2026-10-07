@@ -1,8 +1,8 @@
 ---
 // A small static phone showing a template's main screen (fictional business).
 import "../styles/app-screen.css";
-interface Props { url: string; name: string; banner: string; rows: [string, string][]; button: string; color?: string }
-const { url, name, banner, rows, button, color = "#9a4a24" } = Astro.props;
+interface Props { url: string; name: string; banner: string; rows: [string, string][]; button: string; color?: string; sample?: boolean }
+const { url, name, banner, rows, button, color = "#9a4a24", sample = false } = Astro.props;
 ---
 <figure class="mini">
   <div class="phone">
@@ -15,7 +15,7 @@ const { url, name, banner, rows, button, color = "#9a4a24" } = Astro.props;
       <div class="b ink"><div class="paybtn">{button}</div></div>
     </div>
   </div>
-  <figcaption class="small">Sample</figcaption>
+  {sample && <figcaption class="small">Sample</figcaption>}
 </figure>
 
 <style>

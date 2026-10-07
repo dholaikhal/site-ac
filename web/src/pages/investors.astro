@@ -6,7 +6,7 @@ import facts, { tk, usd, usdOf, plan } from "../data/facts";
 const { market: m, anchor: a, economics: e, models } = facts;
 
 const stages = [
-  { id: "describe", t: "Describe", model: "Owner", job: "The owner types or speaks what they need, in Bangla, Banglish or English.", why: "No forms, no templates to browse. The request is the spec.", cost: "" },
+  { id: "describe", t: "Describe", model: "Owner", job: "The owner types or speaks what they need, in Bangla, Banglish or English.", why: "The request is the spec.", cost: "" },
   { id: "build", t: "Plan and build", model: models.opus.name, job: "Plans the app, generates the data model and pages, wires the connectors and writes the tests.", why: "Multi-file generation with judgement. Reliability matters most on the first build.", cost: `${usd(e.firstBuildOpusUsd)} per first build (${usd(e.firstBuildSonnetUsd)} on ${models.sonnet.name} for the free tier)` },
   { id: "rails", t: "Constrained assembly", model: "Fixed stack", job: "One TypeScript web app stack with a managed database, a tested component library and pre-built local connectors.", why: "Generated code is reliable when it is constrained. A broken store is fatal; the agents assemble rather than invent.", cost: "" },
   { id: "edit", t: "Edit by asking", model: models.sonnet.name, job: "“Add 10% off for bKash.” Edits and small features, each tested and previewed with one-click rollback.", why: "Fast and cheap, and good enough on a constrained stack.", cost: `${usd(e.editUsd)} per edit` },
@@ -27,11 +27,11 @@ const calcPlans = (["starter", "business", "agency"] as const).map((id) => ({
       <h1>The fastest-growing AI category, built for markets that pay by mobile money.</h1>
       <span class="address">For investors</span>
     </div>
-    <p class="lede">Amader Cloud is an AI app builder for Bangladeshi businesses. Owners describe a store, bookings or fee collection; coding agents build it on one fixed stack, with bKash, Nagad, card, courier and SMS connectors already wired in, and host it at name.amader.cloud.</p>
+    <p class="lede">An AI app builder for Bangladeshi businesses. Owners describe a store, bookings or fee collection; coding agents build it on one fixed stack with local payments, couriers and SMS wired in.</p>
     <div class="anchor">
       <div class="stat"><span class="n">{a.lovableValuation.text}</span><span class="l">{a.lovableValuation.label}<Src id={a.lovableValuation.source} /></span></div>
       <div class="stat"><span class="n">{a.lovableArr.text}</span><span class="l">{a.lovableArr.label}<Src id={a.lovableArr.source} /></span></div>
-      <p class="anchor-note">The global builders are priced in dollars and don't know mobile money, local couriers, SMS gateways, Bangladeshi addresses or VAT invoices. We apply the category to the markets they don't serve.</p>
+      <p class="anchor-note">Global builders price in dollars and don't know mobile money, local couriers or VAT invoices. We build for the markets they skip.</p>
     </div>
   </div>
 </section>
@@ -40,7 +40,7 @@ const calcPlans = (["starter", "business", "agency"] as const).map((id) => ({
   <div class="wrap">
     <div class="head">
       <h2>Where the AI is</h2>
-      <p class="lede">The AI is the product, not a feature. Four jobs run on Anthropic models, each matched to what it needs. Select a stage.</p>
+      <p class="lede">Four jobs, each on the Anthropic model that fits it.</p>
     </div>
     <div class="pipe" data-pipe>
       <ol class="pipe-stages" role="tablist" aria-label="AI pipeline">
@@ -85,7 +85,7 @@ const calcPlans = (["starter", "business", "agency"] as const).map((id) => ({
   <div class="wrap">
     <div class="head">
       <h2>Unit economics <span class="hyp">Hypothesis</span></h2>
-      <p class="lede">Cheap to build, cheap to change. Token costs come from list prices; the usage assumptions are ours, and the pilot measures them.</p>
+      <p class="lede">Token costs at list prices; usage is our assumption.</p>
     </div>
     <div class="econ">
       <div class="table-wrap">
@@ -115,7 +115,7 @@ const calcPlans = (["starter", "business", "agency"] as const).map((id) => ({
             </div>
           ))}
         </div>
-        <p class="small">At full use: Starter {pc.starter.margin}%, Business {pc.business.margin}%, Agency {pc.agency.margin}%. Most owners won't use every edit, so blended margin should beat these; the seed target is above 60%. Edits cost {usd(e.editUsd)} each; fixed costs are {calcPlans.map((p) => `${p.fixedNote} (${usd(p.fixed)}) on ${p.name}`).join("; ")}.</p>
+        <p class="small">Cost is edits used × {usd(e.editUsd)}, plus hosting and SMS. Seed target: above 60% blended.</p>
         <p class="small">A paid first build (about {usd(e.firstBuildOpusUsd)}) is recovered within the first one or two months of a Starter plan.</p>
       </div>
     </div>
@@ -148,8 +148,8 @@ const calcPlans = (["starter", "business", "agency"] as const).map((id) => ({
   <div class="wrap split">
     <div>
       <h2>One builder, a connector pack per country.</h2>
-      <p class="lede">The builder, the stack and the review stay the same. What changes by market is the pack: mobile money, couriers, SMS, address formats, invoices, language. Once the model is proven in Bangladesh, the playbook transfers to other mobile-money markets.</p>
-      <p class="small">Revenue grows with businesses' success: subscriptions now, payment volume later.</p>
+      <p class="lede">The builder stays the same. Each market gets its own pack: payments, couriers, SMS, addresses and language. Bangladesh first.</p>
+      <p class="small">Subscriptions now, payment volume later.</p>
     </div>
     <div class="packs" aria-label="Connector packs">
       <div class="core"><span class="pk">Core</span><strong>Builder · stack · review</strong></div>

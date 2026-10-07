@@ -73,7 +73,7 @@ const templates = [
         <h3>Out of the box</h3>
         <ul class="ticks">{t.does.map((d) => <li>{d}</li>)}</ul>
       </div>
-      <MiniPhone url={t.url} color={t.color} {...(t.phone as any)} />
+      <MiniPhone url={t.url} color={t.color} sample={i === 0} {...(t.phone as any)} />
     </div>
   </section>
 ))}
