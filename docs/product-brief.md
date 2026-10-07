@@ -1,6 +1,6 @@
 # amader.cloud — product brief
 
-Status: v0.2 draft, 2026-10-07. v0.1 treated the TV-box cloud as the whole company. v0.2 makes it one recipe in a general reuse platform. Every number marked *hypothesis* needs a pilot to confirm, and every sourced fact is listed in [Sources](#sources).
+Status: v0.3 draft, 2026-10-07. v0.1 treated the TV-box cloud as the whole company. v0.2 made it one recipe in a general reuse platform. v0.3 brings back renting out idle capacity as a product line (Earn) and adds everyday Dhaka recipes. Every number marked *hypothesis* needs a pilot to confirm, and every sourced fact is listed in [Sources](#sources).
 
 ## One line
 
@@ -39,7 +39,7 @@ The **device passport** is the record each device carries through the pipeline: 
 What follows from the table:
 
 - **Most homes and buildings already own a full kit.** A building of 30 flats probably has old phones for its stairwell cameras, a router for the rooftop, a TV box for its server and a tablet for the lobby notice board. *Hypothesis:* the 2-week device audit in the pilot will check this. So generality is the selling point: we can furnish a building's whole digital setup from its own drawers.
-- **Compute sharing becomes plausible once laptops and desktops are in the pool.** A TV box's four ARM cores are worth almost nothing to a buyer. An i5 laptop's are worth something. Compute sharing stays Phase 3, but it now has a real supply.
+- **Renting idle capacity works once laptops and desktops are in the pool.** A TV box's four ARM cores are worth little to a buyer. An i5 laptop's are worth something. See [Earn](#earn-renting-idle-capacity): storage from the pilot, computing from 2027.
 
 ## Why Dhaka, why now
 
@@ -63,7 +63,7 @@ What follows from the table:
 | **Dokan (দোকান)**: shop, clinic, small office | "Don't lose our files or CCTV if a PC dies or gets stolen; show our menu or prices on a screen." | Cloud (PC backups), Camera, Screen | Business |
 | **Pathshala (পাঠশালা)**: school, madrasa, coaching centre | "A computer lab and a library that work without reliable internet." | Lab, Screen, Cloud | School, or sponsored by a company (below) |
 | **Companies retiring devices** | "Get rid of 200 old laptops safely, with proof, and ideally with a CSR story." | Certified wipe + passport, then devices go to Pathshala labs | Company pays per device for wiping and reporting (*hypothesis* Tk 300–800/device), optionally sponsors a lab |
-| **Hosts** | "Earn from a device and disk I already have running." | Compute share, community storage | We pay credits |
+| **Earners** | "Earn from a device and disk I already have." | Rented storage and computing | Buyers pay; we pass on most of it as credit, later bKash |
 | **Donors** | "Get rid of this responsibly." | — | Free pickup at 3+ devices |
 
 **Two engines.** Homes and buildings pay for *service*. Companies pay for *disposal* and supply the devices that schools receive. This is the conventional ITAD (IT asset disposition) business, with one difference: instead of reselling wiped devices, we deploy and maintain them in schools. ITAD firms only resell, and pure-refurb sellers don't manage devices afterward. Doing both is the defensible part.
@@ -99,9 +99,45 @@ Each recipe also has an **eligibility list** published on the site, updated as w
 | **Dokan** | Up to 5 devices; nightly backup for up to 3 Windows PCs; 500 GB off-site; 4 h business-day response | Tk 3,000 | Tk 990 |
 | **Pathshala** | Lab of up to 20 machines + local library server; teacher training session; term-time visits | Quoted (often sponsored) | From Tk 1,500 per lab |
 | **Retire** (companies) | Collection, NIST 800‑88-aligned wipe, certificate per device, impact report showing where each device went | Per device | — |
-| **Host** (add-on) | Offer disk space (≥250 GB) and/or CPU time with ≥95% uptime | Free | Credit: Tk 50 per 250 GB-month during pilot; compute rate set in Phase 3 |
+| **Earn** (add-on) | Rent out disk space (≥250 GB, ≥95% uptime) and, from 2027, computing time in a sandbox | Free | Storage: Tk 50 per 250 GB-month (pilot). Computing: target Tk 0.30 per core-hour |
 
 Payments: bKash, Nagad, bank transfer.
+
+## Earn: renting idle capacity
+
+Members rent out what their managed devices aren't using. This is the original "rent processing" idea, now with a buyer, a price and a safety model.
+
+| | Storage | Computing |
+|---|---|---|
+| Supply | Spare disk on any managed device | Idle hours on laptops and desktops (x86); TV boxes excluded (too slow per core) |
+| Buyers | Other members' off-site copies (internal); later, Bangladeshi businesses needing local, encrypted backup | University and research groups, local startups (media conversion, data processing, software builds), and BOINC volunteer science as a fallback |
+| Buyer price (*hypothesis*) | Bundled into plans | ≈ US$0.004 per core-hour. Reference: AWS t4g.small in Mumbai is $0.011/h for 2 vCPU, ≈ $0.0055 per vCPU-hour (Holori price listing) |
+| Member payout | Tk 50 per 250 GB-month at ≥95% uptime (pilot) | Target Tk 0.30 per core-hour, about 60–70% of the buyer price (*unverified:* assumes about Tk 120 = US$1) |
+| Our take | Margin inside plan pricing | 30–40% of the buyer price |
+| Example | 500 GB → Tk 100/month | 4-core laptop, 10 idle h/day → 1,200 core-hours → Tk 360, minus about Tk 55 of electricity at ~Tk 9/kWh |
+
+Rules: jobs run only in hours the member chooses; the laptop's battery stays above 80% and its lid stays closed; jobs are checked against the acceptable use policy (no mining, scraping or proxying); a device storing *other members'* replicas may also compute, because replicas are encrypted and live outside the job VM.
+
+**Why it matters to investors:** it's a third revenue line (marketplace take) that grows with the installed base, and it lowers members' net cost. That reduces churn. **Risk:** demand. Before building the broker, validate it with 2–3 letters of intent from university labs or startups.
+
+## Everyday Dhaka recipes
+
+Practical jobs drawn from daily life, used in the website's scenes. All run on the same pipeline.
+
+| Recipe | Devices | For whom |
+|---|---|---|
+| "Current gone / current back" alerts to the building's WhatsApp group | Old phone on its charger (it notices when mains power drops or returns) | Every building, during load-shedding |
+| Water-tank level + pump alert | LoRa sensor + TV box LoRa gateway on the roof | Buildings with rooftop tanks |
+| Lane waterlogging alert | LoRa water-level sensors + gateway | Monsoon-prone lanes; area committees |
+| Prayer-time screen | TV box + old TV | Mosques |
+| Bazar price board | Tablet, updated by the bazar committee | Kacha bazars |
+| Cool-box / milk-fridge temperature alarm | LoRa sensor | Fish and milk sellers, tea stalls, pharmacies (insulin) |
+| bKash/Nagad QR + daily tally | Old phone or tablet | Tea stalls, small shops |
+| Shutter night camera | Old phone | Shops that close at night |
+| Rooftop weather station | Old phone (barometer) | Neighbourhood; schools |
+| School lab that funds itself | Lab laptops rent computing after hours | Pathshala |
+
+LoRa sensors are the one item bought new: cheap (*unverified:* price in BD) and battery-powered. The gateway is an old TV box with a LoRa concentrator.
 
 ## Platform architecture (proposed)
 
@@ -116,7 +152,7 @@ Conventional tools first. Hand-rolling needs a reason that survives a check.
 | Monitoring | node_exporter + SMART → VictoriaMetrics + Grafana; alerts via WhatsApp Business API | One dashboard per site for the building committee |
 | Device passport | Small internal web app + database (Phase 0: a spreadsheet) | Builds on the same IDs as fleet management. Publishes aggregate counts to the website. |
 | Wiping | NIST SP 800‑88 Rev. 2 / IEEE 2883 methods per media type: crypto-erase for encrypted phones, secure-erase for SSD/eMMC where supported, overwrite + verify for HDD | Two-person sign-off on certificates for corporate jobs |
-| Compute share (Phase 3) | Start with BOINC (volunteer science) to measure reliability; paid batch jobs only after that | Sandboxed. Never runs on a device that also stores customer data. |
+| Computing jobs (Earn) | A broker queues containerised batch jobs. Each runs in a separate VM on the member's device (KVM on x86 laptops and desktops), with no access to the owner's files or LAN. Egress goes to the broker only. BOINC fills idle time when there are no paid jobs | The VM boundary is the safety claim, so test it with an outside pentest before launch. TV boxes do storage only. |
 
 ### Privacy model
 
@@ -173,7 +209,7 @@ Never claim "carbon neutral" or emissions avoided until we have a method we can 
 | 0. Bench | Oct–Nov 2026 | 5 recipes on ~40 donated devices; Headscale, Garage, monitoring; passport v0 | Each recipe: 10 devices pass a 7-day burn-in |
 | 1. Pilot | Dec 2026–Feb 2027 | 2 buildings (Bari) + 1 corporate retirement → 1 school lab | ≥1 building paying by day 60; lab used weekly; support ≤20 min/device/month |
 | 2. Launch | Mar–Jun 2027 | Bari, Ghor, Dokan public; Retire offer to 10 companies; host credits | 500 managed devices; positive contribution per building |
-| 3. Expand | H2 2027 | Pathshala programme; compute share via BOINC; more recipes (e.g. sensors, kiosks); second city | Decide using pilot data |
+| 3. Expand | H2 2027 | Pathshala programme; paid computing jobs (Earn); LoRa recipes (tank, waterlogging, cool-box sensors); second city | Decide using pilot data |
 
 ## Open questions for the founder
 
@@ -187,6 +223,7 @@ Never claim "carbon neutral" or emissions avoided until we have a method we can 
 
 - ophub/amlogic-s9xxx-armbian, supported SoCs and models, last push May 2026: <https://github.com/ophub/amlogic-s9xxx-armbian>
 - Vo1d, 1.3 M TV boxes, 197 countries: <https://news.drweb.com/show/?i=14900>, <https://www.securityweek.com/1-3-million-android-tv-boxes-infected-by-vo1d-malware/>
+- AWS t4g.small pricing (ap-south-1 $0.011/h, 2 vCPU): <https://calculator.holori.com/aws/ec2/t4g.small>
 - BADBOX 2.0, FBI PSA June 2025: <https://www.bleepingcomputer.com/news/security/fbi-badbox-20-android-malware-infects-millions-of-consumer-devices/>
 - Bangladesh e‑waste 367 M kg (2022): <https://www.dhakatribune.com/business/351072/bangladesh-incurring-high-losses-due-to-inadequate>
 - NIST SP 800‑88 Rev. 2 (Sept 2025): <https://csrc.nist.gov/pubs/sp/800/88/r2/final>, <https://blancco.com/resources/blog-nist-800-88-rev-2-updated-standard/>
