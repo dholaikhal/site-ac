@@ -1,0 +1,34 @@
+---
+import facts, { tk, usdOf } from "../data/facts";
+interface Props { compact?: boolean }
+const { compact = false } = Astro.props;
+const plans = facts.pricing.plans;
+---
+<div class="plans" class:list={{ compact }}>
+  {plans.map((p) => (
+    <div class="plan" class:list={{ feat: p.id === "starter" }}>
+      <div class="plan-top"><h3>{p.name}</h3>{p.id === "starter" && <span class="tag">most sellers</span>}</div>
+      <p class="price"><span class="amt">{tk(p.tk)}</span>{p.tk > 0 && <span class="per">/month</span>}</p>
+      <p class="usd mono">{p.tk > 0 ? `≈ ${usdOf(p.tk)} a month` : "free to build and preview"}</p>
+      {!compact && <ul class="ticks">{p.includes.map((i) => <li>{i}</li>)}</ul>}
+      {compact && <p class="small">{p.includes[0]}</p>}
+    </div>
+  ))}
+</div>
+<p class="mono pilot-note"><span class="hyp">{facts.pricing.status}</span> USD at Tk {facts.fx.tkPerUsd} = $1. Extra AI edits {tk(facts.pricing.extraEditTk)} each.</p>
+
+<style>
+.plans { display: grid; gap: 14px; grid-template-columns: repeat(4, minmax(0, 1fr)); }
+@media (max-width: 1000px) { .plans { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 560px) { .plans { grid-template-columns: 1fr; } }
+.plan { background: var(--card); border: 1px solid var(--rule); border-radius: var(--radius); padding: 20px; display: grid; align-content: start; gap: 4px; }
+.plan.feat { border-color: var(--amber); box-shadow: inset 0 0 0 1px var(--amber); }
+.plan-top { display: flex; justify-content: space-between; align-items: center; gap: 8px; }
+.plan h3 { margin: 0; }
+.price { margin: 6px 0 0; }
+.amt { font-size: 2rem; font-weight: 580; font-stretch: 110%; letter-spacing: -0.02em; }
+.per { color: var(--ink-2); margin-left: 4px; }
+.usd { color: var(--ink-2); margin: 0 0 8px; }
+.plan .ticks { margin-top: 8px; }
+.pilot-note { margin-top: 14px; color: var(--ink-2); display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+</style>

@@ -1,0 +1,60 @@
+---
+// Blueprint of what every app is wired to. Brand names are plain text only (no logos).
+const left = [
+  ["bKash", "Mobile-money checkout through the merchant's own gateway account.", "beta"],
+  ["Nagad", "Mobile-money checkout, same flow as bKash.", "beta"],
+  ["Cards", "Debit and credit cards through a licensed aggregator.", "beta"],
+  ["Courier", "A delivery booked when you mark the order dispatched. Partners to confirm.", "beta"],
+];
+const right = [
+  ["SMS", "Order confirmed, shipped, booking reminders and fee receipts.", "beta"],
+  ["Google Sheets", "Export orders, bookings and payments.", "planned"],
+  ["Facebook catalogue", "Keep your page's catalogue in sync with your shop.", "planned"],
+  ["VAT invoices", "Invoices in the required format (format to confirm).", "planned"],
+];
+---
+<div class="conn">
+  <ul class="side l">{left.map(([n, d, s]) => <li class="node"><strong>{n}</strong><span>{d}</span><em class:list={[s]}>{s === "beta" ? "in the beta" : "planned"}</em></li>)}</ul>
+  <div class="hub">
+    <div class="hub-phone">
+      <span class="mono">yourname.amader.cloud</span>
+      <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 6l2.4 5.6 5.6 2.4-5.6 2.4L16 22l-2.4-5.6L8 14l5.6-2.4z" style="fill:var(--amber)"/></svg>
+      <span class="hub-label">Your app</span>
+      <span class="mono small-mono">hosting · database · backups</span>
+    </div>
+  </div>
+  <ul class="side r">{right.map(([n, d, s]) => <li class="node"><strong>{n}</strong><span>{d}</span><em class:list={[s]}>{s === "beta" ? "in the beta" : "planned"}</em></li>)}</ul>
+</div>
+<p class="small" style="margin-top:16px">Brand names describe what connects; they are trademarks of their owners and appear as text only. Payment partner and courier partners are being confirmed for the beta.</p>
+
+<style>
+.conn { display: grid; grid-template-columns: 1fr 240px 1fr; gap: 0; align-items: center; padding: clamp(16px, 3vw, 36px); border-radius: 14px; border: 1px solid rgb(var(--line-rgb) / .45);
+  background-color: var(--bp); background-image: linear-gradient(rgb(var(--line-rgb) / .16) 1px, transparent 1px), linear-gradient(90deg, rgb(var(--line-rgb) / .16) 1px, transparent 1px); background-size: 24px 24px; }
+.side { list-style: none; margin: 0; padding: 0; display: grid; gap: 14px; }
+.node { position: relative; background: var(--card); border: 1px solid rgb(var(--line-rgb) / .55); border-radius: 10px; padding: 12px 14px; display: grid; gap: 2px; transition: border-color .15s; }
+.node:hover { border-color: var(--amber); }
+.node strong { font-stretch: 108%; }
+.node span { font-size: 0.9rem; color: var(--ink-2); line-height: 1.45; }
+.node em { font-style: normal; font-family: var(--mono); font-size: 0.7rem; color: var(--ok); }
+.node em.planned { color: var(--ink-2); }
+.node::after { content: ""; position: absolute; top: 50%; width: 36px; border-top: 1.5px solid var(--bp-line); }
+.l .node::after { left: 100%; }
+.r .node::after { right: 100%; }
+.node:has(em.beta)::after { border-top: 2px solid var(--amber); }
+.node:has(em.planned)::after { border-top-style: dashed; }
+.l { margin-right: 36px; } .r { margin-left: 36px; }
+.hub { display: grid; place-items: center; position: relative; align-self: stretch; }
+.hub::before { content: ""; position: absolute; inset: 0 50%; border-left: 1.5px solid var(--bp-line); }
+.hub-phone { position: relative; width: 170px; aspect-ratio: 1 / 1.9; border: 2px solid var(--ink); border-radius: 26px; background: var(--card); display: grid; place-items: center; align-content: center; gap: 8px; padding: 14px; text-align: center; box-shadow: 0 0 0 6px var(--bp), 0 0 0 7px rgb(var(--line-rgb) / .5); }
+.hub-phone svg { width: 48px; height: 48px; }
+.hub-phone .mono { font-size: 0.68rem; color: var(--ink-2); word-break: break-all; }
+.hub-label { font-weight: 600; font-stretch: 110%; font-size: 1.1rem; }
+.small-mono { font-size: 0.64rem !important; }
+@media (max-width: 860px) {
+  .conn { grid-template-columns: 1fr; gap: 14px; }
+  .l, .r { margin: 0; }
+  .node::after { display: none; }
+  .hub { order: -1; } .hub::before { display: none; }
+  .hub-phone { aspect-ratio: auto; width: 100%; border-radius: 14px; }
+}
+</style>

@@ -1,0 +1,156 @@
+---
+import Base from "../layouts/Base.astro";
+import Demo from "../components/Demo.astro";
+import Src from "../components/Src.astro";
+import Sources from "../components/Sources.astro";
+import Connectors from "../components/Connectors.astro";
+import PlanCards from "../components/PlanCards.astro";
+import facts from "../data/facts";
+const m = facts.market;
+---
+<Base title="Amader Cloud: describe your business app, AI builds it" description="Describe the shop, booking page or fee collection your business needs. AI builds it at yourname.amader.cloud with bKash, Nagad and card payments, courier booking and SMS wired in.">
+
+<section class="home-hero on-dark grid-night">
+  <div class="wrap">
+    <div class="hero-copy">
+      <div>
+        <p class="kicker">AI app builder for Bangladeshi businesses</p>
+        <h1>Say what your business needs. It's live by tonight.</h1>
+      </div>
+      <div>
+      <p class="lede">Describe a shop, a booking page or fee collection in plain words. Amader Cloud's AI builds it at <span class="mono-inline">yourname.amader.cloud</span>, with bKash, Nagad and card payments, courier booking and SMS already wired in. Change it by asking. We keep it running.</p>
+      <div class="btn-row">
+        <a class="btn btn-live" href="contact.html?topic=beta">Join the beta</a>
+        <a class="btn btn-line" href="#demo">Watch it build</a>
+      </div>
+      </div>
+    </div>
+    <div class="hero-demo">
+      <Demo />
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <div class="head">
+      <p class="kicker">Included, not bolted on</p>
+      <h2>Payments, delivery and SMS come wired in.</h2>
+      <p class="lede">The AI doesn't write payment code from scratch. It connects tested, pre-built connectors for the services Bangladeshi customers already use, so the checkout works on day one.</p>
+    </div>
+    <Connectors />
+  </div>
+</section>
+
+<section class="section alt">
+  <div class="wrap">
+    <div class="head">
+      <p class="kicker">Why your own app</p>
+      <h2>Orders in the inbox, cash at the door.</h2>
+      <p class="lede">Most sellers take orders by Facebook message, track them by hand and get paid on delivery. That gets expensive.</p>
+    </div>
+    <div class="cards stats">
+      <div class="card stat"><span class="n">{m.codShare.text}</span><span class="l">{m.codShare.label}.</span><Src id={m.codShare.source} /></div>
+      <div class="card stat"><span class="n">{m.codReturns.text}</span><span class="l">{m.codReturns.label}.</span><Src id={m.codReturns.source} /></div>
+      <div class="card stat"><span class="n">{m.fbSteadyPages.text}</span><span class="l">Facebook seller pages make consistent revenue; most have no shop of their own.</span><Src id={m.fbSteadyPages.source} /></div>
+    </div>
+    <p class="small" style="margin-top:20px">A shop with prepaid checkout means fewer returned parcels and less manual order-taking. Your page still brings the buyers; your link takes the payment.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <div class="head">
+      <p class="kicker">Start from a template</p>
+      <h2>Three apps, ready on day one.</h2>
+    </div>
+    <div class="cards">
+      <a class="card bp link-card" href="templates.html#shop"><span class="mono-label">template · shop</span><h3>Shop with courier booking</h3><p>Products, cart, prepaid checkout, courier booked when you dispatch, SMS at every step.</p><span class="more">See the shop template</span></a>
+      <a class="card bp link-card" href="templates.html#bookings"><span class="mono-label">template · bookings</span><h3>Bookings with a deposit</h3><p>For clinics, salons, tutors and coaching centres: pick a time, pay a deposit, get a reminder.</p><span class="more">See the bookings template</span></a>
+      <a class="card bp link-card" href="templates.html#fees"><span class="mono-label">template · fees</span><h3>Fee and membership collection</h3><p>For schools, clubs and associations: invoices, online payment and SMS receipts.</p><span class="more">See the fees template</span></a>
+    </div>
+  </div>
+</section>
+
+<section class="section alt">
+  <div class="wrap">
+    <div class="head">
+      <p class="kicker">Pilot pricing</p>
+      <h2>Priced in taka, paid by bKash.</h2>
+      <p class="lede">Build and preview for free. Pay monthly when you go live. These are pilot prices for the beta and may change.</p>
+    </div>
+    <PlanCards compact />
+    <p class="btn-row"><a class="btn btn-line" href="pricing.html">Compare plans</a></p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap split">
+    <div>
+      <p class="kicker">Trust</p>
+      <h2>We never hold your money.</h2>
+      <p class="lede">Payments go to your own merchant accounts through a licensed payment partner. We build and host the app; the money is yours from the first order.</p>
+      <ul class="ticks">
+        <li>Every app is reviewed by AI and rules before it goes live, so nobody can use our addresses for fake bank or mobile-money pages.</li>
+        <li>Every change is tested and previewed, and can be undone in one click.</li>
+        <li>Hosting, backups and security updates are ours to run.</li>
+      </ul>
+      <p><a href="trust.html">Read trust and safety</a></p>
+    </div>
+    <div class="flow-figure" aria-hidden="true">
+      <svg viewBox="0 0 420 300">
+        <g class="bpl">
+          <rect x="20" y="40" width="110" height="70" rx="8"/><text x="75" y="80">Customer</text>
+          <rect x="155" y="40" width="110" height="70" rx="8"/><text x="210" y="74">Licensed</text><text x="210" y="90">partner</text>
+          <rect x="290" y="40" width="110" height="70" rx="8" class="you"/><text x="345" y="74">Your merchant</text><text x="345" y="90">account</text>
+          <rect x="155" y="200" width="110" height="60" rx="8" class="dashed"/><text x="210" y="226">Amader Cloud</text><text x="210" y="242">builds and hosts</text>
+          <path d="M210 200 V125" class="dashed"/>
+          <text x="216" y="168" class="note">no money flows here</text>
+        </g>
+        <path d="M130 75 H150 M265 75 H285" class="amb"/>
+        <circle r="5" class="coin"><animateMotion dur="2.6s" repeatCount="indefinite" path="M75 75 H345"/></circle>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<section class="section on-dark grid-night">
+  <div class="wrap">
+    <div class="cards cta3">
+      <div class="card dark"><h3>Business owners</h3><p>Join the closed beta and build your first app with us.</p><a class="btn btn-live" href="contact.html?topic=beta">Join the beta</a></div>
+      <div class="card dark"><h3>Agencies and freelancers</h3><p>Deliver client apps in a day, on an agency plan.</p><a class="btn btn-line" href="contact.html?topic=agency">Agency enquiry</a></div>
+      <div class="card dark"><h3>Investors</h3><p>The fastest-growing AI category, built for mobile-money markets.</p><a class="btn btn-line" href="investors.html">Investor overview</a></div>
+    </div>
+  </div>
+</section>
+
+<div class="wrap"><Sources ids={["easysell", "ecab"]} /></div>
+<div style="height:40px"></div>
+
+<style>
+.home-hero { padding-block: clamp(40px, 6vw, 80px) clamp(48px, 7vw, 96px); }
+.hero-copy { display: grid; grid-template-columns: 1.15fr 0.85fr; gap: clamp(24px, 4vw, 56px); align-items: end; margin-bottom: clamp(28px, 4vw, 44px); }
+.hero-copy h1 { max-width: 15ch; font-size: clamp(2.3rem, 1.2rem + 3.6vw, 4.4rem); margin: 0; }
+.hero-copy .lede { margin-bottom: 0; }
+.hero-copy .btn-row { margin-top: 20px; }
+@media (max-width: 980px) { .hero-copy { grid-template-columns: 1fr; } }
+.mono-inline { font-family: var(--mono); font-size: 0.92em; color: var(--chalk); white-space: nowrap; }
+.link-card { text-decoration: none; display: block; transition: border-color .15s, transform .15s; }
+.link-card:hover { border-color: var(--amber); transform: translateY(-2px); }
+.more { font-weight: 600; color: var(--amber-ink); }
+.more::after { content: " →"; }
+.card.dark { background: rgb(var(--chalk-rgb) / .05); border-color: rgb(var(--line-rgb) / .3); display: grid; gap: 4px; align-content: start; }
+.card.dark p { color: var(--chalk-2); }
+.card.dark .btn { justify-self: start; margin-top: 8px; }
+.flow-figure svg { width: 100%; height: auto; }
+.bpl rect { fill: var(--bp); stroke: var(--bp-line); stroke-width: 1.4; }
+.bpl rect.you { stroke: var(--amber); stroke-width: 2; }
+.bpl .dashed { stroke-dasharray: 5 5; fill: none; stroke: var(--bp-line); }
+.bpl rect.dashed { fill: var(--paper-2); }
+.bpl text { font-family: var(--mono); font-size: 12px; fill: var(--ink); text-anchor: middle; }
+.bpl text.note { text-anchor: start; fill: var(--ink-2); font-size: 11px; }
+.amb { stroke: var(--amber); stroke-width: 2.4; fill: none; }
+.coin { fill: var(--amber); }
+.stats .src { justify-self: start; }
+</style>
+</Base>
