@@ -1,6 +1,6 @@
 # amader.cloud — product brief
 
-Status: v0.3 draft, 2026-10-07. v0.1 treated the TV-box cloud as the whole company. v0.2 made it one recipe in a general reuse platform. v0.3 brings back renting out idle capacity as a product line (Earn) and adds everyday Dhaka recipes. Every number marked *hypothesis* needs a pilot to confirm, and every sourced fact is listed in [Sources](#sources).
+Status: v0.4 draft, 2026-10-07. v0.1 treated the TV-box cloud as the whole company. v0.2 made it one recipe in a general reuse platform. v0.3 brings back renting out idle capacity as a product line (Earn). v0.4 makes the building/para the unit: the community model. Every number marked *hypothesis* needs a pilot to confirm, and every sourced fact is listed in [Sources](#sources).
 
 ## One line
 
@@ -120,24 +120,26 @@ Rules: jobs run only in hours the member chooses; the laptop's battery stays abo
 
 **Why it matters to investors:** it's a third revenue line (marketplace take) that grows with the installed base, and it lowers members' net cost. That reduces churn. **Risk:** demand. Before building the broker, validate it with 2–3 letters of intent from university labs or startups.
 
-## Everyday Dhaka recipes
+## The community model
 
-Practical jobs drawn from daily life, used in the website's scenes. All run on the same pipeline.
+The unit of value is a **building or para (neighbourhood)**, not a single device. Pooled old devices solve shared, everyday problems that no one household would fix alone. A general pattern sits behind every recipe:
 
-| Recipe | Devices | For whom |
-|---|---|---|
-| "Current gone / current back" alerts to the building's WhatsApp group | Old phone on its charger (it notices when mains power drops or returns) | Every building, during load-shedding |
-| Water-tank level + pump alert | LoRa sensor + TV box LoRa gateway on the roof | Buildings with rooftop tanks |
-| Lane waterlogging alert | LoRa water-level sensors + gateway | Monsoon-prone lanes; area committees |
-| Prayer-time screen | TV box + old TV | Mosques |
-| Bazar price board | Tablet, updated by the bazar committee | Kacha bazars |
-| Cool-box / milk-fridge temperature alarm | LoRa sensor | Fish and milk sellers, tea stalls, pharmacies (insulin) |
-| bKash/Nagad QR + daily tally | Old phone or tablet | Tea stalls, small shops |
-| Shutter night camera | Old phone | Shops that close at night |
-| Rooftop weather station | Old phone (barometer) | Neighbourhood; schools |
-| School lab that funds itself | Lab laptops rent computing after hours | Pathshala |
+> **A shared nuisance** (posters on walls, a paper visitor register, nobody knowing when the current is back, lost backups, kids without a computer) **+ devices already in the building + one owner (the committee) + a small monthly fee or revenue share.**
 
-LoRa sensors are the one item bought new: cheap (*unverified:* price in BD) and battery-powered. The gateway is an old TV box with a LoRa concentrator.
+| Pattern | Examples (illustrative, not exhaustive) | Devices | Who pays or benefits |
+|---|---|---|---|
+| **Pool storage** | Every flat's backup encrypted, split and held by neighbours; buildings back each other up across a para | Spare disks on any managed device | Members (plan); hosts earn credit |
+| **Share screens** | Lobby, lift and gate screens replace poster-covered walls: notices, lost and found, events, paid local ads. A tea stall's old TV becomes the para notice board | Old monitors, TVs + a TV box | Building fund gets an ad revenue share; local shops advertise |
+| **Share eyes, with consent** | Gate and stair cameras the committee controls; an old tablet replaces the paper visitor register | Old phones, tablet, a recorder | Building (Bari plan) |
+| **Tell everyone at once** | Power gone/back, tank low, lane flooding, gate left open: posted to the building's WhatsApp group | Old phones on chargers; one sensor where nothing else works | Building |
+| **Learn together** | Homework corner with offline library in a common room, mosque or madrasa; a school lab that rents out compute after hours | Laptops, a TV box | Building, school, sponsor |
+| **Pass it on** | Devices too old for one household go, wiped and repaired, to students, guards, domestic workers, madrasas | Phones, tablets, laptops | Recipients; donors get a wipe record |
+| **Earn together** | Idle devices rent out storage and computing, with earnings paid into the service-charge fund | Laptops, desktops, disks | Building fund |
+| **Trade fairly** | Bazar price board, the committee's shared accounts, a shop's bKash QR and daily tally | Tablets, phones, laptops | Bazar committees, shops |
+
+New revenue line: **para screens.** Local businesses buy slots on reused lobby and street-facing screens. *Hypothesis:* a 50/50 split with the building fund. This turns the building committee into a seller on our behalf. Check local rules on signage and advertising before selling ad slots.
+
+Specialised sensors (for example LoRa water-level sensors) are an optional add-on where an old device can't do the job. They aren't the core.
 
 ## Platform architecture (proposed)
 
@@ -209,7 +211,7 @@ Never claim "carbon neutral" or emissions avoided until we have a method we can 
 | 0. Bench | Oct–Nov 2026 | 5 recipes on ~40 donated devices; Headscale, Garage, monitoring; passport v0 | Each recipe: 10 devices pass a 7-day burn-in |
 | 1. Pilot | Dec 2026–Feb 2027 | 2 buildings (Bari) + 1 corporate retirement → 1 school lab | ≥1 building paying by day 60; lab used weekly; support ≤20 min/device/month |
 | 2. Launch | Mar–Jun 2027 | Bari, Ghor, Dokan public; Retire offer to 10 companies; host credits | 500 managed devices; positive contribution per building |
-| 3. Expand | H2 2027 | Pathshala programme; paid computing jobs (Earn); LoRa recipes (tank, waterlogging, cool-box sensors); second city | Decide using pilot data |
+| 3. Expand | H2 2027 | Pathshala programme; paid computing jobs (Earn); para screens with local ads; optional sensor add-ons; second city | Decide using pilot data |
 
 ## Open questions for the founder
 
