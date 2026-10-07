@@ -718,3 +718,42 @@ fieldset.field { border: 0; padding: 0; margin: 0; }
 .pict.inline { display: inline-block; width: 28px; height: 28px; margin: 0 8px -7px 0; }
 .pict { width: 56px; height: 56px; stroke-width: 1.8; }
 .value { background: var(--paper-2); }
+
+/* ---------- Companies: three options, certificate ---------- */
+.options { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0; border-top: 1px solid var(--ink); }
+.options article { padding: 28px 28px 32px 0; }
+.options article + article { padding-left: 28px; border-left: 1px solid var(--rule); }
+.options .mono { color: var(--amber-ink); display: block; margin-bottom: 6px; }
+.options h2 { font-size: 1.6rem; }
+.options p { color: var(--ink-2); }
+@media (max-width: 900px) { .options { grid-template-columns: 1fr; } .options article + article { padding-left: 0; border-left: 0; border-top: 1px solid var(--rule); } }
+.steps li > .pict { width: 40px; height: 40px; margin-bottom: 10px; }
+.cert { margin: 0 0 20px; background: var(--paper-2); border: 1px solid var(--rule); border-radius: 4px; padding: 22px 24px; box-shadow: 0 1px 0 var(--rule), 0 18px 40px -24px rgba(14,27,42,.35); position: relative; transform: rotate(-.6deg); }
+.cert-head { display: flex; justify-content: space-between; gap: 12px; border-bottom: 2px solid var(--ink); padding-bottom: 10px; margin-bottom: 12px; color: var(--ink); }
+.cert dl { display: grid; grid-template-columns: 7.5rem 1fr; gap: 6px 14px; margin: 0; font-size: .95rem; }
+.cert dt { color: var(--ink-2); }
+.cert dd { margin: 0; }
+.cert-foot { display: flex; gap: 20px; align-items: center; margin-top: 16px; padding-top: 12px; border-top: 1px dashed var(--rule); font-size: .85rem; color: var(--ink-2); }
+.cert-foot i { font-style: normal; font-family: var(--bangla); font-size: 1.3rem; color: var(--ink); margin-left: 6px; }
+.cert .stamp { margin-left: auto; border: 2px solid var(--amber-ink); color: var(--amber-ink); font-family: var(--mono); font-size: .7rem; padding: 4px 8px; border-radius: 3px; transform: rotate(-4deg); }
+.cert figcaption { margin-top: 12px; }
+
+/* ---------- Earn page: embedded estimator ---------- */
+.earn-embed { border-radius: 6px; padding: clamp(28px, 5vw, 56px); }
+.earn-embed .earn-inner { padding: 0; }
+.ledger .fig .pict { width: 40px; height: 40px; margin-bottom: 10px; }
+
+/* ---------- Investors: flow figure ---------- */
+.flow-fig { margin: 0; display: grid; grid-template-columns: 1fr 64px 1fr 64px 1fr; align-items: center; gap: 12px; }
+.flow-col { display: grid; gap: 12px; }
+.flow-col > .mono { color: var(--amber-ink); }
+.flow-box { border: 1px solid var(--rule); background: var(--paper-2); border-radius: 4px; padding: 14px 16px; display: grid; grid-template-columns: 44px 1fr; column-gap: 12px; align-items: center; }
+.flow-box .pict { width: 40px; height: 40px; margin: 0; grid-row: span 2; }
+.flow-box b { font-stretch: 106%; }
+.flow-box span { color: var(--ink-2); font-size: .9rem; }
+.flow-core { background: var(--bp); color: var(--chalk); border-radius: 6px; padding: 26px 22px; text-align: center; display: grid; gap: 6px; background-image: linear-gradient(rgba(143,184,220,.1) 1px, transparent 1px), linear-gradient(90deg, rgba(143,184,220,.1) 1px, transparent 1px); background-size: 24px 24px; }
+.flow-core .mono { color: var(--amber); }
+.flow-core b { font-size: 1.25rem; font-stretch: 110%; }
+.flow-core span { color: var(--chalk-2); font-size: .9rem; }
+.flow-arrow { width: 64px; height: 20px; fill: none; stroke: var(--amber-ink); stroke-width: 2.5; }
+@media (max-width: 900px) { .flow-fig { grid-template-columns: 1fr; } .flow-arrow { transform: rotate(90deg); justify-self: center; } }
