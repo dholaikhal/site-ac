@@ -6,6 +6,8 @@ rooftop masts, a water tank. Coordinates are in the photo's own pixels (the 2400
 Run after editing:  python3 tools/build_hero.py
 """
 import pathlib, re
+from PIL import Image
+PHOTOS = pathlib.Path(__file__).resolve().parent.parent / "site" / "assets" / "img" / "photos"
 
 SCENES = [
     {
@@ -74,6 +76,79 @@ SCENES = [
 ]
 
 
+SCENES += [
+    {
+        "id": "bazar", "label": "Bazar and mosque", "photo": "bazar", "w": 2400, "h": 3200,
+        "fit": "right", "pos": "50% 100%", "par": "xMidYMax slice",
+        "alt": "A crowded Dhaka market street under tangled cables, with a mosque minaret at the end.",
+        "credit": ("Dhaka. Photo: Ferdous Hasan (Pexels)", "https://www.pexels.com/photo/bustling-dhaka-street-market-with-mosque-in-view-36525029/"),
+        "nodes": {
+            "b1": (1290, 1180, "TV box + old TV", "Prayer times on the mosque wall"),
+            "b2": (1640, 2340, "Tablet", "Today's prices board for the bazar committee"),
+            "b3": (1080, 2900, "LoRa sensor", "Temperature alarm for the fish and milk cool box"),
+            "b4": (2280, 1300, "Desktop PC", "Wholesaler's accounts, backed up nightly"),
+            "b5": (2240, 2000, "Old phone", "Shop counter camera"),
+            "b6": (350, 2400, "Old phone", "bKash QR and the day's sales tally"),
+            "b7": (300, 520, "Laptop", "Rents out its idle computing"),
+        },
+        "links": "b6-b3 b3-b2 b2-b5 b5-b4".split(),
+        "radio": ["b3-b2"], "far": ["b1-b2", "b1-b7", "b7-b6"], "rings": None,
+    },
+    {
+        "id": "teastall", "label": "Tea stall", "photo": "teastall", "w": 2400, "h": 3175,
+        "fit": "right", "pos": "50% 100%", "par": "xMidYMax slice",
+        "alt": "A roadside tea stall in Dhaka: a blue wall painted with a kettle and the words 'swadhin desher cha', and a row of plastic chairs.",
+        "credit": ("Dhaka. Photo: Ahnaf Abror (Pexels)", "https://www.pexels.com/photo/lonely-man-at-a-dhaka-tea-stall-33006139/"),
+        "nodes": {
+            "t1": (1650, 1350, "Old tablet", "bKash and Nagad QR, plus the day's tally"),
+            "t2": (1050, 1060, "Old phone", "Night camera over the stall and chairs"),
+            "t3": (420, 1330, "LoRa sensor", "Milk fridge temperature, with a load-shedding alert"),
+            "t4": (180, 720, "Laptop", "The coaching centre's attendance and results"),
+        },
+        "links": "t1-t2 t2-t3 t3-t4".split(),
+        "radio": [], "far": [], "rings": None,
+    },
+    {
+        "id": "monsoon", "label": "Monsoon", "photo": "monsoon", "w": 2400, "h": 1600,
+        "fit": "cover", "pos": "50% 100%", "par": "xMidYMax slice",
+        "alt": "A waterlogged residential lane in Dhaka during the monsoon, with rickshaws wading through and shop shutters down.",
+        "credit": ("Dhaka. Photo: Faisal Ibne Kalam (Pexels)", "https://www.pexels.com/photo/urban-flooding-in-a-residential-area-38551008/"),
+        "nodes": {
+            "m1": (2160, 1180, "LoRa sensor", "Water-level alert for the lane"),
+            "m2": (330, 1140, "LoRa sensor", "Water depth at the boundary wall"),
+            "m3": (1620, 330, "Old phone", "Posts 'current gone' and 'current back' to the building's WhatsApp"),
+            "m4": (1700, 520, "TV box", "Family photo cloud, safe upstairs"),
+            "m5": (1820, 880, "Old phone", "Night camera on a shut shop"),
+            "m6": (1440, 860, "Old phone", "Building gate camera"),
+            "m7": (2300, 480, "TV box + LoRa radio", "LoRa gateway on the roof"),
+        },
+        "links": "m3-m4 m4-m6 m3-m5 m5-m6 m4-m7".split(),
+        "radio": ["m1-m7", "m2-m7"], "far": [], "rings": "m7",
+    },
+    {
+        "id": "classroom", "label": "Classroom", "photo": "classroom", "w": 2400, "h": 1800,
+        "fit": "cover", "pos": "50% 100%", "par": "xMidYMax slice",
+        "alt": "An empty classroom in Bangladesh with rows of chairs and barred windows, in black and white.",
+        "credit": ("Rangpur. Photo: Nirjon Nakib (Pexels)", "https://www.pexels.com/photo/abandoned-classroom-interior-in-bangladesh-30973503/"),
+        "nodes": {
+            "c1": (1300, 780, "Old TV + TV box", "The teacher's screen"),
+            "c2": (1960, 1040, "TV box", "Offline library: Wikipedia and textbooks"),
+            "c3": (1560, 600, "Wi‑Fi router", "Class network, no internet needed"),
+            "c4": (1240, 1170, "Laptop", "Lab machine with Bangla typing"),
+            "c5": (1000, 1480, "Laptop", "Lab machine"),
+            "c6": (1720, 1180, "Laptop", "Lab machine"),
+            "c7": (2200, 1210, "Laptop", "After school, rents out idle computing to fund the lab"),
+        },
+        "links": "c3-c1 c3-c2 c3-c4 c3-c6 c3-c7 c4-c5 c6-c7".split(),
+        "radio": [], "far": [], "rings": None,
+    },
+]
+ORDER = ["rooftops", "street", "bazar", "teastall", "monsoon", "classroom", "neighbourhood"]
+SCENES = sorted(SCENES, key=lambda s: ORDER.index(s["id"]))
+for s in SCENES:
+    s["label"] = {"street": "Shops at night", "neighbourhood": "Neighbourhood"}.get(s["id"], s["label"])
+
+
 def scene_svg(s):
     n = s["nodes"]
     out = [f'<svg class="mesh" viewBox="0 0 {s["w"]} {s["h"]}" preserveAspectRatio="{s["par"]}" role="group" aria-label="{s["label"]}: old devices and their second jobs. Select a light to read it.">']
@@ -108,7 +183,7 @@ def scene_svg(s):
 
 def scene_html(s, i):
     p = f'assets/img/photos/{s["photo"]}'
-    srcset = f'{p}-1200.jpg 1200w, {p}.jpg 2400w'
+    srcset = f'{p}-1200.jpg 1200w, {p}.jpg {Image.open(PHOTOS / (s["photo"] + ".jpg")).width}w'
     img = (f'<img src="{p}.jpg" srcset="{srcset}" sizes="100vw" alt="{s["alt"]}" style="object-position:{s["pos"]}"'
            + (' fetchpriority="high"' if i == 0 else ' loading="lazy"') + ">")
     bg = f'<img class="scene-bg" src="{p}-1200.jpg" alt="" aria-hidden="true" loading="lazy">' if s["fit"] == "right" else ""
