@@ -1,8 +1,0 @@
----
-// Footnote marker for a figure: a small number linking to the page's source list.
-// Numbers follow the order of sources in facts.json, so they match on every page.
-import facts, { type SourceId } from "../data/facts";
-interface Props { id: SourceId }
-const n = Object.keys(facts.sources).indexOf(Astro.props.id) + 1;
----
-<sup class="fn"><a href={`#src-${Astro.props.id}`} title={facts.sources[Astro.props.id].short}>{n}</a></sup>

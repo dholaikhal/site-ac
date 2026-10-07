@@ -1,7 +1,5 @@
 ---
 import Base from "../layouts/Base.astro";
-import Src from "../components/Src.astro";
-import Sources from "../components/Sources.astro";
 import facts, { tk, usd, usdOf, plan } from "../data/facts";
 const { market: m, anchor: a, economics: e, models } = facts;
 
@@ -29,8 +27,8 @@ const calcPlans = (["starter", "business", "agency"] as const).map((id) => ({
     </div>
     <p class="lede">An AI app builder for Bangladeshi businesses. Owners describe a store, bookings or fee collection; coding agents build it on one fixed stack with local payments, couriers and SMS wired in.</p>
     <div class="anchor">
-      <div class="stat"><span class="n">{a.lovableValuation.text}</span><span class="l">{a.lovableValuation.label}<Src id={a.lovableValuation.source} /></span></div>
-      <div class="stat"><span class="n">{a.lovableArr.text}</span><span class="l">{a.lovableArr.label}<Src id={a.lovableArr.source} /></span></div>
+      <div class="stat"><span class="n">{a.lovableValuation.text}</span><span class="l">{a.lovableValuation.label}</span></div>
+      <div class="stat"><span class="n">{a.lovableArr.text}</span><span class="l">{a.lovableArr.label}</span></div>
       <p class="anchor-note">Global builders price in dollars and don't know mobile money, local couriers or VAT invoices. We build for the markets they skip.</p>
     </div>
   </div>
@@ -62,7 +60,7 @@ const calcPlans = (["starter", "business", "agency"] as const).map((id) => ({
         ))}
       </div>
     </div>
-    <p class="small" style="margin-top:14px">Model prices: {models.opus.name} ${models.opus.input}/${models.opus.output}, {models.sonnet.name} ${models.sonnet.input}/${models.sonnet.output}, {models.haiku.name} ${models.haiku.input}/${models.haiku.output} per million input/output tokens; cache reads {usd(models.opus.cacheRead)}.<Src id="anthropic" /></p>
+    <p class="small" style="margin-top:14px">Model prices: {models.opus.name} ${models.opus.input}/${models.opus.output}, {models.sonnet.name} ${models.sonnet.input}/${models.sonnet.output}, {models.haiku.name} ${models.haiku.input}/${models.haiku.output} per million input/output tokens; cache reads {usd(models.opus.cacheRead)}.</p>
   </div>
 </section>
 
@@ -74,7 +72,7 @@ const calcPlans = (["starter", "business", "agency"] as const).map((id) => ({
     </div>
     <div class="cards">
       {[m.fbSellerPages, m.fbSteadyPages, m.codShare, m.codReturns, m.sslcommerzBusinesses, m.cardLimitUsd].map((f) => (
-        <div class="card stat"><span class="n">{f.text}</span><span class="l">{f.label}.<Src id={f.source as any} /></span></div>
+        <div class="card stat"><span class="n">{f.text}</span><span class="l">{f.label}.</span></div>
       ))}
     </div>
     <p class="small" style="margin-top:16px">Aggregator reach against seller count is our inference across two sources.</p>
@@ -127,9 +125,9 @@ const calcPlans = (["starter", "business", "agency"] as const).map((id) => ({
     <div>
       <h2>Why now</h2>
       <ul class="ticks">
-        <li>AI app builders are the fastest-growing software category: Lovable reached {a.lovableArr.text} in annual revenue in under two years.<Src id="ecosistema" /></li>
+        <li>AI app builders are the fastest-growing software category: Lovable reached {a.lovableArr.text} in annual revenue in under two years.</li>
         <li>Generated code is now good enough for small business apps when it is built on a tested component library.</li>
-        <li>Local payment rails have developer APIs (bKash has a developer portal<Src id="bkashdev" />; aggregators cover every method), but merchants can't use them without a developer.</li>
+        <li>Local payment rails have developer APIs (bKash has a developer portal; aggregators cover every method), but merchants can't use them without a developer.</li>
       </ul>
     </div>
     <div>
@@ -214,7 +212,7 @@ const calcPlans = (["starter", "business", "agency"] as const).map((id) => ({
         <dt>Generated code breaks a live store</dt><dd>Fixed stack, tests on every change, preview before publish, one-click rollback.</dd>
         <dt>Build costs exceed plan price</dt><dd>Template-first generation, {models.sonnet.name} for edits, credit limits.</dd>
         <dt>Global builders add local payments</dt><dd>Speed, depth of connectors, local support and distribution through agencies.</dd>
-        <dt>Customer data on hosted apps</dt><dd>Data-processing terms under the Personal Data Protection Ordinance 2025<Src id="pdpo" />; backups; option to host in Bangladesh later.</dd>
+        <dt>Customer data on hosted apps</dt><dd>Data-processing terms under the Personal Data Protection Ordinance 2025; backups; option to host in Bangladesh later.</dd>
       </dl>
     </div>
   </div>
@@ -230,8 +228,6 @@ const calcPlans = (["starter", "business", "agency"] as const).map((id) => ({
   </div>
 </section>
 
-<div class="wrap"><Sources ids={["ecab", "easysell", "ecosire", "tbs", "bkashdev", "vktr", "ecosistema", "anthropic", "pdpo", "fx", "plan"]} /></div>
-<div style="height:40px"></div>
 
 <script>
 // Pipeline tabs

@@ -1,5 +1,5 @@
 {
-  "_about": "Photographs used on the site. All are under the Unsplash License (free; none are Unsplash+ or premium). Credits render as a footnote on the Trust page and in each image's title attribute, never as captions.",
+  "_about": "Photographs used on the site. All are under the Unsplash License (free; none are Unsplash+ or premium). Credits render on the Sources page and in each image's title attribute, never as captions.",
   "licence": { "name": "Unsplash License", "url": "https://unsplash.com/license" },
   "photos": {
     "delivery-van": {

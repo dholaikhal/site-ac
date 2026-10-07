@@ -1,0 +1,28 @@
+---
+import Base from "../layouts/Base.astro";
+import Sources from "../components/Sources.astro";
+import PhotoCredits from "../components/PhotoCredits.astro";
+import facts, { type SourceId } from "../data/facts";
+const ids = Object.keys(facts.sources) as SourceId[];
+---
+<Base title="Sources · Amader Cloud" description="Where the figures on this site come from, and photo credits.">
+<section class="page-hero">
+  <div class="wrap">
+    <div class="signboard sign-navy">
+      <h1>Sources</h1>
+      <span class="address">Figures and photos used on this site</span>
+    </div>
+  </div>
+</section>
+<section class="section tight">
+  <div class="wrap measure-wrap">
+    <Sources ids={ids} />
+    <PhotoCredits />
+  </div>
+</section>
+<style>
+.measure-wrap { max-width: 860px; margin-inline: 0; }
+.measure-wrap :global(.sources) { border-top: 0; margin-top: 0; padding-top: 0; font-size: 0.98rem; margin-bottom: 36px; }
+.measure-wrap :global(.sources strong) { font-family: var(--display); font-size: 1.8rem; display: block; margin-bottom: 8px; }
+</style>
+</Base>

@@ -1,7 +1,6 @@
 ---
 import Base from "../layouts/Base.astro";
 import PlanCards from "../components/PlanCards.astro";
-import Sources from "../components/Sources.astro";
 import facts, { tk, usdOf } from "../data/facts";
 const plans = facts.pricing.plans;
 const yes = "✓";
@@ -59,7 +58,6 @@ const rows: [string, (p: (typeof plans)[number]) => string][] = [
   </div>
 </section>
 
-<div class="wrap" style="padding-bottom:40px"><Sources ids={["fx"]} /></div>
 
 <section class="section tight ink-band">
   <div class="wrap split">

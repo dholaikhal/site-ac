@@ -2,8 +2,6 @@
 import Base from "../layouts/Base.astro";
 import Photo from "../components/Photo.astro";
 import Demo from "../components/Demo.astro";
-import Src from "../components/Src.astro";
-import Sources from "../components/Sources.astro";
 import facts, { tk, plan } from "../data/facts";
 import "../styles/app-screen.css";
 const m = facts.market;
@@ -74,8 +72,8 @@ const rates: [string, string, string][] = [
       <h2 class="cod-h">Prepaid orders rarely come back.</h2>
       <p class="lede">Most online orders in Bangladesh are paid in cash at the door, and many are refused when the courier arrives. Your own checkout lets buyers pay first, while your Facebook page keeps bringing them in.</p>
       <div class="cod-stats">
-        <div class="stat"><span class="n">{m.codShare.text}</span><span class="l">{m.codShare.label}.<Src id={m.codShare.source} /></span></div>
-        <div class="stat"><span class="n red">{m.codReturns.text}</span><span class="l">{m.codReturns.label}.<Src id={m.codReturns.source} /></span></div>
+        <div class="stat"><span class="n">{m.codShare.text}</span><span class="l">{m.codShare.label}.</span></div>
+        <div class="stat"><span class="n red">{m.codReturns.text}</span><span class="l">{m.codReturns.label}.</span></div>
       </div>
     </div>
   </div>
@@ -102,7 +100,7 @@ const rates: [string, string, string][] = [
       <div class="btn-row"><a class="btn btn-go" href="contact.html?topic=beta">Join the beta</a><a class="btn" href="pricing.html">See the plans</a></div>
     </div>
   </div>
-  <div class="wrap"><Sources ids={["easysell"]} /></div>
+  
 </section>
 
 <style>
