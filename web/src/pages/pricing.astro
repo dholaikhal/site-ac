@@ -24,7 +24,7 @@ const rows: [string, (p: (typeof plans)[number]) => string][] = [
       <h1>Build for free. Pay when you're live.</h1>
       <span class="address">Pilot pricing, in taka</span>
     </div>
-    <p class="lede">Plans in taka, paid by bKash. <span class="hyp">Pilot pricing</span> These are the prices for the beta; we'll learn from it and may change them, with notice.</p>
+    <p class="lede">Plans in taka, paid by bKash.</p>
   </div>
 </section>
 
@@ -39,7 +39,7 @@ const rows: [string, (p: (typeof plans)[number]) => string][] = [
     <div class="head"><h2>Compare plans</h2></div>
     <div class="table-wrap">
       <table>
-        <thead><tr><th scope="col">Pilot pricing</th>{plans.map((p) => <th scope="col">{p.name}</th>)}</tr></thead>
+        <thead><tr><th scope="col">Plan</th>{plans.map((p) => <th scope="col">{p.name}</th>)}</tr></thead>
         <tbody>
           {rows.map(([label, f]) => <tr><th scope="row">{label}</th>{plans.map((p) => <td>{f(p)}</td>)}</tr>)}
         </tbody>
