@@ -8,6 +8,8 @@ import HeroScenes from "../components/HeroScenes.astro";
 import Photo from "../components/Photo.astro";
 import Plans from "../components/Plans.astro";
 import Roadmap from "../components/Roadmap.astro";
+import MemberApp from "../components/peeks/MemberApp.astro";
+import SiteDashboard from "../components/peeks/SiteDashboard.astro";
 ---
 <Base title="amader.cloud: second jobs for old devices" description="We wipe, rebuild and look after old phones, TV boxes, laptops and routers, and put them to work as private clouds, cameras, Wi\u2011Fi, screens and school labs for Dhaka homes, buildings, shops and schools." ogDescription="Old phones, TV boxes, laptops and routers, rebuilt into managed infrastructure for Dhaka homes, buildings, shops and schools." hasHero>
 <!-- Hero: a slideshow of real Dhaka scenes, each with the second jobs that place really has -->
@@ -323,6 +325,17 @@ import Roadmap from "../components/Roadmap.astro";
 </section>
 
 
+<!-- What members and committees see: the app and the building dashboard -->
+<section class="section" id="app" aria-labelledby="app-title">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="kicker">What you see</span>
+      <h2 id="app-title">Looked after, and you can see it.</h2>
+      <p>Every member gets a simple app: what each device is doing, whether your backups are safe, and what you've earned. A building committee gets one page for the whole building, and alerts go to the building's WhatsApp group.</p>
+    </div>
+    <div class="peeks"><MemberApp /><SiteDashboard /></div>
+  </div>
+</section>
 
 <!-- Plans -->
 <section class="section band" id="plans" aria-labelledby="plans-title">
@@ -352,11 +365,9 @@ import Roadmap from "../components/Roadmap.astro";
       <label for="buildings">Buildings on the network <output id="b-out" for="buildings">{N.start}</output></label>
       <input type="range" id="buildings" min="1" max={N.max} value={N.start}>
       <dl>
-        <dt>Devices with a second job</dt><dd id="o-devices">{nf(N.start * N.devicesPerBuilding)}</dd>
-        <dt>Homes with a safe off-site copy</dt><dd id="o-homes">{nf(N.start * N.homesPerBuilding)}</dd>
-        <dt>Monthly revenue</dt><dd id="o-rev">Tk {nf(N.start * N.revenuePerBuilding)}</dd>
+        <dt>Other buildings that can hold each home's encrypted copy</dt><dd id="o-holders">{nf(N.start - 1)}</dd>
       </dl>
-      <p class="small">Illustrative, based on our pilot assumptions: {F.building.flats}-flat buildings where {F.building.joined} flats join, about {N.devicesPerBuilding} devices per building, Tk {nf(N.revenuePerBuilding)} a month per building.</p>
+      <p class="small">Every building that joins is another place to keep the others' backups, so a fire, a flood or a theft in one building loses nothing.</p>
     </form>
   </div>
 </section>

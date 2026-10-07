@@ -262,9 +262,6 @@
   },
   "network": {
     "start": 24,
-    "max": 120,
-    "devicesPerBuilding": 14,
-    "homesPerBuilding": 10,
-    "revenuePerBuilding": 4490
+    "max": 120
   }
 }

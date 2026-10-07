@@ -1,0 +1,30 @@
+---
+// Company retirement batch preview. Early design with sample data; the first row is the sample certificate on the same page.
+const rows = [
+  ["ACME‑IT‑02231", "Dell Latitude 5490", "256 GB NVMe SSD", "Purge: crypto erase + NVMe sanitize", "ok", "Pathshala lab, Mirpur", "AC‑2027‑000418"],
+  ["ACME‑IT‑02232", "Dell Latitude 5490", "256 GB NVMe SSD", "Purge: crypto erase + NVMe sanitize", "ok", "Pathshala lab, Mirpur", "AC‑2027‑000419"],
+  ["ACME‑IT‑02240", "Lenovo ThinkPad T470", "500 GB HDD", "Clear: overwrite + verify", "ok", "Pathshala lab, Mirpur", "AC‑2027‑000424"],
+  ["ACME‑IT‑02255", "HP ProDesk 600 G2", "1 TB HDD", "Clear: overwrite + verify", "ok", "Camera recorder, a building", "AC‑2027‑000431"],
+  ["ACME‑MB‑00117", "Samsung Galaxy A50", "64 GB, encrypted", "Purge: crypto erase", "ok", "Stairwell camera", "AC‑2027‑000447"],
+  ["ACME‑IT‑02261", "HP ProDesk 600 G2", "500 GB HDD", "Destroy: failed verification, shredded", "destroyed", "Recycled, with receipt", "AC‑2027‑000452"],
+];
+---
+<figure class="peek peek-browser peek-wide">
+  <div class="pk-browser" aria-hidden="true" inert>
+    <div class="pk-chrome"><span class="pk-lights"><i></i><i></i><i></i></span><span class="pk-url mono">app.amader.cloud/retirements/RB-2027-0412</span></div>
+    <div class="pk-batch">
+      <div class="pk-dhead"><div><b>Retirement batch RB‑2027‑0412</b><span class="pk-muted">ACME Ltd · collected 18 Mar 2027 · 4 sealed crates</span></div><span class="pk-btn">Download all certificates</span></div>
+      <div class="pk-sum"><span><b>62</b> received</span><span><b>59</b> wiped and verified</span><span><b>3</b> drives destroyed</span><span><b>53</b> reused · <b>9</b> recycled</span></div>
+      <table>
+        <thead><tr><th>Asset tag</th><th>Device</th><th>Storage</th><th>Method</th><th>Result</th><th>Now</th><th>Certificate</th></tr></thead>
+        <tbody>
+          {rows.map(([tag, dev, media, how, res, now, cert]) => (
+            <tr><td class="mono">{tag}</td><td>{dev}</td><td>{media}</td><td>{how}</td><td>{res === "ok" ? <span class="pk-res ok">Verified</span> : <span class="pk-res">Destroyed</span>}</td><td>{now}</td><td class="mono pk-link">{cert}</td></tr>
+          ))}
+        </tbody>
+      </table>
+      <p class="pk-muted pk-foot">Showing 6 of 62 · every certificate signed by a technician and a verifier · export the asset register as CSV</p>
+    </div>
+  </div>
+  <figcaption class="mono">Company portal, retirement report · early design, sample data<span class="sr-only">. A batch of 62 company devices: for each one the asset tag, model, storage, wipe method, result, where it went next and its certificate number. 59 were wiped and verified, 3 drives were destroyed, 53 devices were reused and 9 recycled.</span></figcaption>
+</figure>

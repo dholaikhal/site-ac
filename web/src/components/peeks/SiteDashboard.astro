@@ -1,0 +1,32 @@
+---
+// Building committee dashboard preview: one page per building. Early design with sample data.
+const events = [
+  ["19:58", "Power back. 17 of 18 devices online again.", "WhatsApp"],
+  ["19:12", "Power cut. Cameras and Wi‑Fi running on the UPS.", "WhatsApp"],
+  ["18:20", "Rooftop Wi‑Fi router not responding. Technician visit booked for tomorrow morning.", "WhatsApp"],
+  ["16:40", "Water tank below 20%.", "WhatsApp"],
+  ["11:05", "Notice on the lobby screens: \"Lift maintenance, Friday 10:00–12:00\". Posted by Flat 2A.", ""],
+  ["06:00", "Backup check: 44 of 44 pieces healthy.", ""],
+];
+---
+<figure class="peek peek-browser">
+  <div class="pk-browser" aria-hidden="true" inert>
+    <div class="pk-chrome"><span class="pk-lights"><i></i><i></i><i></i></span><span class="pk-url mono">app.amader.cloud/building</span></div>
+    <div class="pk-dash">
+      <nav class="pk-nav"><b>amader<span>.cloud</span></b><span class="on">Overview</span><span>Cameras</span><span>Screens</span><span>Backups</span><span>Devices</span><span>Members</span></nav>
+      <div class="pk-main">
+        <div class="pk-dhead"><div><b>Your building</b><span class="pk-muted">30 flats · 11 members · committee view</span></div><span class="pk-chip">Today</span></div>
+        <div class="pk-tiles">
+          <div><span class="pk-muted">Devices</span><b>18</b><span><i class="pk-dot ok"></i>17 online <i class="pk-dot warn"></i>1 down</span></div>
+          <div><span class="pk-muted">Cameras</span><b>5</b><span><i class="pk-dot ok"></i>recording, kept 14 days</span></div>
+          <div><span class="pk-muted">Lobby screens</span><b>2</b><span>4 notices showing</span></div>
+          <div><span class="pk-muted">Backups</span><b>11 flats</b><span><i class="pk-dot ok"></i>all copies healthy</span></div>
+        </div>
+        <ol class="pk-events">
+          {events.map(([t, what, to]) => <li><span class="mono pk-muted">{t}</span><span>{what}</span>{to ? <span class="pk-tag">{to}</span> : <span></span>}</li>)}
+        </ol>
+      </div>
+    </div>
+  </div>
+  <figcaption class="mono">Building dashboard · early design, sample data<span class="sr-only">. The committee's overview of a 30-flat building: 18 devices with 1 down, 5 cameras recording, 2 lobby screens, backups for 11 flats all healthy, and today's events such as a power cut and the water tank running low, each also posted to the building's WhatsApp group.</span></figcaption>
+</figure>

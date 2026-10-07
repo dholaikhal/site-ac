@@ -296,9 +296,7 @@ if (consoleForm) {
     const k = +range.value;
     svg.querySelectorAll("[data-i]").forEach((el) => { el.style.display = +el.dataset.i < k ? "" : "none"; });
     out("#b-out", k);
-    out("#o-devices", fmt.format(k * NET.devicesPerBuilding));
-    out("#o-homes", fmt.format(k * NET.homesPerBuilding));
-    out("#o-rev", `Tk ${fmt.format(k * NET.revenuePerBuilding)}`);
+    out("#o-holders", fmt.format(k - 1));
   };
   range.addEventListener("input", update);
   update();

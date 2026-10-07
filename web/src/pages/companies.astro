@@ -1,6 +1,7 @@
 ---
 import Base from "../layouts/Base.astro";
 import SceneHead from "../components/SceneHead.astro";
+import RetireBatch from "../components/peeks/RetireBatch.astro";
 ---
 <Base title="Retire devices into schools: amader.cloud for companies" description="Certified data wiping for your retired laptops, desktops and phones, with a certificate per device. Working devices become school computer labs.">
 <section class="page-head photo">
@@ -28,6 +29,12 @@ import SceneHead from "../components/SceneHead.astro";
     <li><svg class="pict" aria-hidden="true"><use href="#p-school"/></svg><h3>Second job</h3><p>Working devices are rebuilt for a school lab. The rest are stripped for repair parts or sent to a formal recycler.</p></li>
     <li><svg class="pict" aria-hidden="true"><use href="#p-books"/></svg><h3>Report</h3><p>You get a report listing every serial number, its wipe certificate, and where the device ended up.</p></li>
   </ol>
+  </div>
+
+  <div>
+    <h2>Every device, accounted for</h2>
+    <p class="measure">Your company portal lists every device in a batch: how it was wiped, its certificate, and where it went next. Export it for your auditors, or download every certificate at once.</p>
+    <RetireBatch />
   </div>
 
   <div class="split">

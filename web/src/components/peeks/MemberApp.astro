@@ -1,0 +1,43 @@
+---
+// Member app preview (a household on the Ghor plan). Early design with sample data; the bill and credit come from facts.json.
+import F from "../../data/facts.json";
+const ghor = F.plans.people.find((p) => p.name === "Ghor")!;
+const plan = Number(ghor.price.replace(/\D/g, ""));
+const credit = F.rates.storageTkPer250GB; // 250 GB rented for a month
+const tk = (n: number) => `Tk ${new Intl.NumberFormat("en-IN").format(n)}`;
+---
+<figure class="peek peek-phone">
+  <div class="pk-phone" aria-hidden="true" inert>
+    <div class="pk-status mono"><span>19:42</span><span>4G · 78%</span></div>
+    <div class="pk-app">
+      <div class="pk-head"><div><b>Flat 4B</b><span>{ghor.name} plan · 3 devices</span></div><span class="pk-ok-pill">All good</span></div>
+
+      <div class="pk-card">
+        <div class="pk-row"><i class="pk-dot ok"></i><b>Photo cloud</b><span class="pk-dev">TV box</span></div>
+        <p>3 phones backed up at 02:10</p>
+        <div class="pk-bar"><i style="width:41%"></i></div>
+        <p class="pk-muted">412 GB of 1 TB used</p>
+      </div>
+
+      <div class="pk-card">
+        <div class="pk-row"><i class="pk-dot ok"></i><b>Door camera</b><span class="pk-dev">Old phone</span></div>
+        <p>Recording to your TV box. Kept 14 days, never uploaded.</p>
+      </div>
+
+      <div class="pk-card">
+        <div class="pk-row"><i class="pk-dot amber"></i><b>Renting out storage</b><span class="pk-dev">Laptop</span></div>
+        <p>250 GB holding other members' encrypted backups</p>
+        <p class="pk-muted">{tk(credit)} credit this month</p>
+      </div>
+
+      <div class="pk-card">
+        <div class="pk-row"><i class="pk-dot ok"></i><b>Off-site copy</b><span class="pk-dev">4 homes</span></div>
+        <p>Locked with your passphrase. All 4 pieces checked today at 06:00.</p>
+      </div>
+
+      <div class="pk-bill"><div><span class="pk-muted">Next bill, 1 May</span><b>{tk(plan - credit)}</b></div><span class="pk-btn">Pay with bKash</span></div>
+    </div>
+    <nav class="pk-tabs"><span class="on">Home</span><span>Devices</span><span>Earn</span><span>Help</span></nav>
+  </div>
+  <figcaption class="mono">Member app · early design, sample data<span class="sr-only">. A phone screen for Flat 4B: the photo cloud on a TV box backed up 3 phones overnight and has 412 GB of 1 TB used; a door camera on an old phone records to the TV box and keeps 14 days; a laptop rents 250 GB to other members for {tk(credit)} credit; the off-site copy in 4 other homes is healthy; the next bill is {tk(plan - credit)}, payable by bKash.</span></figcaption>
+</figure>
