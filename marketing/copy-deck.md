@@ -110,11 +110,14 @@ Attach: `one-pager-a4.pdf` + deck link (share it from the deck's Share menu firs
 |---|---|---|---|
 | Earn | Your old laptop can pay its own way | Rent out its idle hours and spare disk through amader.cloud. Storage pays Tk 50 per 250 GB a month in our pilot. | Estimate my earnings |
 
-## 9. Everyday Dhaka one-liners (for reels, posts, flyers)
+## 9. Community one-liners (for reels, posts, flyers)
 
-- Load-shedding? An old phone on its charger tells the building's WhatsApp when the current goes and when it's back.
-- Rooftop tank about to run dry? A LoRa sensor tells you before the taps do.
-- Monsoon lane flooding? Sensors on the wall alert the whole street.
-- The mosque's prayer times, on an old TV, kept up to date.
-- The bazar's prices, on a tablet the committee updates every morning.
-- The tea stall's bKash QR and the day's tally, on an old phone.
+Each line is one instance of a pattern: pool storage, share screens, share eyes with consent, tell everyone at once, learn together, pass it on, earn together.
+
+- Your photos, kept safe by your neighbours, in pieces they can't read.
+- Walls covered in posters? The lobby's old monitors carry the notices, and local ads pay the building fund.
+- The paper visitor register, replaced by a tablet that was gathering dust.
+- Load-shedding? An old phone on its charger tells the building when the current is back.
+- Two old laptops in the common room: a homework corner without mobile data.
+- Too old for you, a first phone for someone else. Wiped, fixed and passed on in the para.
+- Your building's idle laptops can help pay its service charge.
