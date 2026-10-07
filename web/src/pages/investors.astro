@@ -61,7 +61,7 @@ const calcPlans = (["starter", "business", "agency"] as const).map((id) => ({
         ))}
       </div>
     </div>
-    <p class="small" style="margin-top:14px">Model prices: {models.opus.name} ${models.opus.input}/${models.opus.output}, {models.sonnet.name} ${models.sonnet.input}/${models.sonnet.output}, {models.haiku.name} ${models.haiku.input}/${models.haiku.output} per million input/output tokens; cache reads ${models.opus.cacheRead}. <Src id="anthropic" /></p>
+    <p class="small" style="margin-top:14px">Model prices: {models.opus.name} ${models.opus.input}/${models.opus.output}, {models.sonnet.name} ${models.sonnet.input}/${models.sonnet.output}, {models.haiku.name} ${models.haiku.input}/${models.haiku.output} per million input/output tokens; cache reads {usd(models.opus.cacheRead)}. <Src id="anthropic" /></p>
   </div>
 </section>
 

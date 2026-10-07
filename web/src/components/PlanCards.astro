@@ -7,7 +7,7 @@ const plans = facts.pricing.plans;
 <div class="plans" class:list={{ compact }}>
   {plans.map((p) => (
     <div class="plan" class:list={{ feat: p.id === "starter" }}>
-      <div class="plan-top"><h3>{p.name}</h3>{p.id === "starter" && <span class="tag">most sellers</span>}</div>
+      <div class="plan-top"><h3>{p.name}</h3>{p.id === "starter" && <span class="tag">start here</span>}</div>
       <p class="price"><span class="amt">{tk(p.tk)}</span>{p.tk > 0 && <span class="per">/month</span>}</p>
       <p class="usd mono">{p.tk > 0 ? `≈ ${usdOf(p.tk)} a month` : "free to build and preview"}</p>
       {!compact && <ul class="ticks">{p.includes.map((i) => <li>{i}</li>)}</ul>}

@@ -371,11 +371,13 @@ function initDemo(root) {
 
   reset();
   // Run the first example once the demo scrolls into view, unless the visitor has already started one.
+  // A tall demo (phone layout) never shows 35% of itself, so also accept "fills half the viewport".
   const io = new IntersectionObserver((entries) => {
-    if (entries.some((en) => en.isIntersecting)) {
+    const en = entries[entries.length - 1];
+    if (en.intersectionRatio >= 0.35 || en.intersectionRect.height >= innerHeight * 0.5) {
       io.disconnect();
       setTimeout(() => { if (!interacted && !st) build("shop", APPS.shop.prompt); }, 700);
     }
-  }, { threshold: 0.35 });
+  }, { threshold: [0, 0.1, 0.2, 0.35, 0.5] });
   io.observe(root);
 }
