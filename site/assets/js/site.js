@@ -161,3 +161,144 @@ if (checker) {
   checker.addEventListener("change", render);
   modelInput.addEventListener("input", render);
 }
+
+// ---------- Redesign: photo mesh, blueprint scroll story, façade hotspots, network scale ----------
+const reduceMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+// Header turns solid once the hero is scrolled past its top.
+const header = document.querySelector(".site-header");
+if (header && document.body.classList.contains("has-hero")) {
+  const onScroll = () => header.classList.toggle("solid", scrollY > 40);
+  addEventListener("scroll", onScroll, { passive: true }); onScroll();
+}
+
+// Shared tooltip for points drawn over photographs.
+function tipper(container, selector) {
+  const tip = container.querySelector(".node-tip");
+  if (!tip) return () => {};
+  const show = (el) => {
+    const c = container.getBoundingClientRect();
+    const r = el.querySelector("circle:last-child").getBoundingClientRect();
+    tip.innerHTML = "";
+    const b = document.createElement("b"); b.textContent = el.dataset.from.toLowerCase();
+    tip.append(b, document.createTextNode(el.dataset.to));
+    tip.hidden = false;
+    let x = r.left + r.width / 2 - c.left;
+    const half = tip.offsetWidth / 2 + 8;
+    x = Math.min(Math.max(x, half), c.width - half);
+    tip.style.left = `${x}px`;
+    tip.style.top = `${r.top - c.top}px`;
+  };
+  const hide = () => { tip.hidden = true; };
+  container.querySelectorAll(selector).forEach((el) => {
+    el.addEventListener("pointerenter", () => show(el));
+    el.addEventListener("pointerleave", hide);
+    el.addEventListener("focus", () => show(el));
+    el.addEventListener("blur", hide);
+    el.addEventListener("click", () => show(el));
+    el.addEventListener("keydown", (e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); show(el); } });
+  });
+  return show;
+}
+const hero = document.querySelector(".hero");
+if (hero) tipper(hero, ".node");
+if (reduceMotion) document.querySelectorAll(".packets").forEach((g) => g.remove());
+
+// Façade: device list and window hotspots highlight each other.
+const facade = document.querySelector(".facade");
+if (facade) {
+  const fig = facade.querySelector(".facade-photo");
+  const show = tipper(fig, ".spot");
+  const buttons = facade.querySelectorAll(".jobs button");
+  const spots = facade.querySelectorAll(".spot");
+  const select = (id) => {
+    buttons.forEach((b) => b.classList.toggle("active", b.dataset.spot === id));
+    spots.forEach((s) => s.classList.toggle("active", s.dataset.spot === id));
+    const s = facade.querySelector(`.spot[data-spot="${id}"]`);
+    if (s) show(s);
+  };
+  buttons.forEach((b) => {
+    b.addEventListener("click", () => select(b.dataset.spot));
+    b.addEventListener("pointerenter", () => select(b.dataset.spot));
+  });
+  spots.forEach((s) => s.addEventListener("click", () => select(s.dataset.spot)));
+  // Start with the first device selected once the section is visible.
+  new IntersectionObserver((entries, io) => {
+    if (entries[0].isIntersecting) { select("a"); io.disconnect(); }
+  }, { threshold: 0.4 }).observe(fig);
+}
+
+// Blueprint: scroll position draws each device, then wires it to the hub.
+const bp = document.querySelector(".bp-scroll");
+if (bp) {
+  const devs = [...bp.querySelectorAll(".dev")];
+  const steps = [...bp.querySelectorAll(".bp-steps li")];
+  const hub = bp.querySelector(".hub");
+  const clamp = (v) => Math.min(1, Math.max(0, v));
+  const render = (p) => {
+    const t = clamp(p / 0.88) * devs.length;
+    devs.forEach((g, i) => {
+      const local = clamp(t - i);
+      g.style.setProperty("--d", clamp(local / 0.6).toFixed(3));
+      g.style.setProperty("--c", clamp((local - 0.6) / 0.4).toFixed(3));
+    });
+    hub.style.setProperty("--c", clamp((p - 0.88) / 0.1).toFixed(3));
+    const active = Math.min(devs.length - 1, Math.floor(t));
+    steps.forEach((li, i) => { li.classList.toggle("on", i === active); li.classList.toggle("done", i < active); });
+  };
+  if (reduceMotion) render(1);
+  else {
+    let raf = 0;
+    const onScroll = () => {
+      cancelAnimationFrame(raf);
+      raf = requestAnimationFrame(() => {
+        const r = bp.getBoundingClientRect();
+        render(clamp(-r.top / (r.height - innerHeight)));
+      });
+    };
+    addEventListener("scroll", onScroll, { passive: true });
+    addEventListener("resize", onScroll);
+    onScroll();
+  }
+}
+
+// Scale: a slider grows the network across the skyline. Figures are illustrative.
+const consoleForm = document.getElementById("scale-console");
+if (consoleForm) {
+  const svg = document.querySelector(".scale-mesh");
+  const NS = "http://www.w3.org/2000/svg";
+  // Deterministic points in the band of the photo that is all buildings, grown outward from one building.
+  let seed = 7;
+  const rand = () => ((seed = (seed * 16807) % 2147483647) / 2147483647);
+  const pts = Array.from({ length: 120 }, () => [80 + rand() * 2240, 1190 + rand() * 370]);
+  const origin = [1250, 1450];
+  pts.sort((a, b) => Math.hypot(a[0] - origin[0], a[1] - origin[1]) - Math.hypot(b[0] - origin[0], b[1] - origin[1]));
+  const edges = pts.map((p, i) => {
+    if (i === 0) return [];
+    const near = pts.slice(0, i).map((q, j) => [j, Math.hypot(p[0] - q[0], p[1] - q[1])]).sort((a, b) => a[1] - b[1]);
+    return near.slice(0, i % 3 === 0 && i > 1 ? 2 : 1).map(([j]) => j);
+  });
+  const gE = svg.querySelector(".edges"), gD = svg.querySelector(".dots");
+  pts.forEach((p, i) => {
+    edges[i].forEach((j) => {
+      const l = document.createElementNS(NS, "line");
+      l.setAttribute("x1", p[0]); l.setAttribute("y1", p[1]); l.setAttribute("x2", pts[j][0]); l.setAttribute("y2", pts[j][1]);
+      l.dataset.i = i; gE.append(l);
+    });
+    const c = document.createElementNS(NS, "circle");
+    c.setAttribute("cx", p[0]); c.setAttribute("cy", p[1]); c.setAttribute("r", i === 0 ? 11 : 7); c.dataset.i = i; gD.append(c);
+  });
+  const range = consoleForm.querySelector("#buildings");
+  const fmt = new Intl.NumberFormat("en-IN");
+  const out = (id, v) => { consoleForm.querySelector(id).textContent = v; };
+  const update = () => {
+    const k = +range.value;
+    svg.querySelectorAll("[data-i]").forEach((el) => { el.style.display = +el.dataset.i < k ? "" : "none"; });
+    out("#b-out", k);
+    out("#o-devices", fmt.format(k * 14));
+    out("#o-homes", fmt.format(k * 10));
+    out("#o-rev", `Tk ${fmt.format(k * 4490)}`);
+  };
+  range.addEventListener("input", update);
+  update();
+}
