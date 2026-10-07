@@ -26,9 +26,9 @@ function initDemo(root) {
   const APPS = {
     shop: {
       match: /shop|sell|store|bag|cloth|saree|dress|product|boutique|cake|food|jewel|deliver/i,
-      prompt: "A shop for my handmade bags with bKash payment, delivery, and an SMS when the order ships",
+      prompt: "A store for my handmade bags with bKash payment, delivery, and an SMS when the order ships",
       name: "Jute & Thread", slug: "jutethread", color: "#9a4a24",
-      kind: "shop with courier booking",
+      kind: "store with courier booking",
       plan: ["Pages: home, product, checkout", "Payments: bKash, Nagad, card", "Delivery: courier booked on dispatch", "SMS: order confirmed, order shipped"],
       model: "products, orders, customers, deliveries",
       tabs: [["home", "Home"], ["item", "Product"], ["pay", "Checkout"], ["sms", "SMS"]],

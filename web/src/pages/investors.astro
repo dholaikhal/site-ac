@@ -8,7 +8,7 @@ const { market: m, anchor: a, economics: e, models } = facts;
 const stages = [
   { id: "describe", t: "Describe", model: "Owner", job: "The owner types or speaks what they need, in Bangla, Banglish or English.", why: "No forms, no templates to browse. The request is the spec.", cost: "" },
   { id: "build", t: "Plan and build", model: models.opus.name, job: "Plans the app, generates the data model and pages, wires the connectors and writes the tests.", why: "Multi-file generation with judgement. Reliability matters most on the first build.", cost: `${usd(e.firstBuildOpusUsd)} per first build (${usd(e.firstBuildSonnetUsd)} on ${models.sonnet.name} for the free tier)` },
-  { id: "rails", t: "Constrained assembly", model: "Fixed stack", job: "One TypeScript web app stack with a managed database, a tested component library and pre-built local connectors.", why: "Generated code is reliable when it is constrained. A broken shop is fatal; the agents assemble rather than invent.", cost: "" },
+  { id: "rails", t: "Constrained assembly", model: "Fixed stack", job: "One TypeScript web app stack with a managed database, a tested component library and pre-built local connectors.", why: "Generated code is reliable when it is constrained. A broken store is fatal; the agents assemble rather than invent.", cost: "" },
   { id: "edit", t: "Edit by asking", model: models.sonnet.name, job: "“Add 10% off for bKash.” Edits and small features, each tested and previewed with one-click rollback.", why: "Fast and cheap, and good enough on a constrained stack.", cost: `${usd(e.editUsd)} per edit` },
   { id: "review", t: "Safety review", model: `${models.haiku.name} + rules`, job: "Every published app is checked for phishing, impersonation and prohibited goods, before publishing and continuously.", why: "Shared subdomains invite fake bank and mobile-money pages. Review is what keeps amader.cloud trusted.", cost: "" },
   { id: "support", t: "Support agent", model: models.sonnet.name, job: "Answers owners from their app's own logs: “Why didn't my bKash payment show?”", why: "Support is the hidden cost of small-business software. The agent can see what actually happened.", cost: "" },
@@ -27,7 +27,7 @@ const calcPlans = (["starter", "business", "agency"] as const).map((id) => ({
       <h1>The fastest-growing AI category, built for markets that pay by mobile money.</h1>
       <span class="address">For investors</span>
     </div>
-    <p class="lede">Amader Cloud is an AI app builder for Bangladeshi businesses. Owners describe a shop, bookings or fee collection; coding agents build it on one fixed stack, with bKash, Nagad, card, courier and SMS connectors already wired in, and host it at name.amader.cloud.</p>
+    <p class="lede">Amader Cloud is an AI app builder for Bangladeshi businesses. Owners describe a store, bookings or fee collection; coding agents build it on one fixed stack, with bKash, Nagad, card, courier and SMS connectors already wired in, and host it at name.amader.cloud.</p>
     <div class="anchor">
       <div class="stat"><span class="n">{a.lovableValuation.text}</span><span class="l">{a.lovableValuation.label}</span><Src id={a.lovableValuation.source} /></div>
       <div class="stat"><span class="n">{a.lovableArr.text}</span><span class="l">{a.lovableArr.label}</span><Src id={a.lovableArr.source} /></div>
@@ -211,7 +211,7 @@ const calcPlans = (["starter", "business", "agency"] as const).map((id) => ({
       <dl class="risks">
         <dt>Scam sites on our subdomains</dt><dd>AI and rule-based review before publishing and continuously; no payment brands in app names; takedown in hours; a verified-business badge.</dd>
         <dt>Payment licensing</dt><dd>We never hold funds; merchants use their own gateway accounts through a licensed partner.</dd>
-        <dt>Generated code breaks a live shop</dt><dd>Fixed stack, tests on every change, preview before publish, one-click rollback.</dd>
+        <dt>Generated code breaks a live store</dt><dd>Fixed stack, tests on every change, preview before publish, one-click rollback.</dd>
         <dt>Build costs exceed plan price</dt><dd>Template-first generation, {models.sonnet.name} for edits, credit limits.</dd>
         <dt>Global builders add local payments</dt><dd>Speed, depth of connectors, local support and distribution through agencies.</dd>
         <dt>Customer data on hosted apps</dt><dd>Data-processing terms under the Personal Data Protection Ordinance 2025 <Src id="pdpo" />; backups; option to host in Bangladesh later.</dd>
