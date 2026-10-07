@@ -1,0 +1,1 @@
+{ "private": true, "name": "amader-marketing-render", "devDependencies": { "playwright-core": "^1", "qrcode": "^1" } }
