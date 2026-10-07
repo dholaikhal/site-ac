@@ -70,6 +70,7 @@ p { margin: 0 0 1em; }
 .lede { font-size: var(--fs-lede); line-height: 1.5; color: var(--ink-2); max-width: 60ch; }
 .small { font-size: var(--fs-small); color: var(--ink-2); }
 .url { font-family: var(--code); font-size: 0.88em; white-space: nowrap; }
+.tag { font-weight: 700; font-size: 0.8rem; color: var(--red); white-space: nowrap; }
 
 /* ---------- The signboard ----------
    A painted board: flat colour, a pinstripe frame inset from the edge, four screw heads,
