@@ -143,8 +143,25 @@ SCENES += [
         "links": "f6-f7 f7-f8 f7-f9 f7-f1".split(),
         "radio": [], "far": ["f1-f2", "f1-f3", "f1-f4", "f1-f5"], "rings": None,
     },
+    {
+        "id": "office", "label": "Offices", "photo": "office", "w": 2400, "h": 1600,
+        "fit": "cover", "pos": "50% 100%", "par": "xMidYMax slice",
+        "alt": "An office building in Dhaka at night, with several floors lit.",
+        "credit": ("Dhaka. Photo: Adnan Fahim (Pexels)", "https://www.pexels.com/photo/view-of-apartments-in-a-glass-building-15535141/"),
+        "nodes": {
+            "o1": (1650, 760, "200 retired laptops", "Wiped with a certificate each, then sent to school labs"),
+            "o2": (1900, 760, "Old monitors", "Meeting-room and reception screens"),
+            "o3": (1600, 1080, "Office desktops", "Rent out idle computing overnight"),
+            "o4": (1900, 1080, "Old desktop", "File server and nightly backups"),
+            "o5": (1530, 450, "Old laptop", "Holds backup copies for the branch office"),
+            "o6": (1150, 940, "Old phones", "Cameras for the server room and stairs"),
+            "o7": (1150, 1250, "Old tablet", "Visitor log at reception"),
+        },
+        "links": "o1-o2 o2-o4 o4-o3 o3-o1 o6-o3 o7-o6".split(),
+        "radio": [], "far": ["o5-o4"], "rings": None,
+    },
 ]
-ORDER = ["rooftops", "towers", "street", "bazar", "teastall", "monsoon", "neighbourhood"]
+ORDER = ["rooftops", "towers", "office", "street", "bazar", "teastall", "monsoon", "neighbourhood"]
 SCENES = sorted(SCENES, key=lambda s: ORDER.index(s["id"]))
 for s in SCENES:
     s["label"] = {"street": "Shops at night", "neighbourhood": "Neighbourhood"}.get(s["id"], s["label"])
