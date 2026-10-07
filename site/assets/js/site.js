@@ -229,7 +229,7 @@ if (facade) {
 }
 
 // Blueprint: scroll position draws each device, then wires it to the hub.
-const bp = document.querySelector(".bp-scroll");
+const bp = document.querySelector("#how");
 if (bp) {
   const devs = [...bp.querySelectorAll(".dev")];
   const steps = [...bp.querySelectorAll(".bp-steps li")];
@@ -493,4 +493,27 @@ if (consoleForm) {
   document.getElementById("kill-disk").addEventListener("click", kill);
   document.getElementById("reset-disk").addEventListener("click", () => { if (!busy) draw(); });
   draw();
+})();
+
+// The TV box, opened up: every [data-on="a,b"] element gets --v from 0 to 1 as the scroll story moves from step a to step b.
+(() => {
+  const sec = document.getElementById("tvbox");
+  if (!sec) return;
+  const items = [...sec.querySelectorAll("[data-on]")].map((el) => { const [a, b] = el.dataset.on.split(",").map(Number); return { el, a, b }; });
+  const steps = [...sec.querySelectorAll(".tv-steps li")];
+  const STEPS = 8;
+  const clamp = (v) => Math.min(1, Math.max(0, v));
+  const render = (p) => {
+    const t = clamp(p / 0.94) * (STEPS + 0.4);
+    items.forEach(({ el, a, b }) => el.style.setProperty("--v", clamp((t - a) / (b - a)).toFixed(3)));
+    const active = Math.min(STEPS - 1, Math.floor(t));
+    steps.forEach((li, i) => { li.classList.toggle("on", i === active); li.classList.toggle("done", i < active); });
+  };
+  if (reduceMotion) return render(1);
+  let raf = 0;
+  const onScroll = () => {
+    cancelAnimationFrame(raf);
+    raf = requestAnimationFrame(() => { const r = sec.getBoundingClientRect(); render(clamp(-r.top / (r.height - innerHeight))); });
+  };
+  addEventListener("scroll", onScroll, { passive: true }); addEventListener("resize", onScroll); onScroll();
 })();

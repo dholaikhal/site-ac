@@ -629,3 +629,44 @@ fieldset.field { border: 0; padding: 0; margin: 0; }
 .hero-foot button, .hero-foot a { pointer-events: auto; }
 .scene figcaption { pointer-events: none; }
 .scene figcaption a { pointer-events: auto; }
+
+/* ---------- The TV box, opened up (scroll-driven) ---------- */
+.tvbox.bp-scroll { height: 720vh; }
+.tv-art .tv-draw { fill: none; stroke: var(--chalk); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; vector-effect: non-scaling-stroke; stroke-dasharray: 1; stroke-dashoffset: calc(1 - var(--v, 0)); }
+.tv-art .tv-draw.thin { stroke: var(--bp-line); stroke-width: 1.2; }
+.tv-art g[data-on] .tv-draw { stroke-dashoffset: calc(1 - var(--v, 0)); }
+.tv-art .tv-lid { transform: translateY(calc(var(--v, 0) * -190px)); opacity: calc(1 - var(--v, 0)); }
+.tv-art .tv-lead { fill: none; stroke: var(--bp-line); stroke-width: 1; vector-effect: non-scaling-stroke; stroke-dasharray: 3 4; }
+.tv-art g[data-on] { opacity: 1; }
+.tv-art g[data-on]:has(> .tv-label), .tv-art g[data-on]:has(> .tv-total) { opacity: var(--v, 0); }
+.tv-art .tv-label { fill: var(--bp-line); font-family: var(--mono); font-size: 16px; }
+.tv-art .tv-label.hi { fill: var(--amber); }
+.tv-art .tv-wire { fill: none; stroke: var(--amber); stroke-width: 2.5; vector-effect: non-scaling-stroke; stroke-dasharray: 1; stroke-dashoffset: calc(1 - var(--v, 0)); filter: drop-shadow(0 0 5px rgba(255,181,71,.6)); }
+.tv-art .tv-meter-title { fill: var(--chalk); font-family: var(--sans); font-size: 18px; font-weight: 600; }
+.tv-art .tv-bar { fill: rgba(143,184,220,.08); stroke: var(--bp-line); stroke-width: 1; vector-effect: non-scaling-stroke; }
+.tv-art .tv-tick { fill: var(--bp-line); font-family: var(--mono); font-size: 13px; text-anchor: middle; }
+.tv-art g[data-on]:has(> .tv-meter-title) { opacity: var(--v, 0); }
+.tv-art .seg { transform-box: fill-box; transform-origin: left center; transform: scaleX(var(--v, 0)); fill: var(--amber); }
+.tv-art .seg.base, .tv-art .seg.flash { fill: var(--bp-line); opacity: .55; }
+.tv-art .seg.s1 { fill: #ffd089; } .tv-art .seg.s2 { fill: #ffb547; } .tv-art .seg.s3 { fill: #e89a2c; } .tv-art .seg.s4 { fill: #ffc66e; }
+.tv-art .seg.s5 { fill: #fff3dc; }
+.tv-art .seg.disk { fill: rgba(255,181,71,.55); }
+.tv-art .tv-seg-label { fill: var(--chalk-2); font-family: var(--mono); font-size: 13px; opacity: var(--v, 0); }
+.tv-art .tv-seg-label.hi { fill: var(--amber); }
+.tv-art .tv-total { fill: var(--chalk); font-family: var(--sans); font-size: 19px; font-weight: 600; }
+@media (max-width: 900px) {
+  .tvbox.bp-scroll { height: 760vh; }
+  .tv-art .tv-label { font-size: 22px; }
+  .tv-art .tv-total { font-size: 22px; }
+}
+@media (prefers-reduced-motion: reduce) { .tvbox.bp-scroll { height: auto; } }
+.tv-art g.tv-lid { opacity: calc(1 - var(--v, 0)); }
+.tvbox .bp-sticky { grid-template-columns: minmax(0, .62fr) minmax(0, 1.38fr); }
+.tvbox .bp-text h2 { font-size: clamp(1.8rem, 1.1rem + 1.8vw, 2.7rem); }
+.tvbox .bp-art { height: min(84svh, 820px); }
+.tv-art .tv-label { font-size: 19px; }
+.tv-art .tv-meter-title { font-size: 21px; }
+.tv-art .tv-tick { font-size: 15px; }
+.tv-art .tv-seg-label { font-size: 16px; }
+.tv-art .tv-total { font-size: 21px; }
+@media (max-width: 900px) { .tvbox .bp-sticky { grid-template-columns: 1fr; } .tv-art .tv-label, .tv-art .tv-seg-label { font-size: 22px; } }

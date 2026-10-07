@@ -282,6 +282,104 @@
   </div>
 </section>
 
+<!-- The garden-variety TV box: what's inside, and what it can do (scroll-driven) -->
+<section class="bp bp-scroll tvbox" id="tvbox" aria-labelledby="tvbox-title">
+  <div class="wrap bp-sticky">
+    <div class="bp-text">
+      <span class="kicker">The box in your drawer</span>
+      <h2 id="tvbox-title">A TV box is a small computer. Here's what it can still do.</h2>
+      <ol class="bp-steps tv-steps">
+        <li class="on"><h3>The box in the drawer</h3><p>Plenty of homes that moved to a smart TV still have one. Here's what's inside a typical box.</p></li>
+        <li><h3>A small computer, really</h3><p>Four ARM cores, 1–4 GB of memory, flash storage, Ethernet, USB and Wi‑Fi. Roughly a phone from a few years ago, without the screen or battery.</p></li>
+        <li><h3>Add a disk</h3><p>Its own flash is small and wears out. A USB disk gives it room for a whole family's photos and files.</p></li>
+        <li><h3>Back up every phone</h3><p>Photos and files from the family's phones copy home every night.</p></li>
+        <li><h3>A photo library</h3><p>Albums and a timeline on your own disk, with no monthly storage bill.</p></li>
+        <li><h3>No ads, anywhere at home</h3><p>Every phone and TV on your Wi‑Fi, without installing anything on them.</p></li>
+        <li><h3>Films and music at home</h3><p>Your own media library, played on any TV or phone in the house.</p></li>
+        <li><h3>Rent out what's left</h3><p>Spare memory and disk earn credit by holding other members' encrypted backups.</p></li>
+      </ol>
+    </div>
+    <svg class="bp-art tv-art" viewBox="0 0 1000 760" role="img" aria-labelledby="tv-art-title">
+      <title id="tv-art-title">Blueprint of a typical Android TV box: four ARM cores, 1 to 4 GB of memory, 8 to 64 GB of flash, Ethernet, USB, HDMI and Wi‑Fi. A USB disk is attached, and a memory meter fills as jobs are added: backup, photo library, ad blocking, media library and rented storage, using about 2.3 GB of 4 GB at roughly 5 watts.</title>
+      <!-- board and parts (revealed when the lid lifts) -->
+      <g data-on="1.2,1.9">
+        <rect class="tv-draw" pathLength="1" x="250" y="160" width="500" height="170" rx="10"/>
+        <rect class="tv-draw" pathLength="1" x="440" y="195" width="96" height="96" rx="4"/>
+        <rect class="tv-draw thin" pathLength="1" x="456" y="211" width="64" height="64" rx="2"/>
+        <rect class="tv-draw" pathLength="1" x="566" y="195" width="62" height="38" rx="3"/>
+        <rect class="tv-draw" pathLength="1" x="566" y="249" width="62" height="38" rx="3"/>
+        <rect class="tv-draw" pathLength="1" x="310" y="232" width="84" height="54" rx="3"/>
+        <rect class="tv-draw" pathLength="1" x="650" y="262" width="62" height="42" rx="3"/>
+        <path class="tv-draw thin" pathLength="1" d="M660 262 v-26 l10 -8 l10 8 v26"/>
+        <rect class="tv-draw" pathLength="1" x="750" y="182" width="30" height="34" rx="2"/>
+        <rect class="tv-draw" pathLength="1" x="750" y="228" width="26" height="16" rx="2"/>
+        <rect class="tv-draw" pathLength="1" x="750" y="252" width="26" height="16" rx="2"/>
+        <rect class="tv-draw" pathLength="1" x="750" y="282" width="30" height="14" rx="2"/>
+        <circle class="tv-draw" pathLength="1" cx="236" cy="246" r="12"/>
+        <path class="tv-draw thin" pathLength="1" d="M270 180 h150 M270 310 h460 M540 180 h20"/>
+      </g>
+      <!-- labels for the parts -->
+      <g data-on="1.6,2.1">
+        <path class="tv-lead" d="M488 195 V128 M597 195 V96 M310 259 H150 M224 246 H150 M780 199 H812 M776 236 H812 M780 289 H812 M681 304 V352"/>
+        <text class="tv-label hi" x="300" y="120">4 ARM cores, 1.2–2 GHz</text>
+        <text class="tv-label" x="560" y="88">1–4 GB memory</text>
+        <text class="tv-label" x="10" y="264" text-anchor="start">8–64 GB flash</text>
+        <text class="tv-label" x="10" y="232" text-anchor="start">5 V or 12 V power</text>
+        <text class="tv-label" x="818" y="204">Ethernet</text>
+        <text class="tv-label" x="818" y="241">2 × USB</text>
+        <text class="tv-label" x="818" y="294">HDMI</text>
+        <text class="tv-label" x="640" y="370">Wi‑Fi</text>
+      </g>
+      <!-- the closed box: drawn first, then lifts away -->
+      <g class="tv-lid" data-on="1,1.6">
+        <g data-on="0,0.8">
+          <rect class="tv-draw" pathLength="1" x="236" y="146" width="528" height="198" rx="18"/>
+          <path class="tv-draw thin" pathLength="1" d="M262 318 h476"/>
+          <circle class="tv-draw" pathLength="1" cx="708" cy="300" r="6"/>
+        </g>
+      </g>
+      <!-- USB disk -->
+      <g data-on="2,2.6">
+        <path class="tv-wire" pathLength="1" d="M776 260 H796 C 800 330, 860 350, 900 388"/>
+        <rect class="tv-draw" pathLength="1" x="830" y="388" width="140" height="64" rx="10"/>
+        <circle class="tv-draw thin" pathLength="1" cx="945" cy="423" r="6"/>
+        <text class="tv-label hi" x="830" y="484">1 TB USB disk</text>
+      </g>
+      <!-- meters -->
+      <g data-on="1.4,2">
+        <text class="tv-meter-title" x="60" y="458">Memory, on a 4 GB box</text>
+        <rect class="tv-bar" x="60" y="532" width="880" height="34" rx="3"/>
+        <path class="tv-lead" d="M280 566 v8 M500 566 v8 M720 566 v8 M940 566 v8"/>
+        <text class="tv-tick" x="280" y="594">1 GB</text><text class="tv-tick" x="500" y="594">2 GB</text><text class="tv-tick" x="720" y="594">3 GB</text><text class="tv-tick" x="930" y="594">4 GB</text>
+        <text class="tv-meter-title" x="60" y="640">Storage</text>
+        <rect class="tv-bar" x="60" y="652" width="880" height="26" rx="3"/>
+      </g>
+      <rect class="seg base" data-on="1.6,2.1" x="60" y="532" width="43" height="34"/>
+      <rect class="seg s1" data-on="3,3.6" x="103" y="532" width="54" height="34"/>
+      <rect class="seg s2" data-on="4,4.6" x="157" y="532" width="258" height="34"/>
+      <rect class="seg s3" data-on="5,5.6" x="415" y="532" width="21" height="34"/>
+      <rect class="seg s4" data-on="6,6.6" x="436" y="532" width="86" height="34"/>
+      <rect class="seg s5" data-on="7,7.6" x="522" y="532" width="32" height="34"/>
+      <g class="seg-labels">
+        <text class="tv-seg-label" data-on="1.8,2.1" x="62" y="594">system</text>
+        <text class="tv-seg-label" data-on="3.3,3.6" x="100" y="520">backup</text>
+        <text class="tv-seg-label" data-on="4.3,4.6" x="200" y="494">photo library</text>
+        <text class="tv-seg-label" data-on="5.3,5.6" x="360" y="520">ad blocking</text>
+        <text class="tv-seg-label" data-on="6.3,6.6" x="436" y="494">media</text>
+        <text class="tv-seg-label hi" data-on="7.3,7.6" x="530" y="520">rented storage</text>
+      </g>
+      <rect class="seg flash" data-on="1.6,2.1" x="60" y="652" width="10" height="26"/>
+      <rect class="seg disk" data-on="2.4,3" x="70" y="652" width="870" height="26"/>
+      <text class="tv-seg-label" data-on="1.8,2.1" x="62" y="702">8 GB flash</text>
+      <text class="tv-seg-label hi" data-on="2.6,3" x="800" y="702">+ 1 TB disk</text>
+      <!-- totals -->
+      <g data-on="7.8,8.3">
+        <text class="tv-total" x="60" y="748">About 2.3 GB of 4 GB in use, around 5 W, all day: roughly Tk 30–65 of power a month.</text>
+      </g>
+    </svg>
+  </div>
+</section>
+
 <!-- Why: three facts -->
 <section class="section" aria-labelledby="why-title">
   <div class="wrap">
