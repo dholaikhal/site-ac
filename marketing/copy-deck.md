@@ -29,7 +29,7 @@ Image: `card-together.png`
 >
 > We're a small Dhaka team giving them second jobs: cameras for the stairs, Wi‑Fi for the roof, a family photo backup that doesn't cost monthly storage fees. We wipe everything first and look after it afterwards.
 >
-> We're looking for **2 buildings** for our pilot this winter. If your building committee might be interested, comment or message us, and we'll come and check your devices for free.
+> We're looking for **2 buildings** for our pilot, starting in March. If your building committee might be interested, comment or message us, and we'll come and check your devices for free.
 
 Image: `card-backups.png` or `card-screens.png`
 
@@ -39,7 +39,7 @@ Image: `card-backups.png` or `card-screens.png`
 >
 > I'm [name] from amader.cloud. We turn the old phones, TV boxes, laptops and routers that residents no longer use into equipment for the building: stairwell and gate cameras, Wi‑Fi for the roof and guard room, and a notice screen in the lobby. We maintain all of it.
 >
-> We're choosing two Dhaka buildings for a pilot starting [December]. The visit and device check are free. Could we show the committee a 10-minute demo at your next meeting?
+> We're choosing two Dhaka buildings for a pilot starting [March 2027]. The visit and device check are free. Could we show the committee a 10-minute demo at your next meeting?
 >
 > amader.cloud
 
@@ -72,7 +72,7 @@ Attach: `flyer-a5.pdf`
 >
 > At amader.cloud we take working devices that homes and companies no longer use, wipe them to NIST SP 800‑88 guidance, rebuild them for one job (camera, Wi‑Fi, private cloud, school lab), and charge monthly to keep them running.
 >
-> We get paid at both ends: companies pay to retire devices, and buildings, homes, shops and schools pay to run them. We're starting with Dhaka's apartment buildings this winter.
+> We get paid at both ends: companies pay to retire devices, and buildings, homes, shops and schools pay to run them. We're starting with Dhaka's apartment buildings in early 2027.
 >
 > If you invest in circular infrastructure in South Asia, I'd love to show you the model. invest@amader.cloud
 

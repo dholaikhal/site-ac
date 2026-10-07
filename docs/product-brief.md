@@ -39,7 +39,7 @@ The **device passport** is the record each device carries through the pipeline: 
 What follows from the table:
 
 - **Most homes and buildings already own a full kit.** A building of 30 flats probably has old phones for its stairwell cameras, a router for the rooftop, a TV box for its server and a tablet for the lobby notice board. *Hypothesis:* the 2-week device audit in the pilot will check this. So generality is the selling point: we can furnish a building's whole digital setup from its own drawers.
-- **Renting idle capacity works once laptops and desktops are in the pool.** A TV box's four ARM cores are worth little to a buyer. An i5 laptop's are worth something. See [Earn](#earn-renting-idle-capacity): storage from the pilot, computing from 2027.
+- **Renting idle capacity works once laptops and desktops are in the pool.** A TV box's four ARM cores are worth little to a buyer. An i5 laptop's are worth something. See [Earn](#earn-renting-idle-capacity): storage from the pilot, computing from 2028.
 
 ## Why Dhaka, why now
 
@@ -99,7 +99,7 @@ Each recipe also has an **eligibility list** published on the site, updated as w
 | **Dokan** | Up to 5 devices; nightly backup for up to 3 Windows PCs; 500 GB off-site; 4 h business-day response | Tk 3,000 | Tk 990 |
 | **Pathshala** | Lab of up to 20 machines + local library server; teacher training session; term-time visits | Quoted (often sponsored) | From Tk 1,500 per lab |
 | **Retire** (companies) | Collection, NIST 800‑88-aligned wipe, certificate per device, impact report showing where each device went | Per device | — |
-| **Earn** (add-on) | Rent out disk space (≥250 GB, ≥95% uptime) and, from 2027, computing time in a sandbox | Free | Storage: Tk 50 per 250 GB-month (pilot). Computing: target Tk 0.30 per core-hour |
+| **Earn** (add-on) | Rent out disk space (≥250 GB, ≥95% uptime) and, from 2028, computing time in a sandbox | Free | Storage: Tk 50 per 250 GB-month (pilot). Computing: target Tk 0.30 per core-hour |
 
 Payments: bKash, Nagad, bank transfer.
 
@@ -208,10 +208,10 @@ Never claim "carbon neutral" or emissions avoided until we have a method we can 
 
 | Phase | When | Scope | Exit criteria |
 |---|---|---|---|
-| 0. Bench | Oct–Nov 2026 | 5 recipes on ~40 donated devices; Headscale, Garage, monitoring; passport v0 | Each recipe: 10 devices pass a 7-day burn-in |
-| 1. Pilot | Dec 2026–Feb 2027 | 2 buildings (Bari) + 1 corporate retirement → 1 school lab | ≥1 building paying by day 60; lab used weekly; support ≤20 min/device/month |
-| 2. Launch | Mar–Jun 2027 | Bari, Ghor, Dokan public; Retire offer to 10 companies; host credits | 500 managed devices; positive contribution per building |
-| 3. Expand | H2 2027 | Pathshala programme; paid computing jobs (Earn); para screens with local ads; optional sensor add-ons; second city | Decide using pilot data |
+| 0. Bench | Jan–Feb 2027 | 5 recipes on ~40 donated devices; Headscale, Garage, monitoring; passport v0 | Each recipe: 10 devices pass a 7-day burn-in |
+| 1. Pilot | Mar–May 2027 | 2 buildings (Bari) + 1 corporate retirement → 1 school lab | ≥1 building paying by day 60; lab used weekly; support ≤20 min/device/month |
+| 2. Launch | Jun–Sep 2027 | Bari, Ghor, Dokan public; Retire offer to 10 companies; host credits | 500 managed devices; positive contribution per building |
+| 3. Expand | Early 2028 | Pathshala programme; paid computing jobs (Earn); para screens with local ads; optional sensor add-ons; second city | Decide using pilot data |
 
 ## Open questions for the founder
 

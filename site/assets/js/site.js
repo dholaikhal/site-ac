@@ -87,7 +87,7 @@ if (checker) {
       tier: "yes",
     },
     laptop: {
-      jobs: ["School lab machine (4 GB memory or more)", "Building server or camera recorder, with its battery as backup power", "Spare computing power for research projects (from 2027)"],
+      jobs: ["School lab machine (4 GB memory or more)", "Building server or camera recorder, with its battery as backup power", "Spare computing power for research projects (from 2028)"],
       say: "Nearly every laptop from the last 12 years can be rebuilt. Swollen batteries are removed and the laptop runs on mains power.",
       tier: "yes",
     },
