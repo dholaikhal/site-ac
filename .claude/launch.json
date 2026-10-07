@@ -1,6 +1,0 @@
-{
-  "version": "0.0.1",
-  "configurations": [
-    { "name": "site", "runtimeExecutable": "/Users/sammaysarkar/.local/bin/node", "runtimeArgs": ["web/node_modules/astro/bin/astro.mjs", "dev", "--root", "web", "--port", "8417"], "port": 8417 }
-  ]
-}
