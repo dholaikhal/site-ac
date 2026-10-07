@@ -1,0 +1,834 @@
+{
+  "hero": [
+    {
+      "id": "rooftops",
+      "label": "Homes and rooftops",
+      "photo": "rooftops",
+      "w": 2400,
+      "h": 1601,
+      "fit": "cover",
+      "pos": "50% 100%",
+      "par": "xMidYMax slice",
+      "alt": "Apartment rooftops in Bibir Bagicha, Dhaka, at dusk, with a few windows lit.",
+      "credit": {
+        "text": "Bibir Bagicha, Dhaka. Photo: Ahmed Hasan",
+        "url": "https://unsplash.com/photos/ioA9B-RAFHE"
+      },
+      "nodes": [
+        {
+          "key": "a",
+          "x": 902,
+          "y": 1112,
+          "from": "TV box",
+          "to": "Family photo cloud",
+          "far": false
+        },
+        {
+          "key": "b",
+          "x": 888,
+          "y": 1370,
+          "from": "Old phone",
+          "to": "Stairwell camera",
+          "far": false
+        },
+        {
+          "key": "c",
+          "x": 495,
+          "y": 1265,
+          "from": "Laptop",
+          "to": "Rents out its idle computing",
+          "far": false
+        },
+        {
+          "key": "d",
+          "x": 1175,
+          "y": 1205,
+          "from": "Desktop PC",
+          "to": "Rents out spare storage",
+          "far": false
+        },
+        {
+          "key": "e",
+          "x": 1363,
+          "y": 1144,
+          "from": "TV box",
+          "to": "Private cloud for a family",
+          "far": false
+        },
+        {
+          "key": "f",
+          "x": 1488,
+          "y": 1060,
+          "from": "Wi‑Fi router",
+          "to": "Rooftop Wi‑Fi",
+          "far": false
+        },
+        {
+          "key": "g",
+          "x": 1525,
+          "y": 1330,
+          "from": "Old phone",
+          "to": "Watches the tank gauge, warns the building before it runs dry",
+          "far": false
+        },
+        {
+          "key": "h",
+          "x": 1765,
+          "y": 975,
+          "from": "Old Wi‑Fi router",
+          "to": "Rooftop link to the next building, for backups only",
+          "far": false
+        },
+        {
+          "key": "i",
+          "x": 1638,
+          "y": 1193,
+          "from": "Tablet",
+          "to": "Family calendar on the wall",
+          "far": false
+        },
+        {
+          "key": "j",
+          "x": 1995,
+          "y": 1230,
+          "from": "Laptop",
+          "to": "Building server",
+          "far": false
+        },
+        {
+          "key": "k",
+          "x": 2000,
+          "y": 1420,
+          "from": "Desktop PC",
+          "to": "Camera recorder",
+          "far": false
+        },
+        {
+          "key": "l",
+          "x": 2260,
+          "y": 1330,
+          "from": "Laptop",
+          "to": "Rents out its idle computing",
+          "far": false
+        },
+        {
+          "key": "m",
+          "x": 1476,
+          "y": 1385,
+          "from": "TV box",
+          "to": "Offline library for the kids",
+          "far": false
+        },
+        {
+          "key": "n",
+          "x": 915,
+          "y": 1025,
+          "from": "Next building over",
+          "to": "Holds an encrypted copy of your backups",
+          "far": true
+        }
+      ],
+      "links": [
+        "a-b",
+        "a-c",
+        "c-b",
+        "a-d",
+        "d-e",
+        "e-f",
+        "e-m",
+        "m-g",
+        "d-m",
+        "i-f",
+        "i-j",
+        "j-k",
+        "j-l",
+        "k-l"
+      ],
+      "radio": [],
+      "far": [
+        "n-a",
+        "n-f",
+        "f-h",
+        "h-g"
+      ],
+      "rings": null
+    },
+    {
+      "id": "office",
+      "label": "Offices",
+      "photo": "office",
+      "w": 2400,
+      "h": 1600,
+      "fit": "cover",
+      "pos": "50% 100%",
+      "par": "xMidYMax slice",
+      "alt": "An office building in Dhaka at night, with several floors lit.",
+      "credit": {
+        "text": "Dhaka. Photo: Adnan Fahim (Pexels)",
+        "url": "https://www.pexels.com/photo/view-of-apartments-in-a-glass-building-15535141/"
+      },
+      "nodes": [
+        {
+          "key": "o1",
+          "x": 1650,
+          "y": 760,
+          "from": "200 retired laptops",
+          "to": "Wiped with a certificate each, then sent to school labs",
+          "far": false
+        },
+        {
+          "key": "o2",
+          "x": 1900,
+          "y": 760,
+          "from": "Old monitors",
+          "to": "Meeting-room and reception screens",
+          "far": false
+        },
+        {
+          "key": "o3",
+          "x": 1600,
+          "y": 1080,
+          "from": "Office desktops",
+          "to": "Rent out idle computing overnight",
+          "far": false
+        },
+        {
+          "key": "o4",
+          "x": 1900,
+          "y": 1080,
+          "from": "Old desktop",
+          "to": "File server and nightly backups",
+          "far": false
+        },
+        {
+          "key": "o5",
+          "x": 1530,
+          "y": 450,
+          "from": "Old laptop",
+          "to": "Holds backup copies for the branch office",
+          "far": false
+        },
+        {
+          "key": "o6",
+          "x": 1150,
+          "y": 940,
+          "from": "Old phones",
+          "to": "Cameras for the server room and stairs",
+          "far": false
+        },
+        {
+          "key": "o7",
+          "x": 1150,
+          "y": 1250,
+          "from": "Old tablet",
+          "to": "Visitor log at reception",
+          "far": false
+        }
+      ],
+      "links": [
+        "o1-o2",
+        "o2-o4",
+        "o4-o3",
+        "o3-o1",
+        "o6-o3",
+        "o7-o6"
+      ],
+      "radio": [],
+      "far": [
+        "o5-o4"
+      ],
+      "rings": null
+    },
+    {
+      "id": "towers",
+      "label": "The building together",
+      "photo": "towers",
+      "w": 2400,
+      "h": 1600,
+      "fit": "cover",
+      "pos": "50% 100%",
+      "par": "xMidYMax slice",
+      "alt": "Rajuk Uttara apartment towers in Dhaka, with hundreds of flat windows.",
+      "credit": {
+        "text": "Uttara, Dhaka. Photo: Robiul Islam Pailot (Pexels)",
+        "url": "https://www.pexels.com/photo/apartment-buildings-in-the-residential-district-of-dhaka-built-as-part-of-the-rajuk-uttara-apartment-project-18340726/"
+      },
+      "nodes": [
+        {
+          "key": "f1",
+          "x": 1360,
+          "y": 560,
+          "from": "Flat 9C",
+          "to": "Its photos, encrypted and split into pieces",
+          "far": false
+        },
+        {
+          "key": "f2",
+          "x": 1520,
+          "y": 880,
+          "from": "Flat 6B",
+          "to": "Holds one piece. It can't read it",
+          "far": false
+        },
+        {
+          "key": "f3",
+          "x": 1840,
+          "y": 700,
+          "from": "Next tower, 8A",
+          "to": "Holds one piece",
+          "far": false
+        },
+        {
+          "key": "f4",
+          "x": 2250,
+          "y": 520,
+          "from": "Tower 3, 10D",
+          "to": "Holds one piece",
+          "far": false
+        },
+        {
+          "key": "f5",
+          "x": 1040,
+          "y": 1180,
+          "from": "Flat 3A",
+          "to": "Holds one piece",
+          "far": false
+        },
+        {
+          "key": "f6",
+          "x": 1170,
+          "y": 1180,
+          "from": "Old monitors",
+          "to": "Lift-lobby screen: notices and local ads, so the walls stay clean",
+          "far": false
+        },
+        {
+          "key": "f7",
+          "x": 1950,
+          "y": 1150,
+          "from": "Old laptop",
+          "to": "Building server: committee records, and a map of who holds which piece",
+          "far": false
+        },
+        {
+          "key": "f8",
+          "x": 2300,
+          "y": 1000,
+          "from": "Desktop PC",
+          "to": "Rents out idle computing for the service-charge fund",
+          "far": false
+        },
+        {
+          "key": "f9",
+          "x": 600,
+          "y": 1250,
+          "from": "Two old laptops",
+          "to": "Homework corner in the common room",
+          "far": false
+        }
+      ],
+      "links": [
+        "f6-f7",
+        "f7-f8",
+        "f7-f9",
+        "f7-f1"
+      ],
+      "radio": [],
+      "far": [
+        "f1-f2",
+        "f1-f3",
+        "f1-f4",
+        "f1-f5"
+      ],
+      "rings": null
+    },
+    {
+      "id": "street",
+      "label": "Shops at night",
+      "photo": "street",
+      "w": 2400,
+      "h": 3200,
+      "fit": "right",
+      "pos": "0% 100%",
+      "par": "xMinYMax slice",
+      "alt": "A Dhaka street on a rainy night: a lit shoe shop, a shuttered shop, a pharmacy sign and flats above.",
+      "credit": {
+        "text": "Dhaka. Photo: MD Shaha Riaz Rimon (Pexels)",
+        "url": "https://www.pexels.com/photo/rainy-night-street-scene-in-dhaka-bangladesh-36922835/"
+      },
+      "nodes": [
+        {
+          "key": "s1",
+          "x": 700,
+          "y": 1500,
+          "from": "Old phone",
+          "to": "Counter camera for the shop",
+          "far": false
+        },
+        {
+          "key": "s2",
+          "x": 880,
+          "y": 1560,
+          "from": "Tablet",
+          "to": "Price and offer screen",
+          "far": false
+        },
+        {
+          "key": "s3",
+          "x": 1200,
+          "y": 1560,
+          "from": "Old phone",
+          "to": "Night camera on a closed shutter",
+          "far": false
+        },
+        {
+          "key": "s4",
+          "x": 1530,
+          "y": 1470,
+          "from": "Laptop",
+          "to": "Pharmacy's nightly backup",
+          "far": false
+        },
+        {
+          "key": "s5",
+          "x": 1850,
+          "y": 1470,
+          "from": "Wi‑Fi router",
+          "to": "Guard-room Wi‑Fi at the gate",
+          "far": false
+        },
+        {
+          "key": "s6",
+          "x": 1650,
+          "y": 720,
+          "from": "TV box",
+          "to": "Family photo cloud upstairs",
+          "far": false
+        },
+        {
+          "key": "s7",
+          "x": 1300,
+          "y": 930,
+          "from": "Laptop",
+          "to": "Rents out its idle computing",
+          "far": false
+        },
+        {
+          "key": "s8",
+          "x": 1350,
+          "y": 560,
+          "from": "Desktop PC",
+          "to": "Rents out spare storage",
+          "far": false
+        }
+      ],
+      "links": [
+        "s1-s2",
+        "s2-s3",
+        "s3-s4",
+        "s4-s5",
+        "s3-s7",
+        "s7-s6",
+        "s6-s8",
+        "s7-s8",
+        "s4-s6",
+        "s5-s6"
+      ],
+      "radio": [],
+      "far": [],
+      "rings": null
+    },
+    {
+      "id": "bazar",
+      "label": "Bazar and mosque",
+      "photo": "bazar",
+      "w": 2400,
+      "h": 3200,
+      "fit": "right",
+      "pos": "50% 100%",
+      "par": "xMidYMax slice",
+      "alt": "A crowded Dhaka market street under tangled cables, with a mosque minaret at the end.",
+      "credit": {
+        "text": "Dhaka. Photo: Ferdous Hasan (Pexels)",
+        "url": "https://www.pexels.com/photo/bustling-dhaka-street-market-with-mosque-in-view-36525029/"
+      },
+      "nodes": [
+        {
+          "key": "b1",
+          "x": 1290,
+          "y": 1180,
+          "from": "TV box + old TV",
+          "to": "Prayer times on the mosque wall",
+          "far": false
+        },
+        {
+          "key": "b2",
+          "x": 1640,
+          "y": 2340,
+          "from": "Tablet",
+          "to": "Today's prices board for the bazar committee",
+          "far": false
+        },
+        {
+          "key": "b3",
+          "x": 1080,
+          "y": 2900,
+          "from": "Old laptop",
+          "to": "The bazar committee's shared accounts",
+          "far": false
+        },
+        {
+          "key": "b4",
+          "x": 2280,
+          "y": 1300,
+          "from": "Desktop PC",
+          "to": "Wholesaler's accounts, backed up nightly",
+          "far": false
+        },
+        {
+          "key": "b5",
+          "x": 2240,
+          "y": 2000,
+          "from": "Old phone",
+          "to": "Shop counter camera",
+          "far": false
+        },
+        {
+          "key": "b6",
+          "x": 350,
+          "y": 2400,
+          "from": "Old phone",
+          "to": "bKash QR and the day's sales tally",
+          "far": false
+        },
+        {
+          "key": "b7",
+          "x": 300,
+          "y": 520,
+          "from": "Laptop",
+          "to": "Rents out its idle computing",
+          "far": false
+        }
+      ],
+      "links": [
+        "b6-b3",
+        "b3-b2",
+        "b2-b5",
+        "b5-b4"
+      ],
+      "radio": [],
+      "far": [
+        "b1-b2",
+        "b1-b7",
+        "b7-b6"
+      ],
+      "rings": null
+    },
+    {
+      "id": "teastall",
+      "label": "Tea stall",
+      "photo": "teastall",
+      "w": 2400,
+      "h": 3175,
+      "fit": "right",
+      "pos": "50% 100%",
+      "par": "xMidYMax slice",
+      "alt": "A roadside tea stall in Dhaka: a blue wall painted with a kettle and the words 'swadhin desher cha', and a row of plastic chairs.",
+      "credit": {
+        "text": "Dhaka. Photo: Ahnaf Abror (Pexels)",
+        "url": "https://www.pexels.com/photo/lonely-man-at-a-dhaka-tea-stall-33006139/"
+      },
+      "nodes": [
+        {
+          "key": "t1",
+          "x": 1650,
+          "y": 1350,
+          "from": "Old tablet",
+          "to": "bKash and Nagad QR, plus the day's tally",
+          "far": false
+        },
+        {
+          "key": "t2",
+          "x": 1050,
+          "y": 1060,
+          "from": "Old phone",
+          "to": "Night camera over the stall and chairs",
+          "far": false
+        },
+        {
+          "key": "t3",
+          "x": 1250,
+          "y": 760,
+          "from": "Old TV + TV box",
+          "to": "The para's notice board: lost and found, events, local ads, instead of posters",
+          "far": false
+        },
+        {
+          "key": "t4",
+          "x": 180,
+          "y": 720,
+          "from": "Laptop",
+          "to": "The coaching centre's attendance and results",
+          "far": false
+        }
+      ],
+      "links": [
+        "t1-t2",
+        "t2-t3",
+        "t3-t4"
+      ],
+      "radio": [],
+      "far": [],
+      "rings": null
+    },
+    {
+      "id": "monsoon",
+      "label": "Monsoon",
+      "photo": "monsoon",
+      "w": 2400,
+      "h": 1600,
+      "fit": "cover",
+      "pos": "50% 100%",
+      "par": "xMidYMax slice",
+      "alt": "A waterlogged residential lane in Dhaka during the monsoon, with rickshaws wading through and shop shutters down.",
+      "credit": {
+        "text": "Dhaka. Photo: Faisal Ibne Kalam (Pexels)",
+        "url": "https://www.pexels.com/photo/urban-flooding-in-a-residential-area-38551008/"
+      },
+      "nodes": [
+        {
+          "key": "m1",
+          "x": 2160,
+          "y": 1180,
+          "from": "Water-level sensor",
+          "to": "Alerts the lane as water rises (the one new part)",
+          "far": false
+        },
+        {
+          "key": "m2",
+          "x": 330,
+          "y": 1140,
+          "from": "Old phone",
+          "to": "Live view of the lane for every resident",
+          "far": false
+        },
+        {
+          "key": "m3",
+          "x": 1640,
+          "y": 440,
+          "from": "Old phone",
+          "to": "Posts 'current gone' and 'current back' to the building's WhatsApp",
+          "far": false
+        },
+        {
+          "key": "m4",
+          "x": 1700,
+          "y": 520,
+          "from": "TV box",
+          "to": "Family photo cloud, safe upstairs",
+          "far": false
+        },
+        {
+          "key": "m5",
+          "x": 1820,
+          "y": 880,
+          "from": "Old phone",
+          "to": "Night camera on a shut shop",
+          "far": false
+        },
+        {
+          "key": "m6",
+          "x": 1440,
+          "y": 860,
+          "from": "Old phone",
+          "to": "Building gate camera",
+          "far": false
+        }
+      ],
+      "links": [
+        "m3-m4",
+        "m4-m6",
+        "m3-m5",
+        "m5-m6",
+        "m6-m1"
+      ],
+      "radio": [],
+      "far": [
+        "m2-m6"
+      ],
+      "rings": null
+    },
+    {
+      "id": "neighbourhood",
+      "label": "Neighbourhood",
+      "photo": "sunset",
+      "w": 2400,
+      "h": 1861,
+      "fit": "cover",
+      "pos": "50% 100%",
+      "par": "xMidYMax slice",
+      "alt": "Dhaka rooftops at sunset, with houses, water tanks and a distant telecom tower.",
+      "credit": {
+        "text": "Dhaka. Photo: Hasnan Monir",
+        "url": "https://unsplash.com/photos/7JRlvjYK0m0"
+      },
+      "nodes": [
+        {
+          "key": "u1",
+          "x": 1960,
+          "y": 1480,
+          "from": "Old laptop",
+          "to": "This building's backup server, holding copies for three neighbours",
+          "far": false
+        },
+        {
+          "key": "u2",
+          "x": 300,
+          "y": 1430,
+          "from": "Old phone",
+          "to": "Rooftop weather station (its barometer still works)",
+          "far": false
+        },
+        {
+          "key": "u3",
+          "x": 2150,
+          "y": 1330,
+          "from": "Laptop",
+          "to": "Rents out its idle computing",
+          "far": false
+        },
+        {
+          "key": "u4",
+          "x": 1150,
+          "y": 1420,
+          "from": "TV box",
+          "to": "Holds an encrypted copy of the next building's backups",
+          "far": false
+        },
+        {
+          "key": "u5",
+          "x": 700,
+          "y": 1560,
+          "from": "Desktop PC",
+          "to": "Backup copies for three buildings",
+          "far": false
+        },
+        {
+          "key": "u6",
+          "x": 1900,
+          "y": 1095,
+          "from": "Building across the road",
+          "to": "Joins the same network",
+          "far": true
+        },
+        {
+          "key": "u8",
+          "x": 2280,
+          "y": 1700,
+          "from": "TV box",
+          "to": "Family photo cloud",
+          "far": false
+        }
+      ],
+      "links": [
+        "u1-u3",
+        "u3-u8",
+        "u5-u2",
+        "u5-u4",
+        "u4-u1"
+      ],
+      "radio": [],
+      "far": [
+        "u1-u2",
+        "u1-u6",
+        "u6-u3"
+      ],
+      "rings": null
+    }
+  ],
+  "extra": [
+    {
+      "id": "skyline",
+      "label": "Public services",
+      "photo": "skyline",
+      "w": 2400,
+      "h": 1600,
+      "fit": "cover",
+      "pos": "50% 100%",
+      "par": "xMidYMax slice",
+      "alt": "Dhaka's skyline of apartment and office towers under monsoon clouds.",
+      "credit": {
+        "text": "Dhaka. Photo: Al Amin Mir (Unsplash)",
+        "url": "https://unsplash.com/photos/jkW9ES-w79Q"
+      },
+      "nodes": [
+        {
+          "key": "g1",
+          "x": 820,
+          "y": 1300,
+          "from": "Upazila office",
+          "to": "A records server sized to real use, not to the brochure",
+          "far": false
+        },
+        {
+          "key": "g2",
+          "x": 1300,
+          "y": 1250,
+          "from": "Public school",
+          "to": "A computer lab from retired laptops",
+          "far": false
+        },
+        {
+          "key": "g3",
+          "x": 1700,
+          "y": 1350,
+          "from": "Public hospital",
+          "to": "Queue and notice screens from old monitors",
+          "far": false
+        },
+        {
+          "key": "g4",
+          "x": 2150,
+          "y": 1300,
+          "from": "City corporation",
+          "to": "Notice screens at service points",
+          "far": false
+        },
+        {
+          "key": "g5",
+          "x": 480,
+          "y": 1400,
+          "from": "Union digital centre",
+          "to": "Reconditioned desktops, each with a wipe certificate",
+          "far": false
+        },
+        {
+          "key": "g6",
+          "x": 1500,
+          "y": 1450,
+          "from": "Agency storeroom",
+          "to": "Retired devices wiped, passported and reused",
+          "far": false
+        }
+      ],
+      "links": [
+        "g5-g1",
+        "g1-g2",
+        "g2-g6",
+        "g6-g3",
+        "g3-g4"
+      ],
+      "radio": [],
+      "far": [],
+      "rings": null
+    }
+  ],
+  "pageHeads": {
+    "companies.html": "office",
+    "hosts.html": "towers",
+    "investors.html": "neighbourhood",
+    "about.html": "teastall",
+    "contact.html": "street",
+    "government.html": "skyline"
+  }
+}

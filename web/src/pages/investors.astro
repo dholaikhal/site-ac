@@ -1,0 +1,100 @@
+---
+import Base from "../layouts/Base.astro";
+import Roadmap from "../components/Roadmap.astro";
+import SceneHead from "../components/SceneHead.astro";
+---
+<Base title="Investors: amader.cloud" description="amader.cloud turns idle consumer devices into managed infrastructure for homes, buildings, shops and schools, and gets paid at both ends. Starting in Dhaka.">
+<section class="page-head photo">
+<SceneHead id="neighbourhood" />
+  <div class="wrap">
+    <h1>Reuse that pays every month.</h1>
+    <p class="lede">The world is learning to resell old devices. Nobody gets the value out of the ones people keep. amader.cloud does, for families and for companies: each idle device gets a new job, or rents out the capacity it isn't using, and we charge monthly to run it. We're starting in Dhaka.</p>
+    <div class="hero-actions" style="margin-bottom:0">
+      <a class="btn btn-bulb" href="contact.html?topic=investor">Request the deck</a>
+      <a class="btn btn-line" href="mailto:invest@amader.cloud">invest@amader.cloud</a>
+    </div>
+  </div>
+</section>
+
+<section class="wrap stack" style="padding-bottom:clamp(56px,8vw,112px)">
+  <div>
+    <h2>The market around us</h2>
+    <ul class="ledger">
+      <li><div class="fig">US$94–103B<small>refurbished electronics, 2024–25</small></div><div><p>The global market for second-life devices. Almost all of it is one-off resale: the value ends at the sale.</p><cite>Research and Markets; Global Industry Analysts. Estimates vary by firm.</cite></div></li>
+      <li><div class="fig">US$17–21B<small>IT asset disposition, 2025</small></div><div><p>What companies pay each year to retire their devices safely. In Bangladesh this market barely exists as a formal service.</p><cite>Global Market Insights; The Business Research Company. Estimates vary by firm.</cite></div></li>
+      <li><div class="fig">367M kg<small>e‑waste, Bangladesh, 2022</small></div><div><p>Bangladesh, with 170 million people, produced this much e‑waste in a single year, and formally recycled very little of it.</p><cite>Global E‑waste Monitor 2024; Population and Housing Census 2022</cite></div></li>
+    </ul>
+  </div>
+
+  <figure class="flow-fig" aria-label="Devices and money flow">
+    <div class="flow-col"><span class="mono">In</span>
+      <div class="flow-box"><svg class="pict" aria-hidden="true"><use href="#p-briefcase"/></svg><b>Companies retire devices</b><span>pay per device</span></div>
+      <div class="flow-box"><svg class="pict" aria-hidden="true"><use href="#p-home"/></svg><b>Households donate</b><span>free pickup</span></div>
+    </div>
+    <svg class="flow-arrow" viewBox="0 0 80 20" aria-hidden="true"><path d="M0 10h70M62 3l10 7-10 7"/></svg>
+    <div class="flow-core"><span class="mono">amader.cloud</span><b>Collect, wipe, rebuild, run</b><span>hardware cost close to zero</span></div>
+    <svg class="flow-arrow" viewBox="0 0 80 20" aria-hidden="true"><path d="M0 10h70M62 3l10 7-10 7"/></svg>
+    <div class="flow-col"><span class="mono">Out</span>
+      <div class="flow-box"><svg class="pict" aria-hidden="true"><use href="#p-photo-cloud"/></svg><b>A new job</b><span>monthly plans: homes, buildings, offices</span></div>
+      <div class="flow-box"><svg class="pict" aria-hidden="true"><use href="#p-coins"/></svg><b>Rented capacity</b><span>we keep 30–40% of every job</span></div>
+    </div>
+  </figure>
+
+  <div class="split">
+    <div>
+      <h2>The gap</h2>
+      <p>Today, a working device that someone stops using has three possible futures. A repair shop resells it once. A recycler shreds it. Or it sits in a drawer, still plugged in and never updated, until it becomes part of a botnet.</p>
+      <p>None of these keeps the device working <em>for</em> anyone. That's the business we're building: <strong>we operate reused devices as a service.</strong></p>
+    </div>
+    <div>
+      <h2>The model</h2>
+      <ul class="check-list">
+        <li><strong>Paid at both ends.</strong> Companies pay per device to retire them. Homes, buildings, shops and schools pay monthly to run them.</li>
+        <li><strong>Hardware close to free.</strong> Our supply is donated or paid for by the company retiring it.</li>
+        <li><strong>Recurring revenue.</strong> Every installed device sits under a monthly plan.</li>
+        <li><strong>Two customers, one pipeline.</strong> Families and companies both have idle devices. Both get the same two outcomes: a new job, or income from spare capacity. Communities pool them, for example neighbours keeping each other's backups.</li>
+        <li><strong>Public sector.</strong> Fixed-fee reviews that size government digital projects to the real need, then reconditioned devices processed to government standards. The Procurement Rules 2025 now name sustainable procurement and asset disposal.</li>
+        <li><strong>A marketplace on top.</strong> Members rent out idle storage and computing to researchers and startups. We keep a share, and members' net cost falls.</li>
+        <li><strong>Network effect.</strong> Each new member adds storage and backup locations that make the service better for everyone else.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="panel-dusk">
+    <h2>Why Dhaka first</h2>
+    <div class="promises" style="border-color:#3d5186">
+      <div><h3 style="color:var(--amber)">Dense and connected</h3><p>A city of apartment blocks and offices on fast local internet, so idle devices are close together and easy to link and look after.</p></div>
+      <div><h3 style="color:var(--amber)">Subscriptions already work</h3><p>bKash and Nagad make small monthly payments normal, with no credit card needed.</p></div>
+      <div><h3 style="color:var(--amber)">The rules just changed</h3><p>The Personal Data Protection Act 2026 makes keeping data local and wiping devices properly a legal question. That's exactly what we sell.</p></div>
+    </div>
+  </div>
+
+  <div class="split">
+    <div>
+      <h2>Early unit economics</h2>
+      <p>These are our working assumptions. The pilot will test them.</p>
+      <ul class="ledger">
+        <li><div class="fig">Tk 4,490<small>monthly revenue per building</small></div><div><p>A 30-flat building where 10 flats join. About Tk 2,600 a month is left after support, visits and network costs.</p></div></li>
+        <li><div class="fig">2×<small>retirement fee vs cost</small></div><div><p>About Tk 500 per laptop against roughly Tk 250 for wiping, testing and logistics. The device then goes into a monthly plan.</p></div></li>
+      </ul>
+    </div>
+    <div>
+      <h2>What we'll know that nobody else does</h2>
+      <p>Every device we handle carries a passport: what it is, how it was wiped, what job it does, how long it lasts, what it costs to run. Over time, this becomes the most detailed record anywhere of which second-hand devices are worth reusing, and for what. That's how we'll price, choose devices and expand faster than anyone starting after us.</p>
+    </div>
+  </div>
+
+  <div>
+    <h2>Milestones</h2>
+    <Roadmap variant="investors" />
+  </div>
+
+  <div class="panel-dusk cta">
+    <div>
+      <h2>Let's talk</h2>
+      <p style="margin:0;max-width:56ch">We're talking to angel and impact investors about funding the Dhaka pilot. The deck has the full model, the team and the plan.</p>
+    </div>
+    <a class="btn btn-bulb" href="contact.html?topic=investor">Request the deck</a>
+  </div>
+</section>
+</Base>

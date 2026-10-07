@@ -1,0 +1,22 @@
+---
+import Photo from "./Photo.astro";
+import site from "../data/site.json";
+const groups = [["For people", site.plans.people, "plans two"], ["For companies and institutions", site.plans.institutions, "plans"]] as const;
+---
+{groups.map(([title, plans, cls]) => (
+  <>
+    <h3 class="plans-group">{title}</h3>
+    <div class={cls}>
+      {plans.map((p: any) => (
+        <article class:list={["plan", { lead: p.lead }]}>
+          <div class="plan-photo"><Photo name={p.photo} sizes="(max-width: 960px) 100vw, 33vw" maxWidth={1200} style={`object-position:${p.pos}`} /></div>
+          <div class="plan-name"><h3>{p.name}</h3>{p.bn && <span class="bn" lang="bn">{p.bn}</span>}</div>
+          <p class="plan-for">{p.for}</p>
+          <div class="price">{p.price}<span>{p.per}</span></div>
+          <p class="setup small">{p.setup}</p>
+          <ul>{p.items.map((it: any) => <li>{typeof it === "string" ? it : <a href={it.href}>{it.text}</a>}</li>)}</ul>
+        </article>
+      ))}
+    </div>
+  </>
+))}

@@ -1,0 +1,188 @@
+{
+  "_note": "Single source for prices, rates, dates and contact details. Pages read this at build time; marketing/render.py can read it too.",
+  "contact": {
+    "email": "hello@amader.cloud",
+    "invest": "invest@amader.cloud",
+    "security": "security@amader.cloud",
+    "whatsapp": "+880 1XXX‑XXXXXX",
+    "hours": "Saturday to Thursday, 10:00–19:00"
+  },
+  "rates": {
+    "storageTkPer250GB": 50,
+    "coreHourTk": 0.3,
+    "tkPerKwh": 9,
+    "computeFrom": 2028,
+    "uptimeTarget": "95%"
+  },
+  "calculator": {
+    "kinds": [
+      {
+        "id": "laptop",
+        "label": "Laptop",
+        "cores": 4,
+        "speed": 1,
+        "watts": 20,
+        "start": 1,
+        "noun": "laptop"
+      },
+      {
+        "id": "desktop",
+        "label": "Desktop PC",
+        "cores": 4,
+        "speed": 1.2,
+        "watts": 60,
+        "start": 0,
+        "noun": "desktop"
+      },
+      {
+        "id": "tvbox",
+        "label": "TV box",
+        "cores": 4,
+        "speed": 0.25,
+        "watts": 4,
+        "start": 1,
+        "noun": "TV box"
+      }
+    ],
+    "idleHours": {
+      "min": 2,
+      "max": 20,
+      "start": 10
+    },
+    "diskGB": {
+      "min": 0,
+      "max": 2000,
+      "step": 50,
+      "start": 500
+    },
+    "days": 30
+  },
+  "building": {
+    "monthly": 2500,
+    "perFlat": 199,
+    "flats": 30,
+    "joined": 10,
+    "revenue": 4490,
+    "contribution": 2600,
+    "devices": 14
+  },
+  "plans": {
+    "people": [
+      {
+        "id": "ghor",
+        "name": "Ghor",
+        "bn": "ঘর",
+        "lead": true,
+        "for": "For one home",
+        "price": "Tk 299",
+        "per": " /month",
+        "setup": "Up to 3 devices",
+        "photo": "rooftops",
+        "pos": "50% 75%",
+        "items": [
+          "Family photo and file backup",
+          "Ads blocked on every device at home",
+          "A safe copy kept by other members",
+          "Earn from spare storage and computing"
+        ]
+      },
+      {
+        "id": "bari",
+        "name": "Bari",
+        "bn": "বাড়ি",
+        "for": "For a whole apartment building",
+        "price": "Tk 2,500",
+        "per": " /month",
+        "setup": "+ Tk 199 for each flat that joins",
+        "photo": "towers",
+        "pos": "50% 40%",
+        "items": [
+          "Cameras for the stairs, gate and parking",
+          "Lobby screens instead of posters",
+          "Backups the flats keep for each other",
+          "Earnings towards the service charge"
+        ]
+      }
+    ],
+    "institutions": [
+      {
+        "id": "dokan",
+        "name": "Dokan",
+        "bn": "দোকান",
+        "for": "For a shop, clinic or small office",
+        "price": "Tk 990",
+        "per": " /month",
+        "setup": "Up to 5 devices",
+        "photo": "street",
+        "pos": "30% 45%",
+        "items": [
+          "Nightly backup of your computers",
+          "A counter camera and a price screen",
+          "Same-day response"
+        ]
+      },
+      {
+        "id": "companies",
+        "name": "Companies",
+        "for": "Offices with devices to reuse or retire",
+        "price": "Quote",
+        "per": " per device",
+        "setup": "Retire, reuse, or rent out",
+        "photo": "office",
+        "pos": "68% 50%",
+        "items": [
+          "Certified wipe for every device",
+          "Reuse in-house, or donated to school labs",
+          "Desktops earn overnight"
+        ]
+      },
+      {
+        "id": "pathshala",
+        "name": "Pathshala",
+        "bn": "পাঠশালা",
+        "for": "Schools and public bodies",
+        "price": "From Tk 1,500",
+        "per": " /month per lab",
+        "setup": "Right-size reviews quoted per project",
+        "photo": "bazar",
+        "pos": "50% 20%",
+        "items": [
+          "Labs from retired laptops, with an offline library",
+          "Labs that rent out computing after hours",
+          {
+            "text": "Right-size reviews for public projects",
+            "href": "government.html"
+          }
+        ]
+      }
+    ]
+  },
+  "timeline": [
+    {
+      "when": "Jan–Feb 2027",
+      "now": true,
+      "title": "Bench",
+      "home": "Rebuilding our first 40 donated devices and measuring how they perform.",
+      "investors": "40 donated devices rebuilt; failure and power data measured."
+    },
+    {
+      "when": "Mar–May 2027",
+      "title": "Pilot",
+      "home": "Two Dhaka apartment buildings and one school lab.",
+      "investors": "2 buildings paying; 1 company retirement feeding 1 school lab."
+    },
+    {
+      "when": "Jun–Sep 2027",
+      "title": "Dhaka launch",
+      "home": "Plans open to every building, home and shop in Dhaka.",
+      "investors": "500 managed devices; positive margin per building."
+    },
+    {
+      "when": "Early 2028",
+      "title": "Next city",
+      "investorsTitle": "Expand",
+      "home": "More device types, more schools, and a second city.",
+      "investors": "A second city, more device types, and shared computing power from idle laptops."
+    }
+  ]
+}

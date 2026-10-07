@@ -1,0 +1,72 @@
+---
+import Base from "../layouts/Base.astro";
+import SceneHead from "../components/SceneHead.astro";
+---
+<Base title="Retire devices into schools: amader.cloud for companies" description="Certified data wiping for your retired laptops, desktops and phones, with a certificate per device. Working devices become school computer labs.">
+<section class="page-head photo">
+<SceneHead id="office" />
+  <div class="wrap">
+    <h1>Your office's old devices still have value.</h1>
+    <p class="lede">Put them back to work, rent out what they aren't using, or retire them properly, with a certificate for every device. We handle collection, wiping, rebuilding and support.</p>
+    <div class="hero-actions"><a class="btn btn-bulb" href="contact.html?topic=company">Ask for a quote</a><a class="btn btn-line" href="#retire">How retirement works</a></div>
+  </div>
+</section>
+
+<section class="wrap stack" style="padding-bottom:clamp(56px,8vw,112px)">
+  <div class="options" id="options">
+    <article><svg class="pict lg" aria-hidden="true"><use href="#p-server"/></svg><span class="mono">01</span><h2>Reuse in-house</h2><p>Old desktops become file servers and backup boxes. Monitors become meeting-room and reception screens. Tablets become visitor logs, and phones become cameras for the server room.</p></article>
+    <article id="earn"><svg class="pict lg" aria-hidden="true"><use href="#p-moon-desktop"/></svg><span class="mono">02</span><h2>Rent out overnight</h2><p>Office desktops are idle every night and weekend. They rent out computing and spare disk inside a sandbox that can't see company files or your network, and the credit comes off your bill.</p></article>
+    <article><svg class="pict lg" aria-hidden="true"><use href="#p-school"/></svg><span class="mono">03</span><h2>Retire into school labs</h2><p>A certified wipe for every device, then the working ones become computer labs in Dhaka schools, with a report your auditors and CSR team can both use.</p></article>
+  </div>
+
+  <div id="retire">
+    <h2>How retirement works</h2>
+  <ol class="steps">
+    <li><svg class="pict" aria-hidden="true"><use href="#p-tablet-log"/></svg><h3>Inventory</h3><p>Send us your asset list. We quote per device and agree a collection date.</p></li>
+    <li><svg class="pict" aria-hidden="true"><use href="#p-briefcase"/></svg><h3>Collect</h3><p>We collect from your office in sealed, numbered crates, with a signed handover sheet.</p></li>
+    <li><svg class="pict" aria-hidden="true"><use href="#p-shield"/></svg><h3>Wipe</h3><p>Each storage device is sanitised with methods that follow NIST SP 800‑88 Rev. 2, then checked again. Two people sign each certificate.</p></li>
+    <li><svg class="pict" aria-hidden="true"><use href="#p-school"/></svg><h3>Second job</h3><p>Working devices are rebuilt for a school lab. The rest are stripped for repair parts or sent to a formal recycler.</p></li>
+    <li><svg class="pict" aria-hidden="true"><use href="#p-books"/></svg><h3>Report</h3><p>You get a report listing every serial number, its wipe certificate, and where the device ended up.</p></li>
+  </ol>
+  </div>
+
+  <div class="split">
+    <div>
+      <h2>What you get</h2>
+      <ul class="check-list">
+        <li>A wipe certificate for every serial number, with the method used and how it was verified</li>
+        <li>A report your auditors and CSR team can both use</li>
+        <li>Optional: sponsor a named lab at a school you choose, with a visit for your team</li>
+        <li>No devices resold with your asset tags or data on them</li>
+      </ul>
+    </div>
+    <div>
+      <h2>How we wipe</h2>
+      <p>The method depends on the storage. Encrypted phones and self-encrypting drives get a cryptographic erase. SSDs and eMMC get a firmware secure erase where it's supported. Hard drives get overwritten and then verified. Drives that fail verification are physically destroyed, and we record that too.</p>
+            <figure class="cert" aria-label="Sample wipe certificate">
+        <div class="cert-head"><span class="mono">Certificate of sanitisation</span><span class="mono">No. AC‑2027‑000418</span></div>
+        <dl>
+          <dt>Device</dt><dd>Laptop, Dell Latitude 5490</dd>
+          <dt>Serial</dt><dd class="mono">7XK2‑HJ3</dd>
+          <dt>Asset tag</dt><dd class="mono">ACME‑IT‑02231</dd>
+          <dt>Media</dt><dd>256 GB NVMe SSD</dd>
+          <dt>Method</dt><dd>Purge: cryptographic erase + NVMe sanitize</dd>
+          <dt>Verified</dt><dd>Sampled read-back, 0 recoverable blocks</dd>
+          <dt>Outcome</dt><dd>Reused: Pathshala lab, Mirpur</dd>
+        </dl>
+        <div class="cert-foot"><span>Technician <i>—</i></span><span>Verifier <i>—</i></span><span class="stamp">NIST SP 800‑88 Rev. 2</span></div>
+        <figcaption class="small">A sample. Every device gets one, signed by two people.</figcaption>
+      </figure>
+      <p class="small">We follow NIST SP 800‑88 Rev. 2, the current US guideline for media sanitisation. We are not yet independently certified. Ask us for our written procedure before you sign.</p>
+    </div>
+  </div>
+
+  <div class="panel-dusk cta">
+    <div>
+      <h2>Have devices to retire this quarter?</h2>
+      <p style="margin:0">Send us the rough count and types, and we'll reply with a quote and a sample certificate.</p>
+    </div>
+    <a class="btn btn-bulb" href="contact.html?topic=company">Ask for a quote</a>
+  </div>
+</section>
+</Base>

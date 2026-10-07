@@ -1,0 +1,75 @@
+---
+import Base from "../layouts/Base.astro";
+---
+<Base title="Check your device: amader.cloud" description="Find out what your old TV box, phone, tablet, laptop, desktop or router can become: a private cloud, a camera, Wi\u2011Fi, a screen or a school lab machine.">
+<section class="page-head">
+  <div class="wrap">
+    <h1>What can your device become?</h1>
+    <p class="lede">Pick what you have. For TV boxes and routers, type the model and we'll tell you whether it can be rebuilt.</p>
+  </div>
+</section>
+
+<section class="wrap stack" style="padding-bottom:clamp(56px,8vw,112px)">
+  <form class="checker" id="checker" onsubmit="return false">
+    <fieldset class="type-picker">
+      <legend>I have an old…</legend>
+      <label><input type="radio" name="type" value="tvbox"> Android TV box</label>
+      <label><input type="radio" name="type" value="phone"> Phone</label>
+      <label><input type="radio" name="type" value="tablet"> Tablet</label>
+      <label><input type="radio" name="type" value="laptop"> Laptop</label>
+      <label><input type="radio" name="type" value="desktop"> Desktop PC</label>
+      <label><input type="radio" name="type" value="router"> Wi‑Fi router</label>
+      <label><input type="radio" name="type" value="screen"> TV or monitor</label>
+    </fieldset>
+    <div class="field" id="model-field" hidden>
+      <label for="model">Model or chip</label>
+      <input id="model" name="model" type="text" autocomplete="off" spellcheck="false">
+      <span class="hint">It's printed on the label underneath, or in Settings › About.</span>
+    </div>
+    <div class="verdict" aria-live="polite" hidden></div>
+    <noscript><p class="small">The checker needs JavaScript. The tables below have the same information.</p></noscript>
+  </form>
+
+  <div>
+    <h2>TV boxes we can rebuild</h2>
+    <p class="measure">What matters is the chip inside the box, not the brand on the outside. Two boxes with the same name can have different chips, so we always confirm by testing.</p>
+    <div class="table-scroll">
+      <table class="chip-table">
+        <thead><tr><th scope="col">Chip</th><th scope="col">Common boxes</th><th scope="col">Status</th></tr></thead>
+        <tbody>
+          <tr><td>Amlogic S905X3</td><td>X96 Max+, H96 Max X3, HK1 Box</td><td><span class="status yes">Supported</span></td></tr>
+          <tr><td>Amlogic S922X, A311D</td><td>Beelink GT‑King, Ugoos AM6</td><td><span class="status yes">Supported</span></td></tr>
+          <tr><td>Amlogic S905X2</td><td>X96 Max</td><td><span class="status yes">Supported</span></td></tr>
+          <tr><td>Amlogic S912</td><td>Various octa-core boxes</td><td><span class="status yes">Supported</span></td></tr>
+          <tr><td>Amlogic S905, S905X, S905W, S905D, S905L3A</td><td>X96 Mini, Phicomm N1, ZTE B860H, Fiberhome HG680P</td><td><span class="status yes">Supported</span></td></tr>
+          <tr><td>Amlogic S905X4, S905W2, S905Y4</td><td>Newer budget boxes</td><td><span class="status maybe">Testing</span></td></tr>
+          <tr><td>Rockchip RK3318, RK3328, RK3228/9</td><td>H96 Max (non‑X3), MXQ Pro variants</td><td><span class="status maybe">Testing</span></td></tr>
+          <tr><td>Allwinner H6, H616, H313</td><td>Tanix TX6, various</td><td><span class="status maybe">Testing</span></td></tr>
+          <tr><td>Locked brand and operator boxes</td><td>Mi Box, Fire TV, Chromecast, DTH set-top boxes</td><td><span class="status no">Recycle</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="small" style="margin-top:12px">Supported chips run community-maintained Armbian builds, which we test and harden ourselves. We move chips from "Testing" to "Supported" once 10 boxes pass 30 days in service.</p>
+  </div>
+
+  <div class="split">
+    <div>
+      <h2>Phones and tablets</h2>
+      <p>Android 8 or newer, a working camera, and a battery that isn't swollen. We usually keep the original software, lock it into a single job (camera or screen), and manage it remotely. We take a battery out or limit its charge when a device stays plugged in permanently.</p>
+    </div>
+    <div>
+      <h2>Laptops and desktops</h2>
+      <p>Any 64-bit machine from roughly the last 12 years. With 4 GB of memory or more, it can be a school lab machine. With less, it can still be a server or a camera recorder. We replace worn-out hard drives with second-hand SSDs where it's worth it.</p>
+    </div>
+    <div>
+      <h2>Wi‑Fi routers</h2>
+      <p>We rebuild routers with OpenWrt, an open firmware that still gets security updates. It needs at least 16 MB of storage and 128 MB of memory, which rules out many cheap routers. Check your exact model and hardware version in the <a href="https://openwrt.org/toh/start" rel="noopener">OpenWrt hardware table</a>.</p>
+    </div>
+    <div>
+      <h2>Not sure what you have?</h2>
+      <p>Send us a photo of the label on WhatsApp, or bring everything to a building collection day. We sort it on the spot.</p>
+      <p><a class="btn btn-bulb" href="contact.html">Book a free visit</a></p>
+    </div>
+  </div>
+</section>
+</Base>

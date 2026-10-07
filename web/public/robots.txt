@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://amader.cloud/sitemap-index.xml

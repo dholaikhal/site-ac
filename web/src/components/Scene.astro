@@ -1,0 +1,14 @@
+---
+import Photo from "./Photo.astro";
+import SceneSvg from "./SceneSvg.astro";
+interface Props { scene: any; live?: boolean; first?: boolean; head?: boolean }
+const { scene: s, live = false, first = false, head = false } = Astro.props;
+---
+<figure class:list={["scene", { live, "head-scene": head }]} data-fit={s.fit} id={head ? undefined : `scene-${s.id}`} aria-label={head ? undefined : s.label} inert={!live && !head ? true : undefined}>
+  {s.fit === "right" && <Photo name={s.photo} class="scene-bg" ariaHidden maxWidth={1200} />}
+  <div class="frame" style={`--ar:${s.w}/${s.h}`}>
+    <Photo name={s.photo} alt={s.alt} style={`object-position:${s.pos}`} loading={first || head ? "eager" : "lazy"} fetchpriority={first ? "high" : undefined} />
+    <SceneSvg scene={s} />
+  </div>
+  <figcaption class="mono"><a href={s.credit.url} rel="noopener">{s.credit.text}</a></figcaption>
+</figure>
