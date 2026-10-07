@@ -83,7 +83,7 @@ Never claim "carbon neutral", "CO₂ saved", or measured wattage until we've met
 - **Tiro Bangla**: every Bengali line. Its hand-made feel against the engineered Latin face is deliberate.
 - **JetBrains Mono**: blueprint annotations, sources, photo credits and small labels only. Lowercase, never letter-spaced capitals.
 
-**Logo:** a TV box with a lit LED and two signal arcs, then the wordmark "amader" with ".cloud" at reduced opacity. Files: `site/assets/img/logo-mark.svg`, `favicon.svg`.
+**Logo:** a TV box with a lit LED and two signal arcs, then the wordmark "amader" with ".cloud" at reduced opacity. Files: `web/public/assets/img/logo-mark.svg`, `favicon.svg`.
 
 **Don't:** use stock photos of foreign cities, glowing "cyber" globes, green-leaf eco icons, more than one amber accent per view, or photos of identifiable people without a release.
 
@@ -91,11 +91,11 @@ Never claim "carbon neutral", "CO₂ saved", or measured wattage until we've met
 
 | Asset | File |
 |---|---|
-| Photos (Unsplash and Pexels licences) | `site/assets/img/photos/`. Unsplash: rooftops (Ahmed Hasan), façades (Ahmed Reyasat), skyline (Al Amin Mir), sunset (Hasnan Monir). Pexels: street at night (MD Shaha Riaz Rimon), bazar and mosque (Ferdous Hasan), tea stall (Ahnaf Abror), monsoon lane (Faisal Ibne Kalam), Uttara towers (Robiul Islam Pailot) |
+| Photos (Unsplash and Pexels licences) | `web/src/assets/photos/`. Unsplash: rooftops (Ahmed Hasan), façades (Ahmed Reyasat), skyline (Al Amin Mir), sunset (Hasnan Monir). Pexels: street at night (MD Shaha Riaz Rimon), bazar and mosque (Ferdous Hasan), tea stall (Ahnaf Abror), monsoon lane (Faisal Ibne Kalam), Uttara towers (Robiul Islam Pailot) |
 | A5 building flyer | `marketing/out/flyer-a5.pdf` |
 | A4 investor one-pager | `marketing/out/one-pager-a4.pdf` |
 | Social cards 1080×1080 | `marketing/out/card-*.png`: together (rooftops), backups held by neighbours (Uttara towers), screens instead of posters (blueprint), botnet warning |
-| Open Graph image | `site/assets/img/og.jpg` |
+| Open Graph image | `web/public/assets/img/og.jpg` |
 | Investor deck | claude.ai artifact; source in `marketing/deck/` |
 | Facebook page kit | `marketing/facebook/`: setup and playbook, dated posts, reply bank, and 34 generated images in `marketing/out/facebook/` |
 | Render pipeline | `python3 marketing/render.py` (run `npm i --prefix marketing` first) |

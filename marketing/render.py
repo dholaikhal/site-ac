@@ -8,10 +8,10 @@ import pathlib, re, subprocess, json
 M = pathlib.Path(__file__).resolve().parent
 frags = {"mesh": (M / "print/_mesh.svgfrag").read_text().strip(), "mark": (M / "print/_mark.svgfrag").read_text().strip()}
 
-# Static network overlays for any hero scene, from the same data the website uses (tools/build_hero.py).
+# Static network overlays for any hero scene, from the same data the website uses (web/src/data/scenes.json, via tools/scenes.py).
 import sys
 sys.path.insert(0, str(M.parent / "tools"))
-from build_hero import SCENES
+from scenes import SCENES
 
 
 def static_mesh(scene, scale=1.0):

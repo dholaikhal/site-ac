@@ -12,10 +12,10 @@ import html, pathlib, sys
 F = pathlib.Path(__file__).resolve().parent
 OUT = F / "cards"
 sys.path.insert(0, str(F.parent.parent / "tools"))
-from build_hero import SCENES  # noqa: E402
+from scenes import SCENES  # noqa: E402
 
 SCENE = {s["id"]: s for s in SCENES}
-PHOTOS = "../../../site/assets/img/photos"
+PHOTOS = "../../../web/src/assets/photos"
 MARK = "<!--mark--><!--/mark-->"
 BRAND = f'<span class="brand">{MARK}<span>amader<span class="tld">.cloud</span></span></span>'
 e = html.escape
