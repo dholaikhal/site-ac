@@ -35,7 +35,7 @@ The **device passport** is the record each device carries through the pipeline: 
 
 ### Which device can do which job
 
-| Device ↓ / Job → | **Cloud** (files, photos, backups) | **Camera** (CCTV, doorbell) | **Wi‑Fi** (coverage, guest network) | **Screen** (notice board, menu, prices) | **Lab** (school machines, offline library) | **Compute share** |
+| Device ↓ / Job → | **Cloud** (files, photos, backups) | **Camera** (CCTV, doorbell) | **Wi‑Fi** (coverage, guest network) | **Screen** (notice board, menu, prayer times) | **Lab** (school machines, offline library) | **Compute share** |
 |---|---|---|---|---|---|---|
 | Android TV box | **Primary.** Armbian on supported Amlogic chips | Recorder for 1–2 cameras (4 GB boxes, *hypothesis*) | — | Yes, drives any TV over HDMI | Offline library server (Kiwix, Kolibri) | Weak (4 small ARM cores) |
 | Android phone | — | **Primary.** Camera app streaming RTSP to a recorder | — | Small display | — | — |
@@ -142,8 +142,8 @@ The unit of value is a **building or para (neighbourhood)**, not a single device
 | **Share screens** | Lobby, lift and gate screens replace poster-covered walls: notices, lost and found, events, paid local ads. A tea stall's old TV becomes the para notice board | Old monitors, TVs + a TV box | Building fund gets an ad revenue share; local shops advertise |
 | **Share eyes, with consent** | Gate and stair cameras the committee controls; an old tablet replaces the paper visitor register | Old phones, tablet, a recorder | Building (Bari plan) |
 | **Tell everyone at once** | Power gone/back, tank low, lane flooding, gate left open: posted to the building's WhatsApp group | Old phones on chargers; one sensor where nothing else works | Building |
-| **Learn together** | Homework corner with offline library in a common room, para club or community centre; a school lab that rents out compute after hours | Laptops, a TV box | Building, school, sponsor |
-| **Pass it on** | Devices too old for one household go, wiped and repaired, to students, guards, domestic workers, schools | Phones, tablets, laptops | Recipients; donors get a wipe record |
+| **Learn together** | Homework corner with offline library in a common room, mosque or madrasa; a school lab that rents out compute after hours | Laptops, a TV box | Building, school, sponsor |
+| **Pass it on** | Devices too old for one household go, wiped and repaired, to students, guards, domestic workers, madrasas | Phones, tablets, laptops | Recipients; donors get a wipe record |
 | **Earn together** | Idle devices rent out storage and computing, with earnings paid into the service-charge fund | Laptops, desktops, disks | Building fund |
 | **Trade fairly** | Bazar price board, the committee's shared accounts, a shop's bKash QR and daily tally | Tablets, phones, laptops | Bazar committees, shops |
 
