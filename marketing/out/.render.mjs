@@ -9,7 +9,8 @@ for (const j of jobs) {
   await p.waitForTimeout(400);
   if (j.out.endsWith(".pdf")) await p.pdf({ path: j.out, preferCSSPageSize: true, printBackground: true });
   else { const s = await p.evaluate(() => [document.body.scrollWidth, document.body.scrollHeight]);
-         await p.setViewportSize({ width: s[0], height: s[1] }); await p.screenshot({ path: j.out }); }
+         await p.setViewportSize({ width: s[0], height: s[1] });
+         await p.screenshot(j.out.endsWith(".jpg") ? { path: j.out, type: "jpeg", quality: 90 } : { path: j.out }); }
   console.log("rendered", j.out.split("/").pop());
 }
 await b.close();
