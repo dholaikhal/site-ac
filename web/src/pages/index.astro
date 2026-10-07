@@ -48,7 +48,7 @@ const rates: [string, string, string][] = [
             <div class="b ink"><div class="pgrid">{products.map(([n, p, w]) => <div class="pc"><div class={`sw ${w}`}></div><span>{n}</span><b>{tk(p)}</b></div>)}</div></div>
           </div>
         </div>
-        <figcaption class="ba-cap">What you get: a made-up store, for illustration</figcaption>
+        <figcaption class="ba-cap">What you get <span class="tag">Sample</span></figcaption>
       </div>
     </figure>
   </div>
@@ -85,7 +85,7 @@ const rates: [string, string, string][] = [
   <div class="wrap">
     <div class="head">
       <h2>Try the builder</h2>
-      <p class="lede">Pick a business or type your own. Watch the app come together, then ask for a change.</p>
+      <p class="lede">Pick a business or type your own.</p>
     </div>
     <Demo />
   </div>

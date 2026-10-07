@@ -34,7 +34,7 @@ function initDemo(root) {
       tabs: [["home", "Home"], ["item", "Product"], ["pay", "Checkout"], ["sms", "SMS"]],
       adminTab: ["admin", "Orders"],
       special: { chip: "Offer cash on delivery inside Dhaka only", match: /cash|cod|delivery|dhaka/i, key: "cod", screen: "pay",
-        reply: "Cash on delivery now appears only when the address is inside Dhaka. Prepaid stays the default.", touched: "checkout, address rule" },
+        reply: "Cash on delivery now shows only for Dhaka addresses.", touched: "checkout, address rule" },
     },
     book: {
       match: /book|appoint|salon|clinic|doctor|tutor|parlou?r|spa|gym|slot|dent/i,
@@ -46,7 +46,7 @@ function initDemo(root) {
       tabs: [["home", "Services"], ["item", "Pick a time"], ["pay", "Deposit"], ["sms", "SMS"]],
       adminTab: ["admin", "Bookings"],
       special: { chip: "Send a reminder SMS the day before", match: /remind|day before|sms/i, key: "remind", screen: "sms",
-        reply: "Customers now get a reminder at 6 pm the day before, with a link to reschedule.", touched: "SMS schedule" },
+        reply: "Reminders now go out at 6 pm the day before.", touched: "SMS schedule" },
     },
     fees: {
       match: /fee|school|coach|club|member|tuition|madrasa|association|student|class|batch/i,
@@ -58,14 +58,14 @@ function initDemo(root) {
       tabs: [["home", "Home"], ["item", "Pay fees"], ["pay", "Payment"], ["sms", "Receipt"]],
       adminTab: ["admin", "Collected"],
       special: { chip: "Add a Tk 100 late fee after the 10th", match: /late|fine|penalt|after the/i, key: "late", screen: "pay",
-        reply: "Invoices paid after the 10th now add a Tk 100 late fee, shown on the payment page and the receipt.", touched: "invoice rule, payment page" },
+        reply: "Fees paid after the 10th now add Tk 100.", touched: "invoice rule, payment page" },
     },
   };
   const COMMON = [
     { chip: "Add 10% off for bKash payments", match: /10|%|off|discount/i, key: "off", screen: "pay",
-      reply: "Paying by bKash now takes 10% off the item total. The discount shows at checkout and on the SMS.", touched: "checkout total, payment option" },
+      reply: "bKash payments now get 10% off.", touched: "checkout total, payment option" },
     { chip: "Make it green", match: /green|colou?r|theme|blue|red/i, key: "green", screen: "home",
-      reply: "Switched the brand colour to green on every page.", touched: "theme" },
+      reply: "Done. The store is green now.", touched: "theme" },
   ];
 
   // ---------- Screens (fictional content) ----------
@@ -255,7 +255,7 @@ function initDemo(root) {
     await wait(450); if (token !== run) return;
 
     setStatus("Claude Opus 5.5 · planning", true);
-    say("ai", `<p>Here is the plan for a <strong>${app.kind}</strong> called ${esc(app.name)}:</p><ul>${app.plan.map((p) => `<li>${p}</li>`).join("")}</ul>`, "Claude Opus 5.5 · plan");
+    say("ai", `<p>Plan: a <strong>${app.kind}</strong> called ${esc(app.name)}.</p><ul>${app.plan.map((p) => `<li>${p}</li>`).join("")}</ul>`, "Claude Opus 5.5 · plan");
     await wait(900); if (token !== run) return;
 
     setStatus("Claude Opus 5.5 · building", true);
@@ -280,7 +280,7 @@ function initDemo(root) {
 
     st.built = true;
     paint("home");
-    say("ai", `<p>Your preview is ready at <span class="mono">${app.slug}.amader.cloud</span>. Tap the tabs under the phone to look around, or ask for a change.</p>`, "Amader Cloud");
+    say("ai", `<p>Preview ready at <span class="url">${app.slug}.amader.cloud</span>.</p>`, "Amader Cloud");
     setStatus("Preview ready · tests passed");
     root.classList.remove("running");
     editChips();
@@ -301,7 +301,7 @@ function initDemo(root) {
     st.flash = e.key;
     paint(e.screen);
     if (!(await step(list, "Tests passed · preview updated", token, 600))) return;
-    say("ai", `<p>${e.reply}</p><p class="muted">The changed parts are outlined on the phone. Every change can be undone.</p>`, "Amader Cloud");
+    say("ai", `<p>${e.reply}</p>`, "Amader Cloud");
     setStatus("Preview updated · tests passed");
     root.classList.remove("running");
     editChips();
@@ -312,7 +312,7 @@ function initDemo(root) {
     if (!prev) return;
     const stack = st.undo;
     st = { ...prev, undo: stack, flash: null };
-    say("ai", `<p>Rolled back the last change.</p>`, "Amader Cloud");
+    say("ai", `<p>Undone.</p>`, "Amader Cloud");
     paint(st.tab);
     editChips();
   }
@@ -329,8 +329,8 @@ function initDemo(root) {
     if (!(await step(list, `Live at ${app.slug}.amader.cloud`, token, 600))) return;
     st.published = true;
     paint("admin");
-    say("ai", `<p>You're live (in this demonstration). Payments go straight to your own merchant accounts through our licensed payment partner; Amader Cloud never holds your money.</p>`, "Amader Cloud");
-    setStatus("Live · demonstration");
+    say("ai", `<p>Live. Payments go to your own merchant account.</p>`, "Amader Cloud");
+    setStatus("Live");
     root.classList.remove("running");
     editChips();
   }
@@ -339,11 +339,11 @@ function initDemo(root) {
     run++;
     st = null;
     msgs.innerHTML = "";
-    screen.innerHTML = `<div class="empty"><span>Pick a business on the left, or describe your own. Your app appears here.</span></div>`;
+    screen.innerHTML = `<div class="empty"><span>Your app appears here.</span></div>`;
     tabs.innerHTML = ""; url.textContent = "yourname.amader.cloud";
     setStatus("Waiting for your request");
     root.classList.remove("running");
-    say("ai", `<p>Describe the app your business needs, or pick one below.</p>`, "Amader Cloud");
+    say("ai", `<p>What should we build?</p>`, "Amader Cloud");
     startChips();
   }
 
@@ -359,7 +359,7 @@ function initDemo(root) {
       if (e) return edit(e, text);
       if (/start over|new app|reset/i.test(text)) return reset();
       say("user", esc(text));
-      say("ai", `<p>This demonstration can only make the changes suggested below. The real builder takes any request.</p>`, "Amader Cloud");
+      say("ai", `<p>Try one of the changes below.</p>`, "Amader Cloud");
       return;
     }
     const key = Object.keys(APPS).find((k) => APPS[k].match.test(text)) || "shop";
