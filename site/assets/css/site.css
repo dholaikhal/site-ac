@@ -2,22 +2,24 @@
    Type: Archivo (variable width) for Latin, Tiro Bangla for Bengali, JetBrains Mono for drawing annotations. */
 
 :root {
-  --night: #0a1622;      /* photo grade, header, footer */
-  --bp: #0f3352;         /* blueprint paper */
-  --bp-deep: #0b2740;
-  --bp-line: #8fb8dc;    /* chalk line on blueprint */
-  --chalk: #e4edf5;      /* text on dark */
-  --chalk-2: #a9bfd3;    /* secondary text on dark */
-  --amber: #ffb547;      /* the connection: a device that is alive */
-  --amber-ink: #8a5a00;  /* amber as text on light (AA) */
-  --paper: #eef1f3;      /* tracing paper */
-  --paper-2: #f8fafb;
-  --ink: #0e1b2a;
-  --ink-2: #4d5e70;
-  --rule: #cfd8df;
+  /* Daylight palette: bright pages, white blueprints with blue line-work, amber for anything alive.
+     Dark bands (hero, header, footer, photo sections) stay night blue. */
+  --night: #0d2a3a;      /* hero grade, header, footer */
+  --bp: #eaf2f8;         /* blueprint paper (bright) */
+  --bp-deep: #dce8f1;
+  --bp-line: #5f87a6;    /* line-work on blueprint */
+  --chalk: #f2f7fa;      /* text on dark bands */
+  --chalk-2: #b7cad6;
+  --amber: #f29d1c;      /* the connection: a device that is alive */
+  --amber-ink: #9a5a00;  /* amber as text on light (AA) */
+  --paper: #ffffff;
+  --paper-2: #f5f8fb;
+  --ink: #0d2a3a;
+  --ink-2: #4c6273;
+  --rule: #d9e2ea;
   --ok: #2c7a55;
   --warn: #b8326a;
-  --night-rgb: 10 22 34; --bp-rgb: 15 51 82; --line-rgb: 143 184 220; --chalk-rgb: 228 237 245; --amber-rgb: 255 181 71; --ink-rgb: 14 27 42;
+  --night-rgb: 13 42 58; --bp-rgb: 234 242 248; --line-rgb: 127 166 196; --chalk-rgb: 242 247 250; --amber-rgb: 242 157 28; --ink-rgb: 13 42 58;
 
   --sans: "Archivo", system-ui, sans-serif;
   --bangla: "Tiro Bangla", "Noto Serif Bengali", serif;
@@ -38,15 +40,9 @@
 }
 
 @media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
-    --paper: #0f1924; --paper-2: #142130; --ink: #e2eaf1; --ink-2: #9fb0c1; --rule: #253445;
-    --amber-ink: #ffb547; --ok: #5cc493; --warn: #f07aa6;
-  }
+  :root:not([data-theme="light"]) { --bp: #0f2434; --bp-rgb: 15 36 52; --paper: #0b1620; --paper-2: #102030; --ink: #e6eef4; --ink-2: #9fb3c2; --rule: #1f3346; --amber-ink: #f6b44f; --ok: #5cc493; --warn: #f07aa6; --ink-rgb: 230 238 244; --bp-line: #7fa6c4; }
 }
-:root[data-theme="dark"] {
-  --paper: #0f1924; --paper-2: #142130; --ink: #e2eaf1; --ink-2: #9fb0c1; --rule: #253445;
-  --amber-ink: #ffb547; --ok: #5cc493; --warn: #f07aa6;
-}
+:root[data-theme="dark"] { --bp: #0f2434; --bp-rgb: 15 36 52; --paper: #0b1620; --paper-2: #102030; --ink: #e6eef4; --ink-2: #9fb3c2; --rule: #1f3346; --amber-ink: #f6b44f; --ok: #5cc493; --warn: #f07aa6; --ink-rgb: 230 238 244; --bp-line: #7fa6c4; }
 
 *, *::before, *::after { box-sizing: border-box; }
 [hidden] { display: none !important; }
@@ -832,26 +828,17 @@ fieldset.field { border: 0; padding: 0; margin: 0; }
 .bp-text .lede { margin-top: -.2em; }
 
 
-/* ===================== Palettes (demo) and themes =====================
-   data-palette on <html> picks a palette; data-theme picks light or dark (set by site.js).
-   Tokens: night (darkest band), bp (feature band), line (grid on bp), chalk (text on dark bands),
-   amber (accent), paper/ink (light sections). *-rgb triplets feed translucent fills. */
-:root[data-theme="dark"] { --paper: #0f1924; --paper-2: #142130; --ink: #e2eaf1; --ink-2: #9fb0c1; --rule: #253445; --amber-ink: #ffb547; --ok: #5cc493; --warn: #f07aa6; --ink-rgb: 226 234 241; }
+/* ===================== Themes =====================
+   Light theme: blueprint bands are bright, so text inside them uses ink. Dark theme: they go dark again. */
 :root[data-theme="light"] { color-scheme: light; }
 :root[data-theme="dark"] { color-scheme: dark; }
-:root[data-palette="concrete"] { --night: #17191c; --bp: #1f3b33; --bp-line: #9cc2b4; --chalk: #eef0ec; --chalk-2: #b9c7c0; --amber: #ff6a3d; --amber-ink: #b8401a; --paper: #ebe8e3; --paper-2: #f6f4f0; --ink: #1b1d20; --ink-2: #565b60; --rule: #d3cec6; --night-rgb: 23 25 28; --bp-rgb: 31 59 51; --line-rgb: 156 194 180; --chalk-rgb: 238 240 236; --amber-rgb: 255 106 61; --ink-rgb: 27 29 32; }
-:root[data-palette="concrete"][data-theme="dark"] { --paper: #16181b; --paper-2: #1d2024; --ink: #eceae6; --ink-2: #a7aaa6; --rule: #2c3034; --amber-ink: #ff8a63; --ink-rgb: 236 234 230; --ok: #5cc493; --warn: #f07aa6; }
-:root[data-palette="rickshaw"] { --night: #121821; --bp: #0e5c5e; --bp-line: #8fd3cf; --chalk: #f3f7f6; --chalk-2: #bfe0dc; --amber: #ff4f7b; --amber-ink: #c21d4f; --paper: #fbfaf7; --paper-2: #ffffff; --ink: #151515; --ink-2: #565656; --rule: #e2ded6; --night-rgb: 18 24 33; --bp-rgb: 14 92 94; --line-rgb: 143 211 207; --chalk-rgb: 243 247 246; --amber-rgb: 255 79 123; --ink-rgb: 21 21 21; }
-:root[data-palette="rickshaw"][data-theme="dark"] { --paper: #111417; --paper-2: #181c20; --ink: #eef1f0; --ink-2: #a9b3b1; --rule: #2a3034; --amber-ink: #ff7a9c; --ink-rgb: 238 241 240; --ok: #5cc493; --warn: #ffb547; }
-:root[data-palette="rickshaw"] .btn-bulb { color: #fff; }
-:root[data-palette="daylight"] { --night: #0d2a3a; --bp: #eaf2f8; --bp-line: #7fa6c4; --chalk: #f2f7fa; --chalk-2: #b7cad6; --amber: #f29d1c; --amber-ink: #9a5a00; --paper: #ffffff; --paper-2: #f5f8fb; --ink: #0d2a3a; --ink-2: #4c6273; --rule: #d9e2ea; --night-rgb: 13 42 58; --bp-rgb: 234 242 248; --line-rgb: 127 166 196; --chalk-rgb: 242 247 250; --amber-rgb: 242 157 28; --ink-rgb: 13 42 58; }
-:root[data-palette="daylight"][data-theme="dark"] { --bp: #0f2434; --paper: #0b1620; --paper-2: #102030; --ink: #e6eef4; --ink-2: #9fb3c2; --rule: #1f3346; --amber-ink: #f6b44f; --bp-rgb: 15 36 52; --ink-rgb: 230 238 244; --ok: #5cc493; --warn: #f07aa6; }
-/* Daylight, light theme: blueprint bands turn bright, so text inside them flips to ink. Hero, header, footer stay dark. */
-:root[data-palette="daylight"]:not([data-theme="dark"]) :is(.bp, .panel-dusk, .page-head:not(.photo), .flow-core) {
-  --chalk: #0d2a3a; --chalk-2: #4c6273; --chalk-rgb: 13 42 58; --line-rgb: 13 42 58; --night-rgb: 255 255 255; --bp-line: #5f87a6; }
-:root[data-palette="daylight"]:not([data-theme="dark"]) :is(.bp, .page-head:not(.photo)) { background-image: linear-gradient(rgb(13 42 58 / .07) 1px, transparent 1px), linear-gradient(90deg, rgb(13 42 58 / .07) 1px, transparent 1px), linear-gradient(rgb(13 42 58 / .03) 1px, transparent 1px), linear-gradient(90deg, rgb(13 42 58 / .03) 1px, transparent 1px); }
-:root[data-palette="daylight"]:not([data-theme="dark"]) .console { border-color: var(--rule); box-shadow: 0 16px 40px -24px rgb(13 42 58 / .35); backdrop-filter: none; }
-:root[data-palette="daylight"]:not([data-theme="dark"]) .bp .btn-line { color: var(--ink) !important; }
+:root[data-theme="light"] :is(.bp, .panel-dusk, .page-head:not(.photo), .flow-core) { --chalk: #0d2a3a; --chalk-2: #4c6273; --chalk-rgb: 13 42 58; --line-rgb: 13 42 58; --night-rgb: 255 255 255; }
+@media (prefers-color-scheme: light) { :root:not([data-theme]) :is(.bp, .panel-dusk, .page-head:not(.photo), .flow-core) { --chalk: #0d2a3a; --chalk-2: #4c6273; --chalk-rgb: 13 42 58; --line-rgb: 13 42 58; --night-rgb: 255 255 255; } }
+:root:not([data-theme="dark"]) :is(.bp, .page-head:not(.photo)) { background-image: linear-gradient(rgb(13 42 58 / .07) 1px, transparent 1px), linear-gradient(90deg, rgb(13 42 58 / .07) 1px, transparent 1px), linear-gradient(rgb(13 42 58 / .03) 1px, transparent 1px), linear-gradient(90deg, rgb(13 42 58 / .03) 1px, transparent 1px); }
+:root:not([data-theme="dark"]) :is(.bp, .panel-dusk, .page-head:not(.photo), .flow-core) .console { border-color: var(--rule); box-shadow: 0 16px 40px -24px rgb(13 42 58 / .35); backdrop-filter: none; }
+:root:not([data-theme="dark"]) :is(.bp, .panel-dusk, .page-head:not(.photo), .flow-core) .btn-line { color: var(--ink); }
+:root:not([data-theme="dark"]) .bp .tv-wire, :root:not([data-theme="dark"]) .bp .wire { filter: none; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme]) :is(.bp, .page-head:not(.photo)) { background-image: linear-gradient(rgb(127 166 196 / .14) 1px, transparent 1px), linear-gradient(90deg, rgb(127 166 196 / .14) 1px, transparent 1px); background-size: 160px 160px, 160px 160px; } }
 
 /* Theme toggle */
 .theme-toggle { all: unset; cursor: pointer; display: inline-grid; place-items: center; width: 36px; height: 36px; border-radius: 50%; border: 1px solid rgb(var(--chalk-rgb) / .3); color: var(--chalk); margin-left: 4px; }
@@ -862,15 +849,3 @@ fieldset.field { border: 0; padding: 0; margin: 0; }
 :root[data-theme="dark"] .theme-toggle .sun { display: none; }
 :root[data-theme="dark"] .theme-toggle .moon { display: block; }
 @media (max-width: 900px) { .theme-toggle { margin-left: 0; } }
-
-/* Palette demo switcher (shown only with ?palettes in the URL, or once used) */
-.palette-demo { position: fixed; left: 16px; bottom: 16px; z-index: 60; background: var(--paper-2); color: var(--ink); border: 1px solid var(--rule); border-radius: 8px; padding: 10px 12px 12px; box-shadow: 0 16px 40px -18px rgb(0 0 0 / .45); font-size: .85rem; }
-.palette-demo b { display: block; font-family: var(--mono); font-weight: 400; font-size: .72rem; color: var(--ink-2); margin-bottom: 8px; }
-.palette-demo .row { display: flex; gap: 6px; flex-wrap: wrap; }
-.palette-demo button { all: unset; cursor: pointer; display: inline-flex; align-items: center; gap: 7px; padding: 6px 10px; border: 1px solid var(--rule); border-radius: 999px; }
-.palette-demo button[aria-pressed="true"] { border-color: var(--ink); box-shadow: inset 0 0 0 1px var(--ink); }
-.palette-demo button:focus-visible { outline: 2px solid var(--amber); outline-offset: 2px; }
-.palette-demo i { display: inline-flex; }
-.palette-demo i span { width: 10px; height: 14px; display: block; }
-.palette-demo i span:first-child { border-radius: 3px 0 0 3px; } .palette-demo i span:last-child { border-radius: 0 3px 3px 0; }
-.palette-demo .close { margin-left: auto; border: 0; padding: 0 2px; }

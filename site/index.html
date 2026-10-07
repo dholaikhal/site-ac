@@ -19,10 +19,9 @@
 <body class="has-hero">
 <!-- chrome:header -->
 <script>
-/* Apply saved theme and palette before paint. Theme: saved choice, else the system setting. */
+/* Apply the saved theme before paint: saved choice, else the system setting. */
 (function(){var d=document.documentElement,g=function(k){try{return localStorage.getItem(k)}catch(e){return null}};
-var t=g("ac-theme")||(matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light");d.setAttribute("data-theme",t);
-var p=new URLSearchParams(location.search).get("palette")||g("ac-palette");if(p)d.setAttribute("data-palette",p);})();
+var t=g("ac-theme")||(matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light");d.setAttribute("data-theme",t);})();
 </script>
 <a class="skip" href="#main">Skip to content</a>
 <header class="site-header">
