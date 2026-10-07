@@ -78,12 +78,12 @@ SCENES = [
 
 SCENES += [
     {
-        "id": "bazar", "label": "Bazar and mosque", "photo": "bazar", "w": 2400, "h": 3200,
+        "id": "bazar", "label": "Bazar", "photo": "bazar", "w": 2400, "h": 3200,
         "fit": "right", "pos": "50% 100%", "par": "xMidYMax slice",
         "alt": "A crowded Dhaka market street under tangled cables, with a mosque minaret at the end.",
         "credit": ("Dhaka. Photo: Ferdous Hasan (Pexels)", "https://www.pexels.com/photo/bustling-dhaka-street-market-with-mosque-in-view-36525029/"),
         "nodes": {
-            "b1": (1290, 1180, "TV box + old TV", "Prayer times on the mosque wall"),
+            "b1": (1290, 1180, "TV box + old TV", "The bazar's notice board: closing days, lost and found, local ads"),
             "b2": (1640, 2340, "Tablet", "Today's prices board for the bazar committee"),
             "b3": (1080, 2900, "Old laptop", "The bazar committee's shared accounts"),
             "b4": (2280, 1300, "Desktop PC", "Wholesaler's accounts, backed up nightly"),
