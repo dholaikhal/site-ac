@@ -40,7 +40,7 @@ Type these in as written. Fields marked *unverified* depend on what Facebook's f
 
 **Details / About** (longer text):
 
-> amader (আমাদের) means "ours".
+> "amader" means "ours".
 >
 > Every home in Dhaka has a drawer of old phones, TV boxes, laptops and routers that still work. We collect them, wipe your old data properly, and rebuild each one for one new job: a stairwell camera, Wi‑Fi on the roof, a family photo cloud, a lobby notice screen, a computer in a school lab. Then we look after them, with support in Bangla.
 >
@@ -120,11 +120,11 @@ Sizes follow third-party 2026 guides, since Meta's help pages don't publish one 
 1. **Claims policy holds.** Only the facts in brand.md, with their source on the card or in the post. No wattage, no CO₂, prices only as "pilot prices".
 2. **Generalise.** No two posts in a row about the same device class or the same place. Check the balance over each fortnight (recipe series above is already balanced).
 3. **Ask real questions, not for clicks.** Meta demotes posts that ask for reactions, specific comments ("comment YES"), tags or shares ([Search Engine Journal](https://searchenginejournal.com/facebook-demoting-engagement-bait/228071)). Never write "like if", "tag a friend", "type 1 for". Asking for information or advice is allowed: "What's in your drawer, and which area are you in?"
-4. **Bengali.** Every Bengali line goes through a native speaker before posting. New lines this packet introduces: আপনার ড্রয়ারে কী আছে? (d01). The plan is English-first with Bengali touches, as the site is. See §8 on going Bangla-first.
+4. **English only, for now.** Posts, cards and the page carry no Bengali lines, as the site doesn't (decided 7 Oct 2026). Support itself is still in Bangla. See open question 2 on going Bangla-first; any Bengali line written later goes through a native speaker before posting.
 5. **People and places.** No identifiable people, flat numbers or building names without written consent. Never post a camera's live view or a screenshot of anyone's files.
 6. **Security questions get a straight answer within a day**, in public where possible ([replies.md](replies.md) §2). Being the people who answer them is the brand.
 7. **Credit photos** in the image (cards already do: small and quiet, never competing with the headline) and in the post if it's cropped out.
-8. **Bangladesh-standard and secular.** Bangla as written in Bangladesh (Bangla Academy, Dhaka spelling) and Bangladeshi English usage: Bangla not Bengali, Tk, flat, lift, current, load-shedding, para, bhangari, bKash/Nagad. Nothing West Bengal–coded. No religious greetings, phrases or festival posts from the page (no "Assalamu alaikum", "Nomoshkar", "Ramadan Mubarak", "Shubho …"). Open with "Hi" or the person's name. Mosques, madrasas, temples and churches can appear as everyday places or customers, like any other fixture of Dhaka. The native reviewer checks both, including পুরনো vs the Bangla Academy spelling পুরোনো, and ডেটা vs ডাটা.
+8. **Bangladesh-standard and secular.** Bangla as written in Bangladesh (Bangla Academy, Dhaka spelling) and Bangladeshi English usage: Bangla not Bengali, Tk, flat, lift, current, load-shedding, para, bhangari, bKash/Nagad. Nothing West Bengal–coded. No religious greetings, phrases or festival posts from the page (no "Assalamu alaikum", "Nomoshkar", "Ramadan Mubarak", "Shubho …"). Open with "Hi" or the person's name. Mosques, madrasas, temples and churches can appear as everyday places or customers, like any other fixture of Dhaka.
 
 ## 5. Getting the first people in
 
@@ -162,7 +162,6 @@ The contact form preselects its topic from the link, so asks go straight to the 
 | When | Task | Owner |
 |---|---|---|
 | By Sun 11 Oct | Create the page with §2. Two admins, 2FA on. Messenger automations on | |
-| By Sun 11 Oct | Native speaker reviews every Bengali line in posts.md and the cards | |
 | By Sun 11 Oct | hello@ mailbox working (the page lists it) | |
 | Mon 12 – Sat 17 Oct | Publish seed posts P01–P06; pin P01 | |
 | By Sat 17 Oct | List 15 building and area groups with their promotion rules | |
@@ -177,7 +176,7 @@ The contact form preselects its topic from the link, so asks go straight to the 
 ## 8. Decisions for the founder
 
 1. **Pilot timing and Ramadan.** Choose buildings before Ramadan (≈ 8 Feb) and install after Eid (≈ mid-March), as this plan assumes? Or install in early Feb and pause? The roadmap says Mar–May.
-2. **Bangla-first?** Building committees in Dhaka may engage more with posts written in Bangla first. That needs a native writer, not translation. This plan is English-first like the site.
+2. **Bangla later?** The page and cards are English only for now, like the site. Building committees in Dhaka may engage more with posts written in Bangla. That needs a native writer, not translation.
 3. **Donors' wipe record.** Cards d03 and r10 promise donors a wipe record and say which job their device got. Confirm the bench can produce that in Phase 0 (the passport is a spreadsheet then).
 4. **Free device check.** The TV box checklist (b03) and drawer day offer a free check. Confirm capacity, or limit it to drawer day.
 5. **Paid budget** for §5.6, and whether to run ads before the pilot at all.

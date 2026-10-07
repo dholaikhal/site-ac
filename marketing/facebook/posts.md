@@ -1,6 +1,6 @@
 # Facebook posts: calendar and copy
 
-v0.1, 2026-10-07. Ready to post from Mon 12 Oct 2026. Images are in `marketing/out/facebook/`. Placeholders are in `[brackets]`. A native speaker reviews every Bengali line first. Rules and setup: [README.md](README.md).
+v0.1, 2026-10-07. Ready to post from Mon 12 Oct 2026. Images are in `marketing/out/facebook/`. Placeholders are in `[brackets]`. Posts and cards are in English only for now. Rules and setup: [README.md](README.md).
 
 Post at 20:30–22:00 Dhaka time until Insights says otherwise. "Story" lines are optional extras on the same day.
 
@@ -30,8 +30,6 @@ Image: `c01-together`
 > 📶 router → Wi‑Fi on the roof
 >
 > Then we look after them, with support in Bangla.
->
-> পুরনো যন্ত্র, নতুন কাজ।
 >
 > We're choosing our first two pilot buildings in Dhaka now. Message us to nominate yours.
 
@@ -63,7 +61,7 @@ Image: `r02-tvbox-cloud`
 >
 > Every phone at home backs up to it. The photos stay in your flat. Copies kept on other members' devices are locked with your key, so they can't read them.
 >
-> No monthly storage bill from abroad. আমাদের ডেটা, আমাদের ঘরে।
+> No monthly storage bill from abroad. Your data stays home.
 
 ### P05 · Fri 16 Oct · stronger together
 
@@ -91,7 +89,7 @@ Image: `r04-tablet-notices`
 
 Image: `d01-drawer` · Story: `s01-reel-drawer` as a still
 
-> **What's in your drawer?** আপনার ড্রয়ারে কী আছে?
+> **What's in your drawer?**
 >
 > We're mapping what Dhaka's drawers hold, para by para. Count the old devices at home: TV boxes, phones, laptops, routers, tablets, monitors. Tell us in the comments with your area.
 >

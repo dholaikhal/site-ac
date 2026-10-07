@@ -5,7 +5,6 @@
 .no { font-size: 22px; color: var(--bp-line); }
 .kick { font-family: "JetBrains Mono", monospace; color: var(--amber); font-size: 26px; margin-top: 56px; }
 h1 { font-size: 72px; margin-top: 16px; max-width: 920px; }
-.bn { color: var(--amber); font-size: 44px; margin-top: 18px; }
 p.sub { font-size: 30px; color: var(--chalk-2); margin-top: 20px; max-width: 900px; line-height: 1.35; }
 .foot { margin-top: auto; display: flex; justify-content: space-between; gap: 24px; font-size: 21px; color: var(--chalk-2); }
 
@@ -22,7 +21,6 @@ p.sub { font-size: 30px; color: var(--chalk-2); margin-top: 20px; max-width: 900
 .cover .brand { display: none; }
 .cover .txt { position: absolute; left: 330px; right: 270px; top: 70px; text-align: center; max-width: none; }
 .cover h1 { font-size: 70px; max-width: none; margin: 0; }
-.cover .bn { font-size: 42px; }
 .cover .foot { position: absolute; left: 330px; right: 330px; bottom: 24px; font-size: 19px; justify-content: center; gap: 40px; }
 .cover .foot span:last-child { font-size: 10px; opacity: .5; }
 .cover.grade::before { background: linear-gradient(180deg, rgba(10,22,34,.92) 0%, rgba(10,22,34,.55) 45%, rgba(10,22,34,.1) 70%, rgba(10,22,34,.55) 100%); }
@@ -74,7 +72,7 @@ ol { list-style: none; margin-top: 44px; display: grid; gap: 26px; }
 .btn { align-self: flex-start; margin-top: auto; background: var(--amber); color: var(--night); font-size: 34px; font-weight: 600; padding: 22px 40px; border-radius: 999px; }
 .s .foot { margin-top: 36px; }
 .paper { background: var(--paper); color: var(--ink); }
-.paper .brand { color: var(--ink); } .paper .no { color: var(--ink-2); } .paper .bn { color: var(--amber-ink); }
+.paper .brand { color: var(--ink); } .paper .no { color: var(--ink-2); }
 .paper p.sub, .paper .foot { color: var(--ink-2); } .paper .n { color: var(--amber-ink); }
 .paper .s li, .paper li { border-top-color: var(--rule); }
 

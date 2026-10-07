@@ -1,6 +1,6 @@
 # amader.cloud — launch copy deck
 
-Ready-to-post copy for the Dhaka pilot. Placeholders are in `[brackets]`. A native speaker should review the Bengali lines before posting.
+Ready-to-post copy for the Dhaka pilot. Placeholders are in `[brackets]`. Everything is in English for now, with no Bengali lines.
 
 ## 1. Facebook page: launch post
 
@@ -16,8 +16,6 @@ Ready-to-post copy for the Dhaka pilot. Placeholders are in `[brackets]`. A nati
 > 📶 router → Wi‑Fi on the roof
 >
 > Then we look after them, with support in Bangla on WhatsApp.
->
-> পুরনো যন্ত্র, নতুন কাজ।
 >
 > We're choosing our first pilot buildings in Dhaka now. Free visit: amader.cloud
 
@@ -54,7 +52,7 @@ Attach: `flyer-a5.pdf`
 | 8–12 s | Caption over black: "1M+ home devices hijacked. FBI, 2025" | "That's how botnets are built." |
 | 12–20 s | Bench: wiping a phone, then mounting it in a stairwell | "We wipe them, rebuild them, and give them a job." |
 | 20–26 s | Dusk rooftop timelapse with amber lines connecting windows (site hero animation) | "A camera. A photo cloud. Wi‑Fi on the roof." |
-| 26–30 s | Logo + পুরনো যন্ত্র, নতুন কাজ | "amader.cloud. Second jobs for old devices." |
+| 26–30 s | Logo + "Second jobs for old devices." | "amader.cloud. Second jobs for old devices." |
 
 ## 5. Ads (Meta)
 

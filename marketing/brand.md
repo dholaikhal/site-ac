@@ -8,21 +8,21 @@ v0.2, 2026-10-07. Covers the redesign: real Dhaka photography, blueprint line-wo
 
 **For investors:** reuse today ends at one transaction. We *operate* reused devices as a service and get paid at both ends. Companies pay to retire devices. Homes, buildings, shops and schools pay monthly to run them. We start with Dhaka's apartment buildings.
 
-**The name:** *amader* (আমাদের) means "ours". The devices, the data and the network belong to the members.
+**The name:** *amader* means "ours". The devices, the data and the network belong to the members.
 
 **One idea:** idle devices still have value, and we get it back out, for people and for companies: give it a job, or rent out what it isn't using.
 
 ## Lines
 
-| Use | English | Bengali | Meaning |
-|---|---|---|---|
-| Company line | Second jobs for old devices. | পুরনো যন্ত্র, নতুন কাজ | "Old devices, new work" |
-| Data promise | Your data stays home. | আমাদের ডেটা, আমাদের ঘরে | "Our data, in our homes" |
-| Earn | Rent out what your devices aren't using. | আমাদের মেঘ, আমাদের হাতে | "Our cloud, in our hands" |
-| Hero headline | Dhaka's next data centre is sitting in its drawers. | — | — |
-| Investor headline | Reuse that pays every month. | — | — |
+| Use | Line |
+|---|---|
+| Company line | Second jobs for old devices. |
+| Data promise | Your data stays home. |
+| Earn | Rent out what your devices aren't using. |
+| Hero headline | Dhaka's next data centre is sitting in its drawers. |
+| Investor headline | Reuse that pays every month. |
 
-A native speaker should review the Bengali lines before anything is printed. *Unverified:* that ডেটা is the spelling the audience expects (ডাটা is also common).
+English only for now (decided 2026-10-07): the site and all marketing material carry no Bengali lines. A Bangla version of the site is parked on the `bangla` branch; any Bengali line goes through a native speaker before it is used.
 
 ## Messaging pillars
 
@@ -80,7 +80,6 @@ Never claim "carbon neutral", "CO₂ saved", or measured wattage until we've met
 **Type**
 
 - **Archivo** (variable width): headlines at width 112–118%, weight 500–560, tight tracking. Body at 100%.
-- **Tiro Bangla**: every Bengali line. Its hand-made feel against the engineered Latin face is deliberate.
 - **JetBrains Mono**: blueprint annotations, sources, photo credits and small labels only. Lowercase, never letter-spaced capitals.
 
 **Logo:** a TV box with a lit LED and two signal arcs, then the wordmark "amader" with ".cloud" at reduced opacity. Files: `web/public/assets/img/logo-mark.svg`, `favicon.svg`.

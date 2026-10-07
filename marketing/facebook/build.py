@@ -77,14 +77,13 @@ def mesh(scene_id, w, h):
 
 def photo(a):
     w, h = a["size"]; s = SCENE[a["scene"]]
-    bn = f'<p class="bn" lang="bn">{a["bn"]}</p>' if a.get("bn") else ""
     sub = f'<p class="sub">{e(a["sub"])}</p>' if a.get("sub") else ""
     kick = f'<p class="kick mono">{e(a["kick"])}</p>' if a.get("kick") else ""
     credit = s["credit"][0].replace("Photo:", "Photo:")
     cred = credit + (" / Unsplash" if "unsplash" in s["credit"][1] else "")
     cred = cred.replace(" (Pexels)", " / Pexels")
     body = (f'<section class="photo grade card p {a.get("cls", "")}"><img src="{PHOTOS}/{s["photo"]}.jpg" alt="" style="object-position:{s["pos"]}">'
-            f'{mesh(a["scene"], w, h)}{BRAND}<div class="txt">{kick}<h1>{e(a["h1"])}</h1>{bn}{sub}</div>'
+            f'{mesh(a["scene"], w, h)}{BRAND}<div class="txt">{kick}<h1>{e(a["h1"])}</h1>{sub}</div>'
             f'<div class="foot mono"><span>{e(a.get("cta", "amader.cloud"))}</span><span>{e(cred)}</span></div></section>')
     return body
 
@@ -112,10 +111,9 @@ def checklist(a):
 
 def steps(a):
     li = "".join(f'<li><span class="n mono">0{i + 1}</span><span>{e(t)}</span></li>' for i, t in enumerate(a["steps"]))
-    bn = f'<p class="bn" lang="bn">{a["bn"]}</p>' if a.get("bn") else ""
     theme = "paper" if a.get("light") else "blueprint"
     return (f'<section class="{theme} card s"><div class="top">{BRAND}<span class="mono no">{e(a["kick"])}</span></div>'
-            f'<h1>{e(a["h1"])}</h1>{bn}<p class="sub">{e(a["sub"])}</p><ol>{li}</ol>'
+            f'<h1>{e(a["h1"])}</h1><p class="sub">{e(a["sub"])}</p><ol>{li}</ol>'
             f'<div class="btn">{e(a["button"])}</div><div class="foot mono"><span>{e(a["foot"])}</span></div></section>')
 
 
@@ -132,7 +130,7 @@ DRAWER = ('<svg class="art" viewBox="0 0 936 470" aria-hidden="true">'
 
 def drawer(a):
     return (f'<section class="blueprint card r d"><div class="top">{BRAND}<span class="mono no">{e(a["kick"])}</span></div>'
-            f'<h1>{e(a["h1"])}</h1><p class="bn" lang="bn">{a["bn"]}</p><p class="sub">{e(a["sub"])}</p>{DRAWER}'
+            f'<h1>{e(a["h1"])}</h1><p class="sub">{e(a["sub"])}</p>{DRAWER}'
             f'<div class="foot mono"><span>{e(a["foot"])}</span></div></section>')
 
 
@@ -158,11 +156,10 @@ WA = "Message us on Facebook · amader.cloud"
 ASSETS = [
     # ---- page identity ----
     dict(id="fb-profile", kind="profile", size=SQ, title="Profile picture"),
-    dict(id="fb-cover", kind="photo", size=COVER, scene="rooftops", cls="cover", h1="Second jobs for old devices.",
-         bn="পুরনো যন্ত্র, নতুন কাজ", cta="pilot buildings in Dhaka · 2027", title="Cover photo"),
+    dict(id="fb-cover", kind="photo", size=COVER, scene="rooftops", cls="cover", h1="Second jobs for old devices.", cta="pilot buildings in Dhaka · 2027", title="Cover photo"),
     dict(id="fb-cover-guide", kind="guide", size=COVER, of="fb-cover", title="Cover crop guide"),
     dict(id="fb-event-drawer-day", kind="photo", size=EVENT, scene="towers", cls="event", kick="drawer day · free device check",
-         h1="Bring your drawer. We'll tell you what each device could do next.", bn="পুরনো যন্ত্র, নতুন কাজ", cta="amader.cloud", title="Event cover: drawer day"),
+         h1="Bring your drawer. We'll tell you what each device could do next.", cta="amader.cloud", title="Event cover: drawer day"),
     dict(id="fb-event-live-qa", kind="photo", size=EVENT, scene="neighbourhood", cls="event", kick="live q&a · bangla and english",
          h1="Ask a fixer: what can your old devices still do?", cta="amader.cloud", title="Event cover: live Q&A"),
 
@@ -228,9 +225,9 @@ ASSETS = [
          do="Before anything goes to the bhangari, ask whether it could still do one job.", src="Global E‑waste Monitor 2024", title="Fact: e-waste"),
 
     # ---- series C: stronger as a building (photo, with the site's mesh for that scene) ----
-    dict(id="c01-together", kind="photo", size=FEED, scene="rooftops", h1="Old devices work better together.", bn="আমাদের পাড়া, আমাদের যন্ত্র",
+    dict(id="c01-together", kind="photo", size=FEED, scene="rooftops", h1="Old devices work better together.",
          sub="One building's drawers can furnish its cameras, Wi‑Fi, lobby screen and backups.", cta="amader.cloud", title="Photo: together"),
-    dict(id="c02-backups", kind="photo", size=FEED, scene="towers", h1="Your photos, kept safe by your neighbours, in pieces they can't read.", bn="আমাদের ডেটা, আমাদের ঘরে",
+    dict(id="c02-backups", kind="photo", size=FEED, scene="towers", h1="Your photos, kept safe by your neighbours, in pieces they can't read.",
          sub="Each flat holds one locked piece. Lose your device and the building gives your photos back.", cta="amader.cloud/#community", title="Photo: backups"),
     dict(id="c03-monsoon", kind="photo", size=FEED, scene="monsoon", h1="Lane flooding, current gone, current back: the building hears it first.",
          sub="Old phones on their chargers post to the building's WhatsApp group.", cta="amader.cloud/#community", title="Photo: monsoon"),
@@ -244,7 +241,7 @@ ASSETS = [
          sub="One building's old laptop holds locked copies for three neighbours. A fire or a theft in one doesn't take everything.", cta="amader.cloud/#community", title="Photo: neighbourhood"),
 
     # ---- series D: take part ----
-    dict(id="d01-drawer", kind="drawer", size=FEED, kick="the drawer census", h1="What's in your drawer?", bn="আপনার ড্রয়ারে কী আছে?",
+    dict(id="d01-drawer", kind="drawer", size=FEED, kick="the drawer census", h1="What's in your drawer?",
          sub="Count the old devices at home and tell us. We're mapping what Dhaka's drawers hold, para by para.", foot="Tell us in the comments, with your area", title="Ask: drawer census"),
     dict(id="d02-nominate", kind="steps", size=FEED, light=True, kick="pilot · march 2027", h1="Nominate your building for the pilot.",
          sub="Two Dhaka buildings get their cameras, Wi‑Fi and lobby screen from their residents' own drawers.",
@@ -260,7 +257,7 @@ ASSETS = [
          button="Talk to us", foot=FACTS["contact"]["email"], title="Ask: companies"),
 
     # ---- stories and reel covers (keep text in the middle; top 250 px and bottom 340 px are covered by Facebook's buttons) ----
-    dict(id="s01-reel-drawer", kind="drawer", size=STORY, kick="reel · 30 s", h1="Every home in Dhaka has this drawer.", bn="পুরনো যন্ত্র, নতুন কাজ",
+    dict(id="s01-reel-drawer", kind="drawer", size=STORY, kick="reel · 30 s", h1="Every home in Dhaka has this drawer.",
          sub="Here's what's in ours, and what each one does now.", foot="amader.cloud", title="Reel cover: drawer"),
     dict(id="s02-story-nominate", kind="photo", size=STORY, scene="street", cls="story", kick="pilot · march 2027", h1="Nominate your building.",
          sub="Two Dhaka buildings. Cameras, Wi‑Fi and a lobby screen from residents' old devices. Free visit.", cta="tap the link · amader.cloud", title="Story: nominate"),

@@ -368,6 +368,7 @@ body:not(.has-hero) main { padding-top: var(--header-h); }
 .page-head h1 { font-size: clamp(2.4rem, 1.4rem + 3.6vw, 4.6rem); max-width: 18ch; }
 .page-head .lede { max-width: 58ch; color: var(--chalk-2); }
 .page-head .btn-line { color: var(--chalk); }
+.page-head .name-line { color: var(--amber); font-size: 1.2rem; font-weight: 500; max-width: 46ch; margin: -0.2em 0 1em; }
 .page-head .hero-actions { margin-bottom: 0; }
 .stack > * + * { margin-top: clamp(48px, 7vw, 88px); }
 .page-head + .stack, .page-head + section { padding-bottom: clamp(64px, 9vw, 120px); }
