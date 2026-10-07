@@ -49,7 +49,7 @@ SCENES = [
             "s5": (1850, 1470, "Wi‑Fi router", "Guard-room Wi‑Fi at the gate"),
             "s6": (1650, 720, "TV box", "Family photo cloud upstairs"),
             "s7": (1300, 930, "Laptop", "Rents out its idle computing"),
-            "s8": (1260, 330, "Desktop PC", "Rents out spare storage"),
+            "s8": (1350, 560, "Desktop PC", "Rents out spare storage"),
         },
         "links": "s1-s2 s2-s3 s3-s4 s4-s5 s3-s7 s7-s6 s6-s8 s7-s8 s4-s6 s5-s6".split(),
         "radio": [], "far": [], "rings": None,
@@ -116,7 +116,7 @@ SCENES += [
         "nodes": {
             "m1": (2160, 1180, "Water-level sensor", "Alerts the lane as water rises (the one new part)"),
             "m2": (330, 1140, "Old phone", "Live view of the lane for every resident"),
-            "m3": (1620, 330, "Old phone", "Posts 'current gone' and 'current back' to the building's WhatsApp"),
+            "m3": (1640, 440, "Old phone", "Posts 'current gone' and 'current back' to the building's WhatsApp"),
             "m4": (1700, 520, "TV box", "Family photo cloud, safe upstairs"),
             "m5": (1820, 880, "Old phone", "Night camera on a shut shop"),
             "m6": (1440, 860, "Old phone", "Building gate camera"),
