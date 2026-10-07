@@ -124,7 +124,7 @@ Sizes follow third-party 2026 guides, since Meta's help pages don't publish one 
 5. **People and places.** No identifiable people, flat numbers or building names without written consent. Never post a camera's live view or a screenshot of anyone's files.
 6. **Security questions get a straight answer within a day**, in public where possible ([replies.md](replies.md) §2). Being the people who answer them is the brand.
 7. **Credit photos** in the image (cards already do: small and quiet, never competing with the headline) and in the post if it's cropped out.
-8. **Bangladesh-standard and secular.** Bangla as written in Bangladesh (Bangla Academy, Dhaka spelling) and Bangladeshi English usage: Bangla not Bengali, Tk, flat, lift, current, load-shedding, para, bhangari, bKash/Nagad. Nothing West Bengal–coded. No religious greetings, phrases or festival posts from the page (no "Assalamu alaikum", "Nomoshkar", "Ramadan Mubarak", "Shubho …"). Open with "Hi" or the person's name. The native reviewer checks both, including পুরনো vs the Bangla Academy spelling পুরোনো, and ডেটা vs ডাটা.
+8. **Bangladesh-standard and secular.** Bangla as written in Bangladesh (Bangla Academy, Dhaka spelling) and Bangladeshi English usage: Bangla not Bengali, Tk, flat, lift, current, load-shedding, para, bhangari, bKash/Nagad. Nothing West Bengal–coded. No religious greetings, phrases or festival posts from the page (no "Assalamu alaikum", "Nomoshkar", "Ramadan Mubarak", "Shubho …"). Open with "Hi" or the person's name. Mosques, madrasas, temples and churches can appear as everyday places or customers, like any other fixture of Dhaka. The native reviewer checks both, including পুরনো vs the Bangla Academy spelling পুরোনো, and ডেটা vs ডাটা.
 
 ## 5. Getting the first people in
 

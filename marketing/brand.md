@@ -39,7 +39,7 @@ A native speaker should review the Bengali lines before anything is printed. *Un
 - Confident about what we've checked. Explicit about what's a pilot hypothesis.
 - No eco-guilt and no tech-bro. Speak like a neighbour who fixes things.
 - Sentence case everywhere. No exclamation marks.
-- Bangladesh-standard and secular: Bangla as written in Bangladesh, Bangladeshi English usage, nothing West Bengal–coded. No religious greetings, phrases or festival posts; open with "Hi" or a name.
+- Bangladesh-standard and secular: Bangla as written in Bangladesh, Bangladeshi English usage, nothing West Bengal–coded. No religious greetings, phrases or festival posts; open with "Hi" or a name. Mosques, madrasas, temples and churches can appear as everyday places or customers, like any other fixture of Dhaka.
 
 ## Claims policy
 
