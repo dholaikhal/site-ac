@@ -64,7 +64,7 @@ Never claim "carbon neutral", "CO₂ saved", or measured wattage until we've met
 2. **Blueprint: how it works.** Ink line drawings of devices on pale-blue grid paper, with dimension lines and mono annotations. It explains; it never decorates.
 3. **Amber: something alive.** Amber is used only for connections, active devices, and the primary button. Don't use it as a general accent.
 
-**Palette: Daylight** (decided 2026-10-07). Bright pages and bright blueprints with ink line-work. Dark night-blue is reserved for the hero, header, footer and photo bands. Every colour comes from a token in `site/assets/css/site.css`, and a dark-theme variant exists (visitors can toggle it).
+**Palette: Daylight** (decided 2026-10-07). Bright pages and bright blueprints with ink line-work. Dark night-blue is reserved for the hero, header, footer and photo bands. Every colour comes from a token in `web/src/styles/site.css`, and a dark-theme variant exists (visitors can toggle it).
 
 | Token | Light | Dark theme | Use |
 |---|---|---|---|

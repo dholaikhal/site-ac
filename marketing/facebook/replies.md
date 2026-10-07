@@ -1,6 +1,6 @@
 # Facebook replies: inbox, comments and moderation
 
-v0.1, 2026-10-07. Answers match the website's plans and FAQ (`site/index.html`) and the [brand.md](../brand.md) claims policy. If the site changes, change these. Write in the language the person wrote in; the Bengali versions need a native writer, not a translation of these.
+v0.1, 2026-10-07. Answers match the website's plans and FAQ (`web/src/pages/index.astro`, prices in `web/src/data/site.json`) and the [brand.md](../brand.md) claims policy. If the site changes, change these. Write in the language the person wrote in; the Bengali versions need a native writer, not a translation of these.
 
 Tone: a neighbour who fixes things. Secular and Bangladesh-standard: no religious greetings or phrases (open with "Hi" or the person's name), Bangladeshi usage throughout. Answer the actual question in the first sentence. No "Dear valued customer", no exclamation marks, no emoji walls.
 

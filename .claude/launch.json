@@ -1,6 +1,6 @@
 {
   "version": "0.0.1",
   "configurations": [
-    { "name": "site", "runtimeExecutable": "python3", "runtimeArgs": ["-m", "http.server", "8417", "--directory", "site"], "port": 8417 }
+    { "name": "site", "runtimeExecutable": "/Users/sammaysarkar/.local/bin/node", "runtimeArgs": ["web/node_modules/astro/bin/astro.mjs", "dev", "--root", "web", "--port", "8417"], "port": 8417 }
   ]
 }
