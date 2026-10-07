@@ -21,7 +21,7 @@ Ready-to-post copy for the Dhaka pilot. Placeholders are in `[brackets]`. A nati
 >
 > We're choosing our first pilot buildings in Dhaka now. Free visit: amader.cloud
 
-Image: `card-hero.png`
+Image: `card-together.png`
 
 ## 2. Facebook group post (building and area groups)
 
@@ -31,7 +31,7 @@ Image: `card-hero.png`
 >
 > We're looking for **2 buildings** for our pilot this winter. If your building committee might be interested, comment or message us, and we'll come and check your devices for free.
 
-Image: `card-blueprint.png`
+Image: `card-backups.png` or `card-screens.png`
 
 ## 3. WhatsApp message to a building committee
 

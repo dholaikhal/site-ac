@@ -91,7 +91,7 @@ Never claim "carbon neutral", "CO₂ saved", or measured wattage until we've met
 | Photos (Unsplash and Pexels licences) | `site/assets/img/photos/`. Unsplash: rooftops (Ahmed Hasan), façades (Ahmed Reyasat), skyline (Al Amin Mir), sunset (Hasnan Monir). Pexels: street at night (MD Shaha Riaz Rimon), bazar and mosque (Ferdous Hasan), tea stall (Ahnaf Abror), monsoon lane (Faisal Ibne Kalam), Uttara towers (Robiul Islam Pailot) |
 | A5 building flyer | `marketing/out/flyer-a5.pdf` |
 | A4 investor one-pager | `marketing/out/one-pager-a4.pdf` |
-| Social cards 1080×1080 | `marketing/out/card-*.png` |
+| Social cards 1080×1080 | `marketing/out/card-*.png`: together (rooftops), backups held by neighbours (Uttara towers), screens instead of posters (blueprint), botnet warning |
 | Open Graph image | `site/assets/img/og.jpg` |
 | Investor deck | claude.ai artifact; source in `marketing/deck/` |
 | Render pipeline | `python3 marketing/render.py` (run `npm i --prefix marketing` first) |

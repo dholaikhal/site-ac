@@ -6,11 +6,35 @@
 import pathlib, re, subprocess, json
 M = pathlib.Path(__file__).resolve().parent
 frags = {"mesh": (M / "print/_mesh.svgfrag").read_text().strip(), "mark": (M / "print/_mark.svgfrag").read_text().strip()}
+
+# Static network overlays for any hero scene, from the same data the website uses (tools/build_hero.py).
+import sys
+sys.path.insert(0, str(M.parent / "tools"))
+from build_hero import SCENES
+
+
+def static_mesh(scene, scale=1.0):
+    n = scene["nodes"]; out = ['<g fill="none" stroke="#ffb547" stroke-linecap="round">']
+    for kind, pairs in (("solid", scene["links"]), ("dash", scene["radio"] + scene["far"])):
+        for pr in pairs:
+            a, b = pr.split("-"); (x1, y1), (x2, y2) = n[a][:2], n[b][:2]
+            style = f'stroke-width="{4.5 * scale}" opacity=".92"' if kind == "solid" else f'stroke-width="{3.5 * scale}" stroke-dasharray="{12 * scale} {12 * scale}" opacity=".9"'
+            out.append(f'<path d="M{x1} {y1} L{x2} {y2}" {style}/>')
+    out.append("</g><g>")
+    for x, y, *_ in n.values():
+        out.append(f'<circle cx="{x}" cy="{y}" r="{26 * scale}" fill="rgba(255,181,71,.22)" stroke="#ffb547" stroke-width="{2.5 * scale}"/><circle cx="{x}" cy="{y}" r="{10 * scale}" fill="#ffb547"/>')
+    out.append("</g>")
+    return "\n".join(out)
+
+
+for sc in SCENES:
+    frags[f"mesh:{sc['id']}"] = static_mesh(sc)
+    frags[f"mesh:{sc['id']}@2"] = static_mesh(sc, 2)  # heavier lines for small renders
 jobs = []
 for f in list((M / "print").glob("*.html")) + list((M / "social").glob("*.html")):
     s = f.read_text()
     for k, v in frags.items():
-        s = re.sub(rf"<!--{k}-->.*?<!--/{k}-->", f"<!--{k}-->{v}<!--/{k}-->", s, flags=re.S)
+        s = re.sub(rf"<!--{re.escape(k)}-->.*?<!--/{re.escape(k)}-->", lambda _m: f"<!--{k}-->{v}<!--/{k}-->", s, flags=re.S)
     f.write_text(s)
     out = M / "out" / (f.stem + (".pdf" if f.parent.name == "print" else ".png"))
     jobs.append({"src": f.as_uri(), "out": str(out)})

@@ -609,3 +609,11 @@ fieldset.field { border: 0; padding: 0; margin: 0; }
 .hero-investors { margin-top: 18px; font-size: .8rem; }
 .hero-investors a { color: var(--chalk-2); }
 .hero-investors a:hover { color: var(--chalk); }
+
+/* Hero: content and scene tabs share the flow, so short screens push the tabs down instead of overlapping. */
+.hero { display: flex; flex-direction: column; }
+.hero-content { flex: 1 0 auto; padding-bottom: 36px; }
+.hero-foot { position: relative; bottom: auto; left: auto; right: auto; padding-bottom: 22px; }
+.hero-content { order: 1; width: 100%; }
+.hero-foot { order: 2; width: 100%; }
+@media (max-width: 900px) { .hero-content { order: -1; } .scenes { order: 0; } .hero-foot { order: 2; } }
