@@ -8,7 +8,7 @@ Second jobs for old devices. This repo holds the product brief, the website (Ast
 | `web/` | The website, an [Astro](https://astro.build) project that builds to plain static HTML in `web/dist/` |
 | `web/src/data/facts.json` | **Every fact the site states:** prices, rates, plans, timeline, statistics with sources, contact details, legal entity. Pages and marketing (print, social, Facebook) read it; change it here, not in page text |
 | `web/src/data/scenes.json` | Hero slideshow and page-head scenes: photo, crop, and every node's position and label |
-| `web/src/pages/` | One `.astro` file per page (same URLs as before: `devices.html`, `companies.html`…) |
+| `web/src/pages/` | One file per page (same URLs as before: `devices.html`, `companies.html`…). Terms, privacy and acceptable use are Markdown (`.mdx`): edit the text directly |
 | `web/src/components/` | Header, Footer, Scene/HeroScenes/SceneHead, Plans, Roadmap, EarnCalc, Photo |
 | `web/src/assets/photos/` | Photo masters. The build makes AVIF/WebP/JPEG at several widths |
 | `web/public/` | Files served as-is (favicon, OG image, robots.txt) |
@@ -55,7 +55,7 @@ After re-rendering the OG image, copy `marketing/out/og.png` to `web/public/asse
 - [ ] Real WhatsApp number: `contact.whatsapp` in `web/src/data/facts.json` (the site, flyer and Facebook kit all read it)
 - [ ] Set up mailboxes: hello@, privacy@, security@, abuse@, invest@ amader.cloud
 - [ ] Contact form backend: set `data-endpoint` on `#contact-form` in `web/src/pages/contact.astro`. Without it, the form opens an email draft
-- [ ] Legal entity name, address and trade licence in `web/src/pages/terms.astro` and `privacy.astro`, plus the control-plane hosting location in privacy §6
+- [ ] Legal entity name, address and trade licence are `entity` in `web/src/data/facts.json` (terms and privacy read it), as is the control-plane hosting location
 - [ ] Lawyer review of terms, privacy and acceptable use. Remove the "draft" notes after review
 - [ ] Native-speaker review of every Bengali line
 - [ ] Deck placeholders: team, raise amount, Dhaka building count
