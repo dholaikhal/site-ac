@@ -606,3 +606,6 @@ fieldset.field { border: 0; padding: 0; margin: 0; }
   .together li, .together li:not(:nth-child(3n+1)) { padding: 22px 0; border-left: 0; }
 }
 .restore .thread { pointer-events: none; opacity: .85; stroke-width: 1.8; }
+.hero-investors { margin-top: 18px; font-size: .8rem; }
+.hero-investors a { color: var(--chalk-2); }
+.hero-investors a:hover { color: var(--chalk); }

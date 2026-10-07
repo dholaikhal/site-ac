@@ -218,8 +218,46 @@
     <p class="lede">Old phones, TV boxes, laptops and routers still work. We give them second jobs in homes, shops and on rooftops, and you can earn from what they aren't using. Then we look after them.</p>
     <div class="hero-actions">
       <a class="btn btn-bulb" href="contact.html">Book a free visit</a>
-      <a class="btn btn-line" href="investors.html">For investors</a>
+      <a class="btn btn-line" href="#earn">What could my devices earn?</a>
     </div>
+    <p class="hero-investors mono"><a href="investors.html">Investing in reuse? Read the investor overview</a></p>
+  </div>
+</section>
+
+<!-- Earn: rent out what your devices aren't using -->
+<section class="bp earn" id="earn" aria-labelledby="earn-title">
+  <div class="wrap earn-inner">
+    <div>
+      <span class="kicker">Earn</span>
+      <h2 id="earn-title">Your devices can pay you back.</h2>
+      <p class="lede">An old laptop sits idle most of the day. A disk sits half empty. Members rent that spare computing and storage to researchers, startups and other members through amader.cloud, and earn credit for it.</p>
+      <ul class="check-list">
+        <li>Jobs run in a sealed sandbox that can't see your files or your home network.</li>
+        <li>Nobody can browse the web through your connection. Your device only talks to our job server.</li>
+        <li>You choose the hours, and you can stop at any time.</li>
+        <li>Earnings go to you, or straight to your building's service-charge fund.</li>
+      </ul>
+      <p style="margin-top:24px"><a class="btn btn-bulb" href="hosts.html">How earning works</a> <a class="btn btn-line" href="contact.html?topic=host" style="color:var(--chalk);margin-left:8px">Join the earn list</a></p>
+    </div>
+    <form class="console earn-calc" id="earn-calc" onsubmit="return false" aria-label="Earnings estimate">
+      <fieldset class="counts">
+        <legend>What could you share?</legend>
+        <div class="count" data-kind="laptop"><span>Laptop</span><button type="button" data-d="-1" aria-label="One fewer laptop">−</button><output>1</output><button type="button" data-d="1" aria-label="One more laptop">+</button></div>
+        <div class="count" data-kind="desktop"><span>Desktop PC</span><button type="button" data-d="-1" aria-label="One fewer desktop">−</button><output>0</output><button type="button" data-d="1" aria-label="One more desktop">+</button></div>
+        <div class="count" data-kind="tvbox"><span>TV box</span><button type="button" data-d="-1" aria-label="One fewer TV box">−</button><output>1</output><button type="button" data-d="1" aria-label="One more TV box">+</button></div>
+      </fieldset>
+      <label for="idle-hours">Idle hours a day <output id="idle-out">10 h</output></label>
+      <input type="range" id="idle-hours" min="2" max="20" value="10">
+      <label for="disk-gb">Spare disk space to rent <output id="disk-out">500 GB</output></label>
+      <input type="range" id="disk-gb" min="0" max="2000" step="50" value="500">
+      <dl>
+        <dt>Storage credit</dt><dd id="e-storage">Tk 100</dd>
+        <dt>Computing, <span id="e-corehours">1,500</span> core-hours</dt><dd id="e-compute">Tk 450</dd>
+        <dt>Your extra electricity</dt><dd id="e-power">− Tk 60</dd>
+        <dt class="total">About, each month</dt><dd class="total" id="e-net">Tk 490</dd>
+      </dl>
+      <p class="small">An estimate, not a promise. Storage pays Tk 50 per 250 GB a month during the pilot. Computing starts in 2027 at a target of Tk 0.30 per core-hour, depending on demand. Electricity is counted at about Tk 9 a unit. Paid as plan credit first, then by bKash.</p>
+    </form>
   </div>
 </section>
 
@@ -407,42 +445,7 @@
   </div>
 </section>
 
-<!-- Earn: rent out what your devices aren't using -->
-<section class="bp earn" id="earn" aria-labelledby="earn-title">
-  <div class="wrap earn-inner">
-    <div>
-      <span class="kicker">Earn</span>
-      <h2 id="earn-title">Your devices can pay you back.</h2>
-      <p class="lede">An old laptop sits idle most of the day. A disk sits half empty. Members rent that spare computing and storage to researchers, startups and other members through amader.cloud, and earn credit for it.</p>
-      <ul class="check-list">
-        <li>Jobs run in a sealed sandbox that can't see your files or your home network.</li>
-        <li>Nobody can browse the web through your connection. Your device only talks to our job server.</li>
-        <li>You choose the hours, and you can stop at any time.</li>
-        <li>Earnings go to you, or straight to your building's service-charge fund.</li>
-      </ul>
-      <p style="margin-top:24px"><a class="btn btn-bulb" href="hosts.html">How earning works</a> <a class="btn btn-line" href="contact.html?topic=host" style="color:var(--chalk);margin-left:8px">Join the earn list</a></p>
-    </div>
-    <form class="console earn-calc" id="earn-calc" onsubmit="return false" aria-label="Earnings estimate">
-      <fieldset class="counts">
-        <legend>What could you share?</legend>
-        <div class="count" data-kind="laptop"><span>Laptop</span><button type="button" data-d="-1" aria-label="One fewer laptop">−</button><output>1</output><button type="button" data-d="1" aria-label="One more laptop">+</button></div>
-        <div class="count" data-kind="desktop"><span>Desktop PC</span><button type="button" data-d="-1" aria-label="One fewer desktop">−</button><output>0</output><button type="button" data-d="1" aria-label="One more desktop">+</button></div>
-        <div class="count" data-kind="tvbox"><span>TV box</span><button type="button" data-d="-1" aria-label="One fewer TV box">−</button><output>1</output><button type="button" data-d="1" aria-label="One more TV box">+</button></div>
-      </fieldset>
-      <label for="idle-hours">Idle hours a day <output id="idle-out">10 h</output></label>
-      <input type="range" id="idle-hours" min="2" max="20" value="10">
-      <label for="disk-gb">Spare disk space to rent <output id="disk-out">500 GB</output></label>
-      <input type="range" id="disk-gb" min="0" max="2000" step="50" value="500">
-      <dl>
-        <dt>Storage credit</dt><dd id="e-storage">Tk 100</dd>
-        <dt>Computing, <span id="e-corehours">1,500</span> core-hours</dt><dd id="e-compute">Tk 450</dd>
-        <dt>Your extra electricity</dt><dd id="e-power">− Tk 60</dd>
-        <dt class="total">About, each month</dt><dd class="total" id="e-net">Tk 490</dd>
-      </dl>
-      <p class="small">An estimate, not a promise. Storage pays Tk 50 per 250 GB a month during the pilot. Computing starts in 2027 at a target of Tk 0.30 per core-hour, depending on demand. Electricity is counted at about Tk 9 a unit. Paid as plan credit first, then by bKash.</p>
-    </form>
-  </div>
-</section>
+
 
 <!-- Plans -->
 <section class="section band" id="plans" aria-labelledby="plans-title">
