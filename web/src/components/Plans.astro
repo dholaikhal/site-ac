@@ -10,7 +10,7 @@ const groups = [["For people", F.plans.people, "plans two"], ["For companies and
       {plans.map((p: any) => (
         <article class:list={["plan", { lead: p.lead }]}>
           <div class="plan-photo"><Photo name={p.photo} sizes="(max-width: 960px) 100vw, 33vw" maxWidth={1200} style={`object-position:${p.pos}`} /></div>
-          <div class="plan-name"><h3>{p.name}</h3>{p.bn && <span class="bn" lang="bn">{p.bn}</span>}</div>
+          <div class="plan-name"><h3>{p.name}</h3></div>
           <p class="plan-for">{p.for}</p>
           <div class="price">{p.price}<span>{p.per}</span></div>
           <p class="setup small">{p.setup}</p>
