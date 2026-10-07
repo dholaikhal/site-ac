@@ -1,0 +1,12 @@
+---
+// A local photograph through Astro's image pipeline. Credit goes in the title attribute only;
+// the full credits list is on the Trust page.
+import { Image } from "astro:assets";
+import data from "../data/photos.json";
+const files = import.meta.glob<{ default: ImageMetadata }>("../assets/photos/*.jpg", { eager: true });
+interface Props { id: keyof typeof data.photos; class?: string; sizes?: string; widths?: number[]; loading?: "lazy" | "eager" }
+const { id, class: cls, sizes = "(max-width: 860px) 100vw, 50vw", widths = [480, 800, 1200, 1600], loading = "lazy" } = Astro.props;
+const p = data.photos[id];
+const src = files[`../assets/photos/${p.file}`].default;
+---
+<Image src={src} alt={p.alt} title={`Photo: ${p.photographer}, Unsplash`} class={cls} widths={widths} sizes={sizes} loading={loading} format="webp" quality={78} />

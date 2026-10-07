@@ -1,0 +1,30 @@
+{
+  "_about": "Photographs used on the site. All are under the Unsplash License (free; none are Unsplash+ or premium). Credits render as a footnote on the Trust page and in each image's title attribute, never as captions.",
+  "licence": { "name": "Unsplash License", "url": "https://unsplash.com/license" },
+  "photos": {
+    "delivery-van": {
+      "file": "delivery-van.jpg",
+      "alt": "A man pedals a three-wheeled van loaded high with orange sacks down a quiet street lined with shopfronts.",
+      "photographer": "Ashikul Islam Anik",
+      "profile": "https://unsplash.com/@anikphotography",
+      "source": "https://unsplash.com/photos/a-man-riding-a-bike-down-a-street-next-to-a-pile-of-bags-d7bfM9FSCW8",
+      "usedOn": "Home"
+    },
+    "shop-interior": {
+      "file": "shop-interior.jpg",
+      "alt": "A small electronics shop at night, shelves packed with goods under a painted shop sign, the owner seated at the counter.",
+      "photographer": "Tarikul Raana",
+      "profile": "https://unsplash.com/@tarikulxraana",
+      "source": "https://unsplash.com/photos/a-man-sitting-at-a-table-in-front-of-a-store-3BtL4JDS8YY",
+      "usedOn": "Templates"
+    },
+    "night-market": {
+      "file": "night-market.jpg",
+      "alt": "Bunches of green bananas hang over a market stall at night while shoppers browse beneath painted signs.",
+      "photographer": "SajidulBari Mahmud",
+      "profile": "https://unsplash.com/@sajidulbari",
+      "source": "https://unsplash.com/photos/people-are-shopping-for-bananas-at-a-night-market-lVIzrh1IkMc",
+      "usedOn": "How it works"
+    }
+  }
+}
