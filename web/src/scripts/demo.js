@@ -1,5 +1,6 @@
 // Amader Cloud builder demo. Scripted entirely in the browser: no AI is called, nothing is published.
 // Businesses, products and prices below are fictional demonstration content, not facts.
+// Requests can be typed, "spoken" (scripted) or written in Banglish; replies follow the visitor's language.
 
 const root = document.querySelector("[data-demo]");
 if (root) initDemo(root);
@@ -10,10 +11,15 @@ function initDemo(root) {
   const chips = $("[data-chips]");
   const form = $("[data-composer]");
   const input = form.querySelector("input");
+  const mic = $("[data-mic]");
   const screen = $("[data-screen]");
   const tabs = $("[data-tabs]");
   const url = $("[data-url]");
   const status = $("[data-status]");
+  const notifEl = $("[data-notif]");
+  const openSign = $("[data-open]");
+  const stage = $(".demo-stage");
+  const who = $("[data-who]");
   const reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
   const pace = reduced ? 0.15 : 1;
 
@@ -21,52 +27,76 @@ function initDemo(root) {
   const wait = (ms) => new Promise((r) => setTimeout(r, ms * pace));
   const esc = (s) => s.replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c]);
 
+  // ---------- Language: English or Banglish (Latin script) ----------
+  let lang = "en";
+  const BANGLISH = /\b(amar|ami|chai|lagbe|dokan|kore|koro|korle|korbo|dao|jonno|nibo|nite|hobe|jabe|ekta|rong|shobuj|chhar|tarikh\w*|mashik|ager|pathao|rakho|shudhu|bhitore|hishebe|kori|notun|ferot)\b/i;
+  const T = {
+    en: { ask: "What should we build?", plan: (a) => `Plan: a <strong>${a.kind}</strong> called ${esc(a.name)}.`, ready: (u) => `Preview ready at <span class="url">${u}</span>.`,
+      live: "Live. Payments go to your own merchant account.", undone: "Undone.", unknown: "Try one of the changes below.",
+      undo: "Undo last change", publish: "Publish", over: "Start over", customer: "Try it as a customer", publishSay: "Publish it",
+      after: "That's your customer's side. The money went straight to your merchant account.", listening: "Listening…" },
+    bn: { ask: "Ki toiri korbo?", plan: (a) => `Bujhechi. ${esc(a.name)} er jonno ei plan:`, ready: (u) => `Preview toiri: <span class="url">${u}</span>.`,
+      live: "Live! Taka shoja apnar merchant account e jabe.", undone: "Ager obosthay ferot gelam.", unknown: "Nicher kono ekta change try korun.",
+      undo: "Ager ta ferot ano", publish: "Publish kore dao", over: "Notun kore shuru", customer: "Customer hishebe try kori", publishSay: "Publish kore dao",
+      after: "Customer eta dekhe. Taka shoja apnar merchant account e geche.", listening: "Shunchi…" },
+  };
+  const t = () => T[lang];
+
   // ---------- Fictional apps ----------
   const PAY = ["bKash", "Nagad", "Card"];
   const APPS = {
     shop: {
-      match: /shop|sell|store|bag|cloth|saree|dress|product|boutique|cake|food|jewel|deliver/i,
+      match: /shop|sell|store|bag|cloth|saree|dress|product|boutique|cake|food|jewel|deliver|dokan|bikri|becha/i,
       prompt: "A store for my handmade bags with bKash payment, delivery, and an SMS when the order ships",
+      bn: "Amar handmade bag er jonno ekta online store chai, bKash e payment, delivery, ar order ship hole customer ke SMS",
       name: "Jute & Thread", slug: "jutethread", color: "#9a4a24",
       kind: "store with courier booking",
       plan: ["Pages: home, product, checkout", "Payments: bKash, Nagad, card", "Delivery: courier booked on dispatch", "SMS: order confirmed, order shipped"],
       model: "products, orders, customers, deliveries",
       tabs: [["home", "Home"], ["item", "Product"], ["pay", "Checkout"], ["sms", "SMS"]],
       adminTab: ["admin", "Orders"],
-      special: { chip: "Offer cash on delivery inside Dhaka only", match: /cash|cod|delivery|dhaka/i, key: "cod", screen: "pay",
-        reply: "Cash on delivery now shows only for Dhaka addresses.", touched: "checkout, address rule" },
+      special: { chip: "Offer cash on delivery inside Dhaka only", bn: "Shudhu Dhakar bhitore cash on delivery rakho", match: /cash|cod|dhaka/i, key: "cod", screen: "pay",
+        reply: "Cash on delivery now shows only for Dhaka addresses.", bnReply: "Cash on delivery ekhon shudhu Dhakar address e dekhabe.", touched: "checkout, address rule" },
     },
     book: {
-      match: /book|appoint|salon|clinic|doctor|tutor|parlou?r|spa|gym|slot|dent/i,
+      match: /book|appoint|salon|clinic|doctor|tutor|parlou?r|parlar|spa|gym|slot|dent/i,
       prompt: "Online bookings for my salon with a deposit paid by bKash and a reminder SMS",
+      bn: "Amar salon er online booking lagbe, bKash e advance nibo, ar booking hole SMS jabe",
       name: "Glow Room", slug: "glowroom", color: "#6a3d8f",
       kind: "bookings with a deposit",
       plan: ["Pages: services, pick a time, deposit", "Payments: deposit by bKash, Nagad or card", "Calendar: your opening hours", "SMS: booking confirmed"],
       model: "services, slots, bookings, customers",
       tabs: [["home", "Services"], ["item", "Pick a time"], ["pay", "Deposit"], ["sms", "SMS"]],
       adminTab: ["admin", "Bookings"],
-      special: { chip: "Send a reminder SMS the day before", match: /remind|day before|sms/i, key: "remind", screen: "sms",
-        reply: "Reminders now go out at 6 pm the day before.", touched: "SMS schedule" },
+      special: { chip: "Send a reminder SMS the day before", bn: "Appointment er ager din reminder SMS pathao", match: /remind|day before|ager din/i, key: "remind", screen: "sms",
+        reply: "Reminders now go out at 6 pm the day before.", bnReply: "Ekhon ager din shondha 6 tay reminder jabe.", touched: "SMS schedule" },
     },
     fees: {
-      match: /fee|school|coach|club|member|tuition|madrasa|association|student|class|batch/i,
+      match: /fee|school|coach|club|member|tuition|madrasa|association|student|class|batch|beton|mashik|chhatro|chatro/i,
       prompt: "Monthly fee collection for my coaching centre, paid by bKash or Nagad, with an SMS receipt",
+      bn: "Amar coaching center er mashik fee bKash ba Nagad e nite chai, guardian er kache SMS receipt jabe",
       name: "Bright Path Coaching", slug: "brightpath", color: "#1f5f8b",
       kind: "fee and membership collection",
       plan: ["Pages: find your student, pay fees, receipt", "Payments: bKash, Nagad, card", "Records: students and batches", "SMS: receipt to the guardian"],
       model: "students, batches, invoices, payments",
       tabs: [["home", "Home"], ["item", "Pay fees"], ["pay", "Payment"], ["sms", "Receipt"]],
       adminTab: ["admin", "Collected"],
-      special: { chip: "Add a Tk 100 late fee after the 10th", match: /late|fine|penalt|after the/i, key: "late", screen: "pay",
-        reply: "Fees paid after the 10th now add Tk 100.", touched: "invoice rule, payment page" },
+      special: { chip: "Add a Tk 100 late fee after the 10th", bn: "10 tarikher pore Tk 100 late fee jog koro", match: /late|fine|penalt|after the|tarikh|jorimana/i, key: "late", screen: "pay",
+        reply: "Fees paid after the 10th now add Tk 100.", bnReply: "10 tarikher pore fee dile Tk 100 jog hobe.", touched: "invoice rule, payment page" },
     },
   };
   const COMMON = [
-    { chip: "Add 10% off for bKash payments", match: /10|%|off|discount/i, key: "off", screen: "pay",
-      reply: "bKash payments now get 10% off.", touched: "checkout total, payment option" },
-    { chip: "Make it green", match: /green|colou?r|theme|blue|red/i, key: "green", screen: "home",
-      reply: "Done. The store is green now.", touched: "theme" },
+    { chip: "Add 10% off for bKash payments", bn: "bKash e payment korle 10% chhar dao", match: /10|%|off|discount|chhar/i, key: "off", screen: "pay",
+      reply: "bKash payments now get 10% off.", bnReply: "bKash e payment korle ekhon 10% chhar.", touched: "checkout total, payment option" },
+    { chip: "Make it green", bn: "Rong ta shobuj kore dao", match: /green|colou?r|theme|blue|red|shobuj|rong/i, key: "green", screen: "home",
+      reply: "Done. It's green now.", bnReply: "Hoye geche. Ekhon shobuj.", touched: "theme" },
   ];
+  // What the customer pays, after the changes the owner asked for.
+  const amount = (st) => ({
+    shop: 1530 - (st.off ? 145 : 0),
+    book: 300 - (st.off ? 30 : 0),
+    fees: 2500 + (st.late ? 100 : 0) - (st.off ? 250 : 0),
+  })[st.app];
 
   // ---------- Screens (fictional content) ----------
   const b = (label, html, cls = "") => `<div class="b ${cls}" data-l="${label}">${html}</div>`;
@@ -180,36 +210,45 @@ function initDemo(root) {
       `<button type="button" role="tab" aria-selected="${id === tabId}" data-tab="${id}" ${st.built || id === tabId ? "" : "disabled"}>${label}</button>`).join("");
     url.textContent = `${app.slug}.amader.cloud${tabId === "home" ? "" : "/" + ({ item: app.tabs[1][1], pay: app.tabs[2][1], sms: "sms", admin: "admin" }[tabId]).toLowerCase().replace(/\s+/g, "-")}`;
   }
+  // Blocks fill in grey, then get painted: a brush of yellow crosses each one as it inks.
   async function ink(token) {
     const blocks = [...screen.querySelectorAll(".b.draft")];
     for (const el of blocks) { await wait(70); if (token !== run) return; el.classList.add("drawn"); }
     await wait(260);
-    for (const el of blocks) { await wait(90); if (token !== run) return; el.classList.remove("draft"); el.classList.add("ink"); }
+    for (const el of blocks) { await wait(110); if (token !== run) return; el.classList.remove("draft"); el.classList.add("ink", "paint"); }
   }
   tabs.addEventListener("click", (e) => {
-    const t = e.target.closest("[data-tab]");
-    if (t && !t.disabled) { st.flash = null; paint(t.dataset.tab); }
+    const b = e.target.closest("[data-tab]");
+    if (b && !b.disabled) { st.flash = null; paint(b.dataset.tab); }
   });
 
-  function setStatus(text, live) { status.textContent = text; status.classList.toggle("live", !!live); }
+  function setStatus(text, live, ai) {
+    status.textContent = text;
+    status.classList.toggle("live", !!live);
+    status.parentElement.classList.toggle("ai", !!ai);
+  }
+  function setWho(text) { who.textContent = text || ""; who.hidden = !text; }
   function scrollMsgs() { msgs.scrollTop = msgs.scrollHeight; }
-  function say(role, html, model) {
+  function say(role, html, label) {
     const li = document.createElement("li");
     li.className = `m ${role}`;
-    li.innerHTML = (model ? `<span class="who">${model}</span>` : "") + html;
+    li.innerHTML = (label ? `<span class="who">${label}</span>` : "") + html;
     msgs.append(li); scrollMsgs();
     return li;
   }
+  const AI = (what) => `<span class="spark" aria-hidden="true">✦</span> AI · ${what}`;
   async function typeUser(text, token) {
     const li = say("user", "");
     for (let i = 1; i <= text.length; i += 3) { li.textContent = text.slice(0, i); scrollMsgs(); await wait(14); if (token !== run) return false; }
     li.textContent = text;
     return true;
   }
-  function logList(model) {
-    const li = say("ai log", `<ol class="steps"></ol>`, model);
+  // An AI step list: its border runs with colour while the AI is working.
+  function logList(label, ai = true) {
+    const li = say(`ai log${ai ? " thinking" : ""}`, `<ol class="steps"></ol>`, label);
     return li.querySelector(".steps");
   }
+  const doneLog = (list) => list.closest("li").classList.remove("thinking");
   async function step(list, text, token, ms = 520) {
     const s = document.createElement("li");
     s.innerHTML = `<span class="st"></span>${text}`;
@@ -219,8 +258,27 @@ function initDemo(root) {
     s.classList.add("done");
     return true;
   }
+  function notify(icon, html, cls = "") {
+    notifEl.innerHTML = `<span class="ni ${cls}">${icon}</span><span>${html}</span>`;
+    notifEl.classList.remove("show"); void notifEl.offsetWidth; notifEl.classList.add("show");
+  }
+  function hideNotif() { notifEl.classList.remove("show"); }
+  function celebrate() {
+    openSign.hidden = false;
+    openSign.classList.remove("swing"); void openSign.offsetWidth; openSign.classList.add("swing");
+    if (reduced) return;
+    const colors = ["#e2261b", "#ffcc00", "#0b5d3b", "#1739a8", "#ffffff"];
+    for (let i = 0; i < 18; i++) {
+      const f = document.createElement("span");
+      f.className = "confetti";
+      f.style.cssText = `--x:${Math.random() * 100}%;--r:${Math.random() * 360}deg;--dx:${(Math.random() - .5) * 80}px;--t:${1.6 + Math.random()}s;background:${colors[i % colors.length]};animation-delay:${Math.random() * .4}s`;
+      stage.append(f);
+      setTimeout(() => f.remove(), 3200);
+    }
+  }
+
   function setChips(items) {
-    chips.innerHTML = items.map((c, i) => `<button type="button" class="chip${c.primary ? " primary" : ""}" data-chip="${i}">${esc(c.label)}</button>`).join("");
+    chips.innerHTML = items.map((c, i) => `<button type="button" class="chip${c.primary ? " primary" : ""}${c.alt ? " alt" : ""}" data-chip="${i}">${esc(c.label)}</button>`).join("");
     chips._items = items;
     requestAnimationFrame(scrollMsgs); // the chip row resizes the message list
   }
@@ -229,24 +287,35 @@ function initDemo(root) {
     if (!btn) return;
     chips._items[+btn.dataset.chip].go();
   });
+  const say_ = (e) => (lang === "bn" ? e.bn : e.chip);
 
   function startChips() {
-    setChips(Object.entries(APPS).map(([k, a]) => ({ label: a.prompt, go: () => build(k, a.prompt) })));
+    setChips(Object.entries(APPS).map(([k, a]) => { const text = lang === "bn" ? a.bn : a.prompt; return { label: text, go: () => build(k, text) }; }));
   }
   function editChips() {
     const app = APPS[st.app];
-    const items = [...COMMON, app.special].filter((e) => !st[e.key]).map((e) => ({ label: e.chip, go: () => edit(e, e.chip) }));
-    if (st.undo.length) items.push({ label: "Undo last change", go: undo });
-    if (!st.published) items.push({ label: "Publish", primary: true, go: publish });
-    items.push({ label: "Start over", go: reset });
+    const items = [...COMMON, app.special].filter((e) => !st[e.key]).map((e) => ({ label: say_(e), go: () => edit(e, say_(e)) }));
+    if (st.undo.length) items.push({ label: t().undo, go: undo });
+    if (!st.published) items.push({ label: t().publish, primary: true, go: publish });
+    else items.push({ label: t().customer, primary: true, go: customer });
+    items.push({ label: t().over, alt: true, go: reset });
     setChips(items);
+  }
+  // The language switch re-labels the suggestions without losing the app.
+  root.querySelectorAll("[data-lang]").forEach((b) => b.addEventListener("click", () => setLang(b.dataset.lang)));
+  function setLang(l) {
+    lang = l;
+    root.querySelectorAll("[data-lang]").forEach((b) => b.setAttribute("aria-pressed", String(b.dataset.lang === l)));
+    input.placeholder = l === "bn" ? "Banglish e likhun, ba mic chapun" : "Describe your app, or ask for a change";
+    if (root.classList.contains("running")) return;
+    if (st?.built) editChips(); else if (!st) startChips();
   }
 
   // ---------- Scripts ----------
   async function build(key, text) {
     const token = ++run;
     const app = APPS[key];
-    msgs.innerHTML = ""; setChips([]);
+    msgs.innerHTML = ""; setChips([]); hideNotif(); openSign.hidden = true; setWho("");
     st = { app: key, off: false, green: false, cod: false, remind: false, late: false, flash: null, built: false, published: false, tab: "home", undo: [] };
     screen.innerHTML = ""; tabs.innerHTML = ""; url.textContent = "…";
     root.classList.add("running");
@@ -254,12 +323,12 @@ function initDemo(root) {
     if (!(await typeUser(text, token))) return;
     await wait(450); if (token !== run) return;
 
-    setStatus("Claude Opus 5.5 · planning", true);
-    say("ai", `<p>Plan: a <strong>${app.kind}</strong> called ${esc(app.name)}.</p><ul>${app.plan.map((p) => `<li>${p}</li>`).join("")}</ul>`, "Claude Opus 5.5 · plan");
+    setStatus("AI is planning", true, true);
+    say("ai", `<p>${t().plan(app)}</p><ul>${app.plan.map((p) => `<li>${p}</li>`).join("")}</ul>`, AI("plan"));
     await wait(900); if (token !== run) return;
 
-    setStatus("Claude Opus 5.5 · building", true);
-    const list = logList("Claude Opus 5.5 · build");
+    setStatus("AI is building", true, true);
+    const list = logList(AI("build"));
     if (!(await step(list, `Data model: ${app.model}`, token))) return;
     paint("home", { draft: true }); ink(token);
     if (!(await step(list, "Pages from the tested component library", token, 1500))) return;
@@ -272,15 +341,17 @@ function initDemo(root) {
     if (!(await step(list, "SMS gateway: message templates", token, 1100))) return;
     setStatus("Running tests", true);
     if (!(await step(list, "Tests: pages, payment callback, SMS · passed", token, 900))) return;
+    doneLog(list);
 
-    setStatus("Claude Haiku 4.5 · safety review", true);
-    const rev = logList("Claude Haiku 4.5 + rules · review");
+    setStatus("AI is reviewing for safety", true, true);
+    const rev = logList(AI("safety review, with rules"));
     if (!(await step(rev, "No impersonation of banks or payment brands", token, 600))) return;
     if (!(await step(rev, "No prohibited goods; payment pages are genuine", token, 600))) return;
+    doneLog(rev);
 
     st.built = true;
     paint("home");
-    say("ai", `<p>Preview ready at <span class="url">${app.slug}.amader.cloud</span>.</p>`, "Amader Cloud");
+    say("ai", `<p>${t().ready(`${app.slug}.amader.cloud`)}</p>`, "Amader Cloud");
     setStatus("Preview ready · tests passed");
     root.classList.remove("running");
     editChips();
@@ -289,19 +360,21 @@ function initDemo(root) {
   async function edit(e, text) {
     if (!st?.built) return;
     const token = ++run;
-    setChips([]);
+    setChips([]); hideNotif(); setWho("");
     root.classList.add("running");
     if (!(await typeUser(text, token))) return;
     await wait(350); if (token !== run) return;
-    setStatus("Claude Sonnet 5.5 · editing", true);
-    const list = logList("Claude Sonnet 5.5 · edit");
+    setStatus("AI is editing", true, true);
+    const list = logList(AI("edit"));
     if (!(await step(list, `Changing: ${e.touched}`, token, 800))) return;
     st.undo.push({ ...st, undo: undefined });
     st[e.key] = true;
     st.flash = e.key;
     paint(e.screen);
+    screen.querySelectorAll(".b.changed").forEach((el) => el.classList.add("paint"));
     if (!(await step(list, "Tests passed · preview updated", token, 600))) return;
-    say("ai", `<p>${e.reply}</p>`, "Amader Cloud");
+    doneLog(list);
+    say("ai", `<p>${lang === "bn" ? e.bnReply : e.reply}</p>`, "Amader Cloud");
     setStatus("Preview updated · tests passed");
     root.classList.remove("running");
     editChips();
@@ -312,7 +385,7 @@ function initDemo(root) {
     if (!prev) return;
     const stack = st.undo;
     st = { ...prev, undo: stack, flash: null };
-    say("ai", `<p>Undone.</p>`, "Amader Cloud");
+    say("ai", `<p>${t().undone}</p>`, "Amader Cloud");
     paint(st.tab);
     editChips();
   }
@@ -320,16 +393,56 @@ function initDemo(root) {
   async function publish() {
     const token = ++run;
     const app = APPS[st.app];
-    setChips([]);
+    setChips([]); setWho("");
     root.classList.add("running");
-    if (!(await typeUser("Publish it", token))) return;
-    setStatus("Publishing", true);
-    const list = logList("Amader Cloud · publish");
-    if (!(await step(list, "Final review against scams and impersonation · passed", token, 700))) return;
-    if (!(await step(list, `Live at ${app.slug}.amader.cloud`, token, 600))) return;
+    if (!(await typeUser(t().publishSay, token))) return;
+    setStatus("AI is doing a final review", true, true);
+    const list = logList(AI("final review"));
+    if (!(await step(list, "Scams and impersonation · passed", token, 700))) return;
+    doneLog(list);
+    const pub = logList("Amader Cloud · publish", false);
+    if (!(await step(pub, `Live at ${app.slug}.amader.cloud`, token, 600))) return;
     st.published = true;
+    paint("home");
+    celebrate();
+    say("ai", `<p>${t().live}</p>`, "Amader Cloud");
+    setStatus("Live");
+    root.classList.remove("running");
+    editChips();
+  }
+
+  // The buyer's side: order, pay in the wallet's own page, get the SMS; then the owner's phone lights up.
+  async function customer() {
+    const token = ++run;
+    const app = APPS[st.app];
+    const amt = amount(st);
+    setChips([]); hideNotif();
+    root.classList.add("running");
+    if (!(await typeUser(t().customer, token))) return;
+    setWho("Customer's phone");
+    setStatus("You are the customer", true);
+    paint("item"); await wait(1100); if (token !== run) return;
+    paint("pay"); await wait(900); if (token !== run) return;
+    const sheet = document.createElement("div");
+    sheet.className = "paysheet";
+    sheet.innerHTML = `<b>bKash payment</b><span class="row"><span>Merchant</span><span>${esc(app.name)}</span></span><span class="row"><span>Amount</span><strong>${tk(amt)}</strong></span><span class="fld">Wallet number · 01•••••••••</span><span class="fld">PIN · ••••</span><span class="paybtn">Confirm</span>`;
+    screen.append(sheet);
+    await wait(1500); if (token !== run) return;
+    sheet.classList.add("paid");
+    sheet.insertAdjacentHTML("beforeend", `<span class="paid-ok">✓ Payment successful</span>`);
+    await wait(900); if (token !== run) return;
+    paint("sms");
+    notify("SMS", `<b>${esc(app.name)}</b> ${st.app === "fees" ? "Receipt for" : "Confirmed:"} ${tk(amt)} paid by bKash`, "sms");
+    await wait(1800); if (token !== run) return;
+
+    setWho("Your phone");
+    setStatus("Owner's view", true);
     paint("admin");
-    say("ai", `<p>Live. Payments go to your own merchant account.</p>`, "Amader Cloud");
+    notify("✓", `<b>New payment</b> ${tk(amt)} · bKash`, "ok");
+    const list = logList("Amader Cloud · after payment", false);
+    if (!(await step(list, "Order recorded, receipt SMS sent", token, 700))) return;
+    if (st.app === "shop" && !(await step(list, "Courier booked: pickup today 4:30 pm", token, 700))) return;
+    say("ai", `<p>${t().after}</p>`, "Amader Cloud");
     setStatus("Live");
     root.classList.remove("running");
     editChips();
@@ -341,29 +454,58 @@ function initDemo(root) {
     msgs.innerHTML = "";
     screen.innerHTML = `<div class="empty"><span>Your app appears here.</span></div>`;
     tabs.innerHTML = ""; url.textContent = "yourname.amader.cloud";
+    hideNotif(); openSign.hidden = true; setWho("");
     setStatus("Waiting for your request");
     root.classList.remove("running");
-    say("ai", `<p>What should we build?</p>`, "Amader Cloud");
+    say("ai", `<p>${t().ask}</p>`, "Amader Cloud");
     startChips();
   }
 
+  // Free text: Banglish switches the replies to Banglish; then match an app or a change.
+  function handle(text) {
+    if (BANGLISH.test(text) && lang !== "bn") setLang("bn");
+    if (st?.built && !root.classList.contains("running")) {
+      const app = APPS[st.app];
+      if (/publish|go live|launch|chalu/i.test(text) && !st.published) return publish();
+      if (/customer|buyer|kinbo|kini|hishebe/i.test(text) && st.published) return customer();
+      const e = [...COMMON, app.special].find((x) => x.match.test(text) && !st[x.key]);
+      if (e) return edit(e, text);
+      if (/start over|new app|reset|notun/i.test(text)) return reset();
+      say("user", esc(text));
+      say("ai", `<p>${t().unknown}</p>`, "Amader Cloud");
+      return;
+    }
+    if (root.classList.contains("running")) return;
+    const key = Object.keys(APPS).find((k) => APPS[k].match.test(text)) || "shop";
+    build(key, text);
+  }
   form.addEventListener("submit", (ev) => {
     ev.preventDefault();
     const text = input.value.trim();
     if (!text) return;
     input.value = "";
-    if (st?.built && !root.classList.contains("running")) {
+    handle(text);
+  });
+
+  // Voice: a scripted recording that "hears" the next Banglish request.
+  mic.addEventListener("click", async () => {
+    if (root.classList.contains("running") || form.classList.contains("listening")) return;
+    setLang("bn");
+    let text;
+    if (!st?.built) text = APPS.shop.bn;
+    else {
       const app = APPS[st.app];
-      if (/publish|go live|launch/i.test(text) && !st.published) return publish();
-      const e = [...COMMON, app.special].find((x) => x.match.test(text) && !st[x.key]);
-      if (e) return edit(e, text);
-      if (/start over|new app|reset/i.test(text)) return reset();
-      say("user", esc(text));
-      say("ai", `<p>Try one of the changes below.</p>`, "Amader Cloud");
-      return;
+      const e = [...COMMON, app.special].find((x) => !st[x.key]);
+      text = e ? e.bn : st.published ? T.bn.customer : T.bn.publishSay;
     }
-    const key = Object.keys(APPS).find((k) => APPS[k].match.test(text)) || "shop";
-    build(key, text);
+    form.classList.add("listening");
+    mic.setAttribute("aria-pressed", "true");
+    input.value = ""; input.placeholder = t().listening;
+    await wait(2200);
+    form.classList.remove("listening");
+    mic.setAttribute("aria-pressed", "false");
+    input.placeholder = "Banglish e likhun, ba mic chapun";
+    handle(text);
   });
 
   reset();

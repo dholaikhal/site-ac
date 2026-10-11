@@ -7,6 +7,10 @@ import "../styles/app-screen.css";
   <div class="demo-chat">
     <div class="demo-bar">
       <strong>Amader Cloud builder</strong>
+      <div class="lang" role="group" aria-label="Language">
+        <button type="button" data-lang="en" aria-pressed="true">English</button>
+        <button type="button" data-lang="bn" aria-pressed="false">Banglish</button>
+      </div>
       <span class="tag">Demo · scripted, no live AI</span>
     </div>
     <ol class="msgs" data-msgs aria-live="polite"></ol>
@@ -14,13 +18,18 @@ import "../styles/app-screen.css";
     <form class="composer" data-composer>
       <label class="sr" for="demo-input">Describe your app</label>
       <input id="demo-input" type="text" autocomplete="off" placeholder="Describe your app, or ask for a change">
+      <span class="wave" aria-hidden="true">{Array.from({ length: 14 }, (_, i) => <i style={`--i:${i}`}></i>)}</span>
+      <button type="button" class="mic" data-mic aria-pressed="false" aria-label="Speak your request (scripted)" title="Speak (scripted)"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5.5 11a6.5 6.5 0 0 0 13 0M12 17.5V21"/></svg></button>
       <button type="submit" class="btn btn-go">Send</button>
     </form>
   </div>
 
   <div class="demo-stage">
     <div class="stage-status"><span class="pulse" aria-hidden="true"></span><span data-status>Waiting for your request</span></div>
+    <span class="who-pill" data-who hidden></span>
     <div class="phone">
+      <div class="open-sign" data-open hidden aria-hidden="true"><span class="cord"></span><span class="board">Open</span></div>
+      <div class="notif" data-notif role="status"></div>
       <div class="phone-notch" aria-hidden="true"></div>
       <div class="phone-url"><svg viewBox="0 0 12 12" aria-hidden="true"><rect x="2.5" y="5" width="7" height="5.5" rx="1" fill="currentColor"/><path d="M4 5V3.6a2 2 0 0 1 4 0V5" fill="none" stroke="currentColor" stroke-width="1.2"/></svg><span data-url>yourname.amader.cloud</span></div>
       <div class="screen" data-screen aria-live="polite"></div>
@@ -73,4 +82,60 @@ import "../styles/app-screen.css";
 .screen-tabs button[aria-selected="true"] { color: #fff; background: #14213d; }
 .screen-tabs button:disabled { opacity: .5; cursor: default; }
 .demo-note { margin: 16px 0 0; }
+
+/* Language switch and voice */
+.lang { display: inline-flex; border: 1.5px solid var(--line); border-radius: 4px; overflow: hidden; }
+.lang button { font: inherit; font-size: 0.8rem; font-weight: 700; padding: 4px 10px; border: 0; background: transparent; color: var(--ink); cursor: pointer; }
+.lang button[aria-pressed="true"] { background: var(--ink); color: var(--wash); }
+.composer { position: relative; align-items: center; }
+.mic { flex: none; display: grid; place-items: center; width: 42px; height: 42px; border-radius: 50%; border: 1.5px solid var(--line); background: var(--card); color: var(--ink); cursor: pointer; }
+.mic svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; }
+.mic svg rect { fill: currentColor; stroke: none; }
+.mic[aria-pressed="true"] { background: var(--red); color: #fff; border-color: var(--red); animation: beacon-mic 1.2s ease-out infinite; }
+@keyframes beacon-mic { 0% { box-shadow: 0 0 0 0 rgb(226 38 27 / .55); } 100% { box-shadow: 0 0 0 12px rgb(226 38 27 / 0); } }
+.wave { display: none; position: absolute; left: 30px; top: 50%; translate: 0 -50%; gap: 3px; align-items: center; height: 24px; pointer-events: none; }
+.wave i { width: 3px; height: 100%; border-radius: 2px; background: var(--red); animation: wave .9s ease-in-out infinite; animation-delay: calc(var(--i) * -0.13s); }
+@keyframes wave { 0%, 100% { scale: 1 .25; } 50% { scale: 1 1; } }
+.listening .wave { display: flex; }
+.listening input::placeholder { color: transparent; }
+
+/* AI at work: the step list's border runs with the sign paints until the AI is done */
+.m .spark { color: var(--red); }
+.m.log.thinking { border: 1.5px solid transparent; background: linear-gradient(var(--card), var(--card)) padding-box, linear-gradient(90deg, var(--yellow), var(--red), var(--blue), var(--green), var(--yellow)) 0 0 / 300% 100% border-box; animation: aiflow 2.2s linear infinite; }
+@keyframes aiflow { to { background-position: 0 0, 300% 0; } }
+.stage-status.ai { background: var(--yellow); }
+.stage-status.ai .pulse { background: var(--red); }
+.chip.alt { border-style: dashed; }
+.who-pill { font-size: 0.78rem; font-weight: 800; color: #14213d; background: var(--yellow); border-radius: 3px; padding: 3px 10px; margin-bottom: -6px; }
+
+/* Brush: a stroke of chrome yellow crosses each block as it's painted */
+.screen .b.paint::after { content: ""; position: absolute; inset: -2px; border-radius: 9px; pointer-events: none; background: linear-gradient(100deg, transparent 0 35%, rgb(255 204 0 / .55) 45% 55%, transparent 65%) -120% 0 / 220% 100% no-repeat; animation: brush .7s ease-out forwards; }
+@keyframes brush { to { background-position: 220% 0; opacity: .2; } }
+
+/* Phone notifications, the OPEN sign and paper flags on publish */
+.phone { position: relative; }
+.notif { position: absolute; z-index: 5; left: 14px; right: 14px; top: 34px; display: flex; gap: 8px; align-items: center; padding: 9px 10px; background: rgb(255 255 255 / .96); color: #14213d; border-radius: 14px; font-size: 0.74rem; line-height: 1.3; box-shadow: 0 10px 24px -10px rgb(0 0 0 / .45); translate: 0 -24px; opacity: 0; pointer-events: none; }
+.notif b { display: block; }
+.notif.show { animation: notif 4.2s cubic-bezier(.2,.8,.2,1) forwards; }
+@keyframes notif { 0% { translate: 0 -24px; opacity: 0; } 10%, 82% { translate: 0 0; opacity: 1; } 100% { translate: 0 -24px; opacity: 0; } }
+.ni { flex: none; display: grid; place-items: center; width: 26px; height: 26px; border-radius: 7px; color: #fff; font-weight: 900; font-size: 0.7rem; background: var(--green); }
+.ni.sms { background: var(--red); font-size: 0.5rem; }
+.open-sign { position: absolute; z-index: 6; top: -44px; left: 50%; translate: -50% 0; display: grid; justify-items: center; transform-origin: 50% 0; }
+.open-sign .cord { width: 60px; height: 22px; border: 2px solid #14213d; border-bottom: 0; border-radius: 30px 30px 0 0; }
+.open-sign .board { font-family: var(--display); font-weight: 900; font-size: 1.5rem; letter-spacing: .06em; text-transform: uppercase; color: var(--yellow); background: var(--red); padding: 2px 16px; border-radius: 3px; box-shadow: inset 0 0 0 3px var(--red), inset 0 0 0 4.5px var(--yellow); }
+.open-sign.swing { animation: swing 2.4s cubic-bezier(.3,.6,.3,1) both; }
+@keyframes swing { 0% { rotate: 0deg; translate: -50% -40px; opacity: 0; } 15% { translate: -50% 0; opacity: 1; rotate: 14deg; } 35% { rotate: -9deg; } 55% { rotate: 5deg; } 75% { rotate: -2deg; } 100% { rotate: 0deg; translate: -50% 0; } }
+.demo-stage { position: relative; overflow: hidden; }
+.confetti { position: absolute; top: -12px; left: var(--x); width: 10px; height: 13px; clip-path: polygon(0 0, 100% 0, 50% 100%); z-index: 7; pointer-events: none; animation: fall var(--t) ease-in forwards; }
+@keyframes fall { to { translate: var(--dx) 640px; rotate: var(--r); opacity: .2; } }
+
+/* The wallet's payment page over the checkout (plain text, no brand artwork) */
+.screen .paysheet { position: absolute; left: 11px; right: 11px; bottom: 11px; z-index: 3; display: grid; gap: 6px; padding: 14px 12px 12px; background: #fff; border-radius: 16px 16px 30px 30px; box-shadow: 0 -12px 30px -10px rgb(0 0 0 / .35); animation: sheet-up .35s cubic-bezier(.2,.8,.2,1); }
+.screen .paysheet > b { font-size: 0.95rem; color: #c2185b; }
+.screen .paysheet .paybtn { background: #c2185b; }
+.screen .paysheet.paid .paybtn { opacity: .4; }
+.screen .paid-ok { text-align: center; font-weight: 800; color: #0b7a4f; animation: sheet-up .3s ease; }
+@keyframes sheet-up { from { translate: 0 30px; opacity: 0; } }
+.screen { position: relative; }
+@media (prefers-reduced-motion: reduce) { .m.log.thinking, .wave i, .mic[aria-pressed="true"] { animation: none; } .notif.show { animation: none; opacity: 1; translate: 0 0; } }
 </style>
