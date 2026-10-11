@@ -10,10 +10,11 @@ import Compare from "../components/Compare.astro";
 import Faq from "../components/Faq.astro";
 import facts, { tk, plan } from "../data/facts";
 import "../styles/app-screen.css";
+import { icon, bag } from "../scripts/app-art.js";
 const m = facts.market;
 const starter = plan("starter"), business = plan("business");
 // Static "after" screen: the same fictional store the demo builds.
-const products: [string, number, string][] = [["Market tote", 1450, "w1"], ["Sling bag", 980, "w2"], ["Laptop sleeve", 1650, "w3"], ["Coin pouch", 350, "w4"]];
+const products: [string, number, string, string, string][] = [["Market tote", 1450, "tote", "#d9b27a", "#8a4a22"], ["Sling bag", 980, "sling", "#a7b58e", "#4f5f3a"], ["Laptop sleeve", 1650, "sleeve", "#8b97ab", "#2f3b55"], ["Coin pouch", 350, "pouch", "#d4876a", "#7a2f17"]];
 const rates: [string, string, string][] = [
   ["Checkout by bKash, Nagad or card", "Paid into your own merchant account", "Included"],
   ["Courier booking", "The courier charges its own delivery fee", "Included"],
@@ -49,9 +50,10 @@ const ticker = ["bKash checkout", "Nagad", "Cards", "Courier booking", "Order SM
           <div class="phone-notch" aria-hidden="true"></div>
           <div class="phone-url"><span>jutethread.amader.cloud</span></div>
           <div class="screen">
-            <div class="b ink" style="--s:0"><div class="ah"><strong>Jute &amp; Thread</strong><span class="cart">Bag · 0</span></div></div>
-            <div class="b ink" style="--s:1"><div class="hero-b"><span>Handmade jute bags</span><small>Delivery across Bangladesh</small></div></div>
-            <div class="b ink" style="--s:2"><div class="pgrid">{products.map(([n, p, w]) => <div class="pc"><div class={`sw ${w}`}></div><span>{n}</span><b>{tk(p)}</b></div>)}</div></div>
+            <div class="b ink" style="--s:0"><div class="ah"><span class="mark">J</span><strong>Jute &amp; Thread</strong><span class="ah-ic"><span class="ib" set:html={icon("search")}></span><span class="ib"><Fragment set:html={icon("bag")} /></span></span></div></div>
+            <div class="b ink" style="--s:1"><div class="hero-b"><div><span>Handmade jute bags</span><small>Delivery across Bangladesh</small><em>Shop now</em></div><span class="hero-art" set:html={bag("tote", "#d9b27a", "#8a4a22")}></span></div></div>
+            <div class="b ink" style="--s:2"><div class="cats"><span class="on">All</span><span>Totes</span><span>Slings</span><span>Sleeves</span></div></div>
+            <div class="b ink" style="--s:3"><div class="pgrid">{products.map(([n, p, k, c, a], i) => <div class="pc"><div class="pimg" style={`--tint:${c}22`}><Fragment set:html={bag(k, c, a)} /><span class="fav" set:html={icon("heart")}></span>{i === 0 && <span class="new">New</span>}</div><span class="pn">{n}</span><b>{tk(p)}</b></div>)}</div></div>
           </div>
         </div>
         <ul class="pings" aria-hidden="true">

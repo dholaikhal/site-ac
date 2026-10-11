@@ -1,3 +1,4 @@
+import { icon, bag, stars, heroArt } from "./app-art.js";
 // Amader Cloud builder demo. Scripted entirely in the browser: no AI is called, nothing is published.
 // Businesses, products, prices and orders below are fictional demonstration content, not facts.
 // Requests can be typed or picked, in English or in Bangla written in English letters; replies follow the visitor's words.
@@ -107,100 +108,127 @@ function initDemo(root) {
 
 
   // ---------- Screens (fictional content) ----------
+  // Each screen is a stack of sections ("blocks") so the build can paint them in one at a time;
+  // finished, they read as one app: app bar, hero, content, bottom bar.
   const b = (label, html, cls = "") => `<div class="b ${cls}" data-l="${label}">${html}</div>`;
   const ch = (on) => (on ? " changed" : "");
-  const payRows = (st, amount) => PAY.map((p, i) => {
-    const off = st.off && p === "bKash";
-    return `<label class="pm${i === 0 ? " sel" : ""}"><span class="radio"></span><span>${p}</span>${off ? '<span class="badge">10% off</span>' : ""}</label>`;
-  }).join("") + (st.cod && st.app === "shop" ? `<label class="pm"><span class="radio"></span><span>Cash on delivery</span><span class="muted">Dhaka only</span></label>` : "") +
-    `<div class="paybtn">Pay ${tk(amount)}</div>`;
+  const initial = (name) => name.split(/\s|&/)[0][0];
+  const appBar = (st, right = ["search", "bag"], badge = 0) => {
+    const a = APPS[st.app];
+    return `<div class="ah"><span class="mark">${initial(a.name)}</span><strong>${esc(a.name)}</strong><span class="ah-ic">${right.map((r) => `<span class="ib">${icon(r)}${r === "bag" && badge ? `<i>${badge}</i>` : ""}</span>`).join("")}</span></div>`;
+  };
+  const subBar = (title, right = "") => `<div class="ah sub"><span class="ib">${icon("back")}</span><strong>${title}</strong><span class="ah-ic">${right}</span></div>`;
+  const tabbar = (items, on = 0) => `<nav class="tabbar">${items.map(([ic, l], i) => `<span class="${i === on ? "on" : ""}">${icon(ic)}${l}</span>`).join("")}</nav>`;
+  const hero = (st, title, sub, cta) => `<div class="hero-b"><div><span>${title}</span><small>${sub}</small><em>${cta}</em></div>${heroArt[st.app]()}</div>`;
+  const methods = (st, amount) => {
+    const opts = PAY.map((p, i) => {
+      const off = st.off && p === "bKash";
+      return `<label class="pm${i === 0 ? " sel" : ""}"><span class="radio"></span><span class="pm-name">${p}</span>${off ? '<span class="badge">10% off</span>' : `<span class="pm-note">${p === "Card" ? "Visa, Mastercard" : "Wallet"}</span>`}</label>`;
+    }).join("");
+    const cod = st.cod && st.app === "shop" ? `<label class="pm"><span class="radio"></span><span class="pm-name">Cash on delivery</span><span class="pm-note">Dhaka only</span></label>` : "";
+    return `<div class="sec"><h5>Pay with</h5>${opts}${cod}</div><div class="paybar"><div class="paybtn">Pay ${tk(amount)}</div></div>`;
+  };
+  const steps3 = (at) => `<ol class="stepper">${["Bag", "Address", "Pay"].map((l, i) => `<li class="${i < at ? "done" : i === at ? "on" : ""}"><span>${i < at ? icon("check") : i + 1}</span>${l}</li>`).join("")}</ol>`;
+
+  const PRODUCTS = [["Market tote", 1450, "tote", "#d9b27a", "#8a4a22"], ["Sling bag", 980, "sling", "#a7b58e", "#4f5f3a"], ["Laptop sleeve", 1650, "sleeve", "#8b97ab", "#2f3b55"], ["Coin pouch", 350, "pouch", "#d4876a", "#7a2f17"]];
+  const SERVICES = [["Haircut", 600, "45 min", "scissors"], ["Hair colour", 2200, "2 hr", "drop"], ["Facial", 1500, "1 hr", "sparkle"], ["Manicure", 700, "40 min", "hand"]];
 
   const SCREENS = {
     shop: {
       home: (st) =>
-        b("header · 56", `<div class="ah"><strong>${APPS.shop.name}</strong><span class="cart">Bag · 0</span></div>`, ch(st.flash === "green")) +
-        b("hero · banner", `<div class="hero-b"><span>Handmade jute bags</span><small>Delivery across Bangladesh</small></div>`, ch(st.flash === "green")) +
-        b("grid · 2 col", `<div class="pgrid">${[["Market tote", 1450, "w1"], ["Sling bag", 980, "w2"], ["Laptop sleeve", 1650, "w3"], ["Coin pouch", 350, "w4"]]
-          .map(([n, p, w]) => `<div class="pc"><div class="sw ${w}"></div><span>${n}</span><b>${tk(p)}</b></div>`).join("")}</div>`) +
-        b("note", `<p class="muted">Pay by bKash, Nagad or card${st.cod ? ", or cash on delivery in Dhaka" : ""}.</p>`, ch(st.flash === "cod")),
+        b("app bar", appBar(st), ch(st.flash === "green")) +
+        b("hero", hero(st, "Handmade jute bags", "Woven by hand · delivery across Bangladesh", "Shop now"), ch(st.flash === "green")) +
+        b("categories", `<div class="cats"><span class="on">All</span><span>Totes</span><span>Slings</span><span>Sleeves</span><span>Pouches</span></div>`) +
+        b("products", `<div class="row-h"><h5>New this week</h5><span>See all</span></div><div class="pgrid">${PRODUCTS.map(([n, p, k, c, a], i) =>
+          `<div class="pc"><div class="pimg" style="--tint:${c}22">${bag(k, c, a)}<span class="fav">${icon("heart")}</span>${i === 0 ? '<span class="new">New</span>' : ""}</div><span class="pn">${n}</span><b>${tk(p)}</b></div>`).join("")}</div>`) +
+        b("payment note", `<p class="strip">${icon("truck")} Pay by bKash, Nagad or card${st.cod ? ", or cash in Dhaka" : ""}</p>`, ch(st.flash === "cod")) +
+        b("tab bar", tabbar([["home", "Home"], ["search", "Search"], ["bag", "Bag"], ["user", "Account"]])),
       item: (st) =>
-        b("header · 56", `<div class="ah"><span>‹ Back</span><span class="cart">Bag · 1</span></div>`) +
-        b("image · 1:1", `<div class="sw w1 big"></div>`) +
-        b("title + price", `<h4>Market tote</h4><div class="price">${tk(1450)}</div>${st.off ? '<div class="badge inline">10% off with bKash</div>' : ""}`, ch(st.flash === "off")) +
-        b("details", `<p class="muted">Woven jute, cotton lining, inside pocket. Courier booked when it ships.</p>`) +
-        b("button", `<div class="paybtn">Add to bag</div>`),
+        b("app bar", subBar("Market tote", `<span class="ib">${icon("bag")}<i>1</i></span>`)) +
+        b("gallery", `<div class="gallery" style="--tint:#d9b27a2e">${bag("tote", "#d9b27a", "#8a4a22")}<span class="dots"><i class="on"></i><i></i><i></i></span></div>`) +
+        b("title", `<div class="sec"><h4>Market tote</h4><div class="rate">${stars(5)}<span>Handmade · 38 × 42 cm</span></div><div class="price">${tk(1450)}${st.off ? '<span class="badge">10% off with bKash</span>' : ""}</div></div>`, ch(st.flash === "off")) +
+        b("options", `<div class="sec"><h5>Colour</h5><div class="swatches"><span class="on" style="--c:#d9b27a"></span><span style="--c:#a7b58e"></span><span style="--c:#d4876a"></span></div><p class="muted">Woven jute, cotton lining, inside pocket. Courier booked when it ships.</p></div>`) +
+        b("add to bag", `<div class="paybar"><div class="qty"><span>−</span>1<span>+</span></div><div class="paybtn">Add to bag</div></div>`),
       pay: (st) => {
         const items = 1450, del = 80, off = st.off ? Math.round(items * 0.1) : 0;
-        return b("header · 56", `<div class="ah"><span>‹ Bag</span><strong>Checkout</strong><span></span></div>`) +
-          b("summary", `<div class="row"><span>Market tote</span><span>${tk(items)}</span></div><div class="row"><span>Delivery</span><span>${tk(del)}</span></div>${off ? `<div class="row ok"><span>bKash discount</span><span>−${tk(off)}</span></div>` : ""}<div class="row tot"><span>Total</span><span>${tk(items + del - off)}</span></div>`, ch(st.flash === "off")) +
-          b("address", `<div class="fld">Name</div><div class="fld">Phone</div><div class="fld">Area: Mirpur, Dhaka</div>`, ch(st.flash === "cod")) +
-          b("payment · connector", payRows(st, items + del - off), ch(st.flash === "off" || st.flash === "cod"));
+        return b("app bar", subBar("Checkout")) + b("steps", steps3(2)) +
+          b("summary", `<div class="sec card"><div class="line-item"><span class="thumb" style="--tint:#d9b27a33">${bag("tote", "#d9b27a", "#8a4a22")}</span><span>Market tote<small>Qty 1</small></span><b>${tk(items)}</b></div><div class="row"><span>Delivery</span><span>${tk(del)}</span></div>${off ? `<div class="row ok"><span>bKash discount</span><span>−${tk(off)}</span></div>` : ""}<div class="row tot"><span>Total</span><span>${tk(items + del - off)}</span></div></div>`, ch(st.flash === "off")) +
+          b("address", `<div class="sec card addr">${icon("home")}<span><b>Deliver to</b>House 12, Road 5, Mirpur 10, Dhaka</span></div>`, ch(st.flash === "cod")) +
+          b("payment", methods(st, items + del - off), ch(st.flash === "off" || st.flash === "cod"));
       },
       sms: (st) => smsScreen(st, [
         `${APPS.shop.name}: order #1042 confirmed. ${tk(1530 - (st.off ? 145 : 0))} paid by bKash${st.off ? " (10% off applied)" : ""}.`,
         `${APPS.shop.name}: your order has shipped. Track it at ${APPS.shop.slug}.amader.cloud/t/1042`,
       ], st.flash === "off"),
-      admin: (st) => adminScreen(st, "Orders", [["#1042 · Market tote", tk(1530 - (st.off ? 145 : 0)), "Paid by bKash · courier booked"]]),
+      admin: (st) => adminScreen(st, "Orders", [["#1042 · Market tote", tk(1530 - (st.off ? 145 : 0)), "Paid by bKash", "Courier booked"]]),
     },
     book: {
       home: (st) =>
-        b("header · 56", `<div class="ah"><strong>${APPS.book.name}</strong><span class="cart">Book</span></div>`, ch(st.flash === "green")) +
-        b("hero · banner", `<div class="hero-b"><span>Hair, skin and nails</span><small>Book online, pay a small deposit</small></div>`, ch(st.flash === "green")) +
-        b("list · services", [["Haircut", 600], ["Hair colour", 2200], ["Facial", 1500], ["Manicure", 700]]
-          .map(([n, p]) => `<div class="row svc"><span>${n}</span><span>${tk(p)}</span></div>`).join("")),
+        b("app bar", appBar(st, ["search", "user"]), ch(st.flash === "green")) +
+        b("hero", hero(st, "Hair, skin and nails", "Banani · open 11 am to 8 pm", "Book a time"), ch(st.flash === "green")) +
+        b("services", `<div class="row-h"><h5>Services</h5><span>Prices</span></div><div class="svc-list">${SERVICES.map(([n, p, d, ic]) =>
+          `<div class="svc"><span class="svc-ic">${icon(ic)}</span><span class="svc-t">${n}<small>${icon("clock")}${d}</small></span><b>${tk(p)}</b><span class="add">+</span></div>`).join("")}</div>`) +
+        b("tab bar", tabbar([["home", "Home"], ["cal", "Bookings"], ["user", "Account"]])),
       item: (st) =>
-        b("header · 56", `<div class="ah"><span>‹ Services</span><strong>Hair colour</strong><span></span></div>`) +
-        b("calendar · week", `<div class="days">${["Mon", "Tue", "Wed", "Thu", "Fri", "Sat"].map((d, i) => `<span class="${i === 3 ? "sel" : ""}">${d}</span>`).join("")}</div>`) +
-        b("slots", `<div class="slots">${["11:00 am", "1:30 pm", "4:30 pm", "6:00 pm"].map((t, i) => `<span class="${i === 2 ? "sel" : ""}">${t}</span>`).join("")}</div>`) +
-        b("button", `<div class="paybtn">Continue</div>`),
+        b("app bar", subBar("Hair colour")) +
+        b("service", `<div class="sec card svc-card"><span class="svc-ic big">${icon("drop")}</span><span><b>Hair colour</b><small>2 hr · ${tk(2200)}</small></span></div>`) +
+        b("date", `<div class="sec"><h5>October</h5><div class="days">${[["Mon", 6], ["Tue", 7], ["Wed", 8], ["Thu", 9], ["Fri", 10], ["Sat", 11]].map(([d, n], i) => `<span class="${i === 3 ? "sel" : ""}"><small>${d}</small>${n}</span>`).join("")}</div></div>`) +
+        b("times", `<div class="sec"><h5>Thursday</h5><div class="slots">${["11:00 am", "1:30 pm", "4:30 pm", "6:00 pm", "7:15 pm"].map((t, i) => `<span class="${i === 2 ? "sel" : i === 1 ? "gone" : ""}">${t}</span>`).join("")}</div></div>`) +
+        b("continue", `<div class="paybar"><span class="pb-note">Thu 9 Oct, 4:30 pm</span><div class="paybtn">Continue</div></div>`),
       pay: (st) => {
         const dep = 300, off = st.off ? 30 : 0;
-        return b("header · 56", `<div class="ah"><span>‹ Time</span><strong>Deposit</strong><span></span></div>`) +
-          b("summary", `<div class="row"><span>Hair colour, Thu 4:30 pm</span><span>${tk(2200)}</span></div><div class="row"><span>Deposit now</span><span>${tk(dep)}</span></div>${off ? `<div class="row ok"><span>bKash discount</span><span>−${tk(off)}</span></div>` : ""}<div class="row tot"><span>Pay now</span><span>${tk(dep - off)}</span></div>`, ch(st.flash === "off")) +
-          b("payment · connector", payRows(st, dep - off), ch(st.flash === "off"));
+        return b("app bar", subBar("Deposit")) +
+          b("summary", `<div class="sec card"><div class="line-item"><span class="thumb glyph">${icon("drop")}</span><span>Hair colour<small>${icon("cal")} Thu 9 Oct, 4:30 pm</small></span><b>${tk(2200)}</b></div><div class="row"><span>Deposit now</span><span>${tk(dep)}</span></div>${off ? `<div class="row ok"><span>bKash discount</span><span>−${tk(off)}</span></div>` : ""}<div class="row tot"><span>Pay now</span><span>${tk(dep - off)}</span></div><p class="muted">The rest is paid at the salon.</p></div>`, ch(st.flash === "off")) +
+          b("payment", methods(st, dep - off), ch(st.flash === "off"));
       },
       sms: (st) => smsScreen(st, [
         `${APPS.book.name}: booking confirmed for Thu 4:30 pm, hair colour. Deposit ${tk(300 - (st.off ? 30 : 0))} received.`,
         ...(st.remind ? [`${APPS.book.name}: reminder, see you tomorrow at 4:30 pm. Need to change it? ${APPS.book.slug}.amader.cloud/r/88`] : []),
       ], st.flash === "remind" || st.flash === "off"),
-      admin: (st) => adminScreen(st, "Bookings", [["Thu 4:30 pm · Hair colour", tk(300 - (st.off ? 30 : 0)), "Deposit paid by bKash"]]),
+      admin: (st) => adminScreen(st, "Bookings", [["Thu 4:30 pm · Hair colour", tk(300 - (st.off ? 30 : 0)), "Deposit by bKash", "Confirmed"]]),
     },
     fees: {
       home: (st) =>
-        b("header · 56", `<div class="ah"><strong>${APPS.fees.name}</strong><span class="cart">Help</span></div>`, ch(st.flash === "green")) +
-        b("hero · banner", `<div class="hero-b"><span>Pay monthly fees</span><small>Receipt by SMS to the guardian</small></div>`, ch(st.flash === "green")) +
-        b("lookup", `<div class="fld">Student ID: BP-2071</div><div class="paybtn">Find student</div>`) +
-        b("list · batches", [["Class 9 science", "Sat, Mon, Wed"], ["Class 10 science", "Sun, Tue, Thu"]]
-          .map(([n, d]) => `<div class="row svc"><span>${n}</span><span class="muted">${d}</span></div>`).join("")),
+        b("app bar", appBar(st, ["bell", "user"]), ch(st.flash === "green")) +
+        b("hero", hero(st, "Pay monthly fees", "Receipt by SMS to the guardian", "Pay now"), ch(st.flash === "green")) +
+        b("lookup", `<div class="sec card lookup"><h5>Find your student</h5><div class="fld">${icon("search")}BP-2071</div><div class="paybtn">Find</div></div>`) +
+        b("batches", `<div class="row-h"><h5>Batches</h5><span>2026</span></div><div class="svc-list">${[["Class 9 science", "Sat, Mon, Wed · 4 pm"], ["Class 10 science", "Sun, Tue, Thu · 5 pm"]].map(([n, d]) =>
+          `<div class="svc"><span class="svc-ic">${icon("book")}</span><span class="svc-t">${n}<small>${d}</small></span></div>`).join("")}</div>`) +
+        b("tab bar", tabbar([["home", "Home"], ["receipt", "Receipts"], ["user", "Help"]])),
       item: (st) =>
-        b("header · 56", `<div class="ah"><span>‹ Back</span><strong>Fees due</strong><span></span></div>`) +
-        b("student", `<div class="row"><span>BP-2071 · Class 9 science</span></div>`) +
-        b("invoices", `<div class="row"><span>October fee</span><span>${tk(2500)}</span></div><div class="row muted"><span>September fee</span><span>Paid</span></div>${st.late ? `<div class="row warn"><span>Late fee after the 10th</span><span>${tk(100)}</span></div>` : ""}`, ch(st.flash === "late")) +
-        b("button", `<div class="paybtn">Pay October fee</div>`),
+        b("app bar", subBar("Fees due")) +
+        b("student", `<div class="sec idcard"><span class="avatar">BP</span><span><b>Student BP-2071</b><small>Class 9 science · Roll 14</small></span>${icon("cap")}</div>`) +
+        b("invoices", `<div class="sec"><h5>Invoices</h5><div class="inv"><span>October fee<small>Due 10 Oct</small></span><b>${tk(2500)}</b><em class="due">Due</em></div><div class="inv paid"><span>September fee<small>Paid 4 Sep</small></span><b>${tk(2500)}</b><em>Paid</em></div>${st.late ? `<div class="inv late"><span>Late fee<small>After the 10th</small></span><b>${tk(100)}</b><em class="due">Due</em></div>` : ""}</div>`, ch(st.flash === "late")) +
+        b("pay", `<div class="paybar"><span class="pb-note">${tk(2500 + (st.late ? 100 : 0))}</span><div class="paybtn">Pay October fee</div></div>`),
       pay: (st) => {
         const fee = 2500, late = st.late ? 100 : 0, off = st.off ? Math.round(fee * 0.1) : 0;
-        return b("header · 56", `<div class="ah"><span>‹ Fees</span><strong>Payment</strong><span></span></div>`) +
-          b("summary", `<div class="row"><span>October fee</span><span>${tk(fee)}</span></div>${late ? `<div class="row warn"><span>Late fee</span><span>${tk(late)}</span></div>` : ""}${off ? `<div class="row ok"><span>bKash discount</span><span>−${tk(off)}</span></div>` : ""}<div class="row tot"><span>Total</span><span>${tk(fee + late - off)}</span></div>`, ch(st.flash === "off" || st.flash === "late")) +
-          b("payment · connector", payRows(st, fee + late - off), ch(st.flash === "off"));
+        return b("app bar", subBar("Payment")) +
+          b("summary", `<div class="sec card"><div class="line-item"><span class="thumb glyph">${icon("receipt")}</span><span>October fee<small>BP-2071 · Class 9 science</small></span><b>${tk(fee)}</b></div>${late ? `<div class="row warn"><span>Late fee</span><span>${tk(late)}</span></div>` : ""}${off ? `<div class="row ok"><span>bKash discount</span><span>−${tk(off)}</span></div>` : ""}<div class="row tot"><span>Total</span><span>${tk(fee + late - off)}</span></div></div>`, ch(st.flash === "off" || st.flash === "late")) +
+          b("payment", methods(st, fee + late - off), ch(st.flash === "off"));
       },
       sms: (st) => smsScreen(st, [
         `${APPS.fees.name}: received ${tk(2500 + (st.late ? 100 : 0) - (st.off ? 250 : 0))} for BP-2071, October fee. Receipt: ${APPS.fees.slug}.amader.cloud/rc/5521`,
       ], st.flash === "off" || st.flash === "late"),
-      admin: (st) => adminScreen(st, "Collected this month", [["BP-2071 · October", tk(2500 + (st.late ? 100 : 0) - (st.off ? 250 : 0)), "Paid by bKash · receipt sent"]]),
+      admin: (st) => adminScreen(st, "Collected", [["BP-2071 · October", tk(2500 + (st.late ? 100 : 0) - (st.off ? 250 : 0)), "Paid by bKash", "Receipt sent"]]),
     },
   };
 
+  // The customer's phone: a messages app with the store's texts.
   function smsScreen(st, texts, changed) {
-    return b("sms · thread", `<div class="sms-head">${esc(APPS[st.app].name)}</div>` +
-      texts.map((t, i) => `<div class="sms${changed && i === texts.length - 1 ? " changed" : ""}">${esc(t)}</div>`).join(""));
+    const a = APPS[st.app];
+    return b("messages", `<div class="sms-app"><div class="sms-head"><span class="ib">${icon("back")}</span><span class="mark">${initial(a.name)}</span><span><b>${esc(a.name)}</b><small>Text message</small></span></div>` +
+      `<p class="sms-day">Today 4:12 pm</p>` +
+      texts.map((t, i) => `<div class="sms${changed && i === texts.length - 1 ? " changed" : ""}">${esc(t).replace(/(\S+\.amader\.cloud\S*)/, '<u>$1</u>')}</div>`).join("") + `</div>`);
   }
+  // The owner's phone: today's takings and the newest record.
   function adminScreen(st, title, rows) {
-    return b("header · 56", `<div class="ah"><strong>${title}</strong><span class="live-dot">Live</span></div>`) +
-      b("toast", `<div class="toast">New payment received</div>`, " changed") +
-      b("list", rows.map(([a, amt, s]) => `<div class="order"><div class="row"><strong>${a}</strong><span>${amt}</span></div><div class="muted">${s}</div></div>`).join("")) +
-      b("note", `<p class="muted">Money goes to your own merchant account, not to Amader Cloud.</p>`);
+    const bars = [30, 52, 41, 64, 48, 70, 88];
+    return b("app bar", `<div class="ah"><span class="mark">${initial(APPS[st.app].name)}</span><strong>${title}</strong><span class="live-dot">Live</span></div>`) +
+      b("today", `<div class="sec dash"><small>Today</small><b>${rows[0][1]}</b><div class="bars">${bars.map((h, i) => `<i style="height:${h}%"${i === bars.length - 1 ? ' class="on"' : ""}></i>`).join("")}</div></div>`) +
+      b("toast", `<div class="toast">${icon("check")} New payment received</div>`, " changed") +
+      b("list", `<div class="sec">${rows.map(([a, amt, s, tag]) => `<div class="order"><div class="row"><strong>${a}</strong><span>${amt}</span></div><div class="row muted"><span>${s}</span><em class="pill">${tag}</em></div></div>`).join("")}<p class="muted">Money goes to your own merchant account, not to Amader Cloud.</p></div>`) +
+      b("tab bar", tabbar([["chart", "Today"], ["receipt", title], ["grid", "Store"], ["user", "Account"]]));
   }
-
 
   // ---------- State and rendering ----------
   let st = null;      // { app, off, green, cod, remind, late, flash, built, published, tab, undo: [], sales, orders }
@@ -526,4 +554,6 @@ function initDemo(root) {
   });
 
   reset();
+  // Dev only (stripped from builds): render any screen directly, e.g. __demo.show("book", "item", { off: true }).
+  if (import.meta.env.DEV) window.__demo = { show(app, tab, flags = {}) { run++; st = { app, off: false, green: false, cod: false, remind: false, late: false, flash: null, built: true, published: true, tab, undo: [], sales: 0, orders: 0, ...flags }; paint(tab); } };
 }
