@@ -116,6 +116,15 @@ document.querySelectorAll("[data-tabs]").forEach((box) => {
     }
     if (focus) tab.focus();
   };
+  // data-auto: walk through the tabs on its own while in view, until the visitor picks one.
+  if (box.hasAttribute("data-auto") && !still) {
+    let timer = null, i = 0;
+    const tick = () => { i = (tabs.findIndex((t) => t.getAttribute("aria-selected") === "true") + 1) % tabs.length; pick(tabs[i]); };
+    const stop = () => { clearInterval(timer); timer = null; };
+    new IntersectionObserver(([e]) => { if (e.isIntersecting && !box.dataset.touched) timer ??= setInterval(tick, 3600); else stop(); }, { threshold: 0.15 }).observe(box);
+    box.addEventListener("pointerdown", () => { box.dataset.touched = "1"; stop(); });
+    box.addEventListener("keydown", () => { box.dataset.touched = "1"; stop(); });
+  }
   tabs.forEach((t, i) => {
     t.addEventListener("click", () => pick(t));
     t.addEventListener("keydown", (e) => {
