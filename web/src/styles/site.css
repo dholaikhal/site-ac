@@ -234,7 +234,7 @@ fieldset.field { border: 0; padding: 0; margin: 0; }
 
 /* ---------- Street texture and motion ----------
    The wall: a faint plaster grain under everything. Motion is small and one-off: things are put up
-   as you arrive (reveal), counts tick over once, and only the bunting and the ticker keep moving. */
+   as you arrive (reveal), counts tick over once, and only the ticker keeps moving. */
 body { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .08 0 0 0 0 .13 0 0 0 0 .24 0 0 0 .05 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); }
 :root[data-theme="dark"] body { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 .035 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); }
 .alt { background-color: var(--wash-2); }
@@ -259,11 +259,6 @@ body { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org
 .awning { height: 46px; background: repeating-linear-gradient(90deg, var(--red) 0 44px, #fff7e6 44px 88px); position: relative; }
 .awning::after { content: ""; position: absolute; left: 0; right: 0; top: 100%; height: 22px; background: radial-gradient(circle at 22px 0, var(--red) 21px, transparent 22px) 0 0 / 88px 22px repeat-x, radial-gradient(circle at 66px 0, #fff7e6 21px, transparent 22px) 0 0 / 88px 22px repeat-x; filter: drop-shadow(0 3px 0 rgb(20 33 61 / .12)); }
 :root[data-theme="dark"] .awning { background: repeating-linear-gradient(90deg, var(--red) 0 44px, #f2e6cf 44px 88px); }
-
-/* Bunting: paper flags strung across the street for a festival. */
-.bunting { display: block; width: 100%; height: 44px; overflow: visible; pointer-events: none; }
-.bunting .flag { transform-box: fill-box; transform-origin: 50% 0; animation: sway 4s ease-in-out infinite; animation-delay: calc(var(--i) * -0.37s); }
-@keyframes sway { 50% { rotate: 5deg; } }
 
 /* LED ticker: the scrolling sign above a mobile-recharge counter. */
 .ticker { background: #14213d; color: var(--yellow); border-block: 3px solid var(--yellow); overflow: hidden; white-space: nowrap; font-family: var(--display); font-weight: 800; font-size: 1.35rem; letter-spacing: .02em; text-transform: uppercase; }

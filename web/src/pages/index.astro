@@ -1,7 +1,6 @@
 ---
 import Base from "../layouts/Base.astro";
 import Demo from "../components/Demo.astro";
-import Bunting from "../components/Bunting.astro";
 import Ticker from "../components/Ticker.astro";
 import BetaButton from "../components/BetaButton.astro";
 import FixTabs from "../components/FixTabs.astro";
@@ -156,8 +155,7 @@ const ticker = ["bKash checkout", "Nagad", "Cards", "Courier booking", "Order SM
   </div>
 </section>
 
-<section class="section closing-sec">
-  <Bunting class="closing-bunting" flags={26} sag={22} />
+<section class="section">
   <div class="wrap closing">
     <div class="signboard sign-yellow" data-reveal>
       <h2>Free to build. {tk(starter.tk)} a month to go&nbsp;live.</h2>
@@ -230,8 +228,6 @@ const ticker = ["bKash checkout", "Nagad", "Cards", "Courier booking", "Order SM
 .faq-grid { display: grid; grid-template-columns: minmax(0, 0.7fr) minmax(0, 1.3fr); gap: clamp(24px, 4vw, 64px); align-items: start; }
 @media (max-width: 860px) { .faq-grid { grid-template-columns: 1fr; } }
 
-.closing-sec { position: relative; padding-top: clamp(84px, 10vw, 140px); overflow: hidden; }
-:global(.closing-bunting) { position: absolute; top: 0; left: 0; color: var(--ink); }
 .closing { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr); gap: clamp(24px, 4vw, 56px); align-items: center; }
 @media (max-width: 860px) { .closing { grid-template-columns: 1fr; } }
 .closing .signboard h2 { font-size: clamp(2.4rem, 1.6rem + 2.6vw, 3.8rem); }
