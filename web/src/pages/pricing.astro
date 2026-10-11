@@ -1,5 +1,6 @@
 ---
 import Base from "../layouts/Base.astro";
+import BetaButton from "../components/BetaButton.astro";
 import PlanCards from "../components/PlanCards.astro";
 import facts, { tk, usdOf } from "../data/facts";
 const plans = facts.pricing.plans;
@@ -62,7 +63,7 @@ const rows: [string, (p: (typeof plans)[number]) => string][] = [
 <section class="section tight ink-band">
   <div class="wrap split">
     <h2 style="margin:0">Build your first app free in the beta.</h2>
-    <div class="btn-row" style="margin:0"><a class="btn btn-go" href="contact.html?topic=beta">Join the beta</a><a class="btn" href="contact.html?topic=agency">Agency enquiry</a></div>
+    <div class="btn-row" style="margin:0"><BetaButton /><a class="btn" href="contact.html?topic=agency">Agency enquiry</a></div>
   </div>
 </section>
 

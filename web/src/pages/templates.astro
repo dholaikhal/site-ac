@@ -1,5 +1,6 @@
 ---
 import Base from "../layouts/Base.astro";
+import BetaButton from "../components/BetaButton.astro";
 import Photo from "../components/Photo.astro";
 import MiniPhone from "../components/MiniPhone.astro";
 const templates = [
@@ -85,7 +86,7 @@ const templates = [
       <p class="lede">Event tickets, restaurant orders and portfolios. Tell us what you need.</p>
     </div>
     <div class="btn-row" style="justify-content:flex-start">
-      <a class="btn btn-go" href="contact.html?topic=beta">Join the beta</a>
+      <BetaButton />
       <a class="btn" href="./#demo">Try the demo</a>
     </div>
   </div>

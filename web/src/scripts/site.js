@@ -82,6 +82,10 @@ const seen = new IntersectionObserver((entries) => {
     seen.unobserve(e.target);
   }
 }, { rootMargin: "0px 0px -12% 0px" });
+// Inner pages get the same arrival without marking every element: section heads and cards.
+document.querySelectorAll(".section .head, .section .cards > *, .pillar, .section .split > *").forEach((el, i) => {
+  if (!el.closest("[data-reveal]")) { el.setAttribute("data-reveal", ""); el.style.setProperty("--d", String(i % 3)); }
+});
 document.querySelectorAll("[data-reveal], [data-count], [data-scene]").forEach((el) => seen.observe(el));
 
 // Ticks every number in the element's text up from zero, keeping the rest of the text: "80–90%" → 0–0% … 80–90%.
