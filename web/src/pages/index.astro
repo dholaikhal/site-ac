@@ -28,7 +28,6 @@ const ticker = ["bKash checkout", "Nagad", "Cards", "Courier booking", "Order SM
 <Base title="Amader Cloud: describe your business, AI builds its app" description="Tell Amader Cloud what you sell in one sentence. It builds a working online store, booking page or fee collection, with bKash, Nagad and card payments already set up.">
 
 <section class="hero">
-  <Bunting class="hero-bunting" />
   <div class="wrap hero-grid">
     <div class="hero-copy">
       <div class="signboard lit">
@@ -162,9 +161,8 @@ const ticker = ["bKash checkout", "Nagad", "Cards", "Courier booking", "Order SM
 </section>
 
 <style>
-.hero { position: relative; padding-block: clamp(44px, 6vw, 80px) clamp(48px, 7vw, 96px); overflow: hidden; }
+.hero { position: relative; padding-block: clamp(28px, 4vw, 56px) clamp(48px, 7vw, 96px); overflow: hidden; }
 .hero::before { content: ""; position: absolute; inset: auto -10% -30% 40%; height: 70%; background: radial-gradient(closest-side, color-mix(in srgb, var(--yellow) 26%, transparent), transparent); pointer-events: none; }
-:global(.hero-bunting) { position: absolute; top: 0; left: 0; color: var(--ink); }
 .hero-grid { position: relative; display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr); gap: clamp(28px, 4vw, 64px); align-items: center; }
 @media (max-width: 1000px) { .hero-grid { grid-template-columns: 1fr; } }
 .hero-copy .signboard h1 { font-size: clamp(3.2rem, 1.8rem + 4.6vw, 6rem); }

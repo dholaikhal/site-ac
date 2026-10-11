@@ -2,7 +2,6 @@
 import Base from "../layouts/Base.astro";
 import SignAvatar from "../components/SignAvatar.astro";
 import Social from "../components/Social.astro";
-import Bunting from "../components/Bunting.astro";
 import BetaButton from "../components/BetaButton.astro";
 import facts, { company as c } from "../data/facts";
 const m = facts.market;
@@ -14,8 +13,7 @@ const beliefs: [string, string][] = [
 ---
 <Base title="About · Amader Cloud" description="Amader means ours. Amader Cloud builds stores, bookings and fee collection for Bangladeshi businesses with AI, from an office in Banani, Dhaka.">
 
-<section class="page-hero about-hero">
-  <Bunting class="about-bunting" flags={24} sag={12} />
+<section class="page-hero">
   <div class="wrap">
     <div class="signboard sign-blue">
       <h1>Amader means ours.</h1>
@@ -90,8 +88,6 @@ const beliefs: [string, string][] = [
 </section>
 
 <style>
-.about-hero { position: relative; padding-top: clamp(60px, 7vw, 96px); }
-:global(.about-bunting) { position: absolute; top: 0; left: 0; color: var(--ink); }
 .beliefs { list-style: none; margin: 24px 0 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; counter-reset: b; }
 @media (max-width: 860px) { .beliefs { grid-template-columns: 1fr; } }
 .beliefs li { position: relative; background: var(--card); border: 1.5px solid var(--line); border-radius: 6px; padding: 28px 24px 22px; }
