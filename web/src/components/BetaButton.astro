@@ -1,0 +1,9 @@
+---
+// The one primary action on the site: join the beta. A painted plate with a "Free" price sticker.
+interface Props { label?: string; sticker?: string; topic?: string }
+const { label = "Join the beta", sticker = "Free", topic = "beta" } = Astro.props;
+---
+<a class="btn btn-go btn-beta" href={`contact.html?topic=${topic}#form`}>
+  {label} <span class="arrow" aria-hidden="true">→</span>
+  {sticker && <span class="sticker" aria-hidden="true">{sticker}</span>}
+</a>

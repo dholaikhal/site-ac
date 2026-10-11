@@ -1,0 +1,80 @@
+---
+// What it fixes: four everyday problems of selling from a Facebook page, each with a small drawing and the fix.
+import facts from "../data/facts";
+const card = facts.market.cardLimitUsd.text;
+const tabs = [
+  { id: "inbox", label: "Orders lost in the inbox", fix: "Your store takes the order, the address and the payment by itself, day and night." },
+  { id: "cod", label: "Cash at the door", fix: "Buyers pay by bKash, Nagad or card before you ship, so fewer parcels come back." },
+  { id: "agency", label: "A website you can't change", fix: "Change anything by asking in a sentence. You see it before it goes live." },
+  { id: "dollar", label: "Tools priced in dollars", fix: "Priced in taka and paid by bKash, with local payments, couriers and SMS built in." },
+];
+---
+<div class="fix" data-tabs>
+  <div class="fix-list" role="tablist" aria-label="Problems">
+    {tabs.map((t, i) => (
+      <button type="button" role="tab" id={`fix-tab-${t.id}`} aria-controls={`fix-${t.id}`} aria-selected={i === 0 ? "true" : "false"} tabindex={i === 0 ? 0 : -1}>
+        <span class="num">{i + 1}</span>{t.label}
+      </button>
+    ))}
+  </div>
+  {tabs.map((t, i) => (
+    <div class="fix-panel" role="tabpanel" id={`fix-${t.id}`} aria-labelledby={`fix-tab-${t.id}`} hidden={i !== 0}>
+      <div class="art" aria-hidden="true">
+        {t.id === "inbox" && (
+          <div class="inbox">
+            <div class="bub l">Price?</div><div class="bub l">Size?</div><div class="bub r">Tk 1,450, one size</div>
+            <div class="bub l">Address na bKash number?</div><div class="bub l">Still available??</div>
+            <span class="unread">47 unread</span>
+          </div>
+        )}
+        {t.id === "cod" && (
+          <div class="parcel"><div class="box"><span class="tape"></span><span class="lbl">Cash on delivery<br/>Tk 1,530</span></div><span class="stamp">Refused · returned</span></div>
+        )}
+        {t.id === "agency" && (
+          <div class="ticket"><b>Change request #7</b><p>Add a delivery charge for outside Dhaka</p><span class="st">Waiting for developer</span><span class="st late">Quoted separately</span></div>
+        )}
+        {t.id === "dollar" && (
+          <div class="decline"><div class="price">$25<small>/month</small></div><div class="toast">Card payment declined<small>International card: {card} limit, allowed purposes only</small></div></div>
+        )}
+      </div>
+      <p class="fixline"><span class="tag-fix">With Amader Cloud</span>{t.fix}</p>
+    </div>
+  ))}
+</div>
+
+<style>
+.fix { display: grid; grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr); gap: clamp(20px, 4vw, 48px); align-items: start; }
+@media (max-width: 860px) { .fix { grid-template-columns: 1fr; } }
+.fix-list { display: grid; gap: 10px; }
+.fix-list button { display: flex; align-items: center; gap: 14px; text-align: left; font: inherit; font-weight: 700; font-size: 1.08rem; color: var(--ink); background: var(--card); border: 1.5px solid var(--rule); border-radius: 6px; padding: 14px 16px; cursor: pointer; transition: border-color .2s, background-color .2s, translate .2s; }
+.fix-list button:hover { border-color: var(--line); }
+.fix-list button[aria-selected="true"] { border-color: var(--line); background: var(--yellow-wash); translate: 6px 0; }
+.num { flex: none; display: grid; place-items: center; width: 34px; height: 34px; border-radius: 4px; background: var(--green); color: var(--yellow); font-family: var(--display); font-weight: 900; font-size: 1.25rem; }
+.fix-list button[aria-selected="true"] .num { background: var(--red); }
+@media (max-width: 860px) { .fix-list { grid-auto-flow: column; grid-auto-columns: minmax(200px, 1fr); overflow-x: auto; padding-bottom: 6px; } .fix-list button[aria-selected="true"] { translate: 0 0; } }
+.fix-panel { background: var(--card); border: 1.5px solid var(--line); border-radius: 8px; overflow: hidden; animation: panel-in .4s ease; }
+@keyframes panel-in { from { opacity: 0; translate: 0 8px; } }
+.art { min-height: 260px; display: grid; place-items: center; padding: 28px; background: repeating-linear-gradient(-45deg, transparent 0 14px, color-mix(in srgb, var(--rule) 45%, transparent) 14px 15px), var(--wash-2); }
+.fixline { margin: 0; padding: 18px 22px 20px; font-size: 1.1rem; font-weight: 600; border-top: 1.5px solid var(--line); }
+.tag-fix { display: block; font-size: 0.8rem; font-weight: 700; color: var(--green); margin-bottom: 4px; }
+:root[data-theme="dark"] .tag-fix { color: var(--ok); }
+/* drawings: always light, like paper on the counter */
+.inbox { position: relative; display: grid; gap: 7px; width: min(300px, 100%); padding: 16px; background: #fff; border-radius: 14px; border: 2px solid #14213d; color: #14213d; font-size: 0.9rem; }
+.bub { padding: 7px 11px; border-radius: 12px; max-width: 80%; background: #eef1f4; }
+.bub.l { justify-self: start; border-bottom-left-radius: 3px; } .bub.r { justify-self: end; background: #1739a8; color: #fff; border-bottom-right-radius: 3px; }
+.unread { position: absolute; top: -14px; right: -14px; background: var(--red); color: #fff; font-weight: 800; font-size: 0.8rem; padding: 4px 10px; border-radius: 999px; rotate: 6deg; }
+.parcel { position: relative; }
+.box { position: relative; width: 210px; height: 150px; background: #c99a5b; border: 2px solid #14213d; border-radius: 6px; display: grid; place-items: center; }
+.tape { position: absolute; left: 50%; top: 0; bottom: 0; width: 34px; translate: -50% 0; background: rgb(255 255 255 / .35); }
+.lbl { position: relative; background: #fff; color: #14213d; font-size: 0.8rem; font-weight: 700; padding: 8px 10px; border-radius: 3px; text-align: center; }
+.stamp { position: absolute; left: 50%; top: 50%; translate: -50% -50%; rotate: -14deg; white-space: nowrap; font-family: var(--display); font-weight: 900; font-size: 1.7rem; text-transform: uppercase; color: var(--red); border: 4px solid var(--red); padding: 2px 12px; border-radius: 4px; background: rgb(255 255 255 / .7); }
+.ticket { width: min(300px, 100%); background: #fff; color: #14213d; border: 2px solid #14213d; border-radius: 8px; padding: 16px 18px; display: grid; gap: 8px; justify-items: start; }
+.ticket p { margin: 0; font-size: 0.92rem; }
+.st { font-size: 0.75rem; font-weight: 700; padding: 3px 9px; border-radius: 999px; background: #fff4c2; color: #7a4d00; }
+.st.late { background: #fde3df; color: #b3261e; }
+.decline { display: grid; gap: 14px; justify-items: center; }
+.price { font-family: var(--display); font-weight: 900; font-size: 3.6rem; line-height: 1; color: #14213d; background: #fff; border: 2px solid #14213d; border-radius: 8px; padding: 8px 18px; rotate: -4deg; }
+.price small { font-size: 1rem; font-family: var(--sans); }
+.toast { background: #fff; color: #b3261e; border: 2px solid #b3261e; border-radius: 10px; padding: 10px 14px; font-weight: 800; max-width: 290px; }
+.toast small { display: block; font-weight: 500; color: #14213d; font-size: 0.8rem; }
+</style>

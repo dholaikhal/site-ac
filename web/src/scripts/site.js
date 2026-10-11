@@ -57,3 +57,64 @@ document.querySelectorAll("form[data-endpoint]").forEach((form) => {
     }
   });
 });
+
+// ---------- Motion: reveal on arrival, count-ups, scenes ----------
+const still = matchMedia("(prefers-reduced-motion: reduce)").matches;
+const seen = new IntersectionObserver((entries) => {
+  for (const e of entries) {
+    if (!e.isIntersecting) continue;
+    e.target.classList.add("in");
+    if (e.target.hasAttribute("data-count")) countUp(e.target);
+    seen.unobserve(e.target);
+  }
+}, { rootMargin: "0px 0px -12% 0px" });
+document.querySelectorAll("[data-reveal], [data-count], [data-scene]").forEach((el) => seen.observe(el));
+
+// Ticks every number in the element's text up from zero, keeping the rest of the text: "80–90%" → 0–0% … 80–90%.
+function countUp(el) {
+  const text = el.textContent;
+  const nums = [...text.matchAll(/\d[\d,]*/g)];
+  if (still || !nums.length) return;
+  const t0 = performance.now(), dur = 1300;
+  const frame = (now) => {
+    const k = Math.min(1, (now - t0) / dur), ease = 1 - (1 - k) ** 3;
+    let out = "", last = 0;
+    for (const m of nums) {
+      const n = +m[0].replace(/,/g, "");
+      out += text.slice(last, m.index) + Math.round(n * ease).toLocaleString("en-IN");
+      last = m.index + m[0].length;
+    }
+    el.textContent = out + text.slice(last);
+    if (k < 1) requestAnimationFrame(frame); else el.textContent = text;
+  };
+  requestAnimationFrame(frame);
+}
+
+// ---------- Tabs (role=tablist inside [data-tabs]) ----------
+document.querySelectorAll("[data-tabs]").forEach((box) => {
+  const tabs = [...box.querySelectorAll('[role="tab"]')];
+  const pick = (tab, focus) => {
+    for (const t of tabs) {
+      const on = t === tab;
+      t.setAttribute("aria-selected", String(on));
+      t.tabIndex = on ? 0 : -1;
+      document.getElementById(t.getAttribute("aria-controls")).hidden = !on;
+    }
+    if (focus) tab.focus();
+  };
+  tabs.forEach((t, i) => {
+    t.addEventListener("click", () => pick(t));
+    t.addEventListener("keydown", (e) => {
+      const d = { ArrowRight: 1, ArrowDown: 1, ArrowLeft: -1, ArrowUp: -1 }[e.key];
+      if (d) { e.preventDefault(); pick(tabs[(i + d + tabs.length) % tabs.length], true); }
+    });
+  });
+});
+
+// ---------- Before/after switch ----------
+document.querySelectorAll("[data-vs]").forEach((box) => {
+  const sw = box.querySelector('[role="switch"]');
+  const set = (on) => { box.classList.toggle("on", on); sw.setAttribute("aria-checked", String(on)); };
+  sw.addEventListener("click", () => set(sw.getAttribute("aria-checked") !== "true"));
+  box.querySelectorAll(".side").forEach((s) => s.addEventListener("click", () => set(s.classList.contains("b"))));
+});

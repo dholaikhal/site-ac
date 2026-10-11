@@ -1,0 +1,10 @@
+---
+// LED ticker: what comes built in, scrolling past like the sign over a recharge counter.
+interface Props { items: string[] }
+const { items } = Astro.props;
+---
+<div class="ticker" role="marquee" aria-label={items.join(", ")}>
+  <div class="ticker-track" aria-hidden="true">
+    {[...items, ...items].map((t) => <span>{t}</span>)}
+  </div>
+</div>

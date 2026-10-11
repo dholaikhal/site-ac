@@ -1,0 +1,30 @@
+---
+// Short answers to what owners ask first. Native <details>, so it works without script.
+import { tk, plan } from "../data/facts";
+const starter = plan("starter");
+const qa: [string, string][] = [
+  ["Do I need to know anything about websites?", "No. You describe your business in a sentence, in English or Banglish, and answer a few questions. You can change anything later the same way."],
+  ["Where does the money from my customers go?", "Straight into your own bKash, Nagad or card merchant account, through a licensed payment partner. We never hold your sales."],
+  ["Can I keep selling on my Facebook page?", "Yes. Share your store's link in posts and replies; your page keeps bringing people in and the store takes the order and the payment."],
+  ["What if the AI gets something wrong?", "You see every change in a preview before it goes live, every change is tested, and any change can be undone in one click."],
+  ["What does it cost?", `Building and trying it is free. Going live starts at ${tk(starter.tk)} a month on the pilot pricing, paid by bKash.`],
+];
+---
+<div class="faq">
+  {qa.map(([q, a], i) => (
+    <details open={i === 0}>
+      <summary>{q}</summary>
+      <p>{a}</p>
+    </details>
+  ))}
+</div>
+<style>
+.faq { display: grid; gap: 10px; max-width: 860px; }
+details { background: var(--card); border: 1.5px solid var(--rule); border-radius: 6px; }
+details[open] { border-color: var(--line); }
+summary { list-style: none; cursor: pointer; display: flex; justify-content: space-between; gap: 16px; align-items: center; padding: 16px 20px; font-weight: 700; font-size: 1.06rem; }
+summary::-webkit-details-marker { display: none; }
+summary::after { content: "+"; flex: none; display: grid; place-items: center; width: 30px; height: 30px; border-radius: 4px; background: var(--yellow); color: #14213d; font-family: var(--display); font-weight: 900; font-size: 1.4rem; transition: rotate .25s; }
+details[open] summary::after { rotate: 45deg; background: var(--red); color: #fff; }
+details p { margin: 0; padding: 0 20px 18px; color: var(--ink-2); max-width: 70ch; }
+</style>
