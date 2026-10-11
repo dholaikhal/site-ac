@@ -1,22 +1,56 @@
 ---
 import Logo from "./Logo.astro";
+import Social from "./Social.astro";
+import { company as c, live } from "../data/facts";
+const tel = (n: string) => `tel:${n.replace(/[^+\d]/g, "")}`;
+const wa = (n: string) => `https://wa.me/${n.replace(/\D/g, "")}`;
+const cols = [
+  ["Product", [["templates.html", "Templates"], ["how-it-works.html", "How it works"], ["pricing.html", "Pricing"], ["trust.html", "Trust and safety"]]],
+  ["Company", [["about.html", "About us"], ["investors.html", "Investors"], ["contact.html", "Contact"], ["contact.html?topic=beta", "Join the beta"]]],
+  ["Legal", [["terms.html", "Terms of service"], ["privacy.html", "Privacy policy"], ["terms.html#acceptable-use", "Acceptable use"], ["sources.html", "Sources"]]],
+] as const;
 ---
 <footer class="site-footer">
   <div class="wrap">
-    <div class="cols">
-      <a class="brand" href="./"><Logo /><span>Amader Cloud</span></a>
-      <ul>
-        <li><a href="templates.html">Templates</a></li>
-        <li><a href="pricing.html">Pricing</a></li>
-        <li><a href="trust.html">Trust</a></li>
-        <li><a href="investors.html">Investors</a></li>
-        <li><a href="sources.html">Sources</a></li>
-      </ul>
-      <ul>
-        <li><a href="contact.html?topic=beta">Join the beta</a></li>
-        <li><a href="mailto:hello@amader.cloud">hello@amader.cloud</a></li>
-      </ul>
+    <div class="top">
+      <div class="about">
+        <a class="brand" href="./"><Logo /><span>Amader Cloud</span></a>
+        <p>Apps for local business, built by AI and run by us, at <span class="url">yourname.amader.cloud</span>.</p>
+        <Social />
+      </div>
+      {cols.map(([h, links]) => (
+        <nav aria-label={h}>
+          <h2>{h}</h2>
+          <ul>{links.map(([href, label]) => <li><a href={href}>{label}</a></li>)}</ul>
+        </nav>
+      ))}
     </div>
-    <p class="fine">© <span data-year>2026</span> Amader Cloud</p>
+
+    <div class="plate">
+      <address>
+        <strong>Office</strong>
+        {c.address.map((l) => <span>{l}</span>)}
+        <span class="small-print">{c.hours}</span>
+      </address>
+      <div>
+        <strong>Call or WhatsApp</strong>
+        <a href={live(tel(c.phone))}>{c.phone}</a>
+        <a href={live(wa(c.whatsapp))}>{c.whatsapp} <span class="small-print">WhatsApp</span></a>
+        <span class="small-print">Support: {c.supportHours}</span>
+      </div>
+      <div>
+        <strong>Email</strong>
+        <a href={`mailto:${c.email.hello}`}>{c.email.hello}</a>
+        <a href={`mailto:${c.email.support}`}>{c.email.support}</a>
+        <a href={`mailto:${c.email.abuse}`}>{c.email.abuse} <span class="small-print">report an app</span></a>
+      </div>
+    </div>
+
+    <p class="fine">
+      <span>© <span data-year>2026</span> {c.legalName}</span>
+      <span>RJSC reg. {c.registration.rjsc}</span>
+      <span>Trade licence {c.registration.tradeLicence}</span>
+      <span>BIN {c.registration.bin}</span>
+    </p>
   </div>
 </footer>

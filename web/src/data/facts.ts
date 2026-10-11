@@ -10,3 +10,7 @@ export const tk = (n: number) => `Tk ${tkFmt.format(n)}`;
 export const usdOf = (taka: number) => `$${(taka / facts.fx.tkPerUsd).toFixed(1)}`;
 export const usd = (n: number, digits = 2) => `$${n.toFixed(digits)}`;
 export const plan = (id: string) => facts.pricing.plans.find((p) => p.id === id)!;
+
+export const company = facts.company;
+/** An outbound link only once the company details are real; mock numbers and pages render as plain text. */
+export const live = (href: string) => (company.mock ? undefined : href);

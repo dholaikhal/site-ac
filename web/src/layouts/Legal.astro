@@ -1,0 +1,44 @@
+---
+// Layout for the MDX legal pages: a quiet navy sign, the draft status and date from facts.json, contents from the h2s.
+import Base from "./Base.astro";
+import facts from "../data/facts";
+const { frontmatter: fm, headings = [] } = Astro.props;
+const toc = headings.filter((h: { depth: number }) => h.depth === 2);
+---
+<Base title={fm.title} description={fm.description}>
+<section class="page-hero">
+  <div class="wrap">
+    <div class="signboard sign-navy">
+      <h1>{fm.h1}</h1>
+      <span class="address">{facts.legal.status} Last updated {facts.legal.updated}.</span>
+    </div>
+    {fm.intro && <p class="lede">{fm.intro}</p>}
+  </div>
+</section>
+<section class="section tight">
+  <div class="wrap legal">
+    <nav class="toc" aria-label="On this page">
+      <strong>On this page</strong>
+      <ol>{toc.map((t: { slug: string; text: string }) => <li><a href={`#${t.slug}`}>{t.text}</a></li>)}</ol>
+    </nav>
+    <article class="doc"><slot /></article>
+  </div>
+</section>
+</Base>
+<style>
+.legal { display: grid; grid-template-columns: minmax(0, 250px) minmax(0, 1fr); gap: clamp(28px, 5vw, 64px); align-items: start; }
+@media (max-width: 860px) { .legal { grid-template-columns: 1fr; } }
+.toc { position: sticky; top: calc(var(--header-h) + 20px); font-size: 0.92rem; border-left: 4px solid var(--yellow); padding-left: 16px; }
+@media (max-width: 860px) { .toc { position: static; } }
+.toc ol { margin: 10px 0 0; padding-left: 18px; color: var(--ink-2); }
+.toc li { margin: 5px 0; }
+.toc a { text-decoration: none; }
+.toc a:hover { text-decoration: underline; }
+.doc { max-width: 72ch; }
+.doc :global(h2) { font-size: clamp(1.9rem, 1.5rem + 1.2vw, 2.5rem); margin-top: 1.6em; scroll-margin-top: calc(var(--header-h) + 16px); }
+.doc :global(h2:first-child) { margin-top: 0; }
+.doc :global(h3) { margin-top: 1.4em; }
+.doc :global(li) { margin: 6px 0; }
+.doc :global(ul), .doc :global(ol) { padding-left: 22px; margin: 0 0 1em; }
+.doc :global(:target) { background: var(--yellow-wash); }
+</style>
