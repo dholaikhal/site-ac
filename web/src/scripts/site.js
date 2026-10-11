@@ -21,12 +21,26 @@ document.querySelectorAll(".theme-toggle").forEach((btn) => {
 
 document.querySelectorAll("[data-year]").forEach((el) => { el.textContent = String(new Date().getFullYear()); });
 
-// Contact form: preselect the topic from ?topic=.
-const contact = document.getElementById("contact-form");
+// Contact form: preselect the topic from ?topic=; the sheet's title and the beta-only fields follow the topic.
+const contact = document.getElementById("form");
 if (contact) {
+  const title = contact.querySelector("[data-form-title]");
+  const sync = () => {
+    const on = contact.querySelector('input[name="topic"]:checked');
+    if (!on) return;
+    if (title) title.textContent = on.dataset.title;
+    contact.querySelectorAll("[data-for]").forEach((el) => {
+      const show = el.dataset.for === on.value;
+      el.hidden = !show;
+      el.querySelectorAll("input, select, textarea").forEach((f) => { f.disabled = !show; });
+    });
+  };
   const topic = new URLSearchParams(location.search).get("topic");
   const radio = topic && contact.querySelector(`input[name="topic"][value="${CSS.escape(topic)}"]`);
   if (radio) radio.checked = true;
+  contact.addEventListener("change", (e) => { if (e.target.name === "topic") sync(); });
+  contact.addEventListener("reset", () => setTimeout(sync));
+  sync();
 }
 
 // Forms with data-endpoint post JSON to Formboost (202 on success; _honey is the spam trap).

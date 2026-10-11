@@ -1,68 +1,152 @@
 ---
 import Base from "../layouts/Base.astro";
+import Social from "../components/Social.astro";
 import forms from "../data/forms.json";
-// Placeholder address until the company and domain mail are set up.
-const to = "hello@amader.cloud";
+import { company as c, live } from "../data/facts";
+const tel = (n: string) => `tel:${n.replace(/[^+\d]/g, "")}`;
+const wa = (n: string) => `https://wa.me/${n.replace(/\D/g, "")}`;
+const topics = [
+  { value: "beta", label: "Join the beta", title: "Get your store into the beta", ico: "✦" },
+  { value: "agency", label: "Agency or freelancer", title: "Build for your clients", ico: "⚒" },
+  { value: "investor", label: "Investing", title: "Talk to the founders", ico: "◆" },
+  { value: "abuse", label: "Report an app", title: "Report an app", ico: "⚑" },
+];
+const inboxes: [string, string][] = [
+  ["Help with your store", c.email.support],
+  ["Report an app", c.email.abuse],
+  ["Privacy and your data", c.email.privacy],
+  ["Press", c.email.press],
+  ["Investors", c.email.investors],
+];
 ---
-<Base title="Contact · Amader Cloud" description="Join the beta, make an agency enquiry, or contact us as an investor.">
+<Base title="Contact · Amader Cloud" description="Join the beta, make an agency enquiry, report an app, or contact the founders. Office in Banani, Dhaka.">
 
 <section class="page-hero">
   <div class="wrap">
-    <div class="signboard ">
+    <div class="signboard">
       <h1>Build with us.</h1>
-      <span class="address">For businesses, agencies and investors</span>
+      <span class="address">{c.address.slice(0, 2).join(", ")} · {c.hours}</span>
     </div>
-    <p class="lede">Tell us what you sell or run, and we'll reach out.</p>
+    <p class="lede">Tell us what you sell or run. A person replies within one working day, by email or WhatsApp.</p>
   </div>
 </section>
 
-<section class="section">
+<section class="section tight">
   <div class="wrap contact">
-    <form class="form card" id="contact-form" data-endpoint={forms.contact} data-fallback={forms.fallbackEmail} data-sent="Sent. We'll reply within one working day.">
-      <input class="hp" type="text" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true">
-      <fieldset class="field">
-        <legend>I'm getting in touch about</legend>
-        <div class="choices">
-          <label class="choice"><input type="radio" name="topic" value="beta" checked> Joining the beta</label>
-          <label class="choice"><input type="radio" name="topic" value="agency"> An agency or freelancer plan</label>
-          <label class="choice"><input type="radio" name="topic" value="investor"> Investing</label>
-          <label class="choice"><input type="radio" name="topic" value="abuse"> Reporting an app</label>
+    <form class="form sheet" id="form" data-endpoint={forms.contact} data-fallback={forms.fallbackEmail} data-sent="Sent. We'll reply within one working day.">
+      <div class="sheet-head"><h2 data-form-title>{topics[0].title}</h2><span class="tag">Free during the beta</span></div>
+      <div class="sheet-body">
+        <input class="hp" type="text" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true">
+        <fieldset class="field">
+          <legend>I'm getting in touch about</legend>
+          <div class="topics">
+            {topics.map((t, i) => (
+              <label class="topic"><input type="radio" name="topic" value={t.value} data-title={t.title} checked={i === 0}><span class="ti" aria-hidden="true">{t.ico}</span>{t.label}</label>
+            ))}
+          </div>
+        </fieldset>
+
+        <fieldset class="field" data-for="beta">
+          <legend>What do you run?</legend>
+          <div class="choices">
+            {["An online store", "Bookings", "Fee collection", "Something else"].map((k, i) => <label class="choice"><input type="radio" name="business" value={k} checked={i === 0}> {k}</label>)}
+          </div>
+        </fieldset>
+
+        <div class="two">
+          <div class="field"><label for="name">Name</label><input id="name" name="name" required autocomplete="name"></div>
+          <div class="field"><label for="org">Business or organisation</label><input id="org" name="org" autocomplete="organization"></div>
         </div>
-      </fieldset>
-      <div class="two">
-        <div class="field"><label for="name">Name</label><input id="name" name="name" required autocomplete="name"></div>
-        <div class="field"><label for="org">Business or organisation</label><input id="org" name="org" autocomplete="organization"></div>
+        <div class="two">
+          <div class="field"><label for="email">Email</label><input id="email" name="email" type="email" required autocomplete="email"></div>
+          <div class="field"><label for="phone">Phone or WhatsApp <span class="opt">optional</span></label><input id="phone" name="phone" type="tel" autocomplete="tel" placeholder="01XXX-XXXXXX"></div>
+        </div>
+        <div class="two" data-for="beta">
+          <div class="field"><label for="page">Facebook page or website <span class="opt">optional</span></label><input id="page" name="page" type="url" inputmode="url" placeholder="https://facebook.com/yourstore"></div>
+          <div class="field"><label for="orders">Orders in a normal month</label>
+            <select id="orders" name="orders"><option>Just starting</option><option>Under 50</option><option>50 to 300</option><option>More than 300</option></select>
+          </div>
+        </div>
+        <div class="field"><label for="message">What do you want to build, or ask?</label><textarea id="message" name="message" placeholder="A store for my handmade bags, bookings for my salon, fee collection for my coaching centre…"></textarea></div>
+        <div class="send-row">
+          <button class="btn btn-go btn-beta" type="submit">Send <span class="arrow" aria-hidden="true">→</span></button>
+          <p class="small">We only use your details to reply. <a href="privacy.html">Privacy</a></p>
+        </div>
+        <p class="form-status" role="status"></p>
       </div>
-      <div class="two">
-        <div class="field"><label for="email">Email</label><input id="email" name="email" type="email" required autocomplete="email"></div>
-        <div class="field"><label for="phone">Phone or WhatsApp</label><input id="phone" name="phone" type="tel" autocomplete="tel"></div>
-      </div>
-      <div class="field"><label for="message">What do you want to build, or ask?</label><textarea id="message" name="message" placeholder="A store for my handmade bags, bookings for my salon, fee collection for my coaching centre…"></textarea></div>
-      <div><button class="btn btn-go" type="submit">Send</button></div>
-      <p class="form-status" role="status"></p>
-      <p class="small" style="margin:0">We only use your details to reply.</p>
     </form>
 
     <aside class="contact-side">
-      <div class="card wash">
+      <div class="plate-card">
+        <h2>Office</h2>
+        <address>{c.address.map((l) => <span>{l}</span>)}</address>
+        <p class="small">{c.hours}. Visits by appointment.</p>
+      </div>
+      <div class="card">
+        <h3>Call or WhatsApp</h3>
+        <p class="big"><a href={live(tel(c.phone))}>{c.phone}</a></p>
+        <p class="big"><a href={live(wa(c.whatsapp))}>{c.whatsapp}</a> <span class="small">WhatsApp</span></p>
+        <p class="small">Support: {c.supportHours}</p>
+      </div>
+      <div class="card">
         <h3>Email</h3>
-        <p class="url">{to}</p>
+        <ul class="inboxes">{inboxes.map(([what, addr]) => <li><span>{what}</span><a href={`mailto:${addr}`}>{addr}</a></li>)}</ul>
       </div>
       <div class="card">
-        <h3>Investors</h3>
-        <p class="small"><a href="investors.html#deck">Request the deck</a></p>
+        <h3>Follow along</h3>
+        <Social labels />
       </div>
-      <div class="card">
+      <div class="card wash">
         <h3>Company</h3>
-        <p class="small">Amader Cloud · [Legal entity] · [Registered address]</p>
+        <dl class="reg">
+          <dt>Registered name</dt><dd>{c.legalName}</dd>
+          <dt>RJSC registration</dt><dd>{c.registration.rjsc}</dd>
+          <dt>Trade licence</dt><dd>{c.registration.tradeLicence}</dd>
+          <dt>VAT (BIN)</dt><dd>{c.registration.bin}</dd>
+        </dl>
       </div>
     </aside>
   </div>
 </section>
 
 <style>
-.contact { display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); gap: 24px; align-items: start; }
-@media (max-width: 860px) { .contact { grid-template-columns: 1fr; } }
-.contact-side { display: grid; gap: 16px; }
+.contact { display: grid; grid-template-columns: minmax(0, 1.55fr) minmax(0, 1fr); gap: clamp(20px, 3vw, 36px); align-items: start; }
+@media (max-width: 920px) { .contact { grid-template-columns: 1fr; } }
+
+/* The form as a printed order sheet: a painted header strip, then the fields */
+.sheet { gap: 0; background: var(--card); border: 1.5px solid var(--line); border-radius: 6px; overflow: hidden; scroll-margin-top: calc(var(--header-h) + 16px); }
+.sheet-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; padding: 18px 24px; background: var(--green); box-shadow: inset 0 -4px 0 var(--yellow); }
+.sheet-head h2 { margin: 0; color: var(--yellow); font-size: clamp(1.6rem, 1.2rem + 1.3vw, 2.2rem); text-shadow: 0.05em 0.05em 0 var(--red); }
+.sheet-head .tag { background: var(--yellow); color: #14213d; padding: 4px 10px; border-radius: 3px; }
+.sheet-body { display: grid; gap: 18px; padding: clamp(20px, 3vw, 30px); }
+.topics { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; }
+@media (max-width: 640px) { .topics { grid-template-columns: 1fr 1fr; } }
+.topic { position: relative; display: grid; justify-items: start; gap: 6px; padding: 12px 12px 12px; border: 1.5px solid var(--rule); border-radius: 6px; cursor: pointer; font-weight: 700; font-size: 0.94rem; line-height: 1.25; transition: border-color .2s, background-color .2s, translate .2s; }
+.topic:hover { border-color: var(--line); }
+.topic input { position: absolute; opacity: 0; pointer-events: none; }
+.ti { display: grid; place-items: center; width: 30px; height: 30px; border-radius: 4px; background: var(--wash-2); color: var(--ink); font-size: 1rem; transition: background-color .2s, color .2s; }
+.topic:has(input:checked) { border-color: var(--line); background: var(--yellow-wash); translate: 0 -2px; }
+.topic:has(input:checked) .ti { background: var(--red); color: #fff; }
+.topic:has(input:focus-visible) { outline: 3px solid var(--blue); outline-offset: 2px; }
+.opt { font-weight: 500; color: var(--ink-2); font-size: 0.85rem; margin-left: 4px; }
+.send-row { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 20px; }
+.send-row .small { margin: 0; }
+.form-status:empty { display: none; }
+.form-status { margin: 0; padding: 12px 14px; border-radius: 4px; font-weight: 600; }
+.form-status.ok { background: var(--green-wash); } .form-status.err { background: var(--red-wash); }
+[data-for][hidden] { display: none; }
+
+.contact-side { display: grid; gap: 14px; }
+.plate-card { background: #14213d; color: #eef2fb; border-radius: 4px; padding: 22px 24px; box-shadow: inset 0 0 0 6px #14213d, inset 0 0 0 7.5px var(--yellow); }
+.plate-card h2 { color: var(--yellow); font-size: 1.7rem; margin-bottom: 8px; }
+.plate-card address { font-style: normal; display: grid; font-size: 1.05rem; }
+.plate-card .small { color: #b4bfd6; margin: 10px 0 0; }
+.big { font-size: 1.1rem; font-weight: 700; margin: 0 0 4px; }
+.big a { text-decoration: none; }
+.inboxes { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; font-size: 0.94rem; }
+.inboxes li { display: grid; }
+.inboxes span { color: var(--ink-2); font-size: 0.85rem; }
+.reg { display: grid; grid-template-columns: auto 1fr; gap: 4px 14px; margin: 0; font-size: 0.9rem; }
+.reg dt { color: var(--ink-2); } .reg dd { margin: 0; font-weight: 600; overflow-wrap: anywhere; }
 </style>
 </Base>
