@@ -10,3 +10,12 @@ One of five AI-first directions for amader.cloud, each on its own branch. On thi
 None of the original device-reuse project's content is on this branch. For design reference only, the earlier site and brand guide are still on `main` (`git show main:marketing/brand.md`, `main:web/`).
 
 The site is served locally on port **8425** once it exists.
+
+## Before the mock details go live
+
+Pushing `idea/banao` deploys https://amader.cloud. These are placeholders on the site today:
+
+- [ ] `company` in `web/src/data/facts.json` is `"mock": true`: legal name, Banani address, phone, WhatsApp, social profiles, RJSC number, trade licence, BIN. Replace them and set `mock` to false (phone and social links only become links then).
+- [ ] `funding` in the same file is mock.
+- [ ] Privacy policy and terms (`web/src/pages/privacy.mdx`, `terms.mdx`) are drafts for lawyer review, written against the Personal Data Protection Act, 2026 (from a law firm's summary; check the gazetted text). The refund rule in the terms (first month back if the first app isn't live in 7 days) and the 7-day grace on failed payments are proposals.
+- [ ] Native-speaker check of the Bangla written in English letters in the demo (`web/src/scripts/demo.js`: `bn` prompts and replies).
