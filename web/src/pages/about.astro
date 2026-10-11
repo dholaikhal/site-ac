@@ -1,0 +1,132 @@
+---
+import Base from "../layouts/Base.astro";
+import SignAvatar from "../components/SignAvatar.astro";
+import Social from "../components/Social.astro";
+import Bunting from "../components/Bunting.astro";
+import BetaButton from "../components/BetaButton.astro";
+import facts, { company as c } from "../data/facts";
+const m = facts.market;
+const beliefs: [string, string][] = [
+  ["The store is theirs.", "The address, the customers, the data and every taka of the sales belong to the owner. We build and keep the lights on."],
+  ["Asking is the interface.", "If an owner can say it in a sentence, in English or Banglish, they can change their store. No dashboards to learn first."],
+  ["Local by default.", "bKash, Nagad, couriers, SMS, taka prices and Bangladeshi addresses come built in, not as plug-ins to find."],
+];
+---
+<Base title="About · Amader Cloud" description="Amader means ours. Amader Cloud builds stores, bookings and fee collection for Bangladeshi businesses with AI, from an office in Banani, Dhaka.">
+
+<section class="page-hero about-hero">
+  <Bunting class="about-bunting" flags={24} sag={12} />
+  <div class="wrap">
+    <div class="signboard sign-blue">
+      <h1>Amader means ours.</h1>
+      <span class="address">{c.legalName} · Dhaka · since {c.founded}</span>
+    </div>
+    <p class="lede">Bangladesh sells on Facebook. {m.fbSellerPages.text} pages are run by sellers, and almost every order is typed out by hand in an inbox. We're building the store each of them should own: described in a sentence, built by AI, paid by bKash.</p>
+  </div>
+</section>
+
+<section class="section tight">
+  <div class="wrap">
+    <h2 data-reveal>What we hold to</h2>
+    <ol class="beliefs">
+      {beliefs.map(([h, p], i) => <li data-reveal style={`--d:${i}`}><span class="no">{i + 1}</span><h3>{h}</h3><p>{p}</p></li>)}
+    </ol>
+  </div>
+</section>
+
+<section class="section alt">
+  <div class="wrap">
+    <div class="head" data-reveal>
+      <h2>The people</h2>
+      <p class="lede">A small team in Dhaka, building with the owners who will use it.</p>
+    </div>
+    <ul class="team">
+      {facts.team.members.map((t, i) => <li data-reveal style={`--d:${i}`}><SignAvatar initials={t.initials} sign={t.sign as any} /><strong>{t.name}</strong><span class="role">{t.role}</span></li>)}
+    </ul>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap office">
+    <div class="shopfront" data-reveal aria-hidden="true">
+      <div class="sf-sign"><span>Amader Cloud</span><small>{c.address[1]}</small></div>
+      <div class="sf-awning"></div>
+      <div class="sf-shutter"><span class="sf-plate">{c.address[0].split(",")[1]?.trim() ?? ""}</span></div>
+    </div>
+    <div data-reveal style="--d:1">
+      <h2>Come by</h2>
+      <address class="addr">{c.address.map((l) => <span>{l}</span>)}</address>
+      <p class="small">{c.hours}. Visits by appointment: <a href="contact.html">write first</a>.</p>
+      <Social labels />
+    </div>
+  </div>
+</section>
+
+<section class="section alt">
+  <div class="wrap two-col">
+    <div data-reveal>
+      <h2>Company details</h2>
+      <dl class="reg">
+        <dt>Registered name</dt><dd>{c.legalName}</dd>
+        <dt>Registered office</dt><dd>{c.address.join(", ")}</dd>
+        <dt>RJSC registration</dt><dd>{c.registration.rjsc}</dd>
+        <dt>Trade licence</dt><dd>{c.registration.tradeLicence}</dd>
+        <dt>VAT registration (BIN)</dt><dd>{c.registration.bin}</dd>
+      </dl>
+    </div>
+    <div data-reveal style="--d:1">
+      <h2>Press</h2>
+      <p>Amader Cloud builds online stores, booking pages and fee collection for Bangladeshi businesses from a one-sentence description. Apps run at <span class="url">name.amader.cloud</span> with bKash, Nagad and card payments, courier booking and SMS built in. The company is based in Dhaka.</p>
+      <p class="small">Press enquiries: <a href={`mailto:${c.email.press}`}>{c.email.press}</a> · <a href="assets/favicon.svg" download="amader-cloud-mark.svg">Download the logo mark (SVG)</a></p>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap closing">
+    <h2>Want your store on this street?</h2>
+    <div class="btn-row"><BetaButton /><a class="btn" href="investors.html">For investors</a></div>
+  </div>
+</section>
+
+<style>
+.about-hero { position: relative; padding-top: clamp(60px, 7vw, 96px); }
+:global(.about-bunting) { position: absolute; top: 0; left: 0; color: var(--ink); }
+.beliefs { list-style: none; margin: 24px 0 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; counter-reset: b; }
+@media (max-width: 860px) { .beliefs { grid-template-columns: 1fr; } }
+.beliefs li { position: relative; background: var(--card); border: 1.5px solid var(--line); border-radius: 6px; padding: 28px 24px 22px; }
+.beliefs .no { position: absolute; top: -18px; left: 20px; display: grid; place-items: center; width: 40px; height: 40px; border-radius: 4px; background: var(--red); color: var(--yellow); font-family: var(--display); font-weight: 900; font-size: 1.5rem; rotate: -4deg; }
+.beliefs h3 { font-family: var(--display); font-size: 1.8rem; font-weight: 800; line-height: 1; margin: 8px 0 10px; }
+.beliefs p { margin: 0; color: var(--ink-2); }
+.team { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; }
+@media (max-width: 760px) { .team { grid-template-columns: 1fr; } }
+.team li { display: grid; gap: 2px; }
+.team :global(.sign-avatar) { width: 112px; height: 112px; margin-bottom: 12px; transition: rotate .3s; }
+.team li:hover :global(.sign-avatar) { rotate: -4deg; }
+.team strong { font-size: 1.15rem; }
+.team .role { color: var(--green); font-weight: 600; }
+:root[data-theme="dark"] .team .role { color: var(--ok); }
+
+.office { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(28px, 5vw, 72px); align-items: center; }
+@media (max-width: 860px) { .office { grid-template-columns: 1fr; } }
+.addr { font-style: normal; display: grid; font-size: 1.3rem; font-weight: 600; margin-bottom: 10px; }
+.office :global(.social) { margin-top: 18px; }
+/* A drawn shopfront: painted sign, awning, rolled-down shutter with the holding-number plate */
+.shopfront { max-width: 460px; margin-inline: auto; width: 100%; }
+.sf-sign { background: var(--green); color: var(--yellow); text-align: center; padding: 18px 16px 14px; border-radius: 4px 4px 0 0; box-shadow: inset 0 0 0 6px var(--green), inset 0 0 0 8px var(--yellow); }
+.sf-sign span { display: block; font-family: var(--display); font-weight: 900; font-size: clamp(2rem, 1.4rem + 2vw, 2.8rem); line-height: 1; text-shadow: 0.05em 0.05em 0 var(--red); }
+.sf-sign small { font-weight: 600; font-size: 0.85rem; }
+.sf-awning { height: 30px; background: repeating-linear-gradient(90deg, var(--red) 0 30px, #fff7e6 30px 60px); border-inline: 2px solid #14213d; }
+.sf-shutter { position: relative; height: 210px; border: 2px solid #14213d; border-top: 0; background: repeating-linear-gradient(180deg, #aab3bf 0 9px, #8d97a4 9px 11px); }
+.sf-plate { position: absolute; right: 16px; top: 18px; background: #1739a8; color: #fff; font-weight: 800; font-size: 0.85rem; padding: 4px 10px; border-radius: 3px; border: 2px solid #fff; }
+
+.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(28px, 5vw, 72px); }
+@media (max-width: 860px) { .two-col { grid-template-columns: 1fr; } }
+.two-col h2 { font-size: clamp(2rem, 1.5rem + 1.6vw, 2.8rem); }
+.reg { display: grid; grid-template-columns: auto 1fr; gap: 8px 18px; margin: 0; }
+.reg dt { color: var(--ink-2); } .reg dd { margin: 0; font-weight: 600; overflow-wrap: anywhere; }
+.closing { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 20px; }
+.closing h2 { margin: 0; font-size: clamp(2rem, 1.5rem + 1.6vw, 2.8rem); }
+.closing .btn-row { margin: 0; }
+</style>
+</Base>
