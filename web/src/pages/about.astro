@@ -60,26 +60,6 @@ const beliefs: [string, string][] = [
   </div>
 </section>
 
-<section class="section alt">
-  <div class="wrap two-col">
-    <div data-reveal>
-      <h2>Company details</h2>
-      <dl class="reg">
-        <dt>Registered name</dt><dd>{c.legalName}</dd>
-        <dt>Registered office</dt><dd>{c.address.join(", ")}</dd>
-        <dt>RJSC registration</dt><dd>{c.registration.rjsc}</dd>
-        <dt>Trade licence</dt><dd>{c.registration.tradeLicence}</dd>
-        <dt>VAT registration (BIN)</dt><dd>{c.registration.bin}</dd>
-      </dl>
-    </div>
-    <div data-reveal style="--d:1">
-      <h2>Press</h2>
-      <p>Amader Cloud builds online stores, booking pages and fee collection for Bangladeshi businesses from a one-sentence description. Apps run at <span class="url">name.amader.cloud</span> with bKash, Nagad and card payments, courier booking and SMS built in. The company is based in Dhaka.</p>
-      <p class="small">Press enquiries: <a href={`mailto:${c.email.press}`}>{c.email.press}</a> · <a href="assets/favicon.svg" download="amader-cloud-mark.svg">Download the logo mark (SVG)</a></p>
-    </div>
-  </div>
-</section>
-
 <section class="section">
   <div class="wrap closing">
     <h2>Want your store on this street?</h2>
@@ -116,11 +96,6 @@ const beliefs: [string, string][] = [
 .sf-shutter { position: relative; height: 210px; border: 2px solid #14213d; border-top: 0; background: repeating-linear-gradient(180deg, #aab3bf 0 9px, #8d97a4 9px 11px); }
 .sf-plate { position: absolute; right: 16px; top: 18px; background: #1739a8; color: #fff; font-weight: 800; font-size: 0.85rem; padding: 4px 10px; border-radius: 3px; border: 2px solid #fff; }
 
-.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(28px, 5vw, 72px); }
-@media (max-width: 860px) { .two-col { grid-template-columns: 1fr; } }
-.two-col h2 { font-size: clamp(2rem, 1.5rem + 1.6vw, 2.8rem); }
-.reg { display: grid; grid-template-columns: auto 1fr; gap: 8px 18px; margin: 0; }
-.reg dt { color: var(--ink-2); } .reg dd { margin: 0; font-weight: 600; overflow-wrap: anywhere; }
 .closing { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 20px; }
 .closing h2 { margin: 0; font-size: clamp(2rem, 1.5rem + 1.6vw, 2.8rem); }
 .closing .btn-row { margin: 0; }

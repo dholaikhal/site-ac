@@ -4,19 +4,11 @@ import Social from "../components/Social.astro";
 import forms from "../data/forms.json";
 import { company as c, live } from "../data/facts";
 const tel = (n: string) => `tel:${n.replace(/[^+\d]/g, "")}`;
-const wa = (n: string) => `https://wa.me/${n.replace(/\D/g, "")}`;
 const topics = [
   { value: "beta", label: "Join the beta", title: "Get your store into the beta", ico: "✦" },
   { value: "agency", label: "Agency or freelancer", title: "Build for your clients", ico: "⚒" },
   { value: "investor", label: "Investing", title: "Talk to the founders", ico: "◆" },
   { value: "abuse", label: "Report an app", title: "Report an app", ico: "⚑" },
-];
-const inboxes: [string, string][] = [
-  ["Help with your store", c.email.support],
-  ["Report an app", c.email.abuse],
-  ["Privacy and your data", c.email.privacy],
-  ["Press", c.email.press],
-  ["Investors", c.email.investors],
 ];
 ---
 <Base title="Contact · Amader Cloud" description="Join the beta, make an agency enquiry, report an app, or contact the founders. Office in Banani, Dhaka.">
@@ -83,27 +75,10 @@ const inboxes: [string, string][] = [
         <p class="small">{c.hours}. Visits by appointment.</p>
       </div>
       <div class="card">
-        <h3>Call or WhatsApp</h3>
+        <h3>Get in touch</h3>
+        <p class="big"><a href={`mailto:${c.email.hello}`}>{c.email.hello}</a></p>
         <p class="big"><a href={live(tel(c.phone))}>{c.phone}</a></p>
-        <p class="big"><a href={live(wa(c.whatsapp))}>{c.whatsapp}</a> <span class="small">WhatsApp</span></p>
-        <p class="small">Support: {c.supportHours}</p>
-      </div>
-      <div class="card">
-        <h3>Email</h3>
-        <ul class="inboxes">{inboxes.map(([what, addr]) => <li><span>{what}</span><a href={`mailto:${addr}`}>{addr}</a></li>)}</ul>
-      </div>
-      <div class="card">
-        <h3>Follow along</h3>
-        <Social labels />
-      </div>
-      <div class="card wash">
-        <h3>Company</h3>
-        <dl class="reg">
-          <dt>Registered name</dt><dd>{c.legalName}</dd>
-          <dt>RJSC registration</dt><dd>{c.registration.rjsc}</dd>
-          <dt>Trade licence</dt><dd>{c.registration.tradeLicence}</dd>
-          <dt>VAT (BIN)</dt><dd>{c.registration.bin}</dd>
-        </dl>
+        <Social />
       </div>
     </aside>
   </div>
@@ -143,10 +118,6 @@ const inboxes: [string, string][] = [
 .plate-card .small { color: #b4bfd6; margin: 10px 0 0; }
 .big { font-size: 1.1rem; font-weight: 700; margin: 0 0 4px; }
 .big a { text-decoration: none; }
-.inboxes { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; font-size: 0.94rem; }
-.inboxes li { display: grid; }
-.inboxes span { color: var(--ink-2); font-size: 0.85rem; }
-.reg { display: grid; grid-template-columns: auto 1fr; gap: 4px 14px; margin: 0; font-size: 0.9rem; }
-.reg dt { color: var(--ink-2); } .reg dd { margin: 0; font-weight: 600; overflow-wrap: anywhere; }
+.card :global(.social) { margin-top: 12px; }
 </style>
 </Base>
