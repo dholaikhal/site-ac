@@ -1,9 +1,15 @@
 ---
-// Mark: a tiny painted signboard — green board, yellow pinstripe, yellow "a" with a red drop shade.
+// Mark: two clouds overlapping, vermilion and teal, meeting in plum: your business and ours, made one.
+// public/assets/favicon.svg is the same drawing; change both together.
+const { class: cls } = Astro.props;
+const id = "mk" + Math.random().toString(36).slice(2, 8);
+const CLOUD = [`<circle cx="128" cy="100" r="58"/>`, `<circle cx="72" cy="136" r="40"/>`, `<circle cx="186" cy="130" r="46"/>`, `<rect x="32" y="136" width="200" height="52" rx="26"/>`, `<rect x="72" y="116" width="114" height="72"/>`];
+const at = (dx: number, dy: number) => CLOUD.map((s) => s.replace("/>", ` transform="translate(${dx} ${dy}) scale(.78)"/>`)).join("");
+const A = at(-4, 4), B = at(46, 36);
 ---
-<svg viewBox="0 0 34 34" aria-hidden="true">
-  <rect x="1" y="4" width="32" height="26" rx="2.5" fill="#0b5d3b"/>
-  <rect x="3.5" y="6.5" width="27" height="21" rx="1.2" fill="none" stroke="#ffcc00" stroke-width="1.3"/>
-  <text x="18.4" y="25.4" text-anchor="middle" font-family="Big Shoulders Display, Arial Narrow, sans-serif" font-weight="900" font-size="22" fill="#e2261b">a</text>
-  <text x="17" y="24" text-anchor="middle" font-family="Big Shoulders Display, Arial Narrow, sans-serif" font-weight="900" font-size="22" fill="#ffcc00">a</text>
+<svg class:list={["mark", cls]} viewBox="17 31 214 156" aria-hidden="true">
+  <defs><clipPath id={id} set:html={B} /></defs>
+  <g fill="#e8402a" set:html={A} />
+  <g fill="#0e9f9a" set:html={B} />
+  <g fill="#7a2e8f" clip-path={`url(#${id})`} set:html={A} />
 </svg>

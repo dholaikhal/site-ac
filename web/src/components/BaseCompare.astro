@@ -1,4 +1,5 @@
 ---
+import Logo from "./Logo.astro";
 // One-off generated app vs an app on Amader Cloud: why a shared, tested base matters. Row by row, so each
 // difference reads straight across; on phones each row stacks.
 const rows: [string, string, string][] = [
@@ -13,7 +14,7 @@ const rows: [string, string, string][] = [
   <div class="cmp-head" role="row">
     <span role="columnheader"></span>
     <span role="columnheader" class="one">Generated from scratch</span>
-    <span role="columnheader" class="ours"><span class="mk" aria-hidden="true">a</span>Built on Amader Cloud</span>
+    <span role="columnheader" class="ours"><Logo />Built on Amader Cloud</span>
   </div>
   {rows.map(([k, a, b]) => (
     <div class="cmp-row" role="row" data-reveal>
@@ -31,7 +32,7 @@ const rows: [string, string, string][] = [
 .cmp-head .one { color: var(--ink-2); }
 .cmp-head .ours { display: inline-flex; align-items: center; gap: 8px; color: var(--green); }
 :root[data-theme="dark"] .cmp-head .ours { color: var(--ok); }
-.mk { display: grid; place-items: center; width: 22px; height: 20px; border-radius: 3px; background: #0b5d3b; color: #ffcc00; box-shadow: inset 0 0 0 1.5px #ffcc00; font: 900 0.8rem/1 var(--display); }
+.ours :global(.mark) { width: 30px; height: 22px; flex: none; }
 .cmp-row strong { align-self: center; font-family: var(--display); font-weight: 800; font-size: 1.3rem; letter-spacing: -0.01em; }
 .cmp-row p { margin: 0; display: flex; gap: 10px; padding: 14px 18px; border-radius: 8px; font-size: 0.95rem; line-height: 1.45; }
 .cmp-row p.one { background: var(--card); color: var(--ink-2); border: 1.5px dashed var(--rule); }

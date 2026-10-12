@@ -102,7 +102,7 @@ p { margin: 0 0 1em; }
 .site-header { position: sticky; top: 0; z-index: 30; background: var(--wash); border-bottom: 1px solid var(--rule); }
 .site-header .wrap { display: flex; align-items: center; gap: 20px; height: var(--header-h); }
 .brand { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; font-family: var(--display); font-weight: 800; font-size: 1.6rem; white-space: nowrap; line-height: 1; }
-.brand svg { width: 34px; height: 34px; flex: none; }
+.brand svg { width: 46px; height: 34px; flex: none; }
 .nav { display: flex; gap: 22px; margin-left: auto; align-items: center; }
 .nav a { text-decoration: none; font-weight: 600; font-size: 0.96rem; white-space: nowrap; }
 .nav a:not(.btn):hover { text-decoration: underline; }
