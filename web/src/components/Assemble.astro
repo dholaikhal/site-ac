@@ -6,8 +6,9 @@ import Device from "./Device.astro";
 import Brand from "./Brand.astro";
 import { icon } from "../scripts/app-art.js";
 type Tile = { t: string; g: "store" | "pay" | "ship" | "msg" | "book" | "owner"; i: string; logos?: string[]; part?: number };
-// The ring: a dozen primary blocks around the phone, linked to it. The checkout's five parts are among them.
-const primary: Tile[] = [
+// Two rings of linked blocks around the phone. The inner ring holds the checkout's five parts; the outer ring,
+// offset half a step, holds the rest of what a business app is commonly built from.
+const innerRing: Tile[] = [
   { t: "Header and menu", g: "store", i: "menu", part: 0 },
   { t: "Product catalogue", g: "store", i: "grid" },
   { t: "Checkout steps", g: "store", i: "list", part: 1 },
@@ -21,30 +22,38 @@ const primary: Tile[] = [
   { t: "Cash on delivery", g: "pay", i: "cash" },
   { t: "Sales dashboard", g: "owner", i: "chart" },
 ];
+const outerRing: Tile[] = [
+  { t: "Sizes and colours", g: "store", i: "tag" }, { t: "Booking calendar", g: "book", i: "cal" }, { t: "Stock counts", g: "store", i: "box" },
+  { t: "Refunds", g: "pay", i: "undo" }, { t: "Delivery zones", g: "ship", i: "map" }, { t: "Deposits", g: "book", i: "coin" },
+  { t: "Messenger chat", g: "msg", i: "chat", logos: ["messenger"] }, { t: "VAT invoices", g: "pay", i: "receipt" }, { t: "Google Sheets export", g: "owner", i: "grid", logos: ["googlesheets"] },
+  { t: "Order tracking", g: "ship", i: "route" }, { t: "Serial numbers", g: "book", i: "hash" }, { t: "Bank transfer", g: "pay", i: "bank", logos: ["brac", "dbbl"] },
+  { t: "Reviews", g: "store", i: "star" }, { t: "Reminders", g: "book", i: "bell" }, { t: "Facebook catalogue", g: "owner", i: "grid", logos: ["facebook"] },
+  { t: "Fee receipts", g: "book", i: "receipt" }, { t: "Staff logins", g: "owner", i: "users" }, { t: "Daily backups", g: "owner", i: "shield" },
+];
 // A rounded-rectangle ring (superellipse) keeps blocks off the phone's corners.
-const ring = (list: Tile[], rx: number, ry: number) => list.map((tile, i) => {
-  const a = -Math.PI / 2 + (i / list.length) * Math.PI * 2 + Math.PI / list.length;
+const ring = (list: Tile[], rx: number, ry: number, offset = 0) => list.map((tile, i) => {
+  const a = -Math.PI / 2 + ((i + offset) / list.length) * Math.PI * 2 + Math.PI / list.length;
   const c = Math.cos(a), sn = Math.sin(a), e = 0.55;
   return { ...tile, x: 50 + rx * Math.sign(c) * Math.abs(c) ** e, y: 50 + ry * Math.sign(sn) * Math.abs(sn) ** e };
 });
-const tiles = ring(primary, 33, 43);
-// Around the ring, a handful of other blocks a business might ask for: faint, not linked, full-bleed.
+const tiles = [...ring(innerRing, 30, 36), ...ring(outerRing, 45, 46.5, 0.5)];
+// In the gaps that are left, faint unlinked blocks: other things a business might ask for.
 const more: [string, string][] = [
-  ["Stock counts", "box"], ["Reviews", "star"], ["Refunds", "undo"], ["VAT invoices", "receipt"], ["Delivery zones", "map"], ["Order tracking", "route"],
-  ["Booking calendar", "cal"], ["Deposits", "coin"], ["Serial numbers", "hash"], ["Reminders", "bell"], ["Fee receipts", "receipt"], ["Staff logins", "users"],
-  ["Daily backups", "shield"], ["Google Sheets export", "grid"], ["Loyalty points", "star"], ["Pre-orders", "cal"], ["Flash sales", "percent"],
-  ["Wholesale prices", "tag"], ["POS for the counter", "cash"], ["Low-stock alerts", "bell"], ["Instalments", "coin"], ["Table booking", "cal"],
-  ["QR menu", "grid"], ["Attendance", "check"], ["Prescription upload", "camera"], ["QR tickets", "ticket"], ["Your own domain", "home"], ["Bangla and English", "chat"],
+  ["Loyalty points", "star"], ["Pre-orders", "cal"], ["Flash sales", "percent"], ["Wholesale prices", "tag"], ["POS for the counter", "cash"],
+  ["Low-stock alerts", "bell"], ["Instalments", "coin"], ["Table booking", "cal"], ["QR menu", "grid"], ["Attendance", "check"],
+  ["Prescription upload", "camera"], ["QR tickets", "ticket"], ["Your own domain", "home"], ["Bangla and English", "chat"], ["Gift cards", "card"],
+  ["Barcode labels", "hash"], ["Returns", "undo"], ["Pickup from the store", "pin"], ["Due collection", "coin"], ["Expense tracker", "chart"],
+  ["Class schedule", "cal"], ["Exam results", "list"], ["Lab reports", "receipt"], ["Rider tracking", "route"], ["Waitlist", "list"],
+  ["Membership cards", "card"], ["Subscriptions", "cal"], ["Two-step login", "shield"], ["Live chat", "chat"], ["Photo gallery", "camera"],
+  ["Service areas", "map"], ["Quotes", "receipt"], ["Multiple branches", "home"], ["Supplier orders", "truck"], ["Donations", "heart"],
 ];
-// A loose grid with every other row offset; the middle band stays clear for the ring and the phone.
 const fieldTiles = (() => {
   const out: { t: string; i: string; x: number; y: number; d: number }[] = [];
-  let n = 0;
-  for (let r = 0; r < 8 && n < more.length; r++) {
-    for (let c = 0; c < 9 && n < more.length; c++) {
-      const x = 4 + c * 11.5 + (r % 2 ? 5.75 : 0), y = 5 + r * 12.8;
-      if (x > 20 && x < 80) continue;
-      if (x > 97) continue;
+  let n = 0, row = 0;
+  for (let y = 3; y <= 97 && n < more.length; y += 6.2, row++) {
+    for (let x = 3 + (row % 2 ? 4.7 : 0); x <= 97 && n < more.length; x += 9.4) {
+      if (x > 36 && x < 64 && y > 6 && y < 94) continue; // the phone
+      if (tiles.some((t) => Math.abs(t.x - x) < 11.5 && Math.abs(t.y - y) < 5.5)) continue;
       const [t, i] = more[n];
       out.push({ t, i, x, y, d: (n * 7) % 23 });
       n++;
@@ -55,10 +64,10 @@ const fieldTiles = (() => {
 const groups = { store: "Store", pay: "Payments", ship: "Delivery", msg: "Messages", book: "Bookings and fees", owner: "Owner tools" };
 ---
 <figure class="asm" data-asm aria-label="Tested blocks around a phone; five of them assemble a checkout (animation)">
-  <ul class="field" aria-hidden="true">
-    {fieldTiles.map((f) => <li style={`--x:${f.x}%;--y:${f.y}%;--t:${f.d}`}><span set:html={icon(f.i)} />{f.t}</li>)}
-  </ul>
   <div class="stage">
+    <ul class="field" aria-hidden="true">
+      {fieldTiles.map((f) => <li style={`--x:${f.x}%;--y:${f.y}%;--t:${f.d}`}><span set:html={icon(f.i)} />{f.t}</li>)}
+    </ul>
     <svg class="lines" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
       {tiles.map((t) => <line x1={t.x} y1={t.y} x2="50" y2="50" class:list={[t.g, { part: t.part !== undefined }]} />)}
     </svg>
@@ -85,18 +94,18 @@ const groups = { store: "Store", pay: "Payments", ship: "Delivery", msg: "Messag
 <style>
 .asm { margin: 0; position: relative; }
 /* The wider shelf: faint chips across the whole section, a few lighting up in turn */
-.field { list-style: none; margin: 0; padding: 0; position: absolute; top: -40px; bottom: -40px; left: 50%; width: 100vw; translate: -50% 0; pointer-events: none; }
+.field { list-style: none; margin: 0; padding: 0; position: absolute; inset: 0; pointer-events: none; }
 .field li { position: absolute; left: var(--x); top: var(--y); translate: -50% -50%; display: inline-flex; align-items: center; gap: 6px; white-space: nowrap; padding: 5px 11px 5px 8px; border-radius: 999px; border: 1px solid rgb(255 255 255 / .14); color: rgb(255 255 255 / .42); font-size: 0.74rem; font-weight: 700; background: rgb(255 255 255 / .03); animation: twinkle 12s ease-in-out infinite; animation-delay: calc(var(--t) * -0.52s); }
 .field li :global(.ic) { width: 13px; height: 13px; fill: none; stroke: currentColor; stroke-width: 1.9; stroke-linecap: round; stroke-linejoin: round; }
 @keyframes twinkle { 0%, 82%, 100% { color: rgb(255 255 255 / .42); border-color: rgb(255 255 255 / .14); } 88%, 94% { color: var(--yellow); border-color: rgb(255 204 0 / .55); background: rgb(255 204 0 / .08); } }
 @media (max-width: 980px) { .field { display: none; } }
 @media (prefers-reduced-motion: reduce) { .field li { animation: none; } }
-.stage { position: relative; height: 820px; max-width: 1200px; margin-inline: auto; }
+.stage { position: relative; height: 940px; width: min(1440px, calc(100vw - 24px)); margin-left: 50%; translate: -50% 0; }
 .lines { position: absolute; inset: 0; width: 100%; height: 100%; }
 .lines line { stroke: rgb(255 255 255 / .16); stroke-width: 1.2; vector-effect: non-scaling-stroke; stroke-dasharray: 3 5; }
 .lines line.part { stroke: rgb(255 204 0 / .55); }
 .tiles { list-style: none; margin: 0; padding: 0; }
-.tile { --c: #14213d; position: absolute; left: var(--x); top: var(--y); translate: -50% -50%; z-index: 1; display: flex; align-items: center; gap: 9px; padding: 7px 12px 7px 7px; width: max-content; max-width: 210px; background: #fff; color: #14213d; border-radius: 12px; border: 1px solid rgb(20 33 61 / .08); box-shadow: 0 1px 0 rgb(255 255 255 / .6) inset, 0 14px 30px -18px rgb(0 0 0 / .7); font-weight: 700; font-size: 0.82rem; line-height: 1.2; animation: drift 7s ease-in-out infinite; animation-delay: calc(var(--d) * -0.6s); transition: scale .25s, box-shadow .25s; }
+.tile { --c: #14213d; position: absolute; left: var(--x); top: var(--y); translate: -50% -50%; z-index: 1; display: flex; align-items: center; gap: 9px; padding: 6px 11px 6px 6px; width: max-content; max-width: 190px; background: #fff; color: #14213d; border-radius: 12px; border: 1px solid rgb(20 33 61 / .08); box-shadow: 0 1px 0 rgb(255 255 255 / .6) inset, 0 14px 30px -18px rgb(0 0 0 / .7); font-weight: 700; font-size: 0.82rem; line-height: 1.2; animation: drift 7s ease-in-out infinite; animation-delay: calc(var(--d) * -0.6s); transition: scale .25s, box-shadow .25s; }
 .tile.store { --c: var(--green); } .tile.pay { --c: var(--red); } .tile.ship { --c: #d98f00; } .tile.msg { --c: #0b8ad9; } .tile.book { --c: #8b3fb5; } .tile.owner { --c: #14213d; }
 .ti { flex: none; display: grid; place-items: center; width: 30px; height: 30px; border-radius: 9px; background: var(--c); color: #fff; }
 .ti :global(.ic) { width: 17px; height: 17px; fill: none; stroke: currentColor; stroke-width: 1.9; stroke-linecap: round; stroke-linejoin: round; }
@@ -119,7 +128,7 @@ const groups = { store: "Store", pay: "Payments", ship: "Delivery", msg: "Messag
 @keyframes asm-fly { from { transform: translate(var(--dx), var(--dy)) scale(.3); opacity: 0; } 30% { opacity: 1; } to { transform: none; opacity: 1; } }
 /* Narrow screens: the phone first, the blocks as a wrapped shelf below it */
 @media (max-width: 980px) {
-  .stage { height: auto; display: flex; flex-direction: column; align-items: center; gap: 22px; }
+  .stage { height: auto; width: auto; margin-left: 0; translate: none; display: flex; flex-direction: column; align-items: center; gap: 22px; }
   .lines { display: none; }
   .asm-phone { position: static; translate: none; order: -1; }
   .tiles { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; }
