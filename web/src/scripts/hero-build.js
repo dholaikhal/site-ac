@@ -125,12 +125,12 @@ function init(box) {
       live.classList.remove("on"); text.classList.remove("caret");
       status.hidden = false; box.classList.add("building"); url.textContent = "…";
       bar.classList.add("spinning");
-      // 18 flicks, from fast to slower; a new design every few flicks
-      for (let f = 0; f < 18; f++) {
+      // 12 flicks, from fast to slower (about 1.6 s); a new design every few flicks
+      for (let f = 0; f < 12; f++) {
         text.textContent = randomIdea();
         text.classList.remove("flick"); void text.offsetWidth; text.classList.add("flick");
         if (f % 3 === 0) showLayout();
-        await wait(70 + f * f * 0.9); if (!ok()) return false;
+        await wait(65 + f * f * 1.1); if (!ok()) return false;
       }
       // land, both at once
       text.textContent = randomIdea();
