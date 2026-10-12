@@ -116,26 +116,35 @@ function init(box) {
 
 
   // One business: type the request, build the store, go live, first order. False if a chip cut it short.
-  // The catch-all stays once it's chosen: an idea is typed, its app is composed (a few layouts fading through),
-  // it goes live, and the next idea follows, until someone picks another kind of business.
+  // The catch-all stays once it's chosen. Like a slot machine: the request flicks through ideas while the phone's
+  // design changes with it, both slowing, then they land together on one idea and one app, which goes live.
+  // A pause, and it spins again, until someone picks another kind of business.
   async function playIdea(token) {
     const ok = () => token === run;
     const ideas = shuffledIdeas();
-    for (let n = 0; ; n++) {
-      const idea = ideas[n % ideas.length];
-      live.classList.remove("on"); status.hidden = true; text.classList.add("caret");
-      for (let c = 1; c <= idea.length; c += 2) { text.textContent = idea.slice(0, c); await wait(24); if (!ok()) return false; }
-      text.textContent = idea; text.classList.remove("caret");
-      await wait(300); if (!ok()) return false;
+    const bar = text.closest(".qb-bar");
+    for (let round = 0; ; round++) {
+      live.classList.remove("on"); text.classList.remove("caret");
       status.hidden = false; box.classList.add("building"); url.textContent = "…";
-      if (!screen.querySelector(".gx")) screen.innerHTML = "";
-      for (let step = 0; step < 7; step++) { showLayout(); await wait(420); if (!ok()) return false; }
+      bar.classList.add("spinning");
+      // 18 flicks, from fast to slower; a new design every few flicks
+      for (let f = 0; f < 18; f++) {
+        text.textContent = ideas[(round * 7 + f * 3) % ideas.length];
+        text.classList.remove("flick"); void text.offsetWidth; text.classList.add("flick");
+        if (f % 3 === 0) showLayout();
+        await wait(70 + f * f * 0.9); if (!ok()) return false;
+      }
+      // land, both at once
+      text.textContent = ideas[(round * 11 + 5) % ideas.length];
+      text.classList.remove("flick"); void text.offsetWidth; text.classList.add("flick", "landed");
+      showLayout();
+      bar.classList.remove("spinning");
       box.classList.remove("building"); status.hidden = true;
       url.textContent = url2.textContent = "yourname.amader.cloud"; live.removeAttribute("href");
+      await wait(350); if (!ok()) return false;
       live.classList.add("on"); celebrate(box.querySelector(".qb .dev"));
-      await wait(3000); if (!ok()) return false;
-      text.classList.add("caret");
-      for (let c = idea.length; c >= 0; c -= 4) { text.textContent = idea.slice(0, c); await wait(10); if (!ok()) return false; }
+      await wait(3200); if (!ok()) return false;
+      text.classList.remove("landed");
     }
   }
 

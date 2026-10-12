@@ -231,6 +231,13 @@ const ticker = ["bKash checkout", "Nagad", "Cards", "Courier booking", "Order SM
 .qb-bar p { font-size: 1.08rem; font-weight: 600; line-height: 1.35; margin: 2px 0 0; min-height: 2.7em; }
 .qb-cap { display: block; font-size: 0.78rem; font-weight: 700; color: var(--ink-2); }
 .qb-bar .caret::after { content: "▍"; color: var(--red); animation: blink 1s steps(1) infinite; }
+/* The catch-all's spin: each idea flicks in from below; the one it lands on settles with a little weight */
+.qb-bar .flick { animation: flick .14s ease-out; }
+@keyframes flick { from { opacity: .35; translate: 0 .35em; } }
+.qb-bar.spinning p { color: var(--ink-2); }
+.qb-bar .landed { animation: landed .45s cubic-bezier(.2, 1.5, .4, 1); }
+@keyframes landed { from { opacity: .5; translate: 0 .5em; } }
+@media (prefers-reduced-motion: reduce) { .qb-bar .flick, .qb-bar .landed { animation: none; } }
 @keyframes blink { 50% { opacity: 0; } }
 .qb-send { grid-area: send; display: grid; place-items: center; width: 44px; height: 44px; border-radius: 10px; background: var(--red); color: #fff; font-weight: 800; font-size: 1.2rem; }
 .qb-status { grid-area: st; justify-self: start; display: inline-flex; align-items: center; gap: 6px; margin-top: 8px; font-weight: 800; font-size: 0.82rem; color: #14213d; padding: 5px 12px; border-radius: 999px; border: 2px solid transparent; background: linear-gradient(var(--yellow), var(--yellow)) padding-box, linear-gradient(90deg, var(--yellow), var(--red), var(--blue), var(--green), var(--yellow)) 0 0 / 300% 100% border-box; animation: aiflow 2s linear infinite; }
