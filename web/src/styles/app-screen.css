@@ -180,3 +180,27 @@
 
 /* Wallet sheet over checkout in the buyer run-through */
 .screen .paysheet .row { border-top: 0; }
+
+/* Photos: products, dishes and photo heroes */
+.screen .ph { display: block; width: 100%; height: 100%; object-fit: cover; }
+.screen .pimg .ph, .screen .gallery .ph { position: absolute; inset: 0; }
+.screen .pimg { background: #efe9e1; }
+.screen .gallery { overflow: hidden; background: #efe9e1; }
+.screen .gallery.wide { aspect-ratio: 1.45; }
+.screen .thumb { overflow: hidden; }
+.screen .hero-b.photo { min-height: 128px; align-items: flex-end; background: #2a1d14; }
+.screen .hero-b.photo .bg { position: absolute; inset: 0; }
+.screen .hero-b.photo::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, rgb(20 12 6 / .86) 0%, rgb(20 12 6 / .5) 65%, rgb(20 12 6 / .15)), linear-gradient(0deg, color-mix(in srgb, var(--brand) 55%, transparent), transparent 60%); }
+.screen .hero-b.photo > div { position: relative; z-index: 1; }
+.screen .menu { display: grid; gap: 8px; padding: 6px 10px 10px; }
+.screen .dish { display: flex; gap: 10px; align-items: center; background: #fff; border-radius: 12px; padding: 6px; box-shadow: 0 6px 14px -11px rgb(0 0 0 / .3); }
+.screen .dish .ph { width: 62px; height: 62px; border-radius: 9px; flex: none; }
+.screen .dish-t { flex: 1; display: grid; font-weight: 700; }
+.screen .dish-t small { font-weight: 500; color: #6d7c88; font-size: 0.64rem; }
+.screen .dish-t b { color: var(--brand); margin-top: 2px; }
+.screen .doc-av { display: grid; place-items: center; width: 34px; height: 34px; border-radius: 50%; background: var(--tintb); color: var(--brand); font-weight: 800; font-size: 0.72rem; flex: none; }
+.screen .doc-av.big { width: 44px; height: 44px; font-size: 0.9rem; }
+.screen .serials { display: grid; grid-template-columns: repeat(5, 1fr); gap: 5px; margin-bottom: 6px; }
+.screen .serials span { text-align: center; padding: 5px 0; border-radius: 8px; background: #fff; border: 1px solid #ece6dd; font-weight: 800; font-size: 0.72rem; }
+.screen .serials .gone { color: #b8c0c8; background: #f3f0eb; }
+.screen .serials .sel { background: var(--brand); color: #fff; border-color: var(--brand); }

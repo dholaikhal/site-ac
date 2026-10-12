@@ -1,4 +1,13 @@
-import { icon, bag, stars, heroArt } from "./app-art.js";
+import { icon, stars, heroArt } from "./app-art.js";
+// Product photos (Unsplash License; credits on the Sources page)
+import imgTote from "../assets/photos/bag-tote.jpg";
+import imgPrinted from "../assets/photos/bag-printed.jpg";
+import imgWoven from "../assets/photos/bag-woven.jpg";
+import imgPouch from "../assets/photos/bag-pouch.jpg";
+import imgKacchi from "../assets/photos/food-biryani-plate.jpg";
+import imgChicken from "../assets/photos/food-biryani-bowl.jpg";
+import imgCake from "../assets/photos/food-cake.jpg";
+const src = (m) => (typeof m === "string" ? m : m.src);
 // Amader Cloud builder demo. Scripted entirely in the browser: no agent is called, nothing is published.
 // Copy rule: the product is "our agent" / "our store agent", never "AI" or a model.
 // Businesses, products, prices and orders below are fictional demonstration content, not facts.
@@ -55,7 +64,7 @@ function initDemo(root) {
   const PAY = ["bKash", "Nagad", "Card"];
   const APPS = {
     shop: {
-      match: /shop|sell|store|bag|cloth|saree|dress|product|boutique|cake|food|jewel|deliver|dokan|bikri|becha/i,
+      match: /shop|sell|store|bag|cloth|saree|dress|product|boutique|jewel|deliver|dokan|bikri|becha/i,
       prompt: "A store for my handmade bags with bKash payment, delivery, and an SMS when the order ships",
       bn: "Amar handmade bag er jonno ekta online store chai, bKash e payment, delivery, ar order ship hole customer ke SMS",
       name: "Jute & Thread", slug: "jutethread", color: "#9a4a24",
@@ -67,8 +76,20 @@ function initDemo(root) {
       special: { chip: "Offer cash on delivery inside Dhaka only", bn: "Shudhu Dhakar bhitore cash on delivery rakho", match: /cash|cod|dhaka/i, key: "cod", screen: "pay",
         reply: "Cash on delivery now shows only for Dhaka addresses.", bnReply: "Cash on delivery ekhon shudhu Dhakar address e dekhabe.", touched: "checkout, address rule" },
     },
+    kitchen: {
+      match: /kitchen|food|biryani|kacchi|cake|bakery|restaurant|meal|tiffin|khabar|ranna/i,
+      prompt: "Orders for my home kitchen: kacchi biryani and cakes, with a delivery time and bKash payment",
+      bn: "Amar home kitchen er order nite chai, kacchi ar cake, delivery time bechhe nibe, bKash e payment",
+      name: "Shorshe Kitchen", slug: "shorshekitchen", color: "#b03a2e",
+      kind: "food orders with delivery times",
+      plan: ["Pages: menu, dish, checkout", "Payments: bKash, Nagad, card", "Delivery: customers pick a time", "SMS: order confirmed, on the way"],
+      tabs: [["home", "Menu"], ["item", "Dish"], ["pay", "Checkout"], ["sms", "SMS"]],
+      adminTab: ["admin", "Orders"],
+      special: { chip: "Orders after 8 pm go to the next day", bn: "Raat 8 tar por order porer diner jonno nao", match: /8 ?pm|next.?day|porer din|cut.?off/i, key: "cutoff", screen: "pay",
+        reply: "Orders after 8 pm now go to next-day delivery.", bnReply: "Raat 8 tar por order ekhon porer diner delivery te jabe.", touched: "delivery times" },
+    },
     book: {
-      match: /book|appoint|salon|clinic|doctor|tutor|parlou?r|parlar|spa|gym|slot|dent/i,
+      match: /book|appoint|salon|tutor|parlou?r|parlar|spa|gym|slot/i,
       prompt: "Online bookings for my salon with a deposit paid by bKash and a reminder SMS",
       bn: "Amar salon er online booking lagbe, bKash e advance nibo, ar booking hole SMS jabe",
       name: "Glow Room", slug: "glowroom", color: "#6a3d8f",
@@ -79,6 +100,18 @@ function initDemo(root) {
       adminTab: ["admin", "Bookings"],
       special: { chip: "Send a reminder SMS the day before", bn: "Appointment er ager din reminder SMS pathao", match: /remind|day before|ager din/i, key: "remind", screen: "sms",
         reply: "Reminders now go out at 6 pm the day before.", bnReply: "Ekhon ager din shondha 6 tay reminder jabe.", touched: "SMS schedule" },
+    },
+    doctor: {
+      match: /clinic|doctor|chamber|serial|patient|daktar|hospital|dental|dent/i,
+      prompt: "Serial booking for my clinic's evening chamber, with a booking fee by bKash and the serial number by SMS",
+      bn: "Amar chamber er serial online e dite chai, bKash e booking fee, ar SMS e serial number jabe",
+      name: "CarePoint Clinic", slug: "carepoint", color: "#0f7a6c",
+      kind: "serial booking for a doctor's chamber",
+      plan: ["Pages: doctors, pick a day, booking fee", "Payments: booking fee by bKash, Nagad or card", "Serials: numbered by expected time", "SMS: serial number and time"],
+      tabs: [["home", "Doctors"], ["item", "Pick a serial"], ["pay", "Booking fee"], ["sms", "SMS"]],
+      adminTab: ["admin", "Serials"],
+      special: { chip: "Text patients when 3 serials are left before them", bn: "Ager 3 ta serial baki thakle patient ke SMS dao", match: /3 serials|serials? (are )?left|baki|before them/i, key: "near", screen: "sms",
+        reply: "Patients now get an SMS when 3 serials are left before them.", bnReply: "Ekhon ager 3 ta serial baki thakle patient SMS pabe.", touched: "SMS schedule" },
     },
     fees: {
       match: /fee|school|coach|club|member|tuition|madrasa|association|student|class|batch|beton|mashik|chhatro|chatro/i,
@@ -103,7 +136,9 @@ function initDemo(root) {
   // What the customer pays, after the changes the owner asked for.
   const amount = (st) => ({
     shop: 1530 - (st.off ? 145 : 0),
+    kitchen: 960 - (st.off ? 90 : 0),
     book: 300 - (st.off ? 30 : 0),
+    doctor: 200 - (st.off ? 20 : 0),
     fees: 2500 + (st.late ? 100 : 0) - (st.off ? 250 : 0),
   })[st.app];
 
@@ -131,29 +166,33 @@ function initDemo(root) {
   };
   const steps3 = (at) => `<ol class="stepper">${["Bag", "Address", "Pay"].map((l, i) => `<li class="${i < at ? "done" : i === at ? "on" : ""}"><span>${i < at ? icon("check") : i + 1}</span>${l}</li>`).join("")}</ol>`;
 
-  const PRODUCTS = [["Market tote", 1450, "tote", "#d9b27a", "#8a4a22"], ["Sling bag", 980, "sling", "#a7b58e", "#4f5f3a"], ["Laptop sleeve", 1650, "sleeve", "#8b97ab", "#2f3b55"], ["Coin pouch", 350, "pouch", "#d4876a", "#7a2f17"]];
+  const ph = (img, cls = "") => `<img class="ph ${cls}" src="${src(img)}" alt="" loading="lazy">`;
+  const heroPhoto = (title, sub, cta, img) => `<div class="hero-b photo">${ph(img, "bg")}<div><span>${title}</span><small>${sub}</small><em>${cta}</em></div></div>`;
+  const PRODUCTS = [["Market tote", 1450, imgTote], ["Printed tote", 1250, imgPrinted], ["Woven handbag", 1850, imgWoven], ["Jute pouch", 350, imgPouch]];
+  const MENU = [["Kacchi biryani", 450, imgKacchi, "Mutton, aloo, borhani on the side"], ["Chicken biryani", 320, imgChicken, "With egg and salad"], ["Chocolate cake", 850, imgCake, "1 lb, order a day ahead"]];
+  const DOCTORS = [["AR", "Dr. A. Rahman", "Medicine", 800, 6], ["SA", "Dr. S. Akter", "Paediatrics", 700, 3], ["MH", "Dr. M. Hossain", "Gynaecology", 1000, 9]];
   const SERVICES = [["Haircut", 600, "45 min", "scissors"], ["Hair colour", 2200, "2 hr", "drop"], ["Facial", 1500, "1 hr", "sparkle"], ["Manicure", 700, "40 min", "hand"]];
 
   const SCREENS = {
     shop: {
       home: (st) =>
         b("app bar", appBar(st), ch(st.flash === "green")) +
-        b("hero", hero(st, "Handmade jute bags", "Woven by hand · delivery across Bangladesh", "Shop now"), ch(st.flash === "green")) +
-        b("categories", `<div class="cats"><span class="on">All</span><span>Totes</span><span>Slings</span><span>Sleeves</span><span>Pouches</span></div>`) +
-        b("products", `<div class="row-h"><h5>New this week</h5><span>See all</span></div><div class="pgrid">${PRODUCTS.map(([n, p, k, c, a], i) =>
-          `<div class="pc"><div class="pimg" style="--tint:${c}22">${bag(k, c, a)}<span class="fav">${icon("heart")}</span>${i === 0 ? '<span class="new">New</span>' : ""}</div><span class="pn">${n}</span><b>${tk(p)}</b></div>`).join("")}</div>`) +
+        b("hero", heroPhoto("Handmade jute bags", "Woven by hand · delivery across Bangladesh", "Shop now", imgPrinted), ch(st.flash === "green")) +
+        b("categories", `<div class="cats"><span class="on">All</span><span>Totes</span><span>Handbags</span><span>Pouches</span><span>Gifts</span></div>`) +
+        b("products", `<div class="row-h"><h5>New this week</h5><span>See all</span></div><div class="pgrid">${PRODUCTS.map(([n, p, img], i) =>
+          `<div class="pc"><div class="pimg">${ph(img)}<span class="fav">${icon("heart")}</span>${i === 0 ? '<span class="new">New</span>' : ""}</div><span class="pn">${n}</span><b>${tk(p)}</b></div>`).join("")}</div>`) +
         b("payment note", `<p class="strip">${icon("truck")} Pay by bKash, Nagad or card${st.cod ? ", or cash in Dhaka" : ""}</p>`, ch(st.flash === "cod")) +
         b("tab bar", tabbar([["home", "Home"], ["search", "Search"], ["bag", "Bag"], ["user", "Account"]])),
       item: (st) =>
         b("app bar", subBar("Market tote", `<span class="ib">${icon("bag")}<i>1</i></span>`)) +
-        b("gallery", `<div class="gallery" style="--tint:#d9b27a2e">${bag("tote", "#d9b27a", "#8a4a22")}<span class="dots"><i class="on"></i><i></i><i></i></span></div>`) +
+        b("gallery", `<div class="gallery">${ph(imgTote)}<span class="dots"><i class="on"></i><i></i><i></i></span></div>`) +
         b("title", `<div class="sec"><h4>Market tote</h4><div class="rate">${stars(5)}<span>Handmade · 38 × 42 cm</span></div><div class="price">${tk(1450)}${st.off ? '<span class="badge">10% off with bKash</span>' : ""}</div></div>`, ch(st.flash === "off")) +
-        b("options", `<div class="sec"><h5>Colour</h5><div class="swatches"><span class="on" style="--c:#d9b27a"></span><span style="--c:#a7b58e"></span><span style="--c:#d4876a"></span></div><p class="muted">Woven jute, cotton lining, inside pocket. Courier booked when it ships.</p></div>`) +
+        b("options", `<div class="sec"><h5>Colour</h5><div class="swatches"><span class="on" style="--c:#cdb48a"></span><span style="--c:#6b5440"></span><span style="--c:#2f3b55"></span></div><p class="muted">Woven jute, cotton lining, inside pocket. Courier booked when it ships.</p></div>`) +
         b("add to bag", `<div class="paybar"><div class="qty"><span>−</span>1<span>+</span></div><div class="paybtn">Add to bag</div></div>`),
       pay: (st) => {
         const items = 1450, del = 80, off = st.off ? Math.round(items * 0.1) : 0;
         return b("app bar", subBar("Checkout")) + b("steps", steps3(2)) +
-          b("summary", `<div class="sec card"><div class="line-item"><span class="thumb" style="--tint:#d9b27a33">${bag("tote", "#d9b27a", "#8a4a22")}</span><span>Market tote<small>Qty 1</small></span><b>${tk(items)}</b></div><div class="row"><span>Delivery</span><span>${tk(del)}</span></div>${off ? `<div class="row ok"><span>bKash discount</span><span>−${tk(off)}</span></div>` : ""}<div class="row tot"><span>Total</span><span>${tk(items + del - off)}</span></div></div>`, ch(st.flash === "off")) +
+          b("summary", `<div class="sec card"><div class="line-item"><span class="thumb">${ph(imgTote)}</span><span>Market tote<small>Qty 1</small></span><b>${tk(items)}</b></div><div class="row"><span>Delivery</span><span>${tk(del)}</span></div>${off ? `<div class="row ok"><span>bKash discount</span><span>−${tk(off)}</span></div>` : ""}<div class="row tot"><span>Total</span><span>${tk(items + del - off)}</span></div></div>`, ch(st.flash === "off")) +
           b("address", `<div class="sec card addr">${icon("home")}<span><b>Deliver to</b>House 12, Road 5, Mirpur 10, Dhaka</span></div>`, ch(st.flash === "cod")) +
           b("payment", methods(st, items + del - off), ch(st.flash === "off" || st.flash === "cod"));
       },
@@ -162,6 +201,33 @@ function initDemo(root) {
         `${APPS.shop.name}: your order has shipped. Track it at ${APPS.shop.slug}.amader.cloud/t/1042`,
       ], st.flash === "off"),
       admin: (st) => adminScreen(st, "Orders", [["#1042 · Market tote", tk(1530 - (st.off ? 145 : 0)), "Paid by bKash", "Courier booked"]]),
+    },
+    kitchen: {
+      home: (st) =>
+        b("app bar", appBar(st), ch(st.flash === "green")) +
+        b("hero", heroPhoto("Kacchi every Friday", "Home-cooked in Mohammadpur · delivered hot", "Order now", imgKacchi), ch(st.flash === "green")) +
+        b("categories", `<div class="cats"><span class="on">All</span><span>Biryani</span><span>Cakes</span><span>Snacks</span></div>`) +
+        b("menu", `<div class="row-h"><h5>Today's menu</h5><span>Delivery 12–9 pm</span></div><div class="menu">${MENU.map(([n, p, img, d]) =>
+          `<div class="dish">${ph(img)}<span class="dish-t">${n}<small>${d}</small><b>${tk(p)}</b></span><span class="add">+</span></div>`).join("")}</div>`) +
+        b("tab bar", tabbar([["home", "Menu"], ["receipt", "Orders"], ["user", "Account"]])),
+      item: (st) =>
+        b("app bar", subBar("Kacchi biryani", `<span class="ib">${icon("bag")}<i>2</i></span>`)) +
+        b("gallery", `<div class="gallery wide">${ph(imgKacchi)}</div>`) +
+        b("title", `<div class="sec"><h4>Kacchi biryani</h4><div class="rate">${stars(5)}<span>Mutton, aloo, borhani on the side</span></div><div class="price">${tk(450)}${st.off ? '<span class="badge">10% off with bKash</span>' : ""}</div></div>`, ch(st.flash === "off")) +
+        b("options", `<div class="sec"><h5>Delivery time</h5><div class="slots">${["12–1 pm", "1–2 pm", "7–8 pm", "8–9 pm"].map((t, i) => `<span class="${i === 1 ? "sel" : ""}">${t}</span>`).join("")}</div></div>`) +
+        b("add", `<div class="paybar"><div class="qty"><span>−</span>2<span>+</span></div><div class="paybtn">Add ${tk(900)}</div></div>`),
+      pay: (st) => {
+        const items = 900, del = 60, off = st.off ? 90 : 0;
+        return b("app bar", subBar("Checkout")) + b("steps", steps3(2)) +
+          b("summary", `<div class="sec card"><div class="line-item"><span class="thumb">${ph(imgKacchi)}</span><span>Kacchi biryani<small>Qty 2</small></span><b>${tk(items)}</b></div><div class="row"><span>Delivery</span><span>${tk(del)}</span></div>${off ? `<div class="row ok"><span>bKash discount</span><span>−${tk(off)}</span></div>` : ""}<div class="row tot"><span>Total</span><span>${tk(items + del - off)}</span></div></div>`, ch(st.flash === "off")) +
+          b("when", `<div class="sec card addr">${icon("clock")}<span><b>${st.cutoff ? "Tomorrow, 1–2 pm" : "Today, 1–2 pm"}</b>${st.cutoff ? "Ordered after 8 pm: next-day delivery" : "House 7, Road 3, Mohammadpur"}</span></div>`, ch(st.flash === "cutoff")) +
+          b("payment", methods(st, items + del - off), ch(st.flash === "off"));
+      },
+      sms: (st) => smsScreen(st, [
+        `${APPS.kitchen.name}: order #207 confirmed. ${tk(960 - (st.off ? 90 : 0))} paid by bKash. Delivery ${st.cutoff ? "tomorrow" : "today"} 1–2 pm.`,
+        `${APPS.kitchen.name}: your food is on the way. Track it at ${APPS.kitchen.slug}.amader.cloud/t/207`,
+      ], st.flash === "off" || st.flash === "cutoff"),
+      admin: (st) => adminScreen(st, "Orders", [["#207 · Kacchi × 2", tk(960 - (st.off ? 90 : 0)), "Paid by bKash", "Out for delivery"]]),
     },
     book: {
       home: (st) =>
@@ -187,6 +253,31 @@ function initDemo(root) {
         ...(st.remind ? [`${APPS.book.name}: reminder, see you tomorrow at 4:30 pm. Need to change it? ${APPS.book.slug}.amader.cloud/r/88`] : []),
       ], st.flash === "remind" || st.flash === "off"),
       admin: (st) => adminScreen(st, "Bookings", [["Thu 4:30 pm · Hair colour", tk(300 - (st.off ? 30 : 0)), "Deposit by bKash", "Confirmed"]]),
+    },
+    doctor: {
+      home: (st) =>
+        b("app bar", appBar(st, ["search", "user"]), ch(st.flash === "green")) +
+        b("hero", hero(st, "Evening chamber", "Saturday to Thursday, 5 to 9 pm", "Get a serial"), ch(st.flash === "green")) +
+        b("doctors", `<div class="row-h"><h5>Doctors today</h5><span>Thu 9 Oct</span></div><div class="svc-list">${DOCTORS.map(([ini, n, sp, fee, left]) =>
+          `<div class="svc"><span class="doc-av">${ini}</span><span class="svc-t">${n}<small>${sp} · ${tk(fee)}</small></span><em class="pill">${left} left</em></div>`).join("")}</div>`) +
+        b("tab bar", tabbar([["home", "Doctors"], ["cal", "My serials"], ["user", "Account"]])),
+      item: (st) =>
+        b("app bar", subBar("Dr. A. Rahman")) +
+        b("doctor", `<div class="sec card svc-card"><span class="doc-av big">AR</span><span><b>Dr. A. Rahman</b><small>Medicine · consultation ${tk(800)} at the chamber</small></span></div>`) +
+        b("date", `<div class="sec"><h5>October</h5><div class="days">${[["Mon", 6], ["Tue", 7], ["Wed", 8], ["Thu", 9], ["Sat", 11], ["Sun", 12]].map(([d, n], i) => `<span class="${i === 3 ? "sel" : ""}"><small>${d}</small>${n}</span>`).join("")}</div></div>`) +
+        b("serials", `<div class="sec"><h5>Serials · Thursday</h5><div class="serials">${Array.from({ length: 20 }, (_, i) => `<span class="${i < 12 ? "gone" : i === 12 ? "sel" : ""}">${i + 1}</span>`).join("")}</div><p class="muted">Serial 13: expected around 7:40 pm</p></div>`) +
+        b("continue", `<div class="paybar"><span class="pb-note">Serial 13</span><div class="paybtn">Continue</div></div>`),
+      pay: (st) => {
+        const fee = 200, off = st.off ? 20 : 0;
+        return b("app bar", subBar("Booking fee")) +
+          b("summary", `<div class="sec card"><div class="line-item"><span class="doc-av">AR</span><span>Serial 13 · Dr. A. Rahman<small>${icon("cal")} Thu 9 Oct, around 7:40 pm</small></span></div><div class="row"><span>Booking fee</span><span>${tk(fee)}</span></div>${off ? `<div class="row ok"><span>bKash discount</span><span>−${tk(off)}</span></div>` : ""}<div class="row tot"><span>Pay now</span><span>${tk(fee - off)}</span></div><p class="muted">Consultation is paid at the chamber.</p></div>`, ch(st.flash === "off")) +
+          b("payment", methods(st, fee - off), ch(st.flash === "off"));
+      },
+      sms: (st) => smsScreen(st, [
+        `${APPS.doctor.name}: serial 13 with Dr. A. Rahman, Thu 9 Oct, around 7:40 pm. Booking fee ${tk(200 - (st.off ? 20 : 0))} paid.`,
+        ...(st.near ? [`${APPS.doctor.name}: 3 serials before yours. Please come to the chamber now.`] : []),
+      ], st.flash === "near" || st.flash === "off"),
+      admin: (st) => adminScreen(st, "Serials", [["Serial 13 · Dr. A. Rahman", tk(200 - (st.off ? 20 : 0)), "Booking fee by bKash", "Confirmed"]]),
     },
     fees: {
       home: (st) =>
@@ -261,14 +352,16 @@ function initDemo(root) {
   });
 
   // ---------- The till: today's sales after the store opens ----------
-  const PEOPLE = { shop: [["Market tote", 1450, "bKash"], ["Sling bag", 980, "Nagad"], ["Coin pouch", 350, "Card"]],
+  const PEOPLE = { shop: [["Printed tote", 1250, "bKash"], ["Jute pouch", 350, "Nagad"], ["Woven handbag", 1850, "Card"]],
+    kitchen: [["Chicken biryani", 320, "bKash"], ["Chocolate cake", 850, "Nagad"], ["Kacchi biryani", 450, "bKash"]],
+    doctor: [["Serial 9 · Dr. S. Akter", 200, "bKash"], ["Serial 14 · Dr. A. Rahman", 200, "Nagad"], ["Serial 4 · Dr. M. Hossain", 200, "bKash"]],
     book: [["Facial", 300, "bKash"], ["Haircut", 300, "Nagad"], ["Manicure", 300, "bKash"]],
     fees: [["BP-2044 · October", 2500, "Nagad"], ["BP-2102 · October", 2500, "bKash"], ["BP-2010 · October", 2500, "bKash"]] };
   function sale(what, amt, method) {
     st.sales += amt; st.orders++;
     till.hidden = false;
     tillAmt.textContent = tk(st.sales);
-    tillN.textContent = `${st.orders} ${st.app === "fees" ? "payment" : st.app === "book" ? "booking" : "order"}${st.orders === 1 ? "" : "s"}`;
+    tillN.textContent = `${st.orders} ${{ fees: "payment", book: "booking", doctor: "serial" }[st.app] || "order"}${st.orders === 1 ? "" : "s"}`;
     tillLog.insertAdjacentHTML("afterbegin", `<li><span>${esc(what)} · ${method}</span><b>${tk(amt)}</b></li>`);
     while (tillLog.children.length > 4) tillLog.lastElementChild.remove();
     till.classList.remove("bump"); void till.offsetWidth; till.classList.add("bump");
@@ -403,7 +496,7 @@ function initDemo(root) {
     paint("home", { draft: true }); ink(token);
     if (!(await step(list, "Designing your front page", token, 1500))) return;
     paint("item", { draft: true }); ink(token);
-    if (!(await step(list, `Adding your ${{ shop: "products", book: "services and opening hours", fees: "students and batches" }[key]}`, token, 1300))) return;
+    if (!(await step(list, `Adding your ${{ shop: "products", kitchen: "menu and delivery times", book: "services and opening hours", doctor: "doctors and chamber hours", fees: "students and batches" }[key]}`, token, 1300))) return;
     paint("pay", { draft: true }); ink(token);
     if (!(await step(list, "Setting up bKash, Nagad and card payments", token, 1500))) return;
     if (key === "shop" && !(await step(list, "Connecting your courier", token, 600))) return;
@@ -473,7 +566,7 @@ function initDemo(root) {
     for (const [what, price, method] of PEOPLE[st.app].slice(0, 2)) {
       await wait(1800); if (token !== run || !st?.published) return;
       const amt = method === "bKash" && st.off ? price - Math.round(price * 0.1) : price;
-      notify("✓", `<b>New ${st.app === "fees" ? "payment" : st.app === "book" ? "booking" : "order"}</b> ${tk(amt)} · ${method}`, "ok");
+      notify("✓", `<b>New ${{ fees: "payment", book: "booking", doctor: "serial" }[st.app] || "order"}</b> ${tk(amt)} · ${method}`, "ok");
       sale(what, amt, method);
     }
   }
@@ -506,7 +599,7 @@ function initDemo(root) {
     setStatus("Your view", true);
     paint("admin");
     notify("✓", `<b>New payment</b> ${tk(amt)} · bKash`, "ok");
-    sale(st.app === "shop" ? "Market tote" : st.app === "book" ? "Hair colour" : "BP-2071 · October", amt, "bKash");
+    sale({ shop: "Market tote", kitchen: "Kacchi × 2", book: "Hair colour", doctor: "Serial 13 · Dr. A. Rahman", fees: "BP-2071 · October" }[st.app], amt, "bKash");
     if (st.app === "shop") { const list = logList("Amader Cloud", false); if (!(await step(list, "Courier booked: pickup today 4:30 pm", token, 700))) return; }
     if (!(await stream(`<p>${t().after}</p>`, "Amader Cloud", token))) return;
     setStatus("Live");

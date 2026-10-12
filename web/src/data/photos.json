@@ -47,6 +47,76 @@
       "licence": "pexels",
       "site": "Pexels",
       "usedOn": "Home"
+    },
+    "bag-pouch": {
+      "file": "bag-pouch.jpg",
+      "alt": "Jute drawstring pouch on a white background.",
+      "photographer": "Mockup Graphics",
+      "profile": "https://unsplash.com/@mockupgraphics",
+      "source": "https://unsplash.com/photos/brown-and-white-polka-dot-textile-1CZ7n_bBnhk",
+      "licence": "unsplash",
+      "site": "Unsplash",
+      "usedOn": "the Home demo"
+    },
+    "bag-tote": {
+      "file": "bag-tote.jpg",
+      "alt": "A tan woven tote bag on a white background.",
+      "photographer": "Md Ishak Rahman",
+      "profile": "https://unsplash.com/@mdishakrahman",
+      "source": "https://unsplash.com/photos/tan-woven-fabric-tote-bag-9gFsWU5mCAs",
+      "licence": "unsplash",
+      "site": "Unsplash",
+      "usedOn": "the Home demo"
+    },
+    "bag-printed": {
+      "file": "bag-printed.jpg",
+      "alt": "A jute tote with a printed trim lying on grass.",
+      "photographer": "chen yanhui",
+      "profile": "https://unsplash.com/@chenyanhui",
+      "source": "https://unsplash.com/photos/two-oranges-and-a-bag-on-the-grass-1LFqgH2LKCs",
+      "licence": "unsplash",
+      "site": "Unsplash",
+      "usedOn": "the Home demo"
+    },
+    "bag-woven": {
+      "file": "bag-woven.jpg",
+      "alt": "A colourful woven handbag.",
+      "photographer": "Delight Dzansi",
+      "profile": "https://unsplash.com/@alkebulanprints",
+      "source": "https://unsplash.com/photos/a-colorful-bag-with-a-handle-RhElxpk8WNg",
+      "licence": "unsplash",
+      "site": "Unsplash",
+      "usedOn": "the Home demo"
+    },
+    "food-biryani-plate": {
+      "file": "food-biryani-plate.jpg",
+      "alt": "A plate of biryani.",
+      "photographer": "Shreyak Singh",
+      "profile": "https://unsplash.com/@shreyaksingh",
+      "source": "https://unsplash.com/photos/cooked-food-on-white-ceramic-plate-0j4bisyPo3M",
+      "licence": "unsplash",
+      "site": "Unsplash",
+      "usedOn": "the Home demo"
+    },
+    "food-biryani-bowl": {
+      "file": "food-biryani-bowl.jpg",
+      "alt": "A bowl of chicken biryani.",
+      "photographer": "Mario Raj",
+      "profile": "https://unsplash.com/@chefmariii",
+      "source": "https://unsplash.com/photos/a-white-bowl-filled-with-rice-and-meat-ysmeQt1dzcw",
+      "licence": "unsplash",
+      "site": "Unsplash",
+      "usedOn": "the Home demo"
+    },
+    "food-cake": {
+      "file": "food-cake.jpg",
+      "alt": "A slice of chocolate cake with a fork.",
+      "photographer": "Will Echols",
+      "profile": "https://unsplash.com/@willecholz",
+      "source": "https://unsplash.com/photos/sliced-chocolate-cake-beside-fork-on-plate-P_l1bJQpQF0",
+      "licence": "unsplash",
+      "site": "Unsplash",
+      "usedOn": "the Home demo"
     }
   },
   "licences": {

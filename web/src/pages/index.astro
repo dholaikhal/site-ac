@@ -10,11 +10,15 @@ import Compare from "../components/Compare.astro";
 import Faq from "../components/Faq.astro";
 import facts, { tk, plan } from "../data/facts";
 import "../styles/app-screen.css";
-import { icon, bag } from "../scripts/app-art.js";
+import { icon } from "../scripts/app-art.js";
+import imgTote from "../assets/photos/bag-tote.jpg";
+import imgPrinted from "../assets/photos/bag-printed.jpg";
+import imgWoven from "../assets/photos/bag-woven.jpg";
+import imgPouch from "../assets/photos/bag-pouch.jpg";
 const m = facts.market;
 const starter = plan("starter"), business = plan("business");
 // Static "after" screen: the same fictional store the demo builds.
-const products: [string, number, string, string, string][] = [["Market tote", 1450, "tote", "#d9b27a", "#8a4a22"], ["Sling bag", 980, "sling", "#a7b58e", "#4f5f3a"], ["Laptop sleeve", 1650, "sleeve", "#8b97ab", "#2f3b55"], ["Coin pouch", 350, "pouch", "#d4876a", "#7a2f17"]];
+const products: [string, number, ImageMetadata][] = [["Market tote", 1450, imgTote], ["Printed tote", 1250, imgPrinted], ["Woven handbag", 1850, imgWoven], ["Jute pouch", 350, imgPouch]];
 const rates: [string, string, string][] = [
   ["Checkout by bKash, Nagad or card", "Paid into your own merchant account", "Included"],
   ["Courier booking", "The courier charges its own delivery fee", "Included"],
@@ -51,9 +55,9 @@ const ticker = ["bKash checkout", "Nagad", "Cards", "Courier booking", "Order SM
           <div class="phone-url"><span>jutethread.amader.cloud</span></div>
           <div class="screen">
             <div class="b ink" style="--s:0"><div class="ah"><span class="mark">J</span><strong>Jute &amp; Thread</strong><span class="ah-ic"><span class="ib" set:html={icon("search")}></span><span class="ib"><Fragment set:html={icon("bag")} /></span></span></div></div>
-            <div class="b ink" style="--s:1"><div class="hero-b"><div><span>Handmade jute bags</span><small>Delivery across Bangladesh</small><em>Shop now</em></div><span class="hero-art" set:html={bag("tote", "#d9b27a", "#8a4a22")}></span></div></div>
-            <div class="b ink" style="--s:2"><div class="cats"><span class="on">All</span><span>Totes</span><span>Slings</span><span>Sleeves</span></div></div>
-            <div class="b ink" style="--s:3"><div class="pgrid">{products.map(([n, p, k, c, a], i) => <div class="pc"><div class="pimg" style={`--tint:${c}22`}><Fragment set:html={bag(k, c, a)} /><span class="fav" set:html={icon("heart")}></span>{i === 0 && <span class="new">New</span>}</div><span class="pn">{n}</span><b>{tk(p)}</b></div>)}</div></div>
+            <div class="b ink" style="--s:1"><div class="hero-b photo"><img class="ph bg" src={imgPrinted.src} alt="" /><div><span>Handmade jute bags</span><small>Delivery across Bangladesh</small><em>Shop now</em></div></div></div>
+            <div class="b ink" style="--s:2"><div class="cats"><span class="on">All</span><span>Totes</span><span>Handbags</span><span>Pouches</span></div></div>
+            <div class="b ink" style="--s:3"><div class="pgrid">{products.map(([n, p, img], i) => <div class="pc"><div class="pimg"><img class="ph" src={img.src} alt="" /><span class="fav" set:html={icon("heart")}></span>{i === 0 && <span class="new">New</span>}</div><span class="pn">{n}</span><b>{tk(p)}</b></div>)}</div></div>
           </div>
         </div>
         <ul class="pings" aria-hidden="true">
