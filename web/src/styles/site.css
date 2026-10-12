@@ -2,7 +2,8 @@
    Taken from the sign-painters' craft on Bangladeshi shop streets: a painted board with a pinstripe
    frame, condensed lettering with an offset "drop shade" in a second colour, and a small "address" line.
    One signboard per page carries the boldness; everything around it is flat, white and quiet.
-   Type: Big Shoulders Display (condensed, signage heritage) for display; Instrument Sans for reading. */
+   Type: Big Shoulders Display (condensed, signage heritage) for display and card titles; Figtree for reading
+   (open, friendly letterforms that stay clear at small sizes on phones). */
 
 :root {
   --wash: #ffffff;        /* whitewashed wall */
@@ -26,12 +27,12 @@
   --warn: #c0241a;
 
   --display: "Big Shoulders Display", "Arial Narrow", sans-serif;
-  --sans: "Instrument Sans", system-ui, sans-serif;
+  --sans: "Figtree", system-ui, sans-serif;
   --code: ui-monospace, "SF Mono", Menlo, monospace;
 
   --fs-sign: clamp(3.4rem, 2rem + 5.4vw, 6.6rem);
   --fs-h2: clamp(2.3rem, 1.6rem + 2.6vw, 3.6rem);
-  --fs-h3: 1.35rem;
+  --fs-h3: 1.55rem;
   --fs-lede: clamp(1.12rem, 1rem + 0.4vw, 1.3rem);
   --fs-body: 1.0625rem;
   --fs-small: 0.94rem;
@@ -65,7 +66,10 @@ a:hover { text-decoration-thickness: 2.5px; }
 h1, h2, h3 { font-family: var(--display); margin: 0 0 0.4em; font-weight: 800; letter-spacing: -0.005em; line-height: 0.95; text-wrap: balance; }
 h1 { font-size: var(--fs-sign); }
 h2 { font-size: var(--fs-h2); }
-h3 { font-size: var(--fs-h3); font-family: var(--sans); font-weight: 700; letter-spacing: -0.01em; line-height: 1.25; }
+/* Card titles are lettered like the signs, as in every component that titles a card */
+h3 { font-size: var(--fs-h3); font-weight: 800; letter-spacing: -0.005em; line-height: 1.05; }
+/* Controls take the page's type rather than the browser's */
+button, input, select, textarea { font-family: inherit; }
 p { margin: 0 0 1em; }
 .lede { font-size: var(--fs-lede); line-height: 1.5; color: var(--ink-2); max-width: 60ch; }
 .small { font-size: var(--fs-small); color: var(--ink-2); }
