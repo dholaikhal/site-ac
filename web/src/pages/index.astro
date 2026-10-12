@@ -6,6 +6,7 @@ import BetaButton from "../components/BetaButton.astro";
 import ProblemScene from "../components/ProblemScene.astro";
 import Photo from "../components/Photo.astro";
 import SafeBase from "../components/SafeBase.astro";
+import Faq from "../components/Faq.astro";
 import facts, { tk, plan } from "../data/facts";
 import "../styles/app-screen.css";
 import Device from "../components/Device.astro";
@@ -104,6 +105,17 @@ const ticker = ["bKash checkout", "Nagad", "Cards", "Courier booking", "Order SM
     <ul class="rates board" data-reveal style="--d:1">
       {rates.map(([item, note, val, logos]) => <li><span class="item">{item}<small>{note}</small>{logos && <span class="rl">{logos.map((id) => <Brand id={id as any} h={18} />)}</span>}</span><span class="lead" aria-hidden="true"></span><span class="val">{val}</span></li>)}
     </ul>
+  </div>
+</section>
+
+<section class="section has-photo tint">
+  <Photo id="night-market" class="bg-photo" sizes="100vw" widths={[800, 1200, 1600]} />
+  <div class="wrap faq-grid">
+    <div class="head" data-reveal>
+      <h2>Questions owners ask first</h2>
+      <p class="small">Anything else: <a href="contact.html">write to us</a>, or ask on WhatsApp.</p>
+    </div>
+    <div data-reveal style="--d:1"><Faq /></div>
   </div>
 </section>
 
@@ -306,6 +318,8 @@ const ticker = ["bKash checkout", "Nagad", "Cards", "Courier booking", "Order SM
 .rl { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin-top: 6px; }
 .board { background: var(--card); border-radius: 4px; padding: 10px 28px; box-shadow: inset 0 0 0 6px var(--card), inset 0 0 0 8px var(--green); }
 
+.faq-grid { display: grid; grid-template-columns: minmax(0, 0.7fr) minmax(0, 1.3fr); gap: clamp(24px, 4vw, 64px); align-items: start; }
+@media (max-width: 860px) { .faq-grid { grid-template-columns: 1fr; } }
 
 .closing { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr); gap: clamp(24px, 4vw, 56px); align-items: center; }
 @media (max-width: 860px) { .closing { grid-template-columns: 1fr; } }
