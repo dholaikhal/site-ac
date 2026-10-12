@@ -16,7 +16,7 @@ const apps = Object.values(APPS);
       <h2>Open a finished one.</h2>
       <p class="lede">Four example businesses, with the kind of app our agent builds. They work like the real thing: fill a bag, pick a time, check out. No money changes hands.</p>
     </div>
-    <ul class="sc-grid">
+    <ul class="sc-grid strip">
       {apps.map((a) => (
         <li>
           <a class="sc-card" href={`https://${a.slug}.amader.cloud`} target="_blank" rel="noopener" style={`--b:${a.brand};--bi:${a.ink};--bt:${a.tint}`}>
@@ -42,12 +42,10 @@ const apps = Object.values(APPS);
 
 <style>
 .sc-head { max-width: 720px; margin-bottom: clamp(24px, 4vw, 40px); }
-.sc-grid { list-style: none; margin: 0; padding: 0; display: grid; gap: 20px; align-items: stretch; grid-template-columns: repeat(4, minmax(0, 1fr)); }
-@media (max-width: 1080px) { .sc-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
-@media (max-width: 560px) { .sc-grid { grid-template-columns: 1fr; } }
+.sc-grid { list-style: none; margin-block: 0; --card-w: clamp(min(312px, 84vw), 30vw, 440px); }
 .sc-card { display: flex; flex-direction: column; height: 100%; background: #fff; color: #14213d; text-decoration: none; border-radius: 10px; overflow: hidden; border: 1.5px solid var(--line); box-shadow: 0 24px 50px -36px rgb(20 33 61 / .55); transition: translate .25s, box-shadow .25s; }
 .sc-card:hover { translate: 0 -4px; box-shadow: 0 30px 60px -34px rgb(20 33 61 / .6); }
-.sc-top { position: relative; display: block; height: 170px; background: var(--bt); overflow: hidden; }
+.sc-top { position: relative; display: block; height: 220px; background: var(--bt); overflow: hidden; }
 .sc-top :global(.sc-img) { width: 100%; height: 100%; object-fit: cover; }
 .sc-art { position: absolute; inset: 0; display: grid; align-content: center; gap: 6px; padding: 40px 18px 10px; background: linear-gradient(135deg, var(--bt), color-mix(in srgb, var(--b) 22%, var(--bt))); }
 .sc-art > span { display: inline-flex; align-items: center; gap: 8px; justify-self: start; padding: 4px 11px 4px 4px; background: #fff; border-radius: 999px; font-weight: 700; font-size: 0.82rem; box-shadow: 0 8px 18px -12px rgb(0 0 0 / .45); }

@@ -16,7 +16,7 @@ const initials = (n: string) => n.replace(/^Dr\.\s*/, "").split(/\s+/).map((w) =
       <h2>From a tea stall to three pharmacies.</h2>
       <p class="lede">Owners on what changed when the inbox stopped being the shop.</p>
     </div>
-    <ul class="story-grid">
+    <ul class="story-grid strip">
       {stories.map((s, i) => (
         <li class="story" data-reveal style={`--d:${i % 3};--t:${tone(s)}`}>
           <span class="scale">{s.scale}</span>
@@ -33,9 +33,7 @@ const initials = (n: string) => n.replace(/^Dr\.\s*/, "").split(/\s+/).map((w) =
 )}
 
 <style>
-.story-grid { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; }
-@media (max-width: 960px) { .story-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
-@media (max-width: 600px) { .story-grid { grid-template-columns: 1fr; } }
+.story-grid { list-style: none; margin-block: 0; --card-w: clamp(min(312px, 84vw), 30vw, 440px); }
 .story { position: relative; display: flex; flex-direction: column; gap: 14px; padding: 22px 22px 20px; background: var(--card); color: var(--ink); border-radius: 8px; border-top: 4px solid var(--t); box-shadow: 0 20px 40px -30px rgb(20 33 61 / .55); }
 .scale { align-self: flex-start; font-size: 0.72rem; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; color: var(--t); }
 :root[data-theme="dark"] .scale { color: color-mix(in srgb, var(--t) 45%, #fff); }
