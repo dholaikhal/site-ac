@@ -3,7 +3,7 @@
 // Copy rule: "our agent", never "AI".
 import { APPS, SCREENS, tk } from "./apps.js";
 import { celebrate, STYLE_NAMES } from "./celebrate.js";
-import { ideaLayout, shuffledIdeas } from "./idea-apps.js";
+import { ideaLayout, randomIdea } from "./idea-apps.js";
 import { APPS as EXAMPLES, LIVE as EXAMPLES_LIVE } from "../../examples/data";
 
 const box = document.querySelector("[data-qb]");
@@ -120,7 +120,6 @@ function init(box) {
   // A pause, and it spins again, until someone picks another kind of business.
   async function playIdea(token) {
     const ok = () => token === run;
-    const ideas = shuffledIdeas();
     const bar = text.closest(".qb-bar");
     for (let round = 0; ; round++) {
       live.classList.remove("on"); text.classList.remove("caret");
@@ -128,13 +127,13 @@ function init(box) {
       bar.classList.add("spinning");
       // 18 flicks, from fast to slower; a new design every few flicks
       for (let f = 0; f < 18; f++) {
-        text.textContent = ideas[(round * 7 + f * 3) % ideas.length];
+        text.textContent = randomIdea();
         text.classList.remove("flick"); void text.offsetWidth; text.classList.add("flick");
         if (f % 3 === 0) showLayout();
         await wait(70 + f * f * 0.9); if (!ok()) return false;
       }
       // land, both at once
-      text.textContent = ideas[(round * 11 + 5) % ideas.length];
+      text.textContent = randomIdea();
       text.classList.remove("flick"); void text.offsetWidth; text.classList.add("flick", "landed");
       showLayout();
       bar.classList.remove("spinning");

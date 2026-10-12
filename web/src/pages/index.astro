@@ -163,10 +163,10 @@ const ticker = ["bKash checkout", "Nagad", "Cards", "Courier booking", "Order SM
 .hw-track .spk:last-child { animation-delay: -.8s; }
 @keyframes twinkle-spk { 50% { opacity: .35; scale: .7; rotate: 25deg; } }
 /* The catch-all's phone: placeholder apps composed from a kit of parts, each fading in over the last */
-.qb :global(.gx) { position: absolute; inset: 0; z-index: 1; display: flex; flex-direction: column; gap: 9px; padding: 10px 12px; background: var(--bg); opacity: 0; transition: opacity .3s ease; overflow: hidden; }
+.qb :global(.gx) { --ink-g: color-mix(in srgb, var(--b) 55%, var(--s)); position: absolute; inset: 0; z-index: 1; display: flex; flex-direction: column; gap: var(--gg, 9px); padding: 10px 12px; background: var(--bg); opacity: 0; transition: opacity .3s ease; overflow: hidden; }
 .qb :global(.gx.in) { opacity: 1; }
 .qb :global(.gx i) { display: block; border-radius: 6px; background: var(--s); }
-.qb :global(.gx .g-t) { height: 8px; border-radius: 4px; background: color-mix(in srgb, var(--b) 55%, var(--s)); }
+.qb :global(.gx .g-t) { height: 8px; border-radius: 4px; background: var(--ink-g); }
 .qb :global(.gx .g-t.thin) { height: 6px; opacity: .6; }
 .qb :global(.gx .g-t.big) { height: 14px; background: var(--b); }
 .qb :global(.gx .g-t.inv) { background: rgb(255 255 255 / .92); }
@@ -177,7 +177,7 @@ const ticker = ["bKash checkout", "Nagad", "Cards", "Courier booking", "Order SM
 .qb :global(.g-ic) { width: 18px; height: 18px; border-radius: 50% !important; margin-left: auto; }
 .qb :global(.g-ic + .g-ic) { margin-left: 0; }
 .qb :global(.g-search) { flex: 1; height: 26px; border-radius: 999px !important; }
-.qb :global(.g-hero) { flex: none; border-radius: 14px; padding: 14px; display: flex; flex-direction: column; justify-content: flex-end; gap: 7px; }
+.qb :global(.g-hero) { flex: none; border-radius: var(--gr, 14px); padding: 14px; display: flex; flex-direction: column; justify-content: flex-end; gap: 7px; }
 .qb :global(.g-hero.photo) { height: 120px; background: linear-gradient(135deg, var(--b), var(--a)); }
 .qb :global(.g-hero.banner) { height: 72px; background: var(--b); flex-direction: row; align-items: center; justify-content: space-between; }
 .qb :global(.g-hero.split) { height: 96px; background: var(--s); flex-direction: row; align-items: center; justify-content: space-between; }
@@ -190,9 +190,9 @@ const ticker = ["bKash checkout", "Nagad", "Cards", "Courier booking", "Order SM
 .qb :global(.g-chips i.on), .qb :global(.g-days i.on), .qb :global(.g-slots i.on), .qb :global(.g-tabs i.on) { background: var(--b); }
 .qb :global(.g-grid) { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
 .qb :global(.g-card) { display: grid; gap: 5px; }
-.qb :global(.g-img) { height: 70px; border-radius: 10px !important; background: color-mix(in srgb, var(--a) 55%, var(--s)) !important; }
+.qb :global(.g-img) { height: 70px; border-radius: var(--gr, 10px) !important; background: color-mix(in srgb, var(--a) 55%, var(--s)) !important; }
 .qb :global(.g-list) { display: grid; gap: 8px; }
-.qb :global(.g-row) { display: flex; align-items: center; gap: 9px; padding: 8px; border-radius: 10px; background: #fff; }
+.qb :global(.g-row) { display: flex; align-items: center; gap: 9px; padding: 8px; border-radius: var(--gr, 10px); background: var(--card-g, #fff); }
 .qb :global(.g-row span) { flex: 1; display: grid; gap: 5px; }
 .qb :global(.g-av) { width: 30px; height: 30px; border-radius: 50% !important; background: var(--a) !important; }
 .qb :global(.g-tag) { width: 34px; height: 16px; border-radius: 999px !important; background: var(--b) !important; opacity: .8; }
@@ -202,7 +202,7 @@ const ticker = ["bKash checkout", "Nagad", "Cards", "Courier booking", "Order SM
 .qb :global(.g-slots) { display: grid; grid-template-columns: repeat(4, 1fr); gap: 5px; }
 .qb :global(.g-slots i) { height: 20px; border-radius: 999px; }
 .qb :global(.g-stats) { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; }
-.qb :global(.g-stats > div) { display: grid; gap: 6px; padding: 10px 8px; border-radius: 10px; background: #fff; }
+.qb :global(.g-stats > div) { display: grid; gap: 6px; padding: 10px 8px; border-radius: var(--gr, 10px); background: var(--card-g, #fff); }
 .qb :global(.g-map) { position: relative; height: 90px; border-radius: 12px; background: repeating-linear-gradient(35deg, var(--s) 0 14px, color-mix(in srgb, var(--s) 70%, #fff) 14px 18px); }
 .qb :global(.g-pin) { position: absolute; left: 48%; top: 30%; width: 18px; height: 18px; border-radius: 50% 50% 50% 0 !important; rotate: -45deg; background: var(--b) !important; }
 .qb :global(.g-form) { display: grid; gap: 7px; }
@@ -212,8 +212,60 @@ const ticker = ["bKash checkout", "Nagad", "Cards", "Courier booking", "Order SM
 .qb :global(.g-thumbs i) { height: 58px; border-radius: 10px; background: color-mix(in srgb, var(--a) 45%, var(--s)); }
 .qb :global(.g-tabs) { margin-top: auto; display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; padding: 8px 10px 0; border-top: 1px solid var(--s); flex: none; }
 .qb :global(.g-tabs i) { height: 18px; border-radius: 6px; }
-.qb :global(.g-cta) { margin-top: auto; flex: none; height: 40px; border-radius: 12px; background: var(--b); display: grid; place-items: center; }
+.qb :global(.g-cta) { margin-top: auto; flex: none; height: 40px; border-radius: var(--gr, 12px); background: var(--b); display: grid; place-items: center; }
 .qb :global(.g-cta .g-t) { margin: 0 auto; }
+/* Each placeholder app draws its own card style; dark ones get light cards */
+.qb :global(.gx.dark) { --card-g: color-mix(in srgb, var(--s) 70%, #000); --ink-g: color-mix(in srgb, var(--b) 60%, #fff); }
+.qb :global(.gx.c-outline .g-row), .qb :global(.gx.c-outline .g-stats > div), .qb :global(.gx.c-outline .g-card), .qb :global(.gx.c-outline .g-plans > div), .qb :global(.gx.c-outline .g-ticket) { box-shadow: inset 0 0 0 1.5px var(--s); background: transparent; }
+.qb :global(.gx.c-shadow .g-row), .qb :global(.gx.c-shadow .g-stats > div), .qb :global(.gx.c-shadow .g-card), .qb :global(.gx.c-shadow .g-plans > div), .qb :global(.gx.c-shadow .g-ticket) { box-shadow: 0 6px 14px -8px rgb(0 0 0 / .35); }
+.qb :global(.gx.c-shadow .g-card) { padding: 5px; border-radius: var(--gr, 10px); background: var(--card-g, #fff); }
+/* More of the kit */
+.qb :global(.gx .g-t.huge) { height: 16px; background: var(--b); }
+.qb :global(.g-profile) { display: flex; align-items: center; gap: 10px; flex: none; }
+.qb :global(.g-profile span) { flex: 1; display: grid; gap: 6px; }
+.qb :global(.g-av.big) { width: 40px; height: 40px; }
+.qb :global(.g-hero.radial) { height: 110px; background: radial-gradient(circle at 75% 20%, var(--a), var(--b) 70%); }
+.qb :global(.g-dots) { display: flex; gap: 4px; }
+.qb :global(.g-dots i) { width: 6px; height: 6px; border-radius: 50% !important; background: rgb(255 255 255 / .5) !important; }
+.qb :global(.g-dots i.on) { width: 16px; border-radius: 3px !important; background: #fff !important; }
+.qb :global(.g-hero.video) { height: 120px; background: linear-gradient(160deg, color-mix(in srgb, var(--b) 80%, #000), var(--a)); align-items: center; justify-content: center; }
+.qb :global(.g-play) { width: 38px; height: 38px; border-radius: 50% !important; background: rgb(255 255 255 / .9) !important; clip-path: none; position: relative; }
+.qb :global(.g-play::after) { content: ""; position: absolute; left: 15px; top: 11px; border: 8px solid transparent; border-left: 12px solid var(--b); border-right: 0; }
+.qb :global(.g-hero.type) { height: auto; padding: 6px 2px; background: transparent; gap: 8px; }
+.qb :global(.g-grid.three) { grid-template-columns: repeat(3, 1fr); }
+.qb :global(.g-img.sq) { height: 54px; }
+.qb :global(.g-menu), .qb :global(.g-receipt) { display: grid; gap: 9px; padding: 4px 2px; }
+.qb :global(.g-receipt) { padding: 10px; border-radius: var(--gr, 10px); background: var(--card-g, #fff); border: 1.5px dashed var(--s); }
+.qb :global(.g-mrow) { display: flex; align-items: center; gap: 6px; }
+.qb :global(.g-mrow .g-lead) { flex: 1; height: 0; border-bottom: 2px dotted var(--s); background: none; }
+.qb :global(.g-mrow.tot) { padding-top: 6px; border-top: 1.5px solid var(--s); }
+.qb :global(.g-ticket) { display: flex; align-items: center; gap: 10px; padding: 12px; border-radius: var(--gr, 10px); background: var(--card-g, #fff); border-left: 5px solid var(--b); }
+.qb :global(.g-ticket > div) { flex: 1; display: grid; gap: 7px; }
+.qb :global(.g-qr) { width: 44px; height: 44px; border-radius: 4px !important; background: repeating-conic-gradient(var(--b) 0 25%, transparent 0 50%) 0 0 / 11px 11px !important; }
+.qb :global(.g-chat) { display: grid; gap: 7px; }
+.qb :global(.g-bub) { height: 24px; border-radius: 12px; }
+.qb :global(.g-bub.l) { justify-self: start; border-bottom-left-radius: 3px; background: var(--s); }
+.qb :global(.g-bub.r) { justify-self: end; border-bottom-right-radius: 3px; background: var(--b); }
+.qb :global(.g-steps) { display: grid; grid-template-columns: repeat(4, 1fr); gap: 4px; }
+.qb :global(.g-steps i) { height: 6px; border-radius: 3px; }
+.qb :global(.g-steps i.on) { background: var(--b); }
+.qb :global(.g-plans) { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.qb :global(.g-plans > div) { display: grid; gap: 7px; padding: 10px; border-radius: var(--gr, 10px); background: var(--card-g, #fff); }
+.qb :global(.g-plans > div.on) { box-shadow: inset 0 0 0 2px var(--b); }
+.qb :global(.g-progress) { display: grid; gap: 7px; }
+.qb :global(.g-track) { height: 10px; border-radius: 5px; background: var(--s); overflow: hidden; }
+.qb :global(.g-track i) { height: 100%; border-radius: 5px; background: linear-gradient(90deg, var(--b), var(--a)); }
+.qb :global(.g-count) { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; }
+.qb :global(.g-count i) { height: 40px; border-radius: var(--gr, 8px); background: var(--b); opacity: .9; }
+.qb :global(.g-toggles) { display: grid; gap: 8px; }
+.qb :global(.g-tg) { display: flex; align-items: center; justify-content: space-between; }
+.qb :global(.g-sw) { width: 30px; height: 16px; border-radius: 999px !important; position: relative; }
+.qb :global(.g-sw::after) { content: ""; position: absolute; left: 2px; top: 2px; width: 12px; height: 12px; border-radius: 50%; background: #fff; }
+.qb :global(.g-sw.on) { background: var(--b) !important; }
+.qb :global(.g-sw.on::after) { left: 16px; }
+.qb :global(.g-cta.split) { display: flex; align-items: center; gap: 8px; padding: 0 8px; background: transparent; }
+.qb :global(.g-cta.split .g-qty) { width: 64px; height: 34px; border-radius: var(--gr, 8px); background: var(--s); }
+.qb :global(.g-cta.split span) { flex: 1; height: 38px; border-radius: var(--gr, 10px); background: var(--b); display: grid; place-items: center; }
 @media (prefers-reduced-motion: reduce) { .qb :global(.gx) { transition: none; } }
 .hero-copy .btn-row { margin-top: auto; padding-top: 6px; }
 .cta-line { display: flex; flex-wrap: wrap; column-gap: 0.55em; margin: -6px 0 0; font-size: 0.92rem; color: var(--ink-2); }
