@@ -1,15 +1,15 @@
 ---
-// Home: the safe base in one picture. The example apps, each in its own colours, stand on one shared base that
-// holds what has to be right for all of them. The full comparison is on How it works (#safe-base).
+// Home: the safe base in one picture, in plain words about safety and stability. The example apps, each in its own
+// colours, stand on one shared base. The detail (payments, logins, data, upkeep) is on How it works (#safe-base).
 import Photo from "./Photo.astro";
 import { APPS } from "../../examples/data";
 import { icon } from "../scripts/app-art.js";
 const apps = Object.values(APPS);
-const base: [string, string][] = [["card", "Checkout"], ["users", "Logins"], ["shield", "Data and backups"], ["undo", "Updates"], ["check", "Checks on every change"]];
+const base: [string, string][] = [["card", "Safe payments"], ["shield", "Private details"], ["check", "Checked changes"], ["undo", "Always up to date"], ["box", "Backed up every day"]];
 const points = [
-  ["Payment keys never reach the page", "Prices are set on our side and keys stay in the base, out of every app's code."],
-  ["Every change checked", "Before it goes live, by our agent and by fixed rules."],
-  ["One fix reaches every store", "We patch the base once and every app has it."],
+  ["Safe for your customers", "Their payments and details are protected the same way in every store."],
+  ["Steady as you grow", "Every change is checked before it goes live, and can be undone."],
+  ["Looked after for you", "We keep the base up to date, so your store keeps working without any work from you."],
 ];
 ---
 <section class="band band-blue has-photo safe" id="safe-base">
@@ -17,11 +17,11 @@ const points = [
   <div class="wrap safe-grid">
     <div data-reveal>
       <h2 class="slogan">One safe base.<br>Every store.</h2>
-      <p class="lede">Apps generated from scratch by general-purpose tools each bring their own security holes. Every store here stands on the same tested base.</p>
+      <p class="lede">A quickly made app can leave a business exposed. Every store on Amader Cloud stands on the same tested, looked-after base, so it stays safe and keeps working while you sell.</p>
       <ul class="safe-points">{points.map(([t, d]) => <li><strong>{t}</strong><span>{d}</span></li>)}</ul>
       <a class="band-link" href="how-it-works.html#safe-base">How the base works →</a>
     </div>
-    <figure class="stack" data-reveal style="--d:1" aria-label="Four example apps standing on one shared base: checkout, logins, data and backups, updates, and checks on every change">
+    <figure class="stack" data-reveal style="--d:1" aria-label="Four example apps standing on one shared base: safe payments, private details, checked changes, always up to date, backed up every day">
       <div class="stack-apps">
         {apps.map((a, i) => <span class="stack-app" style={`--b:${a.brand};--i:${i}`}><i>{a.name[0]}</i>{a.name}</span>)}
       </div>
