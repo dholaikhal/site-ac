@@ -1,25 +1,25 @@
 // Social proof for the home page: a wall of businesses that sell with Amader Cloud, and owners' stories.
 //
 // PLACEHOLDER CONTENT. Every business, person and quote below is invented, to agree the design on. None of it may
-// be published: `live` stays false, so the sections render only in the dev preview (marked "Placeholder") and are
+// be published: `live` stays false, so the sections render only in the dev preview and are
 // left out of the built site. To launch: replace these with real businesses that have agreed to be shown (logo
 // files in public/assets/customers/, quotes approved by the person quoted), then set `live` to true.
 export const live = false;
 
-export type Logo = { name: string; kind: string; mark: "serif" | "script" | "slab" | "round" | "condensed" | "mono"; icon: string };
+export type Logo = { name: string; kind: string; mark: "serif" | "script" | "slab" | "round" | "condensed" | "mono"; icon: string; color: string };
 export const logos: Logo[] = [
-  { name: "Nokshi Ghor", kind: "Hand-stitched kantha", mark: "serif", icon: "heart" },
-  { name: "Dough & Doi", kind: "Home bakery", mark: "script", icon: "star" },
-  { name: "Meghna Agro", kind: "Rice and dal packs", mark: "slab", icon: "box" },
-  { name: "Shapla Pharma", kind: "3 pharmacies", mark: "round", icon: "pill" },
-  { name: "Kantha Kotha", kind: "Saree page", mark: "serif", icon: "tag" },
-  { name: "Brightline Coaching", kind: "400 students", mark: "condensed", icon: "book" },
-  { name: "Cha Adda", kind: "Tea and snacks", mark: "round", icon: "chat" },
-  { name: "Rangdhanu Kids", kind: "Kids' clothing", mark: "script", icon: "sparkle" },
-  { name: "Padma Fresh Fish", kind: "Fish to order", mark: "slab", icon: "truck" },
-  { name: "Thread & Loom BD", kind: "Garment wholesale", mark: "mono", icon: "grid" },
-  { name: "Glowup Studio", kind: "Salon", mark: "serif", icon: "scissors" },
-  { name: "Cool Point Services", kind: "AC repairs", mark: "condensed", icon: "snow" },
+  { name: "Nokshi Ghor", kind: "Hand-stitched kantha", mark: "serif", icon: "heart", color: "#b0413e" },
+  { name: "Dough & Doi", kind: "Home bakery", mark: "script", icon: "star", color: "#c2611f" },
+  { name: "Meghna Agro", kind: "Rice and dal packs", mark: "slab", icon: "box", color: "#2f7d32" },
+  { name: "Shapla Pharma", kind: "3 pharmacies", mark: "round", icon: "pill", color: "#c2185b" },
+  { name: "Kantha Kotha", kind: "Saree page", mark: "serif", icon: "tag", color: "#8e3b8a" },
+  { name: "Brightline Coaching", kind: "400 students", mark: "condensed", icon: "book", color: "#1f5fbf" },
+  { name: "Cha Adda", kind: "Tea and snacks", mark: "round", icon: "chat", color: "#6d4c2f" },
+  { name: "Rangdhanu Kids", kind: "Kids' clothing", mark: "script", icon: "sparkle", color: "#e0457b" },
+  { name: "Padma Fresh Fish", kind: "Fish to order", mark: "slab", icon: "truck", color: "#00838f" },
+  { name: "Thread & Loom BD", kind: "Garment wholesale", mark: "mono", icon: "grid", color: "#37474f" },
+  { name: "Glowup Studio", kind: "Salon", mark: "serif", icon: "scissors", color: "#7b3fb5" },
+  { name: "Cool Point Services", kind: "AC repairs", mark: "condensed", icon: "snow", color: "#0277bd" },
 ];
 
 export type Story = { quote: string; name: string; role: string; business: string; area: string; scale: string; tone: string };

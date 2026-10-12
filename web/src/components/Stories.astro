@@ -1,9 +1,11 @@
 ---
 // Owners in their own words, from a tea stall to a three-branch pharmacy. Shown only while `live` is set in
-// data/proof.ts, or in the dev preview, where it's tagged as placeholder (see the note in data/proof.ts).
+// data/proof.ts, or in the dev preview (see the note in data/proof.ts).
 import Photo from "./Photo.astro";
-import { live, stories } from "../data/proof";
+import { live, stories, logos } from "../data/proof";
 const show = live || import.meta.env.DEV;
+// A story wears its business's brand colour from the logo wall, so a brand looks the same in both places
+const tone = (s: { business: string; tone: string }) => logos.find((l) => l.name === s.business)?.color ?? s.tone;
 const initials = (n: string) => n.replace(/^Dr\.\s*/, "").split(/\s+/).map((w) => w[0]).slice(0, 2).join("");
 ---
 {show && (
@@ -11,12 +13,12 @@ const initials = (n: string) => n.replace(/^Dr\.\s*/, "").split(/\s+/).map((w) =
   <Photo id="night-market" class="bg-photo" sizes="100vw" widths={[800, 1200, 1600]} />
   <div class="wrap">
     <div class="head">
-      <h2>From a tea stall to three pharmacies.{!live && <span class="ph">Placeholder</span>}</h2>
+      <h2>From a tea stall to three pharmacies.</h2>
       <p class="lede">Owners on what changed when the inbox stopped being the shop.</p>
     </div>
     <ul class="story-grid">
       {stories.map((s, i) => (
-        <li class="story" data-reveal style={`--d:${i % 3};--t:${s.tone}`}>
+        <li class="story" data-reveal style={`--d:${i % 3};--t:${tone(s)}`}>
           <span class="scale">{s.scale}</span>
           <blockquote>{s.quote}</blockquote>
           <span class="who">
@@ -31,7 +33,6 @@ const initials = (n: string) => n.replace(/^Dr\.\s*/, "").split(/\s+/).map((w) =
 )}
 
 <style>
-.ph { display: inline-block; vertical-align: middle; margin-left: 12px; padding: 3px 9px; border-radius: 3px; background: var(--yellow); color: #14213d; font-family: var(--sans); font-size: 0.8rem; font-weight: 800; letter-spacing: .04em; text-transform: uppercase; }
 .story-grid { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; }
 @media (max-width: 960px) { .story-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 @media (max-width: 600px) { .story-grid { grid-template-columns: 1fr; } }
