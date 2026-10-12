@@ -59,7 +59,7 @@ const ticker = ["bKash checkout", "Nagad", "Cards", "Courier booking", "Order SM
           <div class="phone-url"><span data-qb-url>…</span></div>
           <div class="screen" data-qb-screen></div>
         </Device>
-        <span class="qb-live" data-qb-live><i></i>Live at <span class="url" data-qb-url-2></span></span>
+        <a class="qb-live" data-qb-live target="_blank" rel="noopener"><i></i>Live at <span class="url" data-qb-url-2></span></a>
       </div>
     </figure>
   </div>
@@ -151,10 +151,9 @@ const ticker = ["bKash checkout", "Nagad", "Cards", "Courier booking", "Order SM
 .hero-copy { display: flex; flex-direction: column; gap: 18px; min-width: 0; }
 .hero-copy .signboard h1 { font-size: var(--h1); line-height: 1.02; }
 .hl { display: block; }
-/* A centred sign: the middle line is a track the kinds of business slide along, reaching the board's
-   pinstripe and fading into it; the chosen one is lit, its neighbours muted either side */
-.hero-copy .signboard { text-align: center; }
-.hw { position: relative; overflow: hidden; margin-inline: calc(-1 * clamp(24px, 4vw, 52px) + 12px); padding-block: 0.04em; -webkit-mask-image: linear-gradient(90deg, transparent, #000 20%, #000 80%, transparent); mask-image: linear-gradient(90deg, transparent, #000 20%, #000 80%, transparent); }
+/* The middle line is a track the kinds of business slide along, reaching the board's pinstripe: the chosen
+   one lit and in line with the other lines, the next ones muted to its right, the last one a sliver to its left */
+.hw { --hp: calc(clamp(24px, 4vw, 52px) - 12px); position: relative; overflow: hidden; margin-inline: calc(-1 * var(--hp)); padding-block: 0.04em; -webkit-mask-image: linear-gradient(90deg, transparent, #000 var(--hp), #000 78%, transparent); mask-image: linear-gradient(90deg, transparent, #000 var(--hp), #000 78%, transparent); }
 .hw-track { display: flex; gap: 0.45em; width: max-content; will-change: transform; }
 .hw-track.glide { transition: transform .62s cubic-bezier(.3,1.15,.4,1); }
 .hw-track button { flex: none; font: inherit; letter-spacing: inherit; line-height: inherit; padding: 0; border: 0; background: none; color: inherit; text-shadow: inherit; opacity: .32; cursor: pointer; transition: color .35s, opacity .35s; }
@@ -205,7 +204,7 @@ const ticker = ["bKash checkout", "Nagad", "Cards", "Courier booking", "Order SM
 .qb { --pz: .68; }
 .qb :global(.dev) { --z: var(--pz); }
 /* Live at: a badge on the phone's bottom bezel */
-.qb-live { position: absolute; left: 50%; bottom: 14px; z-index: 3; white-space: nowrap; box-shadow: 0 10px 24px -10px rgb(0 0 0 / .5); display: inline-flex; align-items: center; gap: 8px; font-weight: 800; font-size: 0.86rem; padding: 6px 14px; border-radius: 999px; background: var(--green); color: #fff; opacity: 0; translate: -50% 8px; transition: opacity .3s, translate .4s cubic-bezier(.2,.8,.2,1.4); }
+.qb-live { text-decoration: none; position: absolute; left: 50%; bottom: 14px; z-index: 3; white-space: nowrap; box-shadow: 0 10px 24px -10px rgb(0 0 0 / .5); display: inline-flex; align-items: center; gap: 8px; font-weight: 800; font-size: 0.86rem; padding: 6px 14px; border-radius: 999px; background: var(--green); color: #fff; opacity: 0; translate: -50% 8px; transition: opacity .3s, translate .4s cubic-bezier(.2,.8,.2,1.4); }
 .qb-live i { width: 8px; height: 8px; border-radius: 50%; background: var(--yellow); }
 .qb-live.on { opacity: 1; translate: -50% 0; }
 .qb-live .url { color: var(--yellow); }

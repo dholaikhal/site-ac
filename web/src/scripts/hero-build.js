@@ -3,6 +3,7 @@
 // Copy rule: "our agent", never "AI".
 import { APPS, SCREENS, tk } from "./apps.js";
 import { celebrate } from "./celebrate.js";
+import { APPS as EXAMPLES, LIVE as EXAMPLES_LIVE } from "../../examples/data";
 
 const box = document.querySelector("[data-qb]");
 if (box && !box.dataset.ready) { box.dataset.ready = "1"; init(box); }
@@ -40,7 +41,10 @@ function init(box) {
   const place = (glide) => {
     const el = chips[at];
     track.classList.toggle("glide", glide && !still);
-    track.style.transform = `translateX(${track.parentElement.clientWidth / 2 - (el.offsetLeft + el.offsetWidth / 2)}px)`;
+    // in line with the board's other lines: the track's line starts inside the board's padding, by --hp
+    const start = parseFloat(getComputedStyle(track.parentElement).paddingLeft) - parseFloat(getComputedStyle(track.parentElement).marginLeft);
+    const x = el.getBoundingClientRect().left - track.getBoundingClientRect().left; // its place along the track
+    track.style.transform = `translateX(${start - x}px)`;
     chips.forEach((c, n) => { c.classList.toggle("on", n === at); c.setAttribute("aria-pressed", String(n === at)); });
   };
   const settle = () => { if (at < N || at >= 2 * N) { at = (at % N) + N; place(false); } };
@@ -70,12 +74,14 @@ function init(box) {
   const skeleton = () => `<div class="skel"><div class="sk-bar"><i></i><i></i><i></i></div><div class="sk-hero"></div><div class="sk-row"><i></i><i></i><i></i></div><div class="sk-grid"><i></i><i></i><i></i><i></i></div><div class="sk-btn"></div></div>`;
   const shuffle = () => screen.querySelectorAll(".skel i, .sk-hero, .sk-btn").forEach((el) => { el.style.backgroundColor = SWATCH[Math.floor(Math.random() * SWATCH.length)]; });
   function paint(k) {
-    if (k === "idea") { screen.style.removeProperty("--brand"); screen.innerHTML = skeleton(); url.textContent = url2.textContent = "yourname.amader.cloud"; return; }
+    if (k === "idea") { screen.style.removeProperty("--brand"); screen.innerHTML = skeleton(); url.textContent = url2.textContent = "yourname.amader.cloud"; live.removeAttribute("href"); return; }
     const a = APPS[k];
     screen.style.setProperty("--brand", a.color);
     screen.innerHTML = SCREENS[k].home(state(k));
     screen.querySelectorAll(".b").forEach((el) => el.classList.add("ink"));
     url.textContent = url2.textContent = `${a.slug}.amader.cloud`;
+    // Live at links to the app itself where it really answers on its subdomain (the example apps)
+    if (EXAMPLES_LIVE && EXAMPLES[a.slug]) live.href = `https://${a.slug}.amader.cloud`; else live.removeAttribute("href");
   }
 
   if (still) {
