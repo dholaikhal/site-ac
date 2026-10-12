@@ -5,7 +5,7 @@ import Ticker from "../components/Ticker.astro";
 import BetaButton from "../components/BetaButton.astro";
 import ProblemScene from "../components/ProblemScene.astro";
 import Photo from "../components/Photo.astro";
-import InboxVsStore from "../components/InboxVsStore.astro";
+import SafeBase from "../components/SafeBase.astro";
 import Faq from "../components/Faq.astro";
 import facts, { tk, plan } from "../data/facts";
 import "../styles/app-screen.css";
@@ -93,16 +93,7 @@ const ticker = ["bKash checkout", "Nagad", "Cards", "Courier booking", "Order SM
   </div>
 </section>
 
-<section class="band band-blue has-photo">
-  <Photo id="cloth-shop" class="bg-photo" sizes="100vw" widths={[800, 1200, 1600]} />
-  <div class="wrap">
-    <div class="band-head" data-reveal>
-      <h2 class="slogan">Less typing.<br>More orders.</h2>
-      <p class="lede">Flip the switch: the same six jobs, done by your own store.</p>
-    </div>
-    <div data-reveal style="--d:1"><InboxVsStore /></div>
-  </div>
-</section>
+<SafeBase />
 
 <section class="band band-yellow has-photo fade-right">
   <Photo id="facades" class="bg-photo" sizes="100vw" widths={[800, 1200, 1600]} />
