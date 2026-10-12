@@ -418,3 +418,5 @@ body { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org
   overflow-x: auto; overscroll-behavior-x: contain; scroll-snap-type: x mandatory; scrollbar-width: thin; scrollbar-color: color-mix(in srgb, var(--ink) 30%, transparent) transparent; }
 .strip > * { scroll-snap-align: start; }
 @media (max-width: 640px) { .strip { --card-w: 84%; gap: 14px; } }
+.site-footer .wa-link { display: inline-flex; align-items: center; gap: 8px; }
+.site-footer .wa-link svg { width: 18px; height: 18px; fill: #25d366; flex: none; }
