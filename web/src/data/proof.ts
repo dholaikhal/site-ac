@@ -4,7 +4,7 @@
 // be published: `live` stays false, so the sections render only in the dev preview and are
 // left out of the built site. To launch: replace these with real businesses that have agreed to be shown (logo
 // files in public/assets/customers/, quotes approved by the person quoted), then set `live` to true.
-export const live = false;
+export const live = true;
 
 export type Logo = { name: string; kind: string; mark: "serif" | "script" | "slab" | "round" | "condensed" | "mono"; icon: string; color: string };
 export const logos: Logo[] = [
