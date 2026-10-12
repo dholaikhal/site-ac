@@ -1,4 +1,5 @@
 ---
+import BaseCompare from "../components/BaseCompare.astro";
 import Base from "../layouts/Base.astro";
 import Photo from "../components/Photo.astro";
 import { plan } from "../data/facts";
@@ -62,6 +63,17 @@ const run = [
       <li data-reveal style="--d:1"><span class="pi" set:html={icon("route")} /><strong>Ready connections</strong><span>bKash, Nagad, cards, couriers and SMS are plugged in, not written from scratch.</span></li>
       <li data-reveal style="--d:2"><span class="pi" set:html={icon("shield")} /><strong>Every change checked</strong><span>Shown to you before it goes live, and undone in one click.</span></li>
     </ul>
+  </div>
+</section>
+
+<section class="section has-photo tint" id="safe-base">
+  <Photo id="towers" class="bg-photo" sizes="100vw" widths={[800, 1200, 1600]} />
+  <div class="wrap">
+    <div class="head">
+      <h2>A safe base under every app.</h2>
+      <p class="lede">Apps generated from scratch by general-purpose tools start from nothing each time, and so do their security holes. Ours stand on the same tested base.</p>
+    </div>
+    <BaseCompare />
   </div>
 </section>
 

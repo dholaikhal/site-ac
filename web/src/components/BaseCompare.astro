@@ -1,0 +1,52 @@
+---
+// One-off generated app vs an app on Amader Cloud: why a shared, tested base matters. Row by row, so each
+// difference reads straight across; on phones each row stacks.
+const rows: [string, string, string][] = [
+  ["Payments", "Prices and payment keys often sit in the page, where a visitor can change them.", "Checkout runs on our tested payment parts. The price is set on our side, and your keys never reach the page."],
+  ["Logins and data", "Each app invents its own login and storage, with its own gaps.", "One login and one data store, the same under every app, backed up every day."],
+  ["Changes", "Every change rewrites code, and a small edit can quietly break checkout.", "Changes swap tested parts, pass the same checks, show you a preview, and undo in one click."],
+  ["Consistency", "Ask twice and you get two designs and two ways of storing an order.", "The same request gets the same parts, so every store works, and reports, the same way."],
+  ["Upkeep", "Security fixes are yours to notice and apply, app by app.", "We fix the base once and every app has the fix."],
+];
+---
+<div class="cmp" role="table" aria-label="A one-off generated app compared with an app on Amader Cloud">
+  <div class="cmp-head" role="row">
+    <span role="columnheader"></span>
+    <span role="columnheader" class="one">Generated from scratch</span>
+    <span role="columnheader" class="ours"><span class="mk" aria-hidden="true">a</span>Built on Amader Cloud</span>
+  </div>
+  {rows.map(([k, a, b]) => (
+    <div class="cmp-row" role="row" data-reveal>
+      <strong role="rowheader">{k}</strong>
+      <p role="cell" class="one"><span class="x" aria-hidden="true">✕</span><span class="t">{a}</span></p>
+      <p role="cell" class="ours"><span class="ok" aria-hidden="true">✓</span><span class="t">{b}</span></p>
+    </div>
+  ))}
+</div>
+
+<style>
+.cmp { display: grid; gap: 10px; }
+.cmp-head, .cmp-row { display: grid; grid-template-columns: 150px minmax(0, 1fr) minmax(0, 1fr); gap: 10px; align-items: stretch; }
+.cmp-head span { font-weight: 800; font-size: 0.85rem; text-transform: uppercase; letter-spacing: .06em; padding: 0 18px 4px; }
+.cmp-head .one { color: var(--ink-2); }
+.cmp-head .ours { display: inline-flex; align-items: center; gap: 8px; color: var(--green); }
+:root[data-theme="dark"] .cmp-head .ours { color: var(--ok); }
+.mk { display: grid; place-items: center; width: 22px; height: 20px; border-radius: 3px; background: #0b5d3b; color: #ffcc00; box-shadow: inset 0 0 0 1.5px #ffcc00; font: 900 0.8rem/1 var(--display); }
+.cmp-row strong { align-self: center; font-family: var(--display); font-weight: 800; font-size: 1.3rem; letter-spacing: -0.01em; }
+.cmp-row p { margin: 0; display: flex; gap: 10px; padding: 14px 18px; border-radius: 8px; font-size: 0.95rem; line-height: 1.45; }
+.cmp-row p.one { background: var(--card); color: var(--ink-2); border: 1.5px dashed var(--rule); }
+.cmp-row p.ours { background: var(--card); color: var(--ink); border: 1.5px solid var(--green); box-shadow: 0 16px 30px -26px rgb(11 93 59 / .6); }
+.x, .ok { flex: none; font-weight: 900; }
+.t { flex: 1 1 0; min-width: 0; }
+.x { color: var(--red); }
+.ok { color: var(--green); }
+:root[data-theme="dark"] .ok { color: var(--ok); }
+@media (max-width: 760px) {
+  .cmp-head { display: none; }
+  .cmp-row { grid-template-columns: 1fr; gap: 6px; padding-top: 10px; }
+  .cmp-row p.one::before { content: "Generated from scratch"; }
+  .cmp-row p.ours::before { content: "On Amader Cloud"; }
+  .cmp-row p { flex-wrap: wrap; }
+  .cmp-row p::before { flex-basis: 100%; font-size: 0.72rem; font-weight: 800; text-transform: uppercase; letter-spacing: .06em; color: var(--ink-2); }
+}
+</style>

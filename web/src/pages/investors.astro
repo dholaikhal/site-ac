@@ -10,6 +10,14 @@ const figures = [
   [m.codShare.text, "of e-commerce still paid in cash on delivery"],
   [a.lovableValuation.text, "valuation of Lovable, the category leader"],
 ];
+const safeBase: [string, string][] = [
+  ["Payment keys never in app code", "Checkout runs on our side, through a licensed aggregator. Apps use our payment parts; they never hold keys or set prices, which is what payment partners ask for."],
+  ["One fix reaches every app", "Security patches, library updates and certificate renewals happen once, in the base, not app by app."],
+  ["Every change checked", "Our agent and fixed rules review each change before it goes live: no fake bank or wallet pages, no exposed customer data, nothing that breaks checkout."],
+  ["Same request, same result", "The agent assembles tested parts instead of writing new code, so stores behave alike and support scales with them."],
+  ["One shape of data", "Orders, bookings and payments look the same across apps, so exports, reports and the owner's dashboard work for every kind of business."],
+  ["It compounds", "Every part we harden makes every later app safer. A tool that writes fresh code per request starts from zero each time."],
+];
 ---
 <Base title="Investors · Amader Cloud" description="Amader Cloud is raising a pre-seed round. Store agents for markets that pay by mobile money. Request the deck.">
 
@@ -75,6 +83,19 @@ const figures = [
     <ol class="milestones">
       {facts.investorMilestones.items.map((s) => <li><span class="when">{s.when}</span><span>{s.what}</span></li>)}
     </ol>
+  </div>
+</section>
+
+<section class="section has-photo tint" id="safe-base">
+  <Photo id="towers" class="bg-photo" sizes="100vw" widths={[800, 1200, 1600]} />
+  <div class="wrap">
+    <div class="head">
+      <h2>A safe base is the product.</h2>
+      <p class="lede">Anyone can now get an app written from a prompt. Most are fragile: prices set in the page, keys in the code, a login invented per app, and new bugs with every change. A shop owner can't audit that. Our agent builds on one tested base, so safety belongs to the platform, not to each app.</p>
+    </div>
+    <div class="cards">
+      {safeBase.map(([t, d]) => <div class="card"><h3>{t}</h3><p>{d}</p></div>)}
+    </div>
   </div>
 </section>
 
