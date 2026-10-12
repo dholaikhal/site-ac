@@ -289,6 +289,8 @@ body { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org
 .band-green { background: var(--green); }
 .band-yellow { background: var(--yellow); color: #14213d; }
 .band-navy { background: #14213d; }
+/* Plum: a sixth sign paint, for a band on a page where the other five are already used */
+.band-plum { background: #5b2d82; }
 .band.band-yellow .lede { color: rgb(20 33 61 / .85); }
 .band-yellow .slogan { color: var(--red); text-shadow: 0.045em 0.045em 0 #14213d; }
 .band-yellow .band-link { color: #14213d; text-decoration-color: var(--red); }
@@ -298,6 +300,7 @@ body { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org
 .band .lede { color: rgb(255 255 255 / .88); }
 .slogan { font-family: var(--display); font-weight: 900; text-transform: uppercase; font-size: clamp(3.4rem, 1.8rem + 6.4vw, 7.6rem); line-height: 0.86; letter-spacing: -0.005em; margin: 0; color: #fff; text-shadow: 0.045em 0.045em 0 #14213d; }
 .band-red .slogan { color: var(--yellow); }
+.band-plum h2 { color: var(--yellow); text-shadow: 0.045em 0.045em 0 var(--red); }
 .band-split { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr); gap: clamp(24px, 5vw, 72px); align-items: end; }
 @media (max-width: 860px) { .band-split { grid-template-columns: 1fr; } }
 .band-head { margin-bottom: clamp(28px, 4vw, 48px); }
