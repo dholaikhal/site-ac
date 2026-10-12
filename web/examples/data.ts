@@ -1,7 +1,7 @@
 // The example apps: the businesses from the demo, finished. Everything here is invented and every
 // page says so; the prompts are the ones the demo builds them from.
 // Set once every example answers on its subdomain: the main site links to them only then.
-export const LIVE = false;
+export const LIVE = true;
 
 export type Kind = "shop" | "kitchen" | "salon" | "clinic";
 export type Item = { id: string; name: string; price: number; photo?: string; icon?: string; desc: string; meta?: string; cat?: string; options?: string[] };
