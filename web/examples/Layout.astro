@@ -7,6 +7,7 @@ interface Props { app: App; title?: string; description?: string }
 const { app, title = `${app.name} · ${app.tagline}`, description = app.hero.sub } = Astro.props;
 const mark = `data:image/svg+xml,${encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><rect width="32" height="32" rx="8" fill="${app.brand}"/><text x="16" y="23" text-anchor="middle" font-family="Georgia,serif" font-size="20" font-weight="700" fill="#fff">${app.name[0]}</text></svg>`)}`;
 const cart = app.kind === "shop" || app.kind === "kitchen";
+const tryIt = { shop: "Browse, fill the bag and check out.", kitchen: "Pick dishes and a delivery time, then check out.", salon: "Choose a service and a time, then pay the deposit.", clinic: "Choose a doctor and a serial, then pay the booking fee." }[app.kind];
 const nav = { shop: [["#items", "Shop"], ["#story", "Our story"], ["#visit", "Contact"]], kitchen: [["#items", "Menu"], ["#story", "How it works"], ["#visit", "Contact"]], salon: [["#items", "Services"], ["#story", "Good to know"], ["#visit", "Find us"]], clinic: [["#items", "Doctors"], ["#story", "How serials work"], ["#visit", "Find us"]] }[app.kind];
 ---
 <!doctype html>
@@ -28,8 +29,8 @@ const nav = { shop: [["#items", "Shop"], ["#story", "Our story"], ["#visit", "Co
 <aside class="ex-banner" aria-label="About this example">
   <div class="ex-in">
     <a class="ex-back" href="https://amader.cloud/#examples"><span aria-hidden="true">←</span> Back to amader.cloud</a>
-    <p class="ex-msg"><span class="ex-mark" aria-hidden="true">a</span><span><b>Example app, made agentically with <a href="https://amader.cloud">amader.cloud</a></b><small>The business is invented and nothing here is for sale.</small></span></p>
-    <a class="ex-cta" href="https://amader.cloud/contact.html?topic=beta#form">Build one like it →</a>
+    <p class="ex-msg"><span class="ex-mark" aria-hidden="true">a</span><span><b>A sample of what our agent builds on <a href="https://amader.cloud">amader.cloud</a></b><small>{tryIt} The business is made up, so no money moves.</small></span></p>
+    <a class="ex-cta" href="https://amader.cloud/contact.html?topic=beta#form">Get one for your business →</a>
   </div>
 </aside>
 <header class="top">
@@ -52,7 +53,7 @@ const nav = { shop: [["#items", "Shop"], ["#story", "Our story"], ["#visit", "Co
     <div><h4>Pay with</h4><p class="paylogos"><img src="/assets/logos/bkash.svg" alt="bKash" height="20"><img src="/assets/logos/nagad.png" alt="Nagad" height="18"><img src="/assets/logos/visa.svg" alt="Visa" height="12"><img src="/assets/logos/mastercard.svg" alt="Mastercard" height="18"></p></div>
   </div>
   <div class="wrap made">
-    <a href="https://amader.cloud" class="made-by"><b>a</b>Example app, made agentically with amader.cloud</a>
+    <a href="https://amader.cloud" class="made-by"><b>a</b>Sample app · amader.cloud</a>
     <span>The request it answers: “{app.prompt}”</span>
   </div>
 </footer>
