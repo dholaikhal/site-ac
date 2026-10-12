@@ -2,7 +2,7 @@
   "_about": "Every number shown on the site comes from this file. Each entry names its source (a key in `sources`). Entries marked hypothesis are pilot assumptions from docs/product-brief.md, not measurements.",
   "company": {
     "mock": true,
-    "_note": "Mock company details so the site reads complete. Every value here is invented: replace with the real ones before publishing. The phone number is real and always a link. While mock is true, WhatsApp and social links render as text, not links, so nobody is sent to a stranger's number or page.",
+    "_note": "Mock company details so the site reads complete. Every value here is invented: replace with the real ones before publishing. The phone and WhatsApp numbers are real and always links. While mock is true, social links render as text, not links, so nobody is sent to a stranger's number or page.",
     "legalName": "Amader Cloud Limited",
     "founded": 2026,
     "address": [
@@ -13,7 +13,7 @@
     "hours": "Sunday to Thursday, 10 am to 7 pm",
     "supportHours": "Every day, 9 am to 11 pm",
     "phone": "+880 1304-731063",
-    "whatsapp": "+880 1812-345678",
+    "whatsapp": "+880 1304-731063",
     "email": {
       "hello": "hello@amader.cloud",
       "support": "support@amader.cloud",

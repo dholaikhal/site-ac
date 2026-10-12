@@ -146,7 +146,7 @@ p { margin: 0 0 1em; }
 .head p:last-child { margin-bottom: 0; }
 .ink-band { background: #14213d; color: #eef2fb; }
 .ink-band .lede, .ink-band .small { color: #b4bfd6; }
-.ink-band .btn:not(.btn-go) { color: #fff; border-color: #fff; }
+.ink-band .btn:not(.btn-go):not(.btn-wa) { color: #fff; border-color: #fff; }
 
 /* Fixed column counts that divide six evenly (3, 2, 1), so rows never end ragged */
 .cards { display: grid; gap: 18px; grid-template-columns: repeat(3, minmax(0, 1fr)); }
@@ -296,7 +296,7 @@ body { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org
 .band-yellow .band-link { color: #14213d; text-decoration-color: var(--red); }
 .band-green .slogan { color: var(--yellow); text-shadow: 0.045em 0.045em 0 var(--red); }
 .band .board { color: var(--ink); }
-.band-navy .btn:not(.btn-go) { color: #fff; border-color: #fff; }
+.band-navy .btn:not(.btn-go):not(.btn-wa) { color: #fff; border-color: #fff; }
 .band .lede { color: rgb(255 255 255 / .88); }
 .slogan { font-family: var(--display); font-weight: 900; text-transform: uppercase; font-size: clamp(3.4rem, 1.8rem + 6.4vw, 7.6rem); line-height: 0.86; letter-spacing: -0.005em; margin: 0; color: #fff; text-shadow: 0.045em 0.045em 0 #14213d; }
 .band-red .slogan { color: var(--yellow); }
@@ -391,9 +391,9 @@ body { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org
 .band .stat .l { color: rgb(255 255 255 / .88); }
 .band.band-yellow .stat .n { color: var(--red); }
 .band.band-yellow .stat .l { color: #14213d; }
-.band .btn:not(.btn-go):not(.btn-quiet) { color: #fff; border-color: rgb(255 255 255 / .9); background: rgb(0 0 0 / .2); }
-.band .btn:not(.btn-go):not(.btn-quiet):hover { background: rgb(0 0 0 / .32); }
-.band.band-yellow .btn:not(.btn-go):not(.btn-quiet) { color: #14213d; border-color: #14213d; background: rgb(255 255 255 / .6); }
+.band .btn:not(.btn-go):not(.btn-quiet):not(.btn-wa) { color: #fff; border-color: rgb(255 255 255 / .9); background: rgb(0 0 0 / .2); }
+.band .btn:not(.btn-go):not(.btn-quiet):not(.btn-wa):hover { background: rgb(0 0 0 / .32); }
+.band.band-yellow .btn:not(.btn-go):not(.btn-quiet):not(.btn-wa) { color: #14213d; border-color: #14213d; background: rgb(255 255 255 / .6); }
 .band .btn-quiet { color: inherit; }
 .band-red .btn-go { box-shadow: inset 0 0 0 3px var(--red), inset 0 0 0 4.5px #fff, 0 0 0 2px #fff; }
 .band .tag, .plan-top .tag { display: inline-block; background: #fff; color: var(--red); padding: 3px 9px; border-radius: 3px; }

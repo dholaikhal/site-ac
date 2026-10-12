@@ -4,6 +4,7 @@ import Photo from "../components/Photo.astro";
 import SignAvatar from "../components/SignAvatar.astro";
 import Social from "../components/Social.astro";
 import BetaButton from "../components/BetaButton.astro";
+import WhatsAppButton from "../components/WhatsAppButton.astro";
 import facts, { company as c } from "../data/facts";
 import officeMap from "../assets/maps/office.svg?raw"; // drawn by tools/static_map.py from OpenStreetMap data
 const m = facts.market;
@@ -64,6 +65,7 @@ const beliefs: [string, string][] = [
       <h2>Come by</h2>
       <address class="addr">{c.address.map((l) => <span>{l}</span>)}</address>
       <p class="small">{c.hours}. Visits by appointment: <a href="contact.html">write first</a>.</p>
+      <p class="wa-row"><WhatsAppButton /></p>
       <Social labels />
     </div>
   </div>

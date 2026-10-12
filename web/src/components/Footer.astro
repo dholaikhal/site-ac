@@ -1,7 +1,7 @@
 ---
 import Logo from "./Logo.astro";
 import Social from "./Social.astro";
-import { company as c } from "../data/facts";
+import { company as c, whatsapp } from "../data/facts";
 const tel = (n: string) => `tel:${n.replace(/[^+\d]/g, "")}`;
 const cols = [
   ["Company", [["how-it-works.html", "How it works"], ["pricing.html", "Pricing"], ["about.html", "About us"], ["investors.html", "Investors"], ["contact.html", "Contact"]]],
@@ -17,6 +17,7 @@ const cols = [
           <span>{c.address.join(", ")}</span>
           <a href={`mailto:${c.email.hello}`}>{c.email.hello}</a>
           <a href={tel(c.phone)}>{c.phone}</a>
+          <a class="wa-link" href={whatsapp()} target="_blank" rel="noopener">WhatsApp {c.whatsapp}</a>
         </address>
         <Social />
       </div>

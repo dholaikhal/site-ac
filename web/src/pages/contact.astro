@@ -4,6 +4,7 @@ import Photo from "../components/Photo.astro";
 import Social from "../components/Social.astro";
 import forms from "../data/forms.json";
 import { company as c } from "../data/facts";
+import WhatsAppButton from "../components/WhatsAppButton.astro";
 const tel = (n: string) => `tel:${n.replace(/[^+\d]/g, "")}`;
 const topics = [
   { value: "beta", label: "Join the beta", title: "Get your store into the beta", ico: "✦" },
@@ -81,6 +82,7 @@ const topics = [
         <h3>Get in touch</h3>
         <p class="big"><a href={`mailto:${c.email.hello}`}>{c.email.hello}</a></p>
         <p class="big"><a href={tel(c.phone)}>{c.phone}</a></p>
+        <p><WhatsAppButton /></p>
         <Social />
       </div>
     </aside>
