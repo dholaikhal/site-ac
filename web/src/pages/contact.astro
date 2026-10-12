@@ -14,7 +14,7 @@ const topics = [
 ---
 <Base title="Contact · Amader Cloud" description="Join the beta, make an agency enquiry, report an app, or contact the founders. Office in Banani, Dhaka.">
 
-<section class="page-hero has-photo fade-right" style="--hc: var(--green)">
+<section class="page-hero band band-red has-photo">
   <Photo id="sunset" class="bg-photo" sizes="100vw" widths={[800, 1200, 1600]} />
   <div class="wrap">
     <div class="signboard">
@@ -25,7 +25,8 @@ const topics = [
   </div>
 </section>
 
-<section class="section tight">
+<section class="section tight has-photo tint">
+  <Photo id="towers" class="bg-photo" sizes="100vw" widths={[800, 1200, 1600]} />
   <div class="wrap contact">
     <form class="form sheet" id="form" data-endpoint={forms.contact} data-fallback={forms.fallbackEmail} data-sent="Sent. We'll reply within one working day.">
       <div class="sheet-head"><h2 data-form-title>{topics[0].title}</h2><span class="tag">Free during the beta</span></div>

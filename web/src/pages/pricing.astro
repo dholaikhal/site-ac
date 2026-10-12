@@ -19,7 +19,7 @@ const rows: [string, (p: (typeof plans)[number]) => string][] = [
 ---
 <Base title="Pilot pricing · Amader Cloud" description="Pilot plans in taka with USD equivalents: free to build and preview, then Starter, Business and Agency plans when you go live.">
 
-<section class="page-hero has-photo fade-right" style="--hc: var(--red)">
+<section class="page-hero band band-navy has-photo">
   <Photo id="towers" class="bg-photo" sizes="100vw" widths={[800, 1200, 1600]} />
   <div class="wrap">
     <div class="signboard sign-red">
@@ -30,7 +30,8 @@ const rows: [string, (p: (typeof plans)[number]) => string][] = [
   </div>
 </section>
 
-<section class="section">
+<section class="section has-photo tint">
+  <Photo id="facades" class="bg-photo" sizes="100vw" widths={[800, 1200, 1600]} />
   <div class="wrap">
     <PlanCards />
   </div>
@@ -50,7 +51,8 @@ const rows: [string, (p: (typeof plans)[number]) => string][] = [
   </div>
 </section>
 
-<section class="section">
+<section class="section has-photo tint">
+  <Photo id="street" class="bg-photo" sizes="100vw" widths={[800, 1200, 1600]} />
   <div class="wrap faq">
     <div class="head"><h2>Questions</h2></div>
     <details><summary>What counts as a change?</summary><p>One request that changes your app, such as “add 10% off for bKash” or “add a size option to every product”. Undoing a change is free.</p></details>

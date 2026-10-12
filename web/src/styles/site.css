@@ -322,8 +322,6 @@ body { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org
 .fade-low > .bg-photo { -webkit-mask-image: linear-gradient(180deg, transparent 22%, #000 75%); mask-image: linear-gradient(180deg, transparent 22%, #000 75%); }
 @media (max-width: 760px) { .fade-right > .bg-photo, .fade-left > .bg-photo { -webkit-mask-image: linear-gradient(180deg, transparent 35%, #000 90%); mask-image: linear-gradient(180deg, transparent 35%, #000 90%); } }
 /* Inner-page heads: a tinted wall with the page's photo on the right, behind the signboard's neighbour */
-.page-hero.has-photo { background-color: color-mix(in srgb, var(--hc, var(--green)) 15%, var(--wash)); }
-.page-hero.has-photo > .bg-photo { opacity: .5; }
 /* Content inside paint bands keeps its own ink */
 .band .card, .band .table-wrap, .band details, .band .beliefs li, .band .team li { color: var(--ink); }
 .band.band-yellow h2, .band.band-yellow h3 { color: #14213d; }
@@ -340,3 +338,12 @@ body { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org
 .parts-points span:last-child { grid-column: 2; color: #c9d2e3; font-size: 0.95rem; }
 .pi { grid-row: span 2; display: grid; place-items: center; width: 42px; height: 42px; border-radius: 12px; background: var(--yellow); color: #14213d; }
 .pi .ic { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 1.9; stroke-linecap: round; stroke-linejoin: round; }
+/* Inner-page heads as full-bleed duotone bands */
+.page-hero.band { padding-block: clamp(36px, 5vw, 72px) clamp(44px, 6vw, 84px); }
+.page-hero.band .lede { color: rgb(255 255 255 / .9); }
+.page-hero.band .signboard { box-shadow: inset 0 0 0 8px var(--board), inset 0 0 0 10px var(--pin), 0 24px 50px -28px rgb(0 0 0 / .7); }
+/* Light tint: a pale wash with a Dhaka photo at low strength, for sections that carry dark text */
+.has-photo.tint { background-color: var(--wash-2); }
+.has-photo.tint > .bg-photo { opacity: .16; }
+:root[data-theme="dark"] .has-photo.tint > .bg-photo { mix-blend-mode: luminosity; opacity: .1; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .has-photo.tint > .bg-photo { mix-blend-mode: luminosity; opacity: .1; } }
