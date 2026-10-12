@@ -4,6 +4,7 @@
 import { APPS, SCREENS, tk } from "./apps.js";
 import { celebrate, STYLE_NAMES } from "./celebrate.js";
 import { ideaLayout, randomIdea } from "./idea-apps.js";
+import { skeleton } from "./skeleton.js";
 import { APPS as EXAMPLES, LIVE as EXAMPLES_LIVE } from "../../examples/data";
 
 const box = document.querySelector("[data-qb]");
@@ -80,7 +81,7 @@ function init(box) {
     const holder = document.createElement("div");
     holder.innerHTML = ideaLayout();
     const layer = holder.firstElementChild;
-    const old = [...screen.querySelectorAll(".gx")];
+    const old = [...screen.querySelectorAll(".gx, .sk")];
     screen.append(layer); void layer.offsetWidth; layer.classList.add("in");
     setTimeout(() => old.forEach((o) => o.remove()), 340);
   };
@@ -90,6 +91,8 @@ function init(box) {
     screen.style.setProperty("--brand", a.color);
     screen.innerHTML = SCREENS[k].home(state(k));
     screen.querySelectorAll(".b").forEach((el) => el.classList.add("ink"));
+    // under the sections as they fly in, the placeholder in the app's colours, faded out once they have landed
+    if (!still) screen.insertAdjacentHTML("afterbegin", skeleton({ level: 3, name: a.name }).replace('class="sk ', 'class="sk under '));
     url.textContent = url2.textContent = `${a.slug}.amader.cloud`;
     // Live at links to the app itself where it really answers on its subdomain (the example apps)
     if (EXAMPLES_LIVE && EXAMPLES[a.slug]) live.href = `https://${a.slug}.amader.cloud`; else live.removeAttribute("href");
@@ -151,20 +154,23 @@ function init(box) {
     }
   }
 
+  // While nothing is built yet the phone shows a placeholder app, never a blank screen
+  const blank = () => { screen.style.removeProperty("--brand"); screen.innerHTML = skeleton(); };
+
   async function play(i, token) {
     const [k, prompt, first, amt, noun] = SHOW[i];
     const ok = () => token === run;
     if (k === "idea") {
       pick(i);
       live.classList.remove("on"); notif.classList.remove("show");
-      screen.innerHTML = ""; url.textContent = "…"; text.textContent = ""; text.classList.add("caret");
+      blank(); url.textContent = "…"; text.textContent = ""; text.classList.add("caret");
       stage("type"); box.classList.remove("building");
       await wait(450); if (!ok()) return false;
       return playIdea(token);
     }
     pick(i);
     live.classList.remove("on"); notif.classList.remove("show");
-    screen.innerHTML = ""; url.textContent = "…"; text.textContent = ""; text.classList.add("caret");
+    blank(); url.textContent = "…"; text.textContent = ""; text.classList.add("caret");
     stage("type"); box.classList.remove("building");
     // Quick to build, then a moment to look: the request and the build take under two seconds, and the finished
     // app stays a little over two, so the four presets pass in about fifteen and the idea comes up.
@@ -175,6 +181,7 @@ function init(box) {
     stage("busy"); box.classList.add("building");
     paint(k);
     if (!(await fly(token))) return false;
+    screen.querySelector(".sk.under")?.classList.add("gone");
     await wait(250); if (!ok()) return false;
     box.classList.remove("building"); stage("done");
     live.classList.add("on"); launch(k);

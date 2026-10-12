@@ -13,6 +13,7 @@ import Faq from "../components/Faq.astro";
 import facts, { tk, plan } from "../data/facts";
 import "../styles/app-screen.css";
 import Device from "../components/Device.astro";
+import { skeleton } from "../scripts/skeleton.js";
 import Brand from "../components/Brand.astro";
 import Showcase from "../components/Showcase.astro";
 // Four kinds with example apps of their own, then the catch-all: whatever the idea is.
@@ -59,7 +60,7 @@ const ticker = ["bKash checkout", "Nagad", "Cards", "Courier booking", "Order SM
         <Device kind="phone">
           <div class="notif qb-notif" data-qb-notif></div>
           <div class="phone-url"><span data-qb-url>…</span></div>
-          <div class="screen" data-qb-screen></div>
+          <div class="screen" data-qb-screen set:html={skeleton()}></div>
         </Device>
         <a class="qb-live" data-qb-live target="_blank" rel="noopener"><i></i>Live at <span class="url" data-qb-url-2></span></a>
       </div>

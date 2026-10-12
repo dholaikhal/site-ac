@@ -1,4 +1,5 @@
 import { APPS, COMMON, PAY, amount, SCREENS, tk, esc, logo, ASK } from "./apps.js";
+import { skeleton } from "./skeleton.js";
 import { celebrate as burst } from "./celebrate.js";
 // Amader Cloud builder demo. Scripted entirely in the browser: no agent is called, nothing is published.
 // Copy rule: the product is "our agent" / "our store agent", never "AI" or a model.
@@ -228,23 +229,30 @@ function initDemo(root) {
     msgs.innerHTML = ""; setChips([]); hideNotif(); openSign.hidden = true; setWho(""); clearTill();
     st = { app: key, off: false, green: false, cod: false, remind: false, late: false, flash: null, built: false, published: false, tab: "home", undo: [], sales: 0, orders: 0 };
     project.textContent = app.name; addr.textContent = "";
-    screen.innerHTML = ""; tabs.innerHTML = ""; url.textContent = "…";
+    screen.style.removeProperty("--brand"); screen.innerHTML = skeleton(); tabs.innerHTML = ""; url.textContent = "…";
     busy(true);
     setStatus("Reading your request", true);
     if (!(await typeUser(text, token))) return;
     await wait(450); if (token !== run) return;
+    // The screen takes shape with the conversation: the name and colours once the request is read, more with each
+    // answer, the plan's parts once there is a plan; then the build paints the real pages over it.
+    const shape = (level, labels) => { screen.style.setProperty("--brand", app.color); screen.innerHTML = skeleton({ level, name: app.name, labels }); };
+    shape(1);
 
     // A short back and forth before building: the agent asks, the owner answers.
+    let answered = 0;
     for (const [q, a, bq, ba] of ASK[key]) {
       setStatus("Our agent has a question", true, true);
       if (!(await stream(`<p>${lang === "bn" ? bq : q}</p>`, AGENT("question"), token))) return;
       await wait(500); if (token !== run) return;
       if (!(await typeUser(lang === "bn" ? ba : a, token))) return;
+      shape(Math.min(3, ++answered + 1));
       await wait(350); if (token !== run) return;
     }
 
     setStatus("Our agent is planning", true, true);
     if (!(await stream(`<p>${t().plan(app)}</p><ul>${app.plan.map((p) => `<li>${p}</li>`).join("")}</ul>`, AGENT("plan"), token))) return;
+    shape(4, app.plan.map((p) => p.split(":")[0]));
     await wait(500); if (token !== run) return;
 
     setStatus("Our agent is building", true, true);
@@ -369,7 +377,7 @@ function initDemo(root) {
     run++;
     st = null;
     msgs.innerHTML = "";
-    screen.innerHTML = `<div class="empty"><span>Your app appears here.</span></div>`;
+    screen.style.removeProperty("--brand"); screen.innerHTML = skeleton({ caption: "Your app appears here." });
     tabs.innerHTML = ""; url.textContent = "yourname.amader.cloud";
     project.textContent = "New app"; addr.textContent = "";
     hideNotif(); openSign.hidden = true; setWho(""); clearTill();
@@ -394,7 +402,8 @@ function initDemo(root) {
       say("ai", `<p>${t().unknown}</p>`, "Amader Cloud");
       return;
     }
-    const key = Object.keys(APPS).find((k) => APPS[k].match.test(text)) || "shop";
+    // the kind of business named first wins: "my home kitchen, with delivery" is a kitchen, not a shop that delivers
+    const key = Object.keys(APPS).map((k) => [k, text.search(APPS[k].match)]).filter(([, at]) => at >= 0).sort((x, y) => x[1] - y[1])[0]?.[0] || "shop";
     build(key, text);
   }
   form.addEventListener("submit", (ev) => {
