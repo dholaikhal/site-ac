@@ -1,5 +1,5 @@
 import { APPS, COMMON, PAY, amount, SCREENS, tk, esc, logo, ASK } from "./apps.js";
-import confettiLib from "canvas-confetti";
+import { celebrate as burst } from "./celebrate.js";
 // Amader Cloud builder demo. Scripted entirely in the browser: no agent is called, nothing is published.
 // Copy rule: the product is "our agent" / "our store agent", never "AI" or a model.
 // Businesses, products, prices and orders below are fictional demonstration content, not facts.
@@ -165,11 +165,7 @@ function initDemo(root) {
   function celebrate() {
     openSign.hidden = false;
     openSign.classList.remove("swing"); void openSign.offsetWidth; openSign.classList.add("swing");
-    const r = devBox.getBoundingClientRect();
-    const origin = { x: (r.left + r.width / 2) / innerWidth, y: (r.top + r.height * 0.25) / innerHeight };
-    const opts = { origin, colors: ["#e2261b", "#ffcc00", "#0b5d3b", "#1739a8", "#ffffff"], disableForReducedMotion: true, zIndex: 40, ticks: 170 };
-    confettiLib({ ...opts, particleCount: 90, spread: 80, startVelocity: 40 });
-    setTimeout(() => confettiLib({ ...opts, particleCount: 50, spread: 120, startVelocity: 28, scalar: 0.75 }), 200);
+    burst(devBox);
   }
 
   function setChips(items) {

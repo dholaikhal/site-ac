@@ -253,3 +253,8 @@
 .screen .bw { font-weight: 800; }
 .screen .pm-logo { display: inline-flex; align-items: center; gap: 6px; min-height: 18px; }
 .screen .ps-head { display: flex; align-items: center; gap: 8px; }
+
+/* Going live: the phone springs once, with a warm glow behind it (src/scripts/celebrate.js) */
+.dev.live-pop { animation: live-pop .7s cubic-bezier(.2, 1.6, .4, 1); }
+@keyframes live-pop { 0% { transform: scale(1); filter: drop-shadow(0 0 0 rgb(255 204 0 / 0)); } 35% { transform: scale(1.035); filter: drop-shadow(0 0 28px rgb(255 204 0 / .55)); } 100% { transform: scale(1); filter: drop-shadow(0 0 0 rgb(255 204 0 / 0)); } }
+@media (prefers-reduced-motion: reduce) { .dev.live-pop { animation: none; } }

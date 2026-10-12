@@ -2,7 +2,7 @@
 // the phone, confetti when it goes live, then the next business. Scripted; uses the demo's apps.
 // Copy rule: "our agent", never "AI".
 import { APPS, SCREENS, tk } from "./apps.js";
-import confettiLib from "canvas-confetti";
+import { celebrate } from "./celebrate.js";
 
 const box = document.querySelector("[data-qb]");
 if (box && !box.dataset.ready) { box.dataset.ready = "1"; init(box); }
@@ -95,14 +95,6 @@ function init(box) {
     return true;
   }
 
-  // A burst from the phone when the app opens, in the sign paints.
-  function confetti() {
-    const r = box.querySelector(".dev").getBoundingClientRect();
-    const origin = { x: (r.left + r.width / 2) / innerWidth, y: (r.top + r.height * 0.3) / innerHeight };
-    const opts = { origin, colors: ["#e2261b", "#ffcc00", "#0b5d3b", "#1739a8", "#ffffff"], disableForReducedMotion: true, zIndex: 40, ticks: 160 };
-    confettiLib({ ...opts, particleCount: 70, spread: 75, startVelocity: 38, scalar: 0.9 });
-    setTimeout(() => confettiLib({ ...opts, particleCount: 40, spread: 110, startVelocity: 26, scalar: 0.7 }), 180);
-  }
 
   // One business: type the request, build the store, go live, first order. False if a chip cut it short.
   async function play(i, token) {
@@ -121,7 +113,7 @@ function init(box) {
     if (!(await fly(token))) return false;
     await wait(450); if (!ok()) return false;
     box.classList.remove("building"); status.hidden = true;
-    live.classList.add("on"); confetti();
+    live.classList.add("on"); celebrate(box.querySelector(".qb .dev"));
     await wait(900); if (!ok()) return false;
     notif.innerHTML = `<span class="ni">✓</span><span><b>New ${noun}</b>${first} · ${tk(amt)} · bKash</span>`;
     notif.classList.add("show");
