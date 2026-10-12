@@ -429,10 +429,3 @@ body { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org
 .edge-dome { mask: radial-gradient(56% var(--e) at 50% var(--e), #000 99%, #0000) 0 0 / 100% calc(var(--e) * 2) no-repeat, linear-gradient(#000 0 0) 0 var(--e) / 100% 100% no-repeat; }
 .edge-scallop { --e: clamp(14px, 1.6vw, 22px); mask: radial-gradient(var(--e) at 50% var(--e), #000 97%, #0000) 50% 0 / calc(var(--e) * 2) calc(var(--e) * 2) repeat-x, linear-gradient(#000 0 0) 0 var(--e) / 100% 100% no-repeat; }
 
-/* Cards pinned up by hand: each at its own small angle and height, straightened on hover */
-.strip.pinned { padding-block: 22px 40px; align-items: start; }
-.pinned > * { --r: -1.4deg; --y: 0px; rotate: var(--r); translate: 0 var(--y); transition: rotate .25s, translate .25s; }
-.pinned > :nth-child(3n + 2) { --r: 1.1deg; --y: 18px; }
-.pinned > :nth-child(3n) { --r: -0.5deg; --y: 6px; }
-.pinned > :hover, .pinned > :focus-within { rotate: 0deg; translate: 0 calc(var(--y) - 4px); }
-@media (prefers-reduced-motion: reduce) { .pinned > * { transition: none; } }
