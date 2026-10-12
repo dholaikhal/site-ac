@@ -4,6 +4,7 @@
 // nothing runs until the visitor picks or types a request.
 import "../styles/app-screen.css";
 import Logo from "./Logo.astro";
+import Device from "./Device.astro";
 ---
 <div class="demo" data-demo id="demo-app" role="region" aria-label="Builder demo (scripted)">
   <span class="demo-stamp" aria-hidden="true">Demo</span>
@@ -27,15 +28,21 @@ import Logo from "./Logo.astro";
     <div class="demo-stage">
       <div class="stage-status"><span class="pulse" aria-hidden="true"></span><span data-status>Waiting for your request</span></div>
 
+      <div class="dev-switch" role="group" aria-label="Preview on">
+        <button type="button" data-dev="phone" aria-pressed="true">Phone</button>
+        <button type="button" data-dev="tablet" aria-pressed="false">Tablet</button>
+        <button type="button" data-dev="laptop" aria-pressed="false">Laptop</button>
+      </div>
       <div class="preview-row">
         <div class="phone-col">
           <span class="who-pill" data-who hidden></span>
-          <div class="phone">
+          <div class="dev-wrap">
             <div class="open-sign" data-open hidden aria-hidden="true"><span class="cord"></span><span class="board">Open</span></div>
-            <div class="notif" data-notif role="status"></div>
-            <div class="phone-notch" aria-hidden="true"></div>
-            <div class="phone-url"><svg viewBox="0 0 12 12" aria-hidden="true"><rect x="2.5" y="5" width="7" height="5.5" rx="1" fill="currentColor"/><path d="M4 5V3.6a2 2 0 0 1 4 0V5" fill="none" stroke="currentColor" stroke-width="1.2"/></svg><span data-url>yourname.amader.cloud</span></div>
-            <div class="screen" data-screen aria-live="polite"></div>
+            <Device kind="phone" id="demo-device">
+              <div class="notif" data-notif role="status"></div>
+              <div class="phone-url"><svg viewBox="0 0 12 12" aria-hidden="true"><rect x="2.5" y="5" width="7" height="5.5" rx="1" fill="currentColor"/><path d="M4 5V3.6a2 2 0 0 1 4 0V5" fill="none" stroke="currentColor" stroke-width="1.2"/></svg><span data-url>yourname.amader.cloud</span></div>
+              <div class="screen" data-screen aria-live="polite"></div>
+            </Device>
           </div>
           <div class="screen-tabs" role="tablist" aria-label="Preview pages" data-tabs></div>
         </div>
@@ -106,10 +113,13 @@ import Logo from "./Logo.astro";
 .stage-status:has(.live) .pulse { background: var(--red); animation: pulse 1s ease-in-out infinite; }
 .stage-status.ai { background: var(--yellow); }
 @keyframes pulse { 50% { opacity: .3; } }
-.preview-row { display: flex; justify-content: center; gap: 14px; align-items: flex-start; }
+.preview-row { display: flex; justify-content: center; gap: 14px; align-items: center; flex-wrap: wrap; }
+.dev-switch { align-self: center; display: inline-flex; border: 2px solid #14213d; border-radius: 999px; overflow: hidden; background: #fff; }
+.dev-switch button { font: inherit; font-size: 0.78rem; font-weight: 800; padding: 4px 12px; border: 0; background: transparent; color: #14213d; cursor: pointer; }
+.dev-switch button[aria-pressed="true"] { background: #14213d; color: #fff; }
+.dev-wrap { position: relative; }
 .phone-col { display: flex; flex-direction: column; align-items: center; gap: 12px; }
 .who-pill { font-size: 0.78rem; font-weight: 800; color: #14213d; background: var(--yellow); border-radius: 3px; padding: 3px 10px; }
-@media (max-width: 900px) { .demo-stage .phone { aspect-ratio: auto; height: 540px; } }
 .screen-tabs { display: flex; flex-wrap: wrap; justify-content: center; gap: 6px; min-height: 32px; }
 .screen-tabs button { font: inherit; font-size: 0.8rem; font-weight: 700; color: #14213d; background: #fff; border: 2px solid #14213d; border-radius: 999px; padding: 4px 11px; cursor: pointer; }
 .screen-tabs button[aria-selected="true"] { color: #fff; background: #14213d; }
@@ -129,13 +139,13 @@ import Logo from "./Logo.astro";
 /* Brush, notifications, OPEN sign, flags, wallet sheet */
 .screen .b.paint::after { content: ""; position: absolute; inset: -2px; border-radius: 9px; pointer-events: none; background: linear-gradient(100deg, transparent 0 35%, rgb(255 204 0 / .55) 45% 55%, transparent 65%) -120% 0 / 220% 100% no-repeat; animation: brush .7s ease-out forwards; }
 @keyframes brush { to { background-position: 220% 0; opacity: .2; } }
-.notif { position: absolute; z-index: 5; left: 14px; right: 14px; top: 34px; display: flex; gap: 8px; align-items: center; padding: 9px 10px; background: rgb(255 255 255 / .96); color: #14213d; border-radius: 14px; font-size: 0.74rem; line-height: 1.3; box-shadow: 0 10px 24px -10px rgb(0 0 0 / .45); translate: 0 -24px; opacity: 0; pointer-events: none; }
+.notif { position: absolute; z-index: 5; left: 10px; right: 10px; top: 46px; display: flex; gap: 8px; align-items: center; padding: 9px 10px; background: rgb(255 255 255 / .96); color: #14213d; border-radius: 14px; font-size: 0.74rem; line-height: 1.3; box-shadow: 0 10px 24px -10px rgb(0 0 0 / .45); translate: 0 -24px; opacity: 0; pointer-events: none; }
 .notif b { display: block; }
 .notif.show { animation: notif 4.2s cubic-bezier(.2,.8,.2,1) forwards; }
 @keyframes notif { 0% { translate: 0 -24px; opacity: 0; } 10%, 82% { translate: 0 0; opacity: 1; } 100% { translate: 0 -24px; opacity: 0; } }
 .ni { flex: none; display: grid; place-items: center; width: 26px; height: 26px; border-radius: 7px; color: #fff; font-weight: 900; font-size: 0.7rem; background: var(--green); }
 .ni.sms { background: var(--red); font-size: 0.5rem; }
-.open-sign { position: absolute; z-index: 6; top: 52px; right: -26px; display: grid; justify-items: center; transform-origin: 50% 0; }
+.open-sign { position: absolute; z-index: 6; top: 70px; right: -22px; display: grid; justify-items: center; transform-origin: 50% 0; }
 .open-sign .cord { width: 56px; height: 20px; border: 2px solid #14213d; border-bottom: 0; border-radius: 30px 30px 0 0; }
 .open-sign .board { font-family: var(--display); font-weight: 900; font-size: 1.35rem; letter-spacing: .06em; text-transform: uppercase; color: var(--yellow); background: var(--red); padding: 2px 14px; border-radius: 3px; box-shadow: inset 0 0 0 3px var(--red), inset 0 0 0 4.5px var(--yellow); }
 .open-sign.swing { animation: swing 2.4s cubic-bezier(.3,.6,.3,1) both; }

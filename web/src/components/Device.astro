@@ -1,0 +1,16 @@
+---
+// A real device frame from devices.css (MIT, Yan Zhu), scaled to fit with CSS zoom.
+// --z scales the frame; --s is the scale the app inside is seen at, so a tablet or laptop shows the
+// store at its real wide layout, the way a screenshot would. The app's markup goes in the slot.
+import "devices.css/dist/devices.min.css";
+import "../styles/app-screen.css";
+interface Props { kind?: "phone" | "tablet" | "laptop"; class?: string; id?: string }
+const { kind = "phone", class: cls, id } = Astro.props;
+const model = { phone: "device-iphone-14-pro", tablet: "device-ipad-pro", laptop: "device-macbook-pro" }[kind];
+---
+<div class:list={["dev", cls]} data-kind={kind} id={id}>
+  <div class:list={["device", model, "device-spacegray"]} data-device>
+    <div class="device-frame"><div class="device-screen"><div class="app"><slot /></div></div></div>
+    <div class="device-stripe"></div><div class="device-header"></div><div class="device-sensors"></div><div class="device-btns"></div><div class="device-power"></div>
+  </div>
+</div>
