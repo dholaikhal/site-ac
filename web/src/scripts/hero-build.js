@@ -108,7 +108,7 @@ function init(box) {
       const dy = (from.top + from.height / 2 - (r.top + r.height / 2)) / scale;
       el.style.setProperty("--dx", `${dx}px`); el.style.setProperty("--dy", `${dy}px`);
       el.classList.remove("qb-wait"); el.classList.add("qb-fly", "paint");
-      await wait(330); if (token !== run) return false;
+      await wait(170); if (token !== run) return false;
     }
     return true;
   }
@@ -161,20 +161,22 @@ function init(box) {
     live.classList.remove("on"); notif.classList.remove("show");
     screen.innerHTML = ""; url.textContent = "…"; text.textContent = ""; text.classList.add("caret");
     status.hidden = true; box.classList.remove("building");
-    await wait(450); if (!ok()) return false;
-    for (let n = 1; n <= prompt.length; n += 2) { text.textContent = prompt.slice(0, n); await wait(26); if (!ok()) return false; }
+    // Quick to build, slow to leave: the request and the build take about two seconds, then the finished
+    // app stays a good three seconds so it can be taken in.
+    await wait(250); if (!ok()) return false;
+    for (let n = 1; n <= prompt.length; n += 3) { text.textContent = prompt.slice(0, n); await wait(18); if (!ok()) return false; }
     text.textContent = prompt; text.classList.remove("caret");
-    await wait(300); if (!ok()) return false;
+    await wait(200); if (!ok()) return false;
     status.hidden = false; box.classList.add("building");
     paint(k);
     if (!(await fly(token))) return false;
-    await wait(450); if (!ok()) return false;
+    await wait(250); if (!ok()) return false;
     box.classList.remove("building"); status.hidden = true;
     live.classList.add("on"); launch(k);
-    await wait(900); if (!ok()) return false;
+    await wait(700); if (!ok()) return false;
     notif.innerHTML = `<span class="ni">✓</span><span><b>New ${noun}</b>${first} · ${tk(amt)} · bKash</span>`;
     notif.classList.add("show");
-    await wait(3600);
+    await wait(2700);
     return ok();
   }
   async function loop() {
