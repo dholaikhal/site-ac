@@ -4,8 +4,7 @@ import Social from "./Social.astro";
 import { company as c, live } from "../data/facts";
 const tel = (n: string) => `tel:${n.replace(/[^+\d]/g, "")}`;
 const cols = [
-  ["Product", [["templates.html", "Templates"], ["how-it-works.html", "How it works"], ["pricing.html", "Pricing"], ["trust.html", "Trust and safety"]]],
-  ["Company", [["about.html", "About us"], ["investors.html", "Investors"], ["contact.html", "Contact"], ["contact.html?topic=beta", "Join the beta"]]],
+  ["Company", [["how-it-works.html", "How it works"], ["pricing.html", "Pricing"], ["about.html", "About us"], ["investors.html", "Investors"], ["contact.html", "Contact"]]],
   ["Legal", [["terms.html", "Terms of service"], ["privacy.html", "Privacy policy"], ["terms.html#acceptable-use", "Acceptable use"], ["sources.html", "Sources"]]],
 ] as const;
 ---
@@ -14,7 +13,11 @@ const cols = [
     <div class="top">
       <div class="about">
         <a class="brand" href="./"><Logo /><span>Amader Cloud</span></a>
-        <p>Apps for local business, built by AI and run by us, at <span class="url">yourname.amader.cloud</span>.</p>
+        <address>
+          <span>{c.address.join(", ")}</span>
+          <a href={`mailto:${c.email.hello}`}>{c.email.hello}</a>
+          <a href={live(tel(c.phone))}>{c.phone}</a>
+        </address>
         <Social />
       </div>
       {cols.map(([h, links]) => (
@@ -24,19 +27,6 @@ const cols = [
         </nav>
       ))}
     </div>
-
-    <div class="plate">
-      <address>
-        <strong>Office</strong>
-        <span>{c.address.join(", ")}</span>
-      </address>
-      <div>
-        <strong>Get in touch</strong>
-        <a href={`mailto:${c.email.hello}`}>{c.email.hello}</a>
-        <a href={live(tel(c.phone))}>{c.phone}</a>
-      </div>
-    </div>
-
     <p class="fine">
       <span>© <span data-year>2026</span> {c.legalName}</span>
       <span>Trade licence {c.registration.tradeLicence}</span>
