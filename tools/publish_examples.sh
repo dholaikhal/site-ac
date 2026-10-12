@@ -13,8 +13,10 @@ set -e
 OWNER="${OWNER:-dholaikhal}"
 cd "$(dirname "$0")/../web/dist-examples"
 for dir in */; do
+  case "$dir" in .publish-*) continue ;; esac
   app="${dir%/}"
-  tmp="$(mktemp -d)"
+  # Inside the project, not the system temp dir, so the project's git identity and SSH key apply.
+  tmp="$(mktemp -d "$PWD/.publish-$app.XXXX")"
   cp -R "$app/." "$tmp/"
   touch "$tmp/.nojekyll"
   git -C "$tmp" init -q -b main
