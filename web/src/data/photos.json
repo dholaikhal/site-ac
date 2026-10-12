@@ -1,5 +1,5 @@
 {
-  "_about": "Photographs used on the site, under the Unsplash License or the Pexels License (free; none are Unsplash+ or premium). Credits render on the Sources page and in each image's title attribute, never as captions. rainlane, office and bazar are copied from main.",
+  "_about": "Photographs used on the site, under the Unsplash License or the Pexels License (free; none are Unsplash+ or premium). Credits render on the Sources page and in each image's title attribute, never as captions. office is copied from main.",
   "photos": {
     "delivery-van": {
       "file": "delivery-van.jpg",
@@ -21,15 +21,6 @@
       "licence": "unsplash",
       "site": "Unsplash"
     },
-    "rainlane": {
-      "file": "rainlane.jpg",
-      "alt": "A rain-wet lane in Mirpur, Dhaka, in the evening, with a CNG auto-rickshaw at the kerb.",
-      "photographer": "Najmul Huda",
-      "source": "https://unsplash.com/photos/v5FymWLSKAg",
-      "licence": "unsplash",
-      "site": "Unsplash",
-      "usedOn": "Home"
-    },
     "office": {
       "file": "office.jpg",
       "alt": "An office building in Gulshan, Dhaka, at night, with its floors lit.",
@@ -37,15 +28,6 @@
       "source": "https://unsplash.com/photos/EyBgE1pPS6s",
       "licence": "unsplash",
       "site": "Unsplash",
-      "usedOn": "Home"
-    },
-    "bazar": {
-      "file": "bazar.jpg",
-      "alt": "A Dhaka market street under tangled cables, with umbrella stalls and a mosque minaret at the end.",
-      "photographer": "Ferdous Hasan",
-      "source": "https://www.pexels.com/photo/bustling-dhaka-street-market-with-mosque-in-view-36525029/",
-      "licence": "pexels",
-      "site": "Pexels",
       "usedOn": "Home"
     },
     "bag-pouch": {
@@ -134,6 +116,26 @@
       "photographer": "rupixen",
       "profile": "https://unsplash.com/@rupixen",
       "source": "https://unsplash.com/photos/person-using-laptop-computer-holding-card-Q59HmzK38eQ",
+      "licence": "unsplash",
+      "site": "Unsplash",
+      "usedOn": "Home"
+    },
+    "tea-stall": {
+      "file": "tea-stall.jpg",
+      "alt": "A small tea stall with a blue awning in Lakshmipur, Bangladesh.",
+      "photographer": "Abdullah AL IMRAN",
+      "profile": "https://unsplash.com/@aalimran07",
+      "source": "https://unsplash.com/photos/a-small-shop-with-a-blue-awning-and-a-blue-awning-TDHW5kAmoj0",
+      "licence": "unsplash",
+      "site": "Unsplash",
+      "usedOn": "Home"
+    },
+    "cloth-shop": {
+      "file": "cloth-shop.jpg",
+      "alt": "Shoppers looking at shirts on a rack in a clothing store in Dhaka.",
+      "photographer": "Bayzid Ahmmed",
+      "profile": "https://unsplash.com/@bayzida41",
+      "source": "https://unsplash.com/photos/a-man-looking-at-a-shirt-on-a-rack-in-a-store-Gklygrxsisc",
       "licence": "unsplash",
       "site": "Unsplash",
       "usedOn": "Home"
