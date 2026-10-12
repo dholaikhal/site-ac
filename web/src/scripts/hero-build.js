@@ -33,7 +33,8 @@ function init(box) {
   const chips = [...box.querySelectorAll("[data-qb-pick]")];
   let jump = null;
   chips.forEach((c) => c.addEventListener("click", () => { jump = +c.dataset.qbPick; run++; }));
-  // Turn the circular reel: each choice moves to its distance from the picked one, wrapping round the list.
+  // Turn the circular reel in the board's window: each choice moves to its distance from the picked one,
+  // wrapping round the list; the ones either side peek in, the rest are out of sight and out of the tab order.
   const pick = (i) => {
     const N = chips.length;
     chips.forEach((c, n) => {
@@ -41,8 +42,9 @@ function init(box) {
       if (o > N / 2) o -= N;
       const li = c.parentElement;
       li.style.setProperty("--o", String(o));
-      li.dataset.d = Math.abs(o) > 2 ? "far" : String(Math.abs(o));
+      li.dataset.d = Math.abs(o) > 1 ? "far" : String(Math.abs(o));
       c.setAttribute("aria-pressed", String(o === 0));
+      c.tabIndex = Math.abs(o) > 1 ? -1 : 0;
     });
   };
   const state = (k) => ({ app: k, off: false, green: false, cod: false, remind: false, late: false, cutoff: false, near: false, flash: null, built: true, published: true, tab: "home", undo: [] });

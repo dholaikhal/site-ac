@@ -26,39 +26,38 @@ const ticker = ["bKash checkout", "Nagad", "Cards", "Courier booking", "Order SM
 ---
 <Base title="Amader Cloud: describe your business, our agent builds its app" description="Tell Amader Cloud what you sell in one sentence. It builds a working online store, booking page or fee collection, with bKash, Nagad and card payments already set up.">
 
-<section class="hero">
+<section class="hero" data-qb>
   <div class="wrap hero-grid">
     <div class="hero-copy">
       <div class="signboard lit">
-        <h1>Describe your business. Our agent builds&nbsp;it.</h1>
-        <span class="address">Open at <span class="url">yourname.amader.cloud</span></span>
+        <!-- The kind of business turns in a window on the board; the ones before and after peek in. Click one to build it. -->
+        <h1><span class="hl">An app for your</span>
+          <span class="slot"><ol class="qb-reel" data-qb-reel aria-label="Kind of business">
+            {[["Facebook store"], ["home kitchen"], ["salon"], ["clinic"], ["pharmacy"], ["event"], ["AC service"], ["coaching centre"]].map(([word], i) =>
+              <li style={`--o:${((i + 4) % 8) - 4}`} data-d={Math.abs(((i + 4) % 8) - 4) > 1 ? "far" : String(Math.abs(((i + 4) % 8) - 4))}><button type="button" data-qb-pick={i} aria-pressed={i === 0 ? "true" : "false"} tabindex={Math.abs(((i + 4) % 8) - 4) > 1 ? -1 : 0}>{word}</button></li>)}
+          </ol></span>
+          <span class="hl">from one sentence.</span></h1>
+        <span class="address">Payments by <Brand id="bkash" h={18} />, Nagad and card, built in</span>
       </div>
-      <p class="lede">Say what you need in one sentence. Our agent builds the app, with bKash, Nagad and card payments already set up.</p>
-      <div class="btn-row"><BetaButton /><a class="btn btn-quiet" href="#demo">Try the builder</a></div>
-      <p class="cta-note"><span>Free while you build</span><span>Pay by <Brand id="bkash" h={16} /> when you go live</span><span>Cancel any time</span></p>
+      <div class="btn-row"><BetaButton sticker="" /><a class="btn btn-quiet" href="#demo">Try the builder</a></div>
+      <p class="cta-line"><span>Free while you build</span> · <span>Pay when you go live</span> · <span>Cancel any time</span></p>
     </div>
 
-    <figure class="qb" data-qb aria-label="Our agent building an app from one sentence, for different kinds of business (animation)">
-      <div class="qb-q">
-        <span class="qb-lead">Do you want an app for your</span>
-        <div class="qb-drum">
-          <ol class="qb-reel" data-qb-reel aria-label="Kind of business">
-            {[["Facebook store", "Facebook store"], ["Home kitchen", "home kitchen"], ["Salon", "salon"], ["Clinic", "clinic"], ["Pharmacy", "pharmacy"], ["Event tickets", "event"], ["AC servicing", "AC servicing team"], ["Coaching centre", "coaching centre"]].map(([label, word], i) =>
-              <li style={`--o:${((i + 4) % 8) - 4}`} data-d={Math.abs(((i + 4) % 8) - 4) > 2 ? "far" : String(Math.abs(((i + 4) % 8) - 4))}><button type="button" data-qb-pick={i} data-word={word} aria-pressed={i === 0 ? "true" : "false"}>{word}<span class="qm">?</span></button></li>)}
-          </ol>
+    <figure class="qb" aria-label="Our agent building an app from one sentence, for different kinds of business (animation)">
+      <div class="qb-stage">
+        <div class="qb-bubble">
+          <span class="qb-cap">You type</span>
+          <p data-qb-text></p>
+          <span class="qb-status" data-qb-status hidden><span class="spark" aria-hidden="true">✦</span> Our agent is building</span>
         </div>
-      </div>
-      <div class="qb-side">
-        <div class="qb-prompt"><span class="qb-cap">You type</span><p data-qb-text></p></div>
-        <div class="qb-status" data-qb-status hidden><span class="spark" aria-hidden="true">✦</span> Our agent is building</div>
-      </div>
-      <div class="qb-phone">
-        <Device kind="phone">
-          <div class="notif qb-notif" data-qb-notif></div>
-          <div class="phone-url"><span data-qb-url>…</span></div>
-          <div class="screen" data-qb-screen></div>
-        </Device>
-        <span class="qb-live" data-qb-live><i></i>Live at <span class="url" data-qb-url-2></span></span>
+        <div class="qb-phone">
+          <Device kind="phone">
+            <div class="notif qb-notif" data-qb-notif></div>
+            <div class="phone-url"><span data-qb-url>…</span></div>
+            <div class="screen" data-qb-screen></div>
+          </Device>
+          <span class="qb-live" data-qb-live><i></i>Live at <span class="url" data-qb-url-2></span></span>
+        </div>
       </div>
     </figure>
   </div>
@@ -144,49 +143,44 @@ const ticker = ["bKash checkout", "Nagad", "Cards", "Courier booking", "Order SM
 
 <style>
 .hero { position: relative; padding-block: clamp(28px, 4vw, 56px) clamp(48px, 7vw, 96px); overflow: hidden; }
-.hero > .wrap { max-width: 1440px; }
-.hero-grid { position: relative; display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr); gap: clamp(28px, 4vw, 64px); align-items: center; }
-@media (max-width: 1140px) { .hero-grid { grid-template-columns: 1fr; } }
-.hero-copy .signboard h1 { font-size: clamp(3.2rem, 1.8rem + 4.6vw, 6rem); }
-.hero-copy .lede { margin-top: 26px; max-width: 46ch; }
+.hero-grid { position: relative; display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr); gap: clamp(28px, 4vw, 64px); align-items: start; }
+@media (max-width: 1140px) { .hero-grid { grid-template-columns: 1fr; } .qb { justify-items: center; } .qb-bubble { margin-top: 70px; } }
+.hero { --h1: clamp(2.3rem, 1.4rem + 3.6vw, 4.4rem); --pad: clamp(26px, 3.4vw, 44px); }
+.hero-copy .signboard h1 { font-size: var(--h1); line-height: 1; }
+.hl { display: block; }
+.hero-copy .btn-row { margin-top: 30px; }
+.cta-line { margin: 14px 0 0; font-size: 0.92rem; color: var(--ink-2); }
+.cta-line span { white-space: nowrap; }
 /* The board's tube light comes on once, at dusk */
 .lit { animation: tube 1.6s steps(1, end) .3s both; }
 @keyframes tube { 0% { filter: brightness(.55); } 12% { filter: brightness(1.05); } 18% { filter: brightness(.6); } 26%, 100% { filter: none; } }
 
-/* Quick build: the request types, sections fly into the phone, confetti when it's live */
-.qb { position: relative; margin: 0; display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 14px 20px; align-items: center; }
-/* "Do you want an app for your …?": the kinds of business on a vertical reel; the active one sits in line,
-   the ones before and after fade above and below. Click any to jump to it. */
-.qb-q { grid-column: 1 / -1; display: flex; flex-wrap: nowrap; width: max-content; max-width: none; align-items: center; gap: 0 0.28em; font-family: var(--display); font-weight: 800; font-size: clamp(1.5rem, 1.1rem + 1vw, 2rem); line-height: 1.1; }
-.qb-lead { flex: none; white-space: nowrap; }
-.qb-drum { --row: 1.2em; position: relative; flex: none; width: 7.6em; height: calc(var(--row) * 5); overflow-x: visible; overflow-y: clip; -webkit-mask-image: linear-gradient(180deg, transparent 0, #000 30%, #000 70%, transparent 100%); mask-image: linear-gradient(180deg, transparent 0, #000 30%, #000 70%, transparent 100%); }
-/* A circular reel: each choice sits at its distance from the active one (wrapping round the list) */
-.qb-reel { list-style: none; margin: 0; padding: 0; position: relative; height: 100%; }
-.qb-reel li { position: absolute; left: 0; top: calc(50% - var(--row) / 2); height: var(--row); display: flex; align-items: center; white-space: nowrap; translate: 0 calc(var(--o) * var(--row)); transition: translate .55s cubic-bezier(.3,1.25,.5,1), opacity .35s; }
+/* The window on the board: a recessed slot where the kinds of business turn like a drum */
+.slot { --row: 1.08em; position: relative; display: block; height: calc(var(--row) * 2.2); margin: 0.12em -0.2em; border-radius: 6px; background: rgb(0 0 0 / .32); box-shadow: inset 0 0 0 2px var(--pin), inset 0 4px 10px rgb(0 0 0 / .45); overflow: clip; }
+/* Soft edges top and bottom so the neighbours fade into the frame */
+.slot::before, .slot::after { content: ""; position: absolute; left: 2px; right: 2px; height: 22%; z-index: 1; pointer-events: none; }
+.slot::before { top: 2px; background: linear-gradient(rgb(6 40 26 / .85), transparent); border-radius: 4px 4px 0 0; }
+.slot::after { bottom: 2px; background: linear-gradient(transparent, rgb(6 40 26 / .85)); border-radius: 0 0 4px 4px; }
+.qb-reel { list-style: none; margin: 0; padding: 0; position: absolute; inset: 0; }
+.qb-reel li { position: absolute; left: 0.22em; top: calc(50% - var(--row) / 2); height: var(--row); display: flex; align-items: center; white-space: nowrap; translate: 0 calc(var(--o) * var(--row) * 0.8); transition: translate .6s cubic-bezier(.3,1.2,.5,1), opacity .35s; }
 .qb-reel li[data-d="far"] { opacity: 0; pointer-events: none; }
-.qb-reel button { font: inherit; padding: 0; border: 0; background: none; cursor: pointer; color: var(--ink-2); transition: color .3s, opacity .3s, scale .3s; transform-origin: left center; }
-.qb-reel li[data-d="1"] button { opacity: .55; scale: .84; }
-.qb-reel li[data-d="2"] button { opacity: .28; scale: .72; }
-.qb-reel li[data-d="0"] button { color: var(--red); opacity: 1; scale: 1; }
-.qb-reel .qm { color: var(--ink); visibility: hidden; }
-.qb-reel li[data-d="0"] .qm { visibility: visible; }
-.qb-reel button:hover { opacity: 1; }
-@media (max-width: 560px) { .qb-q { flex-direction: column; align-items: flex-start; gap: 0; } .qb-drum { width: 100%; margin-top: 0.2em; } }
-.qb-reel button { font: inherit; padding: 0; border: 0; background: none; cursor: pointer; color: var(--ink-2); opacity: .55; transition: color .3s, opacity .3s, scale .3s; transform-origin: left center; scale: .82; }
-.qb-reel button[aria-pressed="true"] { color: var(--red); opacity: 1; scale: 1; }
-.qb-reel .qm { color: var(--ink); visibility: hidden; }
-.qb-reel button[aria-pressed="true"] .qm { visibility: visible; }
-.qb-reel button:hover { opacity: 1; }
-.qb-side { display: grid; gap: 12px; align-self: start; margin-top: 40px; }
-.qb-prompt { position: relative; z-index: 1; background: var(--card); border: 1.5px solid var(--line); border-radius: 18px 18px 4px 18px; padding: 14px 18px 16px; box-shadow: 0 16px 30px -22px rgb(20 33 61 / .5); }
-.qb-prompt p { font-size: 1.12rem; font-weight: 600; line-height: 1.35; margin: 4px 0 0; min-height: 3.1em; }
-.qb-cap { display: block; font-size: 0.85rem; font-weight: 600; color: var(--ink-2); }
-.qb-prompt .caret::after { content: "▍"; color: var(--red); animation: blink 1s steps(1) infinite; }
+.qb-reel button { font: inherit; letter-spacing: inherit; padding: 0; border: 0; background: none; cursor: pointer; color: inherit; text-shadow: inherit; opacity: .6; scale: .48; transform-origin: left center; transition: color .3s, opacity .3s, scale .45s; }
+.qb-reel li[data-d="0"] button { color: #fff; opacity: 1; scale: 1; }
+.qb-reel button:hover, .qb-reel button:focus-visible { opacity: 1; }
+
+/* Quick build: the request is a chat bubble beside the phone; its sections fly from it into the phone */
+.qb { position: relative; margin: 0; display: grid; justify-items: end; }
+.qb-stage { position: relative; display: grid; grid-template-columns: 210px auto; align-items: start; }
+.qb-bubble { position: relative; z-index: 2; margin-top: calc(var(--pad) + var(--h1) * 2.31 - 64px); margin-right: -14px; background: var(--card); border: 1.5px solid var(--line); border-radius: 18px 18px 4px 18px; padding: 14px 18px 16px; box-shadow: 0 18px 36px -22px rgb(20 33 61 / .55); }
+.qb-bubble p { font-size: 1.02rem; font-weight: 600; line-height: 1.35; margin: 4px 0 0; min-height: 4.05em; }
+.qb-cap { display: block; font-size: 0.8rem; font-weight: 700; color: var(--ink-2); }
+.qb-bubble .caret::after { content: "▍"; color: var(--red); animation: blink 1s steps(1) infinite; }
 @keyframes blink { 50% { opacity: 0; } }
-.qb-status { justify-self: start; display: inline-flex; align-items: center; gap: 8px; font-weight: 800; font-size: 0.9rem; color: #14213d; padding: 7px 14px; border-radius: 999px; border: 2px solid transparent; background: linear-gradient(var(--yellow), var(--yellow)) padding-box, linear-gradient(90deg, var(--yellow), var(--red), var(--blue), var(--green), var(--yellow)) 0 0 / 300% 100% border-box; animation: aiflow 2s linear infinite; }
+.qb-status { display: inline-flex; align-items: center; gap: 6px; margin-top: 10px; font-weight: 800; font-size: 0.82rem; color: #14213d; padding: 5px 12px; border-radius: 999px; border: 2px solid transparent; background: linear-gradient(var(--yellow), var(--yellow)) padding-box, linear-gradient(90deg, var(--yellow), var(--red), var(--blue), var(--green), var(--yellow)) 0 0 / 300% 100% border-box; animation: aiflow 2s linear infinite; }
+.qb-status[hidden] { display: none; }
 .qb-status .spark { color: var(--red); }
 @keyframes aiflow { to { background-position: 0 0, 300% 0; } }
-.qb-phone { display: grid; justify-items: center; gap: 12px; }
+.qb-phone { position: relative; z-index: 1; display: grid; justify-items: center; gap: 14px; }
 .qb-live { display: inline-flex; align-items: center; gap: 8px; font-weight: 800; font-size: 0.86rem; padding: 6px 14px; border-radius: 999px; background: var(--green); color: #fff; opacity: 0; translate: 0 8px; transition: opacity .3s, translate .4s cubic-bezier(.2,.8,.2,1.4); }
 .qb-live i { width: 8px; height: 8px; border-radius: 50%; background: var(--yellow); }
 .qb-live.on { opacity: 1; translate: 0 0; }
@@ -195,8 +189,7 @@ const ticker = ["bKash checkout", "Nagad", "Cards", "Courier booking", "Order SM
 .qb :global(.b.qb-wait) { opacity: 0; }
 .qb :global(.b.qb-fly) { animation: qb-fly .62s cubic-bezier(.2,.75,.25,1) both; }
 @keyframes qb-fly { from { transform: translate(var(--dx), var(--dy)) scale(.25); opacity: 0; } 30% { opacity: 1; } to { transform: none; opacity: 1; } }
-@media (max-width: 1140px) { .qb { max-width: 680px; } }
-@media (max-width: 560px) { .qb { grid-template-columns: 1fr; justify-items: center; } .qb-side { margin-top: 0; justify-self: stretch; } }
+
 
 .head.center { margin-inline: auto; text-align: center; }
 .head.center .lede { margin-inline: auto; }
@@ -215,6 +208,12 @@ const ticker = ["bKash checkout", "Nagad", "Cards", "Courier booking", "Order SM
 @media (max-width: 860px) { .closing { grid-template-columns: 1fr; } }
 .closing .signboard h2 { font-size: clamp(2.4rem, 1.6rem + 2.6vw, 3.8rem); }
 
+/* Phones: headline and button first; the bubble sits on the phone's shoulder */
+@media (max-width: 560px) {
+  .qb-stage { grid-template-columns: 1fr; justify-items: center; }
+  .qb-bubble { margin: 0 0 -28px; justify-self: stretch; border-radius: 18px 18px 18px 4px; }
+  .qb-bubble p { min-height: 2.7em; }
+}
 @media (prefers-reduced-motion: reduce) { .lit, .qb-status { animation: none; } }
 </style>
 <script src="../scripts/hero-build.js"></script>
