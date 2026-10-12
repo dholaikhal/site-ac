@@ -16,6 +16,14 @@ const canonical = new URL(Astro.url.pathname.replace(/index\.html$/, ""), Astro.
 <meta property="og:title" content={title}>
 <meta property="og:description" content={description}>
 <meta property="og:url" content={canonical.href}>
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Amader Cloud">
+<meta property="og:image" content={new URL("assets/og.jpg", Astro.site).href}>
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Amader Cloud: describe your business, our agent builds its app.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#14213d">
 {noindex && <meta name="robots" content="noindex">}
 <link rel="canonical" href={canonical.href}>
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">

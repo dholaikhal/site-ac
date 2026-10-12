@@ -79,5 +79,7 @@ const rows: [string, (p: (typeof plans)[number]) => string][] = [
 .faq summary { cursor: pointer; font-family: var(--display); font-weight: 750; font-size: 1.25rem; letter-spacing: -0.015em; }
 .faq details p { margin: 10px 0 0; color: var(--ink-2); }
 td { white-space: nowrap; }
+/* Tablets: let cells wrap so the table fits instead of scrolling a few pixels; phones still scroll it */
+@media (min-width: 600px) and (max-width: 960px) { td { white-space: normal; } }
 </style>
 </Base>
