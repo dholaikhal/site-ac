@@ -165,6 +165,9 @@ const ticker = ["bKash checkout", "Nagad", "Cards", "Courier booking", "Order SM
 /* The catch-all's phone: placeholder apps composed from a kit of parts, each fading in over the last */
 .qb :global(.gx) { --ink-g: color-mix(in srgb, var(--b) 55%, var(--s)); position: absolute; inset: 0; z-index: 1; display: flex; flex-direction: column; gap: var(--gg, 9px); padding: 10px 12px; background: var(--bg); opacity: 0; transition: opacity .3s ease; overflow: hidden; }
 .qb :global(.gx.in) { opacity: 1; }
+/* The body holds more than fits and runs off the bottom, so the screen is always full; the footer stays pinned */
+.qb :global(.g-body) { flex: 1; min-height: 0; display: flex; flex-direction: column; gap: var(--gg, 9px); overflow: hidden; }
+.qb :global(.g-body > .gp) { flex: none; }
 .qb :global(.gx i) { display: block; border-radius: 6px; background: var(--s); }
 .qb :global(.gx .g-t) { height: 8px; border-radius: 4px; background: var(--ink-g); }
 .qb :global(.gx .g-t.thin) { height: 6px; opacity: .6; }
@@ -210,9 +213,9 @@ const ticker = ["bKash checkout", "Nagad", "Cards", "Courier booking", "Order SM
 .qb :global(.g-btn) { height: 30px; border-radius: 8px !important; background: var(--b) !important; }
 .qb :global(.g-thumbs) { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; }
 .qb :global(.g-thumbs i) { height: 58px; border-radius: 10px; background: color-mix(in srgb, var(--a) 45%, var(--s)); }
-.qb :global(.g-tabs) { margin-top: auto; display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; padding: 8px 10px 0; border-top: 1px solid var(--s); flex: none; }
+.qb :global(.g-tabs) { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; padding: 8px 10px 0; border-top: 1px solid var(--s); flex: none; }
 .qb :global(.g-tabs i) { height: 18px; border-radius: 6px; }
-.qb :global(.g-cta) { margin-top: auto; flex: none; height: 40px; border-radius: var(--gr, 12px); background: var(--b); display: grid; place-items: center; }
+.qb :global(.g-cta) { flex: none; height: 40px; border-radius: var(--gr, 12px); background: var(--b); display: grid; place-items: center; }
 .qb :global(.g-cta .g-t) { margin: 0 auto; }
 /* Each placeholder app draws its own card style; dark ones get light cards */
 .qb :global(.gx.dark) { --card-g: color-mix(in srgb, var(--s) 70%, #000); --ink-g: color-mix(in srgb, var(--b) 60%, #fff); }

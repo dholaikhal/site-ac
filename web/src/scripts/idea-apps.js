@@ -119,16 +119,17 @@ const FOOT = [
   () => "",
 ];
 
-/** A different app each call: colours, corners, spacing and card style drawn at random, then an app bar, a hero,
- *  two to four parts in a random order, and a footer. */
+/** A different app each call: colours, corners, spacing and card style drawn at random, then an app bar, a hero
+ *  and more parts than fit, in a random order, in a body that runs off the bottom like a real scrolling screen
+ *  (so the phone is always full), above a pinned footer. */
 export function ideaLayout() {
   const [bg, brand, accent, soft] = Math.random() < 0.45 ? any(CURATED) : generated();
   const radius = any(["3px", "8px", "14px", "20px"]);
   const gap = any(["7px", "9px", "12px"]);
   const card = any(["flat", "outline", "shadow"]);
   const dark = /^hsl\(\d+ 28% 11%\)$/.test(bg) || bg === "#14213d";
-  const parts = [...PARTS].sort(() => Math.random() - 0.5).slice(0, 2 + Math.floor(Math.random() * 3)).map((f) => f()).join("");
-  return `<div class="gx c-${card}${dark ? " dark" : ""}" style="--bg:${bg};--b:${brand};--a:${accent};--s:${soft};--gr:${radius};--gg:${gap}">${any(BAR)()}${any(HERO)()}${parts}${any(FOOT)()}</div>`;
+  const parts = [...PARTS].sort(() => Math.random() - 0.5).slice(0, 6).map((f) => f()).join("");
+  return `<div class="gx c-${card}${dark ? " dark" : ""}" style="--bg:${bg};--b:${brand};--a:${accent};--s:${soft};--gr:${radius};--gg:${gap}"><div class="g-body">${any(BAR)()}${any(HERO)()}${parts}</div>${any(FOOT)()}</div>`;
 }
 
 /** A random idea, never the same one twice running. */
