@@ -17,7 +17,8 @@ const toc = headings.filter((h: { depth: number }) => h.depth === 2);
     {fm.intro && <p class="lede">{fm.intro}</p>}
   </div>
 </section>
-<section class="section tight">
+<section class="section tight has-photo tint">
+  <Photo id="facades" class="bg-photo" sizes="100vw" widths={[800, 1200, 1600]} />
   <div class="wrap legal">
     <nav class="toc" aria-label="On this page">
       <strong>On this page</strong>
@@ -36,7 +37,7 @@ const toc = headings.filter((h: { depth: number }) => h.depth === 2);
 .toc li { margin: 5px 0; }
 .toc a { text-decoration: none; }
 .toc a:hover { text-decoration: underline; }
-.doc { max-width: 72ch; }
+.doc { max-width: 76ch; background: var(--card); border: 1px solid var(--rule); border-radius: 8px; padding: clamp(22px, 4vw, 44px); box-shadow: 0 24px 50px -36px rgb(20 33 61 / .45); }
 .doc :global(h2) { font-size: clamp(1.9rem, 1.5rem + 1.2vw, 2.5rem); margin-top: 1.6em; scroll-margin-top: calc(var(--header-h) + 16px); }
 .doc :global(h2:first-child) { margin-top: 0; }
 .doc :global(h3) { margin-top: 1.4em; }

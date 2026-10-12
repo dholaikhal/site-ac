@@ -17,14 +17,15 @@ const ids: SourceId[] = ["ecab", "easysell", "vktr", "pdpo", "fx"];
     </div>
   </div>
 </section>
-<section class="section tight">
+<section class="section tight has-photo tint">
+  <Photo id="towers" class="bg-photo" sizes="100vw" widths={[800, 1200, 1600]} />
   <div class="wrap measure-wrap">
     <Sources ids={ids} />
     <PhotoCredits />
   </div>
 </section>
 <style>
-.measure-wrap { max-width: 860px; margin-inline: 0; }
+.measure-wrap { max-width: 900px; margin-inline: 0; background: var(--card); border: 1px solid var(--rule); border-radius: 8px; padding: clamp(22px, 4vw, 44px); box-shadow: 0 24px 50px -36px rgb(20 33 61 / .45); }
 .measure-wrap :global(.sources) { border-top: 0; margin-top: 0; padding-top: 0; font-size: 0.98rem; margin-bottom: 36px; }
 .measure-wrap :global(.sources strong) { font-family: var(--display); font-size: 1.8rem; display: block; margin-bottom: 8px; }
 </style>
