@@ -20,6 +20,18 @@ export const logos: Logo[] = [
   { name: "Thread & Loom BD", kind: "Garment wholesale", mark: "mono", icon: "grid", color: "#37474f" },
   { name: "Glowup Studio", kind: "Salon", mark: "serif", icon: "scissors", color: "#7b3fb5" },
   { name: "Cool Point Services", kind: "AC repairs", mark: "condensed", icon: "snow", color: "#0277bd" },
+  { name: "Sundori Jewellers", kind: "Gold and silver", mark: "serif", icon: "star", color: "#a67c00" },
+  { name: "Bazar Basket", kind: "Grocery delivery", mark: "round", icon: "bag", color: "#558b2f" },
+  { name: "Mishti Mukh", kind: "Sweets", mark: "script", icon: "heart", color: "#ad1457" },
+  { name: "Haor Boats", kind: "Boat trips", mark: "slab", icon: "map", color: "#01579b" },
+  { name: "Lalbagh Leather", kind: "Shoes and bags", mark: "condensed", icon: "tag", color: "#6d4c41" },
+  { name: "Shonar Dairy", kind: "Milk by subscription", mark: "round", icon: "box", color: "#00695c" },
+  { name: "Pathshala Tutors", kind: "Home tutors", mark: "condensed", icon: "book", color: "#303f9f" },
+  { name: "Kacchi House", kind: "Biryani kitchen", mark: "slab", icon: "star", color: "#d84315" },
+  { name: "Fit Dhaka", kind: "Gym memberships", mark: "mono", icon: "users", color: "#263238" },
+  { name: "Green Leaf Nursery", kind: "Plants and saplings", mark: "serif", icon: "heart", color: "#388e3c" },
+  { name: "Quick Fix Mobile", kind: "Phone repairs", mark: "round", icon: "wrench", color: "#5e35b1" },
+  { name: "Barishal Honey", kind: "Honey by the jar", mark: "script", icon: "drop", color: "#b26a00" },
 ];
 
 export type Story = { quote: string; name: string; role: string; business: string; area: string; scale: string; tone: string };
