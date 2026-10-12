@@ -4,6 +4,7 @@ import Photo from "../components/Photo.astro";
 import { plan } from "../data/facts";
 import Connectors from "../components/Connectors.astro";
 import Assemble from "../components/Assemble.astro";
+import { icon } from "../scripts/app-art.js";
 // Who does each step. Agent steps glow in the chain. Copy rule: "our agent", never "AI", a model or a provider.
 const steps = [
   { t: "You describe it", who: "you" },
@@ -47,20 +48,18 @@ const run = [
   </div>
 </section>
 
-<section class="band band-blue parts-band">
+<section class="band band-navy parts-band">
   <div class="wrap">
-    <div class="band-split parts-head" data-reveal>
-      <h2 class="slogan">Built from parts<br>that already work.</h2>
-      <p class="lede">Our agent doesn't start from a blank page. It puts your app together from pieces we've already tested.</p>
-    </div>
-    <div data-reveal style="--d:1">
-      <ul class="ticks">
-        <li><strong>Tested building blocks:</strong> product grids, calendars, checkouts and receipts that already work.</li>
-        <li><strong>Ready connections:</strong> bKash, Nagad, cards, couriers and SMS are plugged in, not written from scratch.</li>
-        <li><strong>Every change is checked</strong> and shown to you before it goes live, and can be undone in one click.</li>
-      </ul>
-    </div>
+    <header class="parts-head" data-reveal>
+      <h2 class="slogan">Built from parts that already work.</h2>
+      <p class="lede">Our agent doesn't start from a blank page. It puts your app together from blocks we've already built and tested.</p>
+    </header>
     <Assemble />
+    <ul class="parts-points">
+      <li data-reveal><span class="pi" set:html={icon("box")} /><strong>Tested building blocks</strong><span>Product grids, calendars, checkouts and receipts that already work.</span></li>
+      <li data-reveal style="--d:1"><span class="pi" set:html={icon("route")} /><strong>Ready connections</strong><span>bKash, Nagad, cards, couriers and SMS are plugged in, not written from scratch.</span></li>
+      <li data-reveal style="--d:2"><span class="pi" set:html={icon("shield")} /><strong>Every change checked</strong><span>Shown to you before it goes live, and undone in one click.</span></li>
+    </ul>
   </div>
 </section>
 

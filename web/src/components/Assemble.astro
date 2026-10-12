@@ -4,58 +4,31 @@
 // what else a business app can be made of. Script: src/scripts/assemble.js.
 import Device from "./Device.astro";
 import Brand from "./Brand.astro";
-type Tile = { t: string; g: "store" | "pay" | "ship" | "msg" | "book" | "owner"; logos?: string[]; part?: number };
-// Inner ring: the checkout's five parts plus close neighbours. Outer ring: everything else on the shelf.
-const inner: Tile[] = [
-  { t: "Header and menu", g: "store", part: 0 },
-  { t: "Checkout steps", g: "store", part: 1 },
-  { t: "Order summary", g: "store", part: 2 },
-  { t: "Delivery address", g: "ship", part: 3 },
-  { t: "Payments", g: "pay", logos: ["bkash", "nagad", "visa"], part: 4 },
-  { t: "Cash on delivery", g: "pay" },
-  { t: "Coupons and offers", g: "store" },
-  { t: "Order SMS", g: "msg" },
-  { t: "Courier booking", g: "ship", logos: ["pathao", "steadfast", "redx"] },
-  { t: "Product catalogue", g: "store" },
+import { icon } from "../scripts/app-art.js";
+type Tile = { t: string; g: "store" | "pay" | "ship" | "msg" | "book" | "owner"; i: string; logos?: string[]; part?: number };
+// Four columns of blocks, two each side of the phone, staggered. The checkout's five parts sit nearest the phone.
+const cols: { x: number; shift: number; tiles: Tile[] }[] = [
+  { x: 9, shift: 5, tiles: [
+    { t: "Product catalogue", g: "store", i: "grid" }, { t: "Sizes and colours", g: "store", i: "tag" }, { t: "Stock counts", g: "store", i: "box" },
+    { t: "Reviews", g: "store", i: "star" }, { t: "Refunds", g: "pay", i: "undo" }, { t: "VAT invoices", g: "pay", i: "receipt" },
+    { t: "Bank transfer", g: "pay", i: "bank", logos: ["brac", "dbbl"] } ] },
+  { x: 26.5, shift: 0, tiles: [
+    { t: "Header and menu", g: "store", i: "menu", part: 0 }, { t: "Checkout steps", g: "store", i: "list", part: 1 }, { t: "Order summary", g: "store", i: "receipt", part: 2 },
+    { t: "Delivery address", g: "ship", i: "pin", part: 3 }, { t: "Payments", g: "pay", i: "card", logos: ["bkash", "nagad", "visa"], part: 4 },
+    { t: "Cash on delivery", g: "pay", i: "cash" }, { t: "Coupons and offers", g: "store", i: "percent" } ] },
+  { x: 73.5, shift: 0, tiles: [
+    { t: "Courier booking", g: "ship", i: "truck", logos: ["pathao", "steadfast", "redx"] }, { t: "Delivery zones", g: "ship", i: "map" }, { t: "Order tracking", g: "ship", i: "route" },
+    { t: "Order SMS", g: "msg", i: "chat" }, { t: "WhatsApp updates", g: "msg", i: "chat", logos: ["whatsapp"] }, { t: "Messenger chat", g: "msg", i: "chat", logos: ["messenger"] },
+    { t: "Booking calendar", g: "book", i: "cal" } ] },
+  { x: 91, shift: 5, tiles: [
+    { t: "Deposits", g: "book", i: "coin" }, { t: "Serial numbers", g: "book", i: "hash" }, { t: "Reminders", g: "book", i: "bell" }, { t: "Fee receipts", g: "book", i: "receipt" },
+    { t: "Sales dashboard", g: "owner", i: "chart" }, { t: "Google Sheets export", g: "owner", i: "grid", logos: ["googlesheets"] }, { t: "Facebook catalogue", g: "owner", i: "grid", logos: ["facebook"] },
+    { t: "Staff logins", g: "owner", i: "users" }, { t: "Daily backups", g: "owner", i: "shield" } ] },
 ];
-const outer: Tile[] = [
-  { t: "Sizes and colours", g: "store" },
-  { t: "Stock counts", g: "store" },
-  { t: "Reviews", g: "store" },
-  { t: "Refunds", g: "pay" },
-  { t: "VAT invoices", g: "pay" },
-  { t: "Bank transfer", g: "pay", logos: ["brac", "dbbl"] },
-  { t: "Delivery zones", g: "ship" },
-  { t: "Order tracking", g: "ship" },
-  { t: "WhatsApp updates", g: "msg", logos: ["whatsapp"] },
-  { t: "Messenger chat", g: "msg", logos: ["messenger"] },
-  { t: "Booking calendar", g: "book" },
-  { t: "Deposits", g: "book" },
-  { t: "Serial numbers", g: "book" },
-  { t: "Reminders", g: "book" },
-  { t: "Fee receipts", g: "book" },
-  { t: "Sales dashboard", g: "owner" },
-  { t: "Google Sheets export", g: "owner", logos: ["googlesheets"] },
-  { t: "Facebook catalogue", g: "owner", logos: ["facebook"] },
-  { t: "Staff logins", g: "owner" },
-  { t: "Daily backups", g: "owner" },
-];
-const place = (list: Tile[], rx: number, ry: number, turn: number) =>
-  list.map((tile, i) => {
-    const a = turn + (i / list.length) * Math.PI * 2;
-    return { ...tile, x: 50 + rx * Math.cos(a), y: 50 + ry * Math.sin(a) };
-  });
-// The inner ring sits on two side arcs so nothing hides behind the phone.
-const sides = (list: Tile[], rx: number, ry: number) => {
-  const per = Math.ceil(list.length / 2);
-  return list.map((tile, i) => {
-    const k = Math.floor(i / 2), f = per > 1 ? k / (per - 1) : 0.5;
-    const a = (-46 + f * 92) * (Math.PI / 180);
-    const right = i % 2 === 0;
-    return { ...tile, x: 50 + (right ? 1 : -1) * rx * Math.cos(a), y: 50 + ry * Math.sin(a) };
-  });
-};
-const tiles = [...sides(inner, 31, 40), ...place(outer, 45, 47, -Math.PI / 2 + 0.16)];
+const tiles = cols.flatMap((c) => c.tiles.map((tile, i) => {
+  const n = c.tiles.length, top = 8 + c.shift, span = 84 - c.shift;
+  return { ...tile, x: c.x, y: top + (n > 1 ? (i / (n - 1)) * span : span / 2) };
+}));
 const groups = { store: "Store", pay: "Payments", ship: "Delivery", msg: "Messages", book: "Bookings and fees", owner: "Owner tools" };
 ---
 <figure class="asm" data-asm aria-label="Tested blocks around a phone; five of them assemble a checkout (animation)">
@@ -66,8 +39,8 @@ const groups = { store: "Store", pay: "Payments", ship: "Delivery", msg: "Messag
     <ul class="tiles">
       {tiles.map((t, i) => (
         <li class:list={["tile", t.g, { part: t.part !== undefined }]} data-part={t.part} style={`--x:${t.x.toFixed(2)}%;--y:${t.y.toFixed(2)}%;--d:${i}`}>
-          {t.logos && <span class="tl">{t.logos.map((id) => <Brand id={id as any} h={14} />)}</span>}
-          <span class="tt">{t.t}</span>
+          <span class="ti" set:html={icon(t.i)} />
+          <span class="tx"><span class="tt">{t.t}</span>{t.logos && <span class="tl">{t.logos.map((id) => <Brand id={id as any} h={13} />)}</span>}</span>
         </li>
       ))}
     </ul>
@@ -87,14 +60,17 @@ const groups = { store: "Store", pay: "Payments", ship: "Delivery", msg: "Messag
 .asm { margin: 0; }
 .stage { position: relative; height: 820px; max-width: 1200px; margin-inline: auto; }
 .lines { position: absolute; inset: 0; width: 100%; height: 100%; }
-.lines line { stroke: rgb(255 255 255 / .22); stroke-width: 1.2; vector-effect: non-scaling-stroke; stroke-dasharray: 3 5; }
+.lines line { stroke: rgb(255 255 255 / .16); stroke-width: 1.2; vector-effect: non-scaling-stroke; stroke-dasharray: 3 5; }
 .lines line.part { stroke: rgb(255 204 0 / .55); }
 .tiles { list-style: none; margin: 0; padding: 0; }
-.tile { --c: #14213d; position: absolute; left: var(--x); top: var(--y); translate: -50% -50%; z-index: 1; display: grid; justify-items: center; gap: 4px; padding: 8px 12px; min-width: 110px; max-width: 170px; text-align: center; background: #fff; color: #14213d; border-radius: 10px; border-top: 4px solid var(--c); box-shadow: 0 12px 26px -16px rgb(0 0 0 / .6); font-weight: 700; font-size: 0.82rem; line-height: 1.2; animation: drift 7s ease-in-out infinite; animation-delay: calc(var(--d) * -0.6s); transition: scale .25s, box-shadow .25s; }
-.tile.store { --c: var(--green); } .tile.pay { --c: var(--red); } .tile.ship { --c: #e8a200; } .tile.msg { --c: #0b8ad9; } .tile.book { --c: #8b3fb5; } .tile.owner { --c: #14213d; }
+.tile { --c: #14213d; position: absolute; left: var(--x); top: var(--y); translate: -50% -50%; z-index: 1; display: flex; align-items: center; gap: 9px; padding: 7px 12px 7px 7px; width: max-content; max-width: 210px; background: #fff; color: #14213d; border-radius: 12px; border: 1px solid rgb(20 33 61 / .08); box-shadow: 0 1px 0 rgb(255 255 255 / .6) inset, 0 14px 30px -18px rgb(0 0 0 / .7); font-weight: 700; font-size: 0.82rem; line-height: 1.2; animation: drift 7s ease-in-out infinite; animation-delay: calc(var(--d) * -0.6s); transition: scale .25s, box-shadow .25s; }
+.tile.store { --c: var(--green); } .tile.pay { --c: var(--red); } .tile.ship { --c: #d98f00; } .tile.msg { --c: #0b8ad9; } .tile.book { --c: #8b3fb5; } .tile.owner { --c: #14213d; }
+.ti { flex: none; display: grid; place-items: center; width: 30px; height: 30px; border-radius: 9px; background: var(--c); color: #fff; }
+.ti :global(.ic) { width: 17px; height: 17px; fill: none; stroke: currentColor; stroke-width: 1.9; stroke-linecap: round; stroke-linejoin: round; }
+.tx { display: grid; gap: 4px; text-align: left; }
 .tile:hover { scale: 1.06; z-index: 3; }
-.tl { display: flex; align-items: center; justify-content: center; gap: 6px; flex-wrap: wrap; }
-.tl :global(.brand-word) { font-size: 10px !important; }
+.tl { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+.tl :global(.brand-word) { font-size: 9.5px !important; }
 @keyframes drift { 50% { translate: -50% calc(-50% - 6px); } }
 .tile.part.go { scale: 1.12; z-index: 3; box-shadow: 0 0 0 3px var(--yellow), 0 16px 30px -12px rgb(0 0 0 / .6); }
 .tile.part.done::after { content: "✓"; position: absolute; top: -9px; right: -9px; width: 20px; height: 20px; border-radius: 50%; background: var(--ok); color: #fff; font-size: 0.7rem; display: grid; place-items: center; }
@@ -104,7 +80,7 @@ const groups = { store: "Store", pay: "Payments", ship: "Delivery", msg: "Messag
 .legend { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px 18px; margin-top: 18px; font-weight: 700; font-size: 0.85rem; }
 .legend span { display: inline-flex; align-items: center; gap: 6px; }
 .legend i { width: 12px; height: 12px; border-radius: 3px; background: var(--c); }
-.legend .store { --c: var(--green); } .legend .pay { --c: var(--red); } .legend .ship { --c: #e8a200; } .legend .msg { --c: #0b8ad9; } .legend .book { --c: #8b3fb5; } .legend .owner { --c: #fff; }
+.legend .store { --c: var(--green); } .legend .pay { --c: var(--red); } .legend .ship { --c: #d98f00; } .legend .msg { --c: #0b8ad9; } .legend .book { --c: #8b3fb5; } .legend .owner { --c: #c9d2e3; }
 .asm :global(.b.asm-wait) { opacity: 0; }
 .asm :global(.b.asm-fly) { animation: asm-fly .6s cubic-bezier(.2,.75,.25,1) both; }
 @keyframes asm-fly { from { transform: translate(var(--dx), var(--dy)) scale(.3); opacity: 0; } 30% { opacity: 1; } to { transform: none; opacity: 1; } }
