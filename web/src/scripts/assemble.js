@@ -23,7 +23,9 @@ function init(box) {
       const blocks = [...screen.querySelectorAll(".b")];
       blocks.forEach((b) => b.classList.add("asm-wait"));
       await wait(600);
-      const scale = parseFloat(getComputedStyle(box.querySelector(".dev")).getPropertyValue("--s")) || 1;
+      // Fly offsets are in the screen's own pixels: undo the device's scale and the stage's zoom.
+      const k = parseFloat(getComputedStyle(box.querySelector(".stage")).getPropertyValue("--k")) || 1;
+      const scale = (parseFloat(getComputedStyle(box.querySelector(".dev")).getPropertyValue("--s")) || 1) * k;
       for (let i = 0; i < blocks.length; i++) {
         const part = parts[Math.min(i, parts.length - 1)];
         part.classList.add("go");
