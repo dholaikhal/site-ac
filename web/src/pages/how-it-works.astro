@@ -3,6 +3,7 @@ import Base from "../layouts/Base.astro";
 import Photo from "../components/Photo.astro";
 import { plan } from "../data/facts";
 import Connectors from "../components/Connectors.astro";
+import Assemble from "../components/Assemble.astro";
 // Who does each step. Agent steps glow on the track. Copy rule: "our agent", never "AI", a model or a provider.
 const steps = [
   { t: "Describe it", d: "Write what you want, how you want. “A store for my handmade bags with bKash payment and an SMS when the order ships.”", who: "you" },
@@ -58,10 +59,10 @@ const run = [
   </div>
 </section>
 
-<section class="section">
+<section class="band band-blue">
   <div class="wrap split">
     <div>
-      <h2>Built from parts that already work.</h2>
+      <h2 class="slogan">Built from parts<br>that already work.</h2>
       <p class="lede">Our agent doesn't start from a blank page. It puts your app together from pieces we've already tested.</p>
       <ul class="ticks">
         <li><strong>Tested building blocks:</strong> product grids, calendars, checkouts and receipts that already work.</li>
@@ -69,12 +70,7 @@ const run = [
         <li><strong>Every change is checked</strong> and shown to you before it goes live, and can be undone in one click.</li>
       </ul>
     </div>
-    <div class="rails" aria-hidden="true">
-      <div class="rail ai"><span>✦</span> Our agent puts it together</div>
-      <div class="rail-row"><div class="rail">Tested building blocks</div><div class="rail">Ready connections</div></div>
-      <div class="rail">Checked, previewed, undoable</div>
-      <div class="rail out">Your store</div>
-    </div>
+    <Assemble />
   </div>
 </section>
 
@@ -164,12 +160,6 @@ const run = [
   .stop { text-align: left; }
 }
 @media (prefers-reduced-motion: reduce) { .track::before, .station.ai .disc, .station.ai .disc::after, .ai-dot, .stop.ai { animation: none; } }
-.rails { display: grid; gap: 10px; }
-.rail-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-.rail { border: 2px solid var(--line); border-radius: 12px; padding: 16px; text-align: center; font-family: var(--display); font-weight: 800; font-size: 1.1rem; letter-spacing: -0.01em; background: var(--card); }
-.rail.ai { color: #fff; border-color: transparent; background: linear-gradient(var(--blue), var(--blue)) padding-box, linear-gradient(90deg, var(--yellow), var(--red), var(--green), var(--yellow)) 0 0 / 300% 100% border-box; border-width: 3px; animation: aiflow-b 3s linear infinite; }
-.rail.ai span { color: var(--yellow); }
-.rail.out { background: var(--red); color: #fff; border-color: #14213d; justify-self: center; padding-inline: 40px; border-radius: 999px; }
 .aw { margin: 8px 0 0; padding-left: 20px; display: grid; gap: 8px; }
 #agencies .agency-card { color: #14213d; background: var(--yellow); border-color: var(--yellow); }
 </style>
