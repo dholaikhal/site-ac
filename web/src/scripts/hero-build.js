@@ -12,7 +12,12 @@ if (box && !box.dataset.ready) { box.dataset.ready = "1"; init(box); }
 function init(box) {
   const $ = (s) => box.querySelector(s);
   const text = $("[data-qb-text]");
-  const status = $("[data-qb-status]");
+  // The caption over the request tells the stage, in one place so nothing shifts: typing, building, done
+  const cap = $(".qb-cap");
+  const stage = (st) => {
+    cap.dataset.st = st;
+    cap.innerHTML = { type: "You type", busy: '<span class="spark" aria-hidden="true">✦</span> Our agent is building', done: "✓ Done!" }[st];
+  };
   const screen = $("[data-qb-screen]");
   const url = $("[data-qb-url]");
   const url2 = $("[data-qb-url-2]");
@@ -91,7 +96,7 @@ function init(box) {
   }
 
   if (still) {
-    paint("shop"); text.textContent = SHOW[0][1]; status.hidden = true; live.classList.add("on");
+    paint("shop"); text.textContent = SHOW[0][1]; stage("done"); live.classList.add("on");
     chips.forEach((c) => c.addEventListener("click", () => { const i = +c.dataset.qbPick; pick(i); paint(SHOW[i][0]); text.textContent = SHOW[i][1]; }));
     return;
   }
@@ -123,7 +128,7 @@ function init(box) {
     const bar = text.closest(".qb-bar");
     for (let round = 0; ; round++) {
       live.classList.remove("on"); text.classList.remove("caret");
-      status.hidden = false; box.classList.add("building"); url.textContent = "…";
+      stage("busy"); box.classList.add("building"); url.textContent = "…";
       bar.classList.add("spinning");
       // 12 flicks, from fast to slower (about 1.6 s); a new design every few flicks
       for (let f = 0; f < 12; f++) {
@@ -137,7 +142,7 @@ function init(box) {
       text.classList.remove("flick"); void text.offsetWidth; text.classList.add("flick", "landed");
       showLayout();
       bar.classList.remove("spinning");
-      box.classList.remove("building"); status.hidden = true;
+      box.classList.remove("building"); stage("done");
       url.textContent = url2.textContent = "yourname.amader.cloud"; live.removeAttribute("href");
       await wait(350); if (!ok()) return false;
       live.classList.add("on"); launch("idea");
@@ -153,25 +158,25 @@ function init(box) {
       pick(i);
       live.classList.remove("on"); notif.classList.remove("show");
       screen.innerHTML = ""; url.textContent = "…"; text.textContent = ""; text.classList.add("caret");
-      status.hidden = true; box.classList.remove("building");
+      stage("type"); box.classList.remove("building");
       await wait(450); if (!ok()) return false;
       return playIdea(token);
     }
     pick(i);
     live.classList.remove("on"); notif.classList.remove("show");
     screen.innerHTML = ""; url.textContent = "…"; text.textContent = ""; text.classList.add("caret");
-    status.hidden = true; box.classList.remove("building");
+    stage("type"); box.classList.remove("building");
     // Quick to build, slow to leave: the request and the build take about two seconds, then the finished
     // app stays a good three seconds so it can be taken in.
     await wait(250); if (!ok()) return false;
     for (let n = 1; n <= prompt.length; n += 3) { text.textContent = prompt.slice(0, n); await wait(18); if (!ok()) return false; }
     text.textContent = prompt; text.classList.remove("caret");
     await wait(200); if (!ok()) return false;
-    status.hidden = false; box.classList.add("building");
+    stage("busy"); box.classList.add("building");
     paint(k);
     if (!(await fly(token))) return false;
     await wait(250); if (!ok()) return false;
-    box.classList.remove("building"); status.hidden = true;
+    box.classList.remove("building"); stage("done");
     live.classList.add("on"); launch(k);
     await wait(700); if (!ok()) return false;
     notif.innerHTML = `<span class="ni">✓</span><span><b>New ${noun}</b>${first} · ${tk(amt)} · bKash</span>`;

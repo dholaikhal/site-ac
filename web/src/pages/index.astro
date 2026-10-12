@@ -44,8 +44,7 @@ const ticker = ["bKash checkout", "Nagad", "Cards", "Courier booking", "Order SM
         <span class="address">Payments by <Brand id="bkash" h={18} />, Nagad and card, built in</span>
       </div>
       <div class="qb-bar">
-        <div class="qb-in"><span class="qb-cap">You type</span><p data-qb-text></p></div>
-        <span class="qb-status" data-qb-status hidden><span class="spark" aria-hidden="true">✦</span> Our agent is building</span>
+        <div class="qb-in"><span class="qb-cap" data-st="type" aria-live="polite">You type</span><p data-qb-text></p></div>
         <span class="qb-send" aria-hidden="true">→</span>
       </div>
       <div class="btn-row"><BetaButton sticker="" /><a class="btn btn-quiet" href="#demo">Try the builder</a></div>
@@ -272,10 +271,15 @@ const ticker = ["bKash checkout", "Nagad", "Cards", "Courier booking", "Order SM
 @keyframes tube { 0% { filter: brightness(.55); } 12% { filter: brightness(1.05); } 18% { filter: brightness(.6); } 26%, 100% { filter: none; } }
 
 /* The sentence, in a message bar; its sections fly from here into the phone */
-.qb-bar { position: relative; display: grid; grid-template-columns: minmax(0, 1fr) auto; grid-template-areas: "in send" "st send"; align-items: center; column-gap: 14px; padding: 14px 14px 14px 18px; background: var(--card); border: 1.5px solid var(--line); border-radius: 14px; box-shadow: 0 18px 36px -28px rgb(20 33 61 / .55); }
+.qb-bar { position: relative; display: grid; grid-template-columns: minmax(0, 1fr) auto; grid-template-areas: "in send"; align-items: center; column-gap: 14px; padding: 14px 14px 14px 18px; background: var(--card); border: 1.5px solid var(--line); border-radius: 14px; box-shadow: 0 18px 36px -28px rgb(20 33 61 / .55); }
 .qb-in { grid-area: in; }
 .qb-bar p { font-size: 1.08rem; font-weight: 600; line-height: 1.35; margin: 2px 0 0; min-height: 2.7em; }
 .qb-cap { display: block; font-size: 0.78rem; font-weight: 700; color: var(--ink-2); }
+/* The caption tells the stage in place: You type, then the agent at work (a moving sweep of the sign paints), then Done! */
+.qb-cap[data-st="busy"] { background: linear-gradient(90deg, var(--red), #d98f00, var(--blue), var(--green), var(--red)) 0 0 / 300% 100%; -webkit-background-clip: text; background-clip: text; color: transparent; animation: capflow 2s linear infinite; }
+.qb-cap[data-st="busy"] .spark { color: var(--red); -webkit-text-fill-color: var(--red); }
+.qb-cap[data-st="done"] { color: var(--green); }
+:root[data-theme="dark"] .qb-cap[data-st="done"] { color: var(--ok); }
 .qb-bar .caret::after { content: "▍"; color: var(--red); animation: blink 1s steps(1) infinite; }
 /* The catch-all's spin: each idea flicks in from below; the one it lands on settles with a little weight */
 .qb-bar .flick { animation: flick .14s ease-out; }
@@ -286,10 +290,7 @@ const ticker = ["bKash checkout", "Nagad", "Cards", "Courier booking", "Order SM
 @media (prefers-reduced-motion: reduce) { .qb-bar .flick, .qb-bar .landed { animation: none; } }
 @keyframes blink { 50% { opacity: 0; } }
 .qb-send { grid-area: send; display: grid; place-items: center; width: 44px; height: 44px; border-radius: 10px; background: var(--red); color: #fff; font-weight: 800; font-size: 1.2rem; }
-.qb-status { grid-area: st; justify-self: start; display: inline-flex; align-items: center; gap: 6px; margin-top: 8px; font-weight: 800; font-size: 0.82rem; color: #14213d; padding: 5px 12px; border-radius: 999px; border: 2px solid transparent; background: linear-gradient(var(--yellow), var(--yellow)) padding-box, linear-gradient(90deg, var(--yellow), var(--red), var(--blue), var(--green), var(--yellow)) 0 0 / 300% 100% border-box; animation: aiflow 2s linear infinite; }
-.qb-status[hidden] { display: none; }
-.qb-status .spark { color: var(--red); }
-@keyframes aiflow { to { background-position: 0 0, 300% 0; } }
+@keyframes capflow { to { background-position: 300% 0; } }
 
 /* The phone, as tall as the column beside it */
 .qb { position: relative; margin: 0; display: grid; align-content: start; justify-items: center; }
@@ -333,7 +334,7 @@ const ticker = ["bKash checkout", "Nagad", "Cards", "Courier booking", "Order SM
   .qb { --pz: .66; }
 }
 @media (max-width: 560px) { .qb { --pz: .6; } }
-@media (prefers-reduced-motion: reduce) { .lit, .qb-status { animation: none; } }
+@media (prefers-reduced-motion: reduce) { .lit, .qb-cap { animation: none; } }
 </style>
 <script src="../scripts/hero-build.js"></script>
 </Base>
