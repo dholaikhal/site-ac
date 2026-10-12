@@ -3,10 +3,9 @@ import Base from "../layouts/Base.astro";
 import Demo from "../components/Demo.astro";
 import Ticker from "../components/Ticker.astro";
 import BetaButton from "../components/BetaButton.astro";
-import FixTabs from "../components/FixTabs.astro";
+import ProblemScene from "../components/ProblemScene.astro";
 import StreetScene from "../components/StreetScene.astro";
 import InboxVsStore from "../components/InboxVsStore.astro";
-import Compare from "../components/Compare.astro";
 import Faq from "../components/Faq.astro";
 import facts, { tk, plan } from "../data/facts";
 import "../styles/app-screen.css";
@@ -32,7 +31,7 @@ const ticker = ["bKash checkout", "Nagad", "Cards", "Courier booking", "Order SM
         <h1>Describe your business. Our agent builds&nbsp;it.</h1>
         <span class="address">Open at <span class="url">yourname.amader.cloud</span></span>
       </div>
-      <p class="lede">A Facebook store, a home kitchen, a salon, a clinic, a pharmacy, a coaching centre: say what you need in one sentence. Our agent builds the app, with bKash, Nagad and card payments already set up.</p>
+      <p class="lede">Say what you need in one sentence. Our agent builds the app, with bKash, Nagad and card payments already set up.</p>
       <div class="btn-row"><BetaButton /><a class="btn btn-quiet" href="#demo">Try the builder</a></div>
       <p class="cta-note"><span>Free while you build</span><span>Pay by bKash when you go live</span><span>Cancel any time</span></p>
     </div>
@@ -61,25 +60,17 @@ const ticker = ["bKash checkout", "Nagad", "Cards", "Courier booking", "Order SM
 
 <Ticker items={ticker} />
 
-<section class="section">
+<section class="band band-green demo-band" id="demo">
   <div class="wrap">
-    <div class="head" data-reveal>
-      <h2>A Facebook page is not a store.</h2>
-      <p class="lede">We add the missing pieces: checkout, delivery and order updates, so the inbox stops eating your day.</p>
-    </div>
-    <div data-reveal style="--d:1"><FixTabs /></div>
-  </div>
-</section>
-
-<section class="section alt demo-sec" id="demo">
-  <div class="wrap">
-    <div class="head" data-reveal>
-      <h2>Try the builder</h2>
-      <p class="lede">Pick a business, or write what you want, how you want.</p>
+    <div class="band-head band-split" data-reveal>
+      <h2 class="slogan">Try it.<br>Build one now.</h2>
+      <p class="lede">Pick a kind of business, or write what you want, how you want. Then open it to customers and watch the orders come in.</p>
     </div>
     <Demo />
   </div>
 </section>
+
+<ProblemScene />
 
 <section class="scene-sec">
   <StreetScene />
@@ -115,12 +106,12 @@ const ticker = ["bKash checkout", "Nagad", "Cards", "Courier booking", "Order SM
   </div>
 </section>
 
-<section class="section alt rates-sec">
+<section class="band band-yellow">
   <div class="wrap rate-grid">
     <div data-reveal>
-      <h2>What comes with every store</h2>
-      <p class="lede">Nothing to set up yourself. Ask for changes in plain words.</p>
-      <p class="small"><a href="pricing.html">See the plans</a></p>
+      <h2 class="slogan">All in.<br>No setup.</h2>
+      <p class="lede">What comes with every store. Ask for changes in plain words.</p>
+      <a class="band-link" href="pricing.html">See the plans →</a>
     </div>
     <ul class="rates board" data-reveal style="--d:1">
       {rates.map(([item, note, val]) => <li><span class="item">{item}<small>{note}</small></span><span class="lead" aria-hidden="true"></span><span class="val">{val}</span></li>)}
@@ -129,16 +120,6 @@ const ticker = ["bKash checkout", "Nagad", "Cards", "Courier booking", "Order SM
 </section>
 
 <section class="section">
-  <div class="wrap">
-    <div class="head" data-reveal>
-      <h2>Where else can a store go?</h2>
-      <p class="lede">The usual options, side by side.</p>
-    </div>
-    <div data-reveal style="--d:1"><Compare /></div>
-  </div>
-</section>
-
-<section class="section alt">
   <div class="wrap faq-grid">
     <div class="head" data-reveal>
       <h2>Questions owners ask first</h2>
@@ -148,7 +129,7 @@ const ticker = ["bKash checkout", "Nagad", "Cards", "Courier booking", "Order SM
   </div>
 </section>
 
-<section class="section">
+<section class="band band-navy">
   <div class="wrap closing">
     <div class="signboard sign-yellow" data-reveal>
       <h2>Free to build. {tk(starter.tk)} a month to go&nbsp;live.</h2>

@@ -1,0 +1,80 @@
+---
+// "A Facebook page is not a store": a full-width photo that changes with the problem picked,
+// one status card on it, and an offset card holding the heading and the problems (like the prepaid scene).
+import Photo from "./Photo.astro";
+import facts from "../data/facts";
+const card = facts.market.cardLimitUsd.text;
+const tabs = [
+  { id: "inbox", label: "Orders lost in the inbox", fix: "Your store takes the order, the address and the payment by itself, day and night.", photo: "rainlane" },
+  { id: "agency", label: "A website you can't change", fix: "Change anything by asking in a sentence. You see it before it goes live.", photo: "office" },
+  { id: "dollar", label: "Tools priced in dollars", fix: "Priced in taka and paid by bKash, with local payments, couriers and SMS built in.", photo: "bazar" },
+] as const;
+---
+<section class="pscene" data-tabs>
+  <div class="pphotos">
+    {tabs.map((t, i) => (
+      <div class="pphoto" role="tabpanel" id={`pp-${t.id}`} aria-labelledby={`pt-${t.id}`} hidden={i !== 0}>
+        <Photo id={t.photo} class="pimg-bg" sizes="100vw" widths={[800, 1200, 1600, 2000]} />
+        {t.id === "inbox" && (
+          <div class="pnote chat" aria-hidden="true">
+            <span class="unread">47 unread</span>
+            <div class="bub l">Price?</div><div class="bub l">Size?</div><div class="bub r">Tk 1,450, one size</div>
+            <div class="bub l">Address na bKash number?</div><div class="bub l">Still available?? 11:48 pm</div>
+          </div>
+        )}
+        {t.id === "agency" && (
+          <div class="pnote" aria-hidden="true"><span class="ni amber">⏳</span><span><b>Change request #7 · waiting</b>Add a delivery charge outside Dhaka · quoted separately</span></div>
+        )}
+        {t.id === "dollar" && (
+          <div class="pnote" aria-hidden="true"><span class="ni red">✕</span><span><b>Card payment declined</b>International card: {card} limit, allowed purposes only</span></div>
+        )}
+      </div>
+    ))}
+  </div>
+  <div class="wrap">
+    <div class="pcard" data-reveal>
+      <h2>A Facebook page is not a store.</h2>
+      <p class="lede">We add the missing pieces, so the inbox stops eating your day.</p>
+      <div class="plist" role="tablist" aria-label="Problems">
+        {tabs.map((t, i) => (
+          <button type="button" role="tab" id={`pt-${t.id}`} aria-controls={`pp-${t.id}`} aria-selected={i === 0 ? "true" : "false"} tabindex={i === 0 ? 0 : -1}>
+            <span class="num">{i + 1}</span><span class="pl">{t.label}<small><b>With Amader Cloud:</b> {t.fix}</small></span>
+          </button>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+.pscene { position: relative; padding-bottom: clamp(48px, 7vw, 96px); }
+.pphotos { position: relative; aspect-ratio: 2.3 / 1; max-height: 640px; width: 100%; overflow: hidden; background: #14213d; }
+.pphoto { position: absolute; inset: 0; animation: pfade .6s ease; }
+.pphoto[hidden] { display: none; }
+@keyframes pfade { from { opacity: 0; } }
+.pphoto :global(.pimg-bg) { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.pphoto::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, rgb(10 16 32 / .1), rgb(10 16 32 / .35)); }
+.pnote { position: absolute; z-index: 1; right: clamp(16px, 5vw, 72px); top: clamp(16px, 5vw, 64px); max-width: 340px; display: flex; gap: 10px; align-items: center; padding: 10px 14px 10px 10px; background: #fff; color: #14213d; border-radius: 14px; font-size: 0.88rem; line-height: 1.35; box-shadow: 0 14px 30px -12px rgb(0 0 0 / .55); animation: note-in .5s cubic-bezier(.2,.8,.2,1.2) .2s backwards; }
+.pnote b { display: block; font-size: 0.95rem; }
+.ni { flex: none; display: grid; place-items: center; width: 34px; height: 34px; border-radius: 9px; color: #fff; font-weight: 900; }
+.ni.red { background: var(--red); } .ni.amber { background: #e8a200; }
+@keyframes note-in { from { opacity: 0; translate: 0 12px; } }
+.pnote.chat { display: grid; gap: 6px; width: min(290px, 70vw); padding: 14px; border: 2px solid #14213d; }
+.bub { padding: 6px 10px; border-radius: 12px; max-width: 82%; background: #eef1f4; font-size: 0.86rem; }
+.bub.l { justify-self: start; border-bottom-left-radius: 3px; } .bub.r { justify-self: end; background: #1739a8; color: #fff; border-bottom-right-radius: 3px; }
+.unread { position: absolute; top: -12px; right: -12px; background: var(--red); color: #fff; font-weight: 800; font-size: 0.78rem; padding: 3px 10px; border-radius: 999px; rotate: 6deg; }
+.pcard { position: relative; z-index: 2; margin-top: clamp(-220px, -16vw, -60px); max-width: 640px; background: var(--card); border: 1.5px solid var(--line); border-radius: 6px; padding: clamp(24px, 4vw, 40px); box-shadow: 0 30px 60px -40px rgb(20 33 61 / .5); }
+.pcard h2 { max-width: 14ch; }
+.plist { display: grid; gap: 8px; margin-top: 22px; }
+.plist button { display: flex; gap: 14px; align-items: flex-start; text-align: left; font: inherit; color: var(--ink); background: var(--card); border: 1.5px solid var(--rule); border-radius: 6px; padding: 12px 14px; cursor: pointer; transition: border-color .2s, background-color .2s; }
+.plist button:hover { border-color: var(--line); }
+.plist button[aria-selected="true"] { border-color: var(--line); background: var(--yellow-wash); }
+.num { flex: none; display: grid; place-items: center; width: 32px; height: 32px; border-radius: 4px; background: var(--green); color: var(--yellow); font-family: var(--display); font-weight: 900; font-size: 1.2rem; }
+.plist button[aria-selected="true"] .num { background: var(--red); }
+.pl { display: grid; gap: 4px; font-weight: 700; font-size: 1.05rem; padding-top: 4px; }
+.pl small { display: none; font-weight: 500; font-size: 0.95rem; color: var(--ink-2); }
+.pl small b { color: var(--green); }
+:root[data-theme="dark"] .pl small b { color: var(--ok); }
+.plist button[aria-selected="true"] small { display: block; animation: pfade .4s ease; }
+@media (max-width: 760px) { .pphotos { aspect-ratio: 4 / 5; } .pnote { left: 16px; right: 16px; max-width: none; } .pnote.chat { left: auto; } .pcard { margin-top: -48px; } }
+</style>
