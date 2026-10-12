@@ -24,7 +24,8 @@ details { background: var(--card); border: 1.5px solid var(--rule); border-radiu
 details[open] { border-color: var(--line); }
 summary { list-style: none; cursor: pointer; display: flex; justify-content: space-between; gap: 16px; align-items: center; padding: 16px 20px; font-weight: 700; font-size: 1.06rem; }
 summary::-webkit-details-marker { display: none; }
-summary::after { content: "+"; flex: none; display: grid; place-items: center; width: 30px; height: 30px; border-radius: 4px; background: var(--yellow); color: #14213d; font-family: var(--display); font-weight: 900; font-size: 1.4rem; transition: rotate .25s; }
-details[open] summary::after { rotate: 45deg; background: var(--red); color: #fff; }
+/* The mark is drawn, not typed: two bars crossing at the exact centre of a square plate; a cross when open */
+summary::after { --m: #14213d; content: ""; flex: none; width: 30px; height: 30px; border-radius: 4px; background: linear-gradient(var(--m), var(--m)) center / 14px 3px no-repeat, linear-gradient(var(--m), var(--m)) center / 3px 14px no-repeat, var(--yellow); transition: background-color .2s; }
+details[open] summary::after { --m: #fff; --x: linear-gradient(45deg, transparent calc(50% - 1.5px), var(--m) calc(50% - 1.5px) calc(50% + 1.5px), transparent calc(50% + 1.5px)); background: var(--x) center / 14px 14px no-repeat, linear-gradient(-45deg, transparent calc(50% - 1.5px), var(--m) calc(50% - 1.5px) calc(50% + 1.5px), transparent calc(50% + 1.5px)) center / 14px 14px no-repeat, var(--red); }
 details p { margin: 0; padding: 0 20px 18px; color: var(--ink-2); max-width: 70ch; }
 </style>
