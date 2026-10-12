@@ -4,14 +4,14 @@ import Photo from "../components/Photo.astro";
 import { plan } from "../data/facts";
 import Connectors from "../components/Connectors.astro";
 import Assemble from "../components/Assemble.astro";
-// Who does each step. Agent steps glow on the track. Copy rule: "our agent", never "AI", a model or a provider.
+// Who does each step. Agent steps glow in the chain. Copy rule: "our agent", never "AI", a model or a provider.
 const steps = [
-  { t: "Describe it", d: "Write what you want, how you want. “A store for my handmade bags with bKash payment and an SMS when the order ships.”", who: "you" },
-  { t: "Our agent builds it", d: "Our store agent plans your app, lays out the pages, adds your products or services, and connects payments, courier and SMS. Minutes, not weeks.", who: "ai" },
-  { t: "Try it", d: "A preview on your phone, with test payments, before anything is public. Look around, place a test order, read the SMS.", who: "you" },
-  { t: "Change it by asking", d: "“Add 10% off for bKash payments.” “Make it green.” Our agent makes the change, you see it first, and any change can be undone.", who: "ai" },
-  { t: "Our agent checks it", d: "Before it goes live, and while it runs, every app is checked for scams, fake bank or wallet pages and prohibited goods.", who: "ai" },
-  { t: "Get paid", d: "Live at yourname.amader.cloud. Customers pay into your own merchant accounts; we never hold your money.", who: "you" },
+  { t: "You describe it", who: "you" },
+  { t: "Our agent builds it", who: "ai" },
+  { t: "You try it", who: "you" },
+  { t: "You ask, our agent changes it", who: "ai" },
+  { t: "Our agent checks it", who: "ai" },
+  { t: "You get paid", who: "you" },
 ];
 const run = [
   ["Hosting", "Your app runs on our servers at yourname.amader.cloud. Nothing to install."],
@@ -35,26 +35,13 @@ const run = [
 
 <section class="section">
   <div class="wrap">
-    <div class="flow" data-tabs data-auto>
+    <div class="flow">
       <p class="legend"><span class="ai-dot" aria-hidden="true">✦</span> Our cloud agent does the glowing steps. You do the rest.</p>
-      <ol class="track" role="tablist" aria-label="Steps">
+      <ol class="chain" aria-label="Steps">
         {steps.map((s, i) => (
-          <li class:list={["station", s.who]}>
-            <button type="button" role="tab" id={`st-${i}`} aria-controls={`sp-${i}`} aria-selected={i === 0 ? "true" : "false"} tabindex={i === 0 ? 0 : -1}>
-              <span class="disc">{s.who === "ai" ? "✦" : i + 1}</span>
-              <span class="name">{s.t}</span>
-              <span class="tag">{s.who === "ai" ? "Our agent" : "You"}</span>
-            </button>
-          </li>
+          <li class:list={["link", s.who]} style={`--i:${i}`}><span class="pill">{s.who === "ai" && <span class="spark" aria-hidden="true">✦</span>}{s.t}</span></li>
         ))}
       </ol>
-      {steps.map((s, i) => (
-        <div class:list={["stop", s.who]} role="tabpanel" id={`sp-${i}`} aria-labelledby={`st-${i}`} hidden={i !== 0}>
-          <span class="stop-n">Step {i + 1} of {steps.length}{s.who === "ai" ? " · done by our agent" : ""}</span>
-          <h2>{s.t}</h2>
-          <p class="lede">{s.d}</p>
-        </div>
-      ))}
     </div>
   </div>
 </section>
@@ -126,40 +113,19 @@ const run = [
 .legend { display: flex; align-items: center; gap: 10px; font-weight: 700; margin: 0 0 22px; }
 .ai-dot { display: inline-grid; place-items: center; width: 28px; height: 28px; border-radius: 50%; color: #fff; background: conic-gradient(var(--yellow), var(--red), var(--blue), var(--green), var(--yellow)); animation: spin-ai 4s linear infinite; }
 @keyframes spin-ai { to { rotate: 360deg; } }
-/* The track: six stations on a line; a token rides the line, and agent stations run with colour */
-.track { list-style: none; margin: 0; padding: 0; position: relative; display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 8px; }
-.track::before { content: ""; position: absolute; left: 8%; right: 8%; top: 31px; height: 4px; background: repeating-linear-gradient(90deg, var(--line) 0 10px, transparent 10px 18px); animation: flow-line 1.2s linear infinite; }
-@keyframes flow-line { to { background-position: 18px 0; } }
-.station button { position: relative; width: 100%; display: grid; justify-items: center; gap: 8px; padding: 0 4px 10px; font: inherit; color: var(--ink); background: none; border: 0; cursor: pointer; text-align: center; }
-.disc { position: relative; z-index: 1; display: grid; place-items: center; width: 66px; height: 66px; border-radius: 50%; background: var(--card); border: 3px solid var(--line); font-family: var(--display); font-weight: 900; font-size: 1.7rem; transition: scale .25s, background-color .25s; }
-.station.ai .disc { border-color: transparent; background: linear-gradient(var(--card), var(--card)) padding-box, conic-gradient(from var(--a, 0deg), var(--yellow), var(--red), var(--blue), var(--green), var(--yellow)) border-box; color: var(--red); animation: ring 3s linear infinite; }
-@property --a { syntax: "<angle>"; inherits: false; initial-value: 0deg; }
-@keyframes ring { to { --a: 360deg; } }
-.station.ai .disc::after { content: ""; position: absolute; inset: -10px; border-radius: 50%; background: radial-gradient(closest-side, color-mix(in srgb, var(--yellow) 55%, transparent), transparent); z-index: -1; animation: glow 2.4s ease-in-out infinite; }
-@keyframes glow { 50% { opacity: .35; scale: .85; } }
-.name { font-weight: 700; font-size: 0.98rem; line-height: 1.2; }
-.station .tag { font-size: 0.72rem; color: var(--ink-2); }
-.station.ai .tag { color: var(--red); }
-.station button[aria-selected="true"] .disc { scale: 1.12; background-color: var(--yellow); }
-.station.you button[aria-selected="true"] .disc { background: var(--yellow); color: #14213d; }
-.station.ai button[aria-selected="true"] .disc { background: linear-gradient(var(--yellow), var(--yellow)) padding-box, conic-gradient(from var(--a, 0deg), var(--yellow), var(--red), var(--blue), var(--green), var(--yellow)) border-box; color: #14213d; }
-.station button[aria-selected="true"] .name { text-decoration: underline; text-decoration-color: var(--red); text-decoration-thickness: 3px; text-underline-offset: 5px; }
-.stop { margin-top: 26px; padding: clamp(22px, 3vw, 34px); border: 2px solid var(--line); border-radius: 8px; background: var(--card); max-width: 860px; margin-inline: auto; text-align: center; animation: panel-in .35s ease; }
-.stop.ai { border-color: transparent; background: linear-gradient(var(--card), var(--card)) padding-box, linear-gradient(90deg, var(--yellow), var(--red), var(--blue), var(--green), var(--yellow)) 0 0 / 300% 100% border-box; animation: panel-in .35s ease, aiflow-b 3s linear infinite; }
+/* The chain: six steps as buttons joined by arrows; a light runs along it, and the agent's steps glow */
+.flow { display: grid; justify-items: center; gap: 22px; }
+.chain { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 12px 0; max-width: 1100px; }
+.link { display: flex; align-items: center; }
+.link + .link::before { content: "→"; margin: 0 12px; font-weight: 900; font-size: 1.5rem; color: var(--red); animation: nudge 1.4s ease-in-out infinite; animation-delay: calc(var(--i) * .15s); }
+@keyframes nudge { 50% { translate: 4px 0; } }
 @keyframes aiflow-b { to { background-position: 0 0, 300% 0; } }
-@keyframes panel-in { from { opacity: 0; translate: 0 8px; } }
-.stop-n { font-weight: 700; font-size: 0.85rem; color: var(--ink-2); }
-.stop.ai .stop-n { color: var(--red); }
-.stop h2 { margin: 6px 0 10px; }
-.stop .lede { margin: 0 auto; }
-.flow-bar { height: 3px; }
-@media (max-width: 760px) {
-  .track { grid-template-columns: 1fr; gap: 4px; }
-  .track::before { left: 31px; right: auto; top: 10px; bottom: 10px; width: 4px; height: auto; background: repeating-linear-gradient(180deg, var(--line) 0 10px, transparent 10px 18px); }
-  .station button { grid-template-columns: 66px 1fr auto; justify-items: start; align-items: center; text-align: left; gap: 14px; padding: 4px 0; }
-  .stop { text-align: left; }
-}
-@media (prefers-reduced-motion: reduce) { .track::before, .station.ai .disc, .station.ai .disc::after, .ai-dot, .stop.ai { animation: none; } }
+.pill { display: inline-flex; align-items: center; gap: 8px; padding: 12px 20px; border-radius: 999px; font-weight: 800; font-size: 1.05rem; background: var(--card); border: 2px solid var(--line); color: var(--ink); white-space: nowrap; animation: lit 9s ease-in-out infinite; animation-delay: calc(var(--i) * 1.5s - 9s); }
+.link.ai .pill { border-color: transparent; background: linear-gradient(var(--card), var(--card)) padding-box, linear-gradient(90deg, var(--yellow), var(--red), var(--blue), var(--green), var(--yellow)) 0 0 / 300% 100% border-box; animation: lit 9s ease-in-out infinite, aiflow-b 3s linear infinite; animation-delay: calc(var(--i) * 1.5s - 9s), 0s; }
+.pill .spark { color: var(--red); }
+@keyframes lit { 0%, 18%, 100% { scale: 1; box-shadow: none; } 6%, 12% { scale: 1.08; box-shadow: 0 10px 24px -10px rgb(20 33 61 / .45); } }
+@media (max-width: 700px) { .chain { flex-direction: column; } .link + .link::before { content: "↓"; margin: 6px 0; } .link { flex-direction: column; } }
+@media (prefers-reduced-motion: reduce) { .pill, .link + .link::before, .ai-dot { animation: none !important; } }
 .aw { margin: 8px 0 0; padding-left: 20px; display: grid; gap: 8px; }
 #agencies .agency-card { color: #14213d; background: var(--yellow); border-color: var(--yellow); }
 </style>
