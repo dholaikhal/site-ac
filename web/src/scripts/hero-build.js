@@ -33,10 +33,17 @@ function init(box) {
   const chips = [...box.querySelectorAll("[data-qb-pick]")];
   let jump = null;
   chips.forEach((c) => c.addEventListener("click", () => { jump = +c.dataset.qbPick; run++; }));
-  // Roll the reel so the picked kind of business sits in line with "Do you want an app for your".
+  // Turn the circular reel: each choice moves to its distance from the picked one, wrapping round the list.
   const pick = (i) => {
-    chips.forEach((c, n) => c.setAttribute("aria-pressed", String(n === i)));
-    reel.style.setProperty("--i", String(i));
+    const N = chips.length;
+    chips.forEach((c, n) => {
+      let o = (((n - i) % N) + N) % N;
+      if (o > N / 2) o -= N;
+      const li = c.parentElement;
+      li.style.setProperty("--o", String(o));
+      li.dataset.d = Math.abs(o) > 2 ? "far" : String(Math.abs(o));
+      c.setAttribute("aria-pressed", String(o === 0));
+    });
   };
   const state = (k) => ({ app: k, off: false, green: false, cod: false, remind: false, late: false, cutoff: false, near: false, flash: null, built: true, published: true, tab: "home", undo: [] });
 
