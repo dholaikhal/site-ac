@@ -29,23 +29,31 @@ function init(box) {
     ["service", "Bookings for my AC servicing team, visit fee by bKash", "AC servicing", 500, "visit"],
     ["fees", "Monthly fees for my coaching centre, receipt by SMS", "BP-2071 · October", 2500, "payment"],
   ];
-  const reel = $("[data-qb-reel]");
-  const chips = [...box.querySelectorAll("[data-qb-pick]")];
+  // The kinds of business on the board: a track drawn three times over. The chosen one is slid to the middle of
+  // the board and lit; after each glide the track quietly resets to the middle copy, so it never runs out.
+  const track = $("[data-qb-reel]");
+  const chips = [...track.querySelectorAll("[data-qb-pick]")];
+  const N = chips.length / 3;
+  let at = N; // position in the three copies
   let jump = null;
-  // A tap answers at once (chip, row and headline); the build for it starts as soon as the current step stops.
-  chips.forEach((c) => c.addEventListener("click", () => { jump = +c.dataset.qbPick; run++; pick(jump); }));
-  // Pick a kind of business: its chip lights up and slides to the middle of the row (the row scrolls, not
-  // the page), and the headline's middle line becomes its name.
-  const word = $("[data-qb-word]");
-  const pick = (i) => {
-    chips.forEach((c, n) => c.setAttribute("aria-pressed", String(n === i)));
-    const c = chips[i];
-    reel.scrollTo({ left: c.offsetLeft - (reel.clientWidth - c.offsetWidth) / 2, behavior: still ? "auto" : "smooth" });
-    if (word.textContent !== c.dataset.word) {
-      word.textContent = c.dataset.word;
-      word.classList.remove("swap"); void word.offsetWidth; word.classList.add("swap");
-    }
+  const place = (glide) => {
+    const el = chips[at];
+    track.classList.toggle("glide", glide && !still);
+    track.style.transform = `translateX(${track.parentElement.clientWidth / 2 - (el.offsetLeft + el.offsetWidth / 2)}px)`;
+    chips.forEach((c, n) => { c.classList.toggle("on", n === at); c.setAttribute("aria-pressed", String(n === at)); });
   };
+  const settle = () => { if (at < N || at >= 2 * N) { at = (at % N) + N; place(false); } };
+  track.addEventListener("transitionend", settle);
+  const pick = (i) => {
+    // the copy of i nearest to where the track is now, so it turns the short way round
+    at = [i, i + N, i + 2 * N].reduce((a, b) => (Math.abs(b - at) < Math.abs(a - at) ? b : a));
+    place(true);
+  };
+  // A tap answers at once; the build for it starts as soon as the current step stops.
+  chips.forEach((c) => c.addEventListener("click", () => { jump = +c.dataset.qbPick; run++; pick(jump); }));
+  place(false);
+  document.fonts?.ready.then(() => place(false));
+  addEventListener("resize", () => place(false));
   const state = (k) => ({ app: k, off: false, green: false, cod: false, remind: false, late: false, cutoff: false, near: false, flash: null, built: true, published: true, tab: "home", undo: [] });
 
   let visible = true, run = 0;
