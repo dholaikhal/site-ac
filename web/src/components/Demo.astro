@@ -150,8 +150,6 @@ import Device from "./Device.astro";
 .open-sign .board { font-family: var(--display); font-weight: 900; font-size: 1.35rem; letter-spacing: .06em; text-transform: uppercase; color: var(--yellow); background: var(--red); padding: 2px 14px; border-radius: 3px; box-shadow: inset 0 0 0 3px var(--red), inset 0 0 0 4.5px var(--yellow); }
 .open-sign.swing { animation: swing 2.4s cubic-bezier(.3,.6,.3,1) both; }
 @keyframes swing { 0% { rotate: 0deg; translate: 0 -40px; opacity: 0; } 15% { translate: 0 0; opacity: 1; rotate: 14deg; } 35% { rotate: -9deg; } 55% { rotate: 5deg; } 75% { rotate: -2deg; } 100% { rotate: 0deg; } }
-.confetti { position: absolute; top: -12px; left: var(--x); width: 10px; height: 13px; clip-path: polygon(0 0, 100% 0, 50% 100%); z-index: 7; pointer-events: none; animation: fall var(--t) ease-in forwards; }
-@keyframes fall { to { translate: var(--dx) 640px; rotate: var(--r); opacity: .2; } }
 .screen { position: relative; }
 .screen .paysheet { position: absolute; left: 0; right: 0; bottom: 0; z-index: 3; display: grid; gap: 6px; padding: 14px 12px 16px; background: #fff; border-radius: 16px 16px 0 0; box-shadow: 0 -12px 30px -10px rgb(0 0 0 / .35); animation: sheet-up .35s cubic-bezier(.2,.8,.2,1); }
 .screen .paysheet > b { font-size: 0.95rem; color: #c2185b; }

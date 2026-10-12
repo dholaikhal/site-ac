@@ -19,6 +19,7 @@ export const esc = (s) => s.replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt
 export const PAY = ["bKash", "Nagad", "Card"];
 export const APPS = {
   shop: {
+    label: "Facebook store",
     match: /shop|sell|store|bag|cloth|saree|dress|product|boutique|jewel|deliver|dokan|bikri|becha/i,
     prompt: "A store for my handmade bags with bKash payment, delivery, and an SMS when the order ships",
     bn: "Amar handmade bag er jonno ekta online store chai, bKash e payment, delivery, ar order ship hole customer ke SMS",
@@ -32,6 +33,7 @@ export const APPS = {
       reply: "Cash on delivery now shows only for Dhaka addresses.", bnReply: "Cash on delivery ekhon shudhu Dhakar address e dekhabe.", touched: "checkout, address rule" },
   },
   kitchen: {
+    label: "Home kitchen",
     match: /kitchen|food|biryani|kacchi|cake|bakery|restaurant|meal|tiffin|khabar|ranna/i,
     prompt: "Orders for my home kitchen: kacchi biryani and cakes, with a delivery time and bKash payment",
     bn: "Amar home kitchen er order nite chai, kacchi ar cake, delivery time bechhe nibe, bKash e payment",
@@ -44,6 +46,7 @@ export const APPS = {
       reply: "Orders after 8 pm now go to next-day delivery.", bnReply: "Raat 8 tar por order ekhon porer diner delivery te jabe.", touched: "delivery times" },
   },
   book: {
+    label: "Salon",
     match: /book|appoint|salon|tutor|parlou?r|parlar|spa|gym|slot/i,
     prompt: "Online bookings for my salon with a deposit paid by bKash and a reminder SMS",
     bn: "Amar salon er online booking lagbe, bKash e advance nibo, ar booking hole SMS jabe",
@@ -57,6 +60,7 @@ export const APPS = {
       reply: "Reminders now go out at 6 pm the day before.", bnReply: "Ekhon ager din shondha 6 tay reminder jabe.", touched: "SMS schedule" },
   },
   doctor: {
+    label: "Clinic",
     match: /clinic|doctor|chamber|serial|patient|daktar|hospital|dental|dent/i,
     prompt: "Serial booking for my clinic's evening chamber, with a booking fee by bKash and the serial number by SMS",
     bn: "Amar chamber er serial online e dite chai, bKash e booking fee, ar SMS e serial number jabe",
@@ -68,7 +72,47 @@ export const APPS = {
     special: { chip: "Text patients when 3 serials are left before them", bn: "Ager 3 ta serial baki thakle patient ke SMS dao", match: /3 serials|serials? (are )?left|baki|before them/i, key: "near", screen: "sms",
       reply: "Patients now get an SMS when 3 serials are left before them.", bnReply: "Ekhon ager 3 ta serial baki thakle patient SMS pabe.", touched: "SMS schedule" },
   },
+  pharmacy: {
+    label: "Pharmacy",
+    match: /pharmac|medicine|oshudh|prescription|drug ?store/i,
+    prompt: "Medicine orders for my pharmacy: upload a prescription, pay by bKash, delivered within the hour",
+    bn: "Amar pharmacy er jonno online order chai, prescription upload, bKash e payment, ek ghontay delivery",
+    name: "Shefa Pharmacy", slug: "shefapharmacy", color: "#1d5fa8",
+    kind: "medicine orders with prescriptions",
+    plan: ["Pages: medicines, prescription upload, checkout", "Payments: bKash, Nagad, card", "Delivery: a rider within the hour", "SMS: order confirmed, rider on the way"],
+    tabs: [["home", "Medicines"], ["item", "Prescription"], ["pay", "Checkout"], ["sms", "SMS"]],
+    adminTab: ["admin", "Orders"],
+    special: { chip: "Ask for a prescription on antibiotics", bn: "Antibiotic kinte prescription lagbe", match: /antibiotic|prescription/i, key: "rx", screen: "item",
+      reply: "Antibiotics now need a prescription photo before checkout.", bnReply: "Antibiotic kinte ekhon prescription er chhobi lagbe.", touched: "checkout rule" },
+  },
+  event: {
+    label: "Event tickets",
+    match: /ticket|event|concert|workshop|seminar|onushthan|gaan/i,
+    prompt: "Tickets for our Friday music night, with seat types, bKash payment and the ticket by SMS",
+    bn: "Amader shukrobar er gaaner onushthaner ticket bikri korte chai, bKash e payment, SMS e ticket",
+    name: "Shondha Live", slug: "shondhalive", color: "#a21caf",
+    kind: "event tickets",
+    plan: ["Pages: event, tickets, checkout", "Payments: bKash, Nagad, card", "Tickets: a QR code checked at the gate", "SMS: the ticket and a reminder"],
+    tabs: [["home", "Event"], ["item", "Tickets"], ["pay", "Checkout"], ["sms", "Ticket"]],
+    adminTab: ["admin", "Sales"],
+    special: { chip: "Early-bird price until Wednesday", bn: "Budhbar porjonto early-bird dam rakho", match: /early|budhbar|wednesday/i, key: "early", screen: "item",
+      reply: "Early-bird tickets are Tk 100 less until Wednesday.", bnReply: "Budhbar porjonto early-bird ticket Tk 100 kom.", touched: "ticket prices" },
+  },
+  service: {
+    label: "AC servicing",
+    match: /\bac\b|air ?con|servicing|repair|plumb|electrician|technician|mistri/i,
+    prompt: "Bookings for my AC servicing team: pick a time, pay a visit fee by bKash, the technician's name by SMS",
+    bn: "Amar AC servicing er booking chai, shomoy bechhe nibe, bKash e visit fee, SMS e technician er naam",
+    name: "Thanda AC Care", slug: "thandaac", color: "#0369a1",
+    kind: "home-service bookings",
+    plan: ["Pages: services, pick a time, visit fee", "Payments: visit fee by bKash, Nagad or card", "Schedule: your team's free slots", "SMS: technician's name and time"],
+    tabs: [["home", "Services"], ["item", "Pick a time"], ["pay", "Visit fee"], ["sms", "SMS"]],
+    adminTab: ["admin", "Jobs"],
+    special: { chip: "Add Tk 200 for visits outside Dhanmondi", bn: "Dhanmondi er baire visit e Tk 200 extra rakho", match: /outside|baire|dhanmondi/i, key: "zone", screen: "pay",
+      reply: "Visits outside Dhanmondi now add Tk 200.", bnReply: "Dhanmondi er baire visit e ekhon Tk 200 extra.", touched: "visit fee rule" },
+  },
   fees: {
+    label: "Coaching centre",
     match: /fee|school|coach|club|member|tuition|madrasa|association|student|class|batch|beton|mashik|chhatro|chatro/i,
     prompt: "Monthly fee collection for my coaching centre, paid by bKash or Nagad, with an SMS receipt",
     bn: "Amar coaching center er mashik fee bKash ba Nagad e nite chai, guardian er kache SMS receipt jabe",
@@ -94,6 +138,9 @@ export const amount = (st) => ({
   kitchen: 960 - (st.off ? 90 : 0),
   book: 300 - (st.off ? 30 : 0),
   doctor: 200 - (st.off ? 20 : 0),
+  pharmacy: 580 - (st.off ? 54 : 0),
+  event: (st.early ? 800 : 1000) - (st.off ? (st.early ? 80 : 100) : 0),
+  service: 500 + (st.zone ? 200 : 0) - (st.off ? 50 : 0),
   fees: 2500 + (st.late ? 100 : 0) - (st.off ? 250 : 0),
 })[st.app];
 
@@ -126,6 +173,9 @@ const heroPhoto = (title, sub, cta, img) => `<div class="hero-b photo">${ph(img,
 const PRODUCTS = [["Market tote", 1450, imgTote], ["Printed tote", 1250, imgPrinted], ["Woven handbag", 1850, imgWoven], ["Jute pouch", 350, imgPouch]];
 const MENU = [["Kacchi biryani", 450, imgKacchi, "Mutton, aloo, borhani on the side"], ["Chicken biryani", 320, imgChicken, "With egg and salad"], ["Chocolate cake", 850, imgCake, "1 lb, order a day ahead"]];
 const DOCTORS = [["AR", "Dr. A. Rahman", "Medicine", 800, 6], ["SA", "Dr. S. Akter", "Paediatrics", 700, 3], ["MH", "Dr. M. Hossain", "Gynaecology", 1000, 9]];
+const MEDS = [["Paracetamol 500 mg", "10 tablets", 20], ["Oral saline", "10 sachets", 60], ["Digital thermometer", "Fast reading", 350], ["Antacid syrup", "200 ml", 110]];
+const TICKETS = [["General", 500, 64], ["Front rows", 900, 12], ["Student", 300, 30]];
+const JOBS = [["AC servicing", 1500, "1–2 hr", "snow"], ["Gas refill", 3500, "1 hr", "wrench"], ["New AC installation", 2500, "2–3 hr", "wrench"]];
 const SERVICES = [["Haircut", 600, "45 min", "scissors"], ["Hair colour", 2200, "2 hr", "drop"], ["Facial", 1500, "1 hr", "sparkle"], ["Manicure", 700, "40 min", "hand"]];
 
 export const SCREENS = {
@@ -233,6 +283,81 @@ export const SCREENS = {
       ...(st.near ? [`${APPS.doctor.name}: 3 serials before yours. Please come to the chamber now.`] : []),
     ], st.flash === "near" || st.flash === "off"),
     admin: (st) => adminScreen(st, "Serials", [["Serial 13 · Dr. A. Rahman", tk(200 - (st.off ? 20 : 0)), "Booking fee by bKash", "Confirmed"]]),
+  },
+  pharmacy: {
+    home: (st) =>
+      b("app bar", appBar(st, ["search", "bag"]), ch(st.flash === "green")) +
+      b("hero", hero(st, "Medicines at your door", "Dhanmondi · delivered within the hour", "Upload prescription"), ch(st.flash === "green")) +
+      b("search", `<div class="sec"><div class="fld">${icon("search")}<span class="muted">Search medicines</span></div></div>`) +
+      b("medicines", `<div class="row-h"><h5>Popular</h5><span>See all</span></div><div class="svc-list">${MEDS.map(([n, d, p]) =>
+        `<div class="svc"><span class="svc-ic">${icon("pill")}</span><span class="svc-t">${n}<small>${d}</small></span><b>${tk(p)}</b><span class="add">+</span></div>`).join("")}</div>`) +
+      b("tab bar", tabbar([["home", "Home"], ["camera", "Prescription"], ["bag", "Cart"], ["user", "Account"]])),
+    item: (st) =>
+      b("app bar", subBar("Prescription")) +
+      b("upload", `<div class="sec card upload">${icon("camera")}<span><b>Prescription photo added</b><small>Our pharmacist checks it before your order is packed</small></span>${icon("check", "ok")}</div>`) +
+      b("items", `<div class="sec"><h5>From your prescription</h5><div class="inv"><span>Paracetamol 500 mg<small>10 tablets</small></span><b>${tk(20)}</b></div><div class="inv"><span>Antacid syrup<small>200 ml</small></span><b>${tk(110)}</b></div><div class="inv${st.rx ? " late" : ""}"><span>Antibiotic course<small>${st.rx ? "Prescription needed · added" : "7 days"}</small></span><b>${tk(410)}</b>${st.rx ? '<em class="due">Rx</em>' : ""}</div></div>`, ch(st.flash === "rx")) +
+      b("continue", `<div class="paybar"><span class="pb-note">${tk(540)}</span><div class="paybtn">Checkout</div></div>`),
+    pay: (st) => {
+      const items = 540, del = 40, off = st.off ? 54 : 0;
+      return b("app bar", subBar("Checkout")) + b("steps", steps3(2)) +
+        b("summary", `<div class="sec card"><div class="line-item"><span class="thumb glyph">${icon("pill")}</span><span>3 items<small>Prescription checked</small></span><b>${tk(items)}</b></div><div class="row"><span>Delivery within the hour</span><span>${tk(del)}</span></div>${off ? `<div class="row ok"><span>bKash discount</span><span>−${tk(off)}</span></div>` : ""}<div class="row tot"><span>Total</span><span>${tk(items + del - off)}</span></div></div>`, ch(st.flash === "off")) +
+        b("address", `<div class="sec card addr">${icon("pin")}<span><b>Deliver to</b>Road 27, Dhanmondi, Dhaka</span></div>`) +
+        b("payment", methods(st, items + del - off), ch(st.flash === "off"));
+    },
+    sms: (st) => smsScreen(st, [
+      `${APPS.pharmacy.name}: order #318 confirmed. ${tk(amount(st))} paid by bKash. A rider will reach you within the hour.`,
+      `${APPS.pharmacy.name}: your rider is on the way. Track it at ${APPS.pharmacy.slug}.amader.cloud/t/318`,
+    ], st.flash === "off"),
+    admin: (st) => adminScreen(st, "Orders", [["#318 · 3 items", tk(amount(st)), "Paid by bKash", "Rider assigned"]]),
+  },
+  event: {
+    home: (st) =>
+      b("app bar", appBar(st, ["search", "user"]), ch(st.flash === "green")) +
+      b("hero", hero(st, "Friday Music Night", "Dhanmondi · Fri 17 Oct · 7 pm", "Get tickets"), ch(st.flash === "green")) +
+      b("details", `<div class="sec card info">${[["cal", "Friday 17 October, doors 6:30 pm"], ["pin", "Rooftop stage, Road 8, Dhanmondi"], ["ticket", "Ticket by SMS, QR checked at the gate"]].map(([i, t]) => `<span>${icon(i)}${t}</span>`).join("")}</div>`) +
+      b("tickets", `<div class="row-h"><h5>Tickets</h5><span>${st.early ? "Early-bird on" : "Selling fast"}</span></div><div class="svc-list">${TICKETS.map(([n, p, left]) =>
+        `<div class="svc"><span class="svc-ic">${icon("ticket")}</span><span class="svc-t">${n}<small>${left} left</small></span><b>${tk(st.early && n === "General" ? p - 100 : p)}</b></div>`).join("")}</div>`, ch(st.flash === "early")) +
+      b("tab bar", tabbar([["home", "Event"], ["ticket", "My tickets"], ["user", "Account"]])),
+    item: (st) =>
+      b("app bar", subBar("Tickets")) +
+      b("types", `<div class="sec">${TICKETS.map(([n, p, left], i) => `<div class="inv${i === 0 ? " pick" : ""}"><span>${n}<small>${left} left</small></span><b>${tk(st.early && i === 0 ? p - 100 : p)}</b><div class="qty mini"><span>−</span>${i === 0 ? 2 : 0}<span>+</span></div></div>`).join("")}${st.early ? '<p class="muted">Early-bird price until Wednesday.</p>' : ""}</div>`, ch(st.flash === "early")) +
+      b("continue", `<div class="paybar"><span class="pb-note">2 tickets</span><div class="paybtn">Checkout ${tk(st.early ? 800 : 1000)}</div></div>`),
+    pay: (st) => {
+      const items = st.early ? 800 : 1000, off = st.off ? items / 10 : 0;
+      return b("app bar", subBar("Checkout")) +
+        b("summary", `<div class="sec card"><div class="line-item"><span class="thumb glyph">${icon("ticket")}</span><span>2 × General<small>Fri 17 Oct, 7 pm</small></span><b>${tk(items)}</b></div>${off ? `<div class="row ok"><span>bKash discount</span><span>−${tk(off)}</span></div>` : ""}<div class="row tot"><span>Total</span><span>${tk(items - off)}</span></div></div>`, ch(st.flash === "off")) +
+        b("payment", methods(st, items - off), ch(st.flash === "off"));
+    },
+    sms: (st) => smsScreen(st, [
+      `${APPS.event.name}: 2 tickets for Friday Music Night, 17 Oct, 7 pm. ${tk(amount(st))} paid by bKash. Show this at the gate: ${APPS.event.slug}.amader.cloud/t/5521`,
+    ], st.flash === "off"),
+    admin: (st) => adminScreen(st, "Sales", [["2 × General", tk(amount(st)), "Paid by bKash", "QR sent"]]),
+  },
+  service: {
+    home: (st) =>
+      b("app bar", appBar(st, ["search", "user"]), ch(st.flash === "green")) +
+      b("hero", hero(st, "AC servicing at home", "Same-day visits in Dhaka", "Book a visit"), ch(st.flash === "green")) +
+      b("services", `<div class="row-h"><h5>Services</h5><span>Prices</span></div><div class="svc-list">${JOBS.map(([n, p, d, ic]) =>
+        `<div class="svc"><span class="svc-ic">${icon(ic)}</span><span class="svc-t">${n}<small>${icon("clock")}${d}</small></span><b>${tk(p)}</b><span class="add">+</span></div>`).join("")}</div>`) +
+      b("tab bar", tabbar([["home", "Home"], ["cal", "Visits"], ["user", "Account"]])),
+    item: (st) =>
+      b("app bar", subBar("AC servicing")) +
+      b("service", `<div class="sec card svc-card"><span class="svc-ic big">${icon("snow")}</span><span><b>AC servicing</b><small>1 to 2 hours · from ${tk(1500)}</small></span></div>`) +
+      b("date", `<div class="sec"><h5>October</h5><div class="days">${[["Mon", 6], ["Tue", 7], ["Wed", 8], ["Thu", 9], ["Fri", 10], ["Sat", 11]].map(([d, n], i) => `<span class="${i === 3 ? "sel" : ""}"><small>${d}</small>${n}</span>`).join("")}</div></div>`) +
+      b("times", `<div class="sec"><h5>Thursday</h5><div class="slots">${["10–12", "12–2 pm", "4–6 pm", "6–8 pm"].map((t, i) => `<span class="${i === 2 ? "sel" : i === 0 ? "gone" : ""}">${t}</span>`).join("")}</div></div>`) +
+      b("continue", `<div class="paybar"><span class="pb-note">Thu, 4–6 pm</span><div class="paybtn">Continue</div></div>`),
+    pay: (st) => {
+      const fee = 500, zone = st.zone ? 200 : 0, off = st.off ? 50 : 0;
+      return b("app bar", subBar("Visit fee")) +
+        b("summary", `<div class="sec card"><div class="line-item"><span class="thumb glyph">${icon("snow")}</span><span>AC servicing<small>${icon("cal")} Thu 9 Oct, 4–6 pm</small></span></div><div class="row"><span>Visit fee, taken off the bill</span><span>${tk(fee)}</span></div>${zone ? `<div class="row warn"><span>Outside Dhanmondi</span><span>${tk(zone)}</span></div>` : ""}${off ? `<div class="row ok"><span>bKash discount</span><span>−${tk(off)}</span></div>` : ""}<div class="row tot"><span>Pay now</span><span>${tk(fee + zone - off)}</span></div></div>`, ch(st.flash === "off" || st.flash === "zone")) +
+        b("address", `<div class="sec card addr">${icon("pin")}<span><b>Visit at</b>House 9, Road 4, Mohammadpur</span></div>`, ch(st.flash === "zone")) +
+        b("payment", methods(st, fee + zone - off), ch(st.flash === "off"));
+    },
+    sms: (st) => smsScreen(st, [
+      `${APPS.service.name}: visit confirmed for Thu 9 Oct, 4–6 pm. Technician: Rafiq. Visit fee ${tk(amount(st))} paid.`,
+      `${APPS.service.name}: Rafiq is on the way and will call when he reaches the gate.`,
+    ], st.flash === "off" || st.flash === "zone"),
+    admin: (st) => adminScreen(st, "Jobs", [["Thu 4–6 pm · AC servicing", tk(amount(st)), "Visit fee by bKash", "Technician assigned"]]),
   },
   fees: {
     home: (st) =>

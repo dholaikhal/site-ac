@@ -1,4 +1,5 @@
 import { APPS, COMMON, PAY, amount, SCREENS, tk, esc } from "./apps.js";
+import confettiLib from "canvas-confetti";
 // Amader Cloud builder demo. Scripted entirely in the browser: no agent is called, nothing is published.
 // Copy rule: the product is "our agent" / "our store agent", never "AI" or a model.
 // Businesses, products, prices and orders below are fictional demonstration content, not facts.
@@ -93,13 +94,16 @@ function initDemo(root) {
   const PEOPLE = { shop: [["Printed tote", 1250, "bKash"], ["Jute pouch", 350, "Nagad"], ["Woven handbag", 1850, "Card"]],
     kitchen: [["Chicken biryani", 320, "bKash"], ["Chocolate cake", 850, "Nagad"], ["Kacchi biryani", 450, "bKash"]],
     doctor: [["Serial 9 · Dr. S. Akter", 200, "bKash"], ["Serial 14 · Dr. A. Rahman", 200, "Nagad"], ["Serial 4 · Dr. M. Hossain", 200, "bKash"]],
+    pharmacy: [["Oral saline", 60, "bKash"], ["Digital thermometer", 350, "Nagad"], ["Paracetamol 500 mg", 20, "bKash"]],
+    event: [["Front rows × 2", 1800, "bKash"], ["Student", 300, "Nagad"], ["General × 3", 1500, "Card"]],
+    service: [["Gas refill visit", 500, "bKash"], ["AC servicing visit", 500, "Nagad"], ["Installation visit", 500, "bKash"]],
     book: [["Facial", 300, "bKash"], ["Haircut", 300, "Nagad"], ["Manicure", 300, "bKash"]],
     fees: [["BP-2044 · October", 2500, "Nagad"], ["BP-2102 · October", 2500, "bKash"], ["BP-2010 · October", 2500, "bKash"]] };
   function sale(what, amt, method) {
     st.sales += amt; st.orders++;
     till.hidden = false;
     tillAmt.textContent = tk(st.sales);
-    tillN.textContent = `${st.orders} ${{ fees: "payment", book: "booking", doctor: "serial" }[st.app] || "order"}${st.orders === 1 ? "" : "s"}`;
+    tillN.textContent = `${st.orders} ${{ fees: "payment", book: "booking", doctor: "serial", event: "ticket", service: "visit" }[st.app] || "order"}${st.orders === 1 ? "" : "s"}`;
     tillLog.insertAdjacentHTML("afterbegin", `<li><span>${esc(what)} · ${method}</span><b>${tk(amt)}</b></li>`);
     while (tillLog.children.length > 4) tillLog.lastElementChild.remove();
     till.classList.remove("bump"); void till.offsetWidth; till.classList.add("bump");
@@ -161,15 +165,11 @@ function initDemo(root) {
   function celebrate() {
     openSign.hidden = false;
     openSign.classList.remove("swing"); void openSign.offsetWidth; openSign.classList.add("swing");
-    if (reduced) return;
-    const colors = ["#e2261b", "#ffcc00", "#0b5d3b", "#1739a8", "#ffffff"];
-    for (let i = 0; i < 18; i++) {
-      const f = document.createElement("span");
-      f.className = "confetti";
-      f.style.cssText = `--x:${Math.random() * 100}%;--r:${Math.random() * 360}deg;--dx:${(Math.random() - .5) * 80}px;--t:${1.6 + Math.random()}s;background:${colors[i % colors.length]};animation-delay:${Math.random() * .4}s`;
-      stage.append(f);
-      setTimeout(() => f.remove(), 3200);
-    }
+    const r = devBox.getBoundingClientRect();
+    const origin = { x: (r.left + r.width / 2) / innerWidth, y: (r.top + r.height * 0.25) / innerHeight };
+    const opts = { origin, colors: ["#e2261b", "#ffcc00", "#0b5d3b", "#1739a8", "#ffffff"], disableForReducedMotion: true, zIndex: 40, ticks: 170 };
+    confettiLib({ ...opts, particleCount: 90, spread: 80, startVelocity: 40 });
+    setTimeout(() => confettiLib({ ...opts, particleCount: 50, spread: 120, startVelocity: 28, scalar: 0.75 }), 200);
   }
 
   function setChips(items) {
@@ -185,7 +185,8 @@ function initDemo(root) {
   const label_ = (e) => (lang === "bn" ? e.bn : e.chip);
 
   function startChips() {
-    setChips([...Object.entries(APPS).map(([k, a]) => ({ label: a.prompt, go: () => build(k, a.prompt) })), { label: APPS.book.bn, go: () => build("book", APPS.book.bn) }]);
+    // Short labels for the kinds of business; picking one types its full request.
+    setChips([...Object.entries(APPS).map(([k, a]) => ({ label: a.label, go: () => build(k, a.prompt) })), { label: "Salon, asked in Bangla words", alt: true, go: () => build("book", APPS.book.bn) }]);
   }
   function editChips() {
     const app = APPS[st.app];
@@ -234,7 +235,7 @@ function initDemo(root) {
     paint("home", { draft: true }); ink(token);
     if (!(await step(list, "Designing your front page", token, 1500))) return;
     paint("item", { draft: true }); ink(token);
-    if (!(await step(list, `Adding your ${{ shop: "products", kitchen: "menu and delivery times", book: "services and opening hours", doctor: "doctors and chamber hours", fees: "students and batches" }[key]}`, token, 1300))) return;
+    if (!(await step(list, `Adding your ${{ shop: "products", kitchen: "menu and delivery times", book: "services and opening hours", doctor: "doctors and chamber hours", pharmacy: "medicines and delivery area", event: "event and ticket types", service: "services and team hours", fees: "students and batches" }[key]}`, token, 1300))) return;
     paint("pay", { draft: true }); ink(token);
     if (!(await step(list, "Setting up bKash, Nagad and card payments", token, 1500))) return;
     if (key === "shop" && !(await step(list, "Connecting your courier", token, 600))) return;
@@ -304,7 +305,7 @@ function initDemo(root) {
     for (const [what, price, method] of PEOPLE[st.app].slice(0, 2)) {
       await wait(1800); if (token !== run || !st?.published) return;
       const amt = method === "bKash" && st.off ? price - Math.round(price * 0.1) : price;
-      notify("✓", `<b>New ${{ fees: "payment", book: "booking", doctor: "serial" }[st.app] || "order"}</b> ${tk(amt)} · ${method}`, "ok");
+      notify("✓", `<b>New ${{ fees: "payment", book: "booking", doctor: "serial", event: "ticket", service: "visit" }[st.app] || "order"}</b> ${tk(amt)} · ${method}`, "ok");
       sale(what, amt, method);
     }
   }
@@ -337,7 +338,7 @@ function initDemo(root) {
     setStatus("Your view", true);
     paint("admin");
     notify("✓", `<b>New payment</b> ${tk(amt)} · bKash`, "ok");
-    sale({ shop: "Market tote", kitchen: "Kacchi × 2", book: "Hair colour", doctor: "Serial 13 · Dr. A. Rahman", fees: "BP-2071 · October" }[st.app], amt, "bKash");
+    sale({ shop: "Market tote", kitchen: "Kacchi × 2", book: "Hair colour", doctor: "Serial 13 · Dr. A. Rahman", pharmacy: "3 items", event: "General × 2", service: "AC servicing visit", fees: "BP-2071 · October" }[st.app], amt, "bKash");
     if (st.app === "shop") { const list = logList("Amader Cloud", false); if (!(await step(list, "Courier booked: pickup today 4:30 pm", token, 700))) return; }
     if (!(await stream(`<p>${t().after}</p>`, "Amader Cloud", token))) return;
     setStatus("Live");

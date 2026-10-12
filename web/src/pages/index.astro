@@ -32,7 +32,7 @@ const ticker = ["bKash checkout", "Nagad", "Cards", "Courier booking", "Order SM
         <h1>Describe your business. Our agent builds&nbsp;it.</h1>
         <span class="address">Open at <span class="url">yourname.amader.cloud</span></span>
       </div>
-      <p class="lede">A Facebook store, a home kitchen, a salon, a clinic, a coaching centre: say what you need in one sentence. Our agent builds the app, with bKash, Nagad and card payments already set up.</p>
+      <p class="lede">A Facebook store, a home kitchen, a salon, a clinic, a pharmacy, a coaching centre: say what you need in one sentence. Our agent builds the app, with bKash, Nagad and card payments already set up.</p>
       <div class="btn-row"><BetaButton /><a class="btn btn-quiet" href="#demo">Try the builder</a></div>
       <p class="cta-note"><span>Free while you build</span><span>Pay by bKash when you go live</span><span>Cancel any time</span></p>
     </div>
@@ -40,7 +40,7 @@ const ticker = ["bKash checkout", "Nagad", "Cards", "Courier booking", "Order SM
     <figure class="qb" data-qb aria-label="Our agent building an app from one sentence, for different kinds of business (animation)">
       <p class="qb-q">Do you want an app for your <b data-qb-type>Facebook store</b>?</p>
       <div class="qb-types" role="group" aria-label="Kind of business">
-        {[["Facebook store", "Facebook store"], ["Home kitchen", "home kitchen"], ["Salon", "salon"], ["Clinic", "clinic"], ["Coaching centre", "coaching centre"]].map(([label, word], i) =>
+        {[["Facebook store", "Facebook store"], ["Home kitchen", "home kitchen"], ["Salon", "salon"], ["Clinic", "clinic"], ["Pharmacy", "pharmacy"], ["Event tickets", "event"], ["AC servicing", "AC servicing team"], ["Coaching centre", "coaching centre"]].map(([label, word], i) =>
           <button type="button" data-qb-pick={i} data-word={word} aria-pressed={i === 0 ? "true" : "false"}>{label}</button>)}
       </div>
       <div class="qb-side">
@@ -115,7 +115,6 @@ const ticker = ["bKash checkout", "Nagad", "Cards", "Courier booking", "Order SM
   </div>
 </section>
 
-<div class="awning" aria-hidden="true"></div>
 <section class="section alt rates-sec">
   <div class="wrap rate-grid">
     <div data-reveal>
@@ -199,8 +198,6 @@ const ticker = ["bKash checkout", "Nagad", "Cards", "Courier booking", "Order SM
 .qb :global(.b.qb-wait) { opacity: 0; }
 .qb :global(.b.qb-fly) { animation: qb-fly .62s cubic-bezier(.2,.75,.25,1) both; }
 @keyframes qb-fly { from { transform: translate(var(--dx), var(--dy)) scale(.25); opacity: 0; } 30% { opacity: 1; } to { transform: none; opacity: 1; } }
-.qb :global(.qb-confetti) { position: absolute; top: 18%; left: var(--x); width: 10px; height: 13px; clip-path: polygon(0 0, 100% 0, 50% 100%); z-index: 4; pointer-events: none; animation: qb-fall var(--t) cubic-bezier(.2,.6,.4,1) forwards; }
-@keyframes qb-fall { 0% { translate: 0 0; opacity: 1; } 15% { translate: calc(var(--dx) * .4) -60px; } 100% { translate: var(--dx) 420px; rotate: var(--r); opacity: 0; } }
 @media (max-width: 1000px) { .qb { max-width: 620px; } }
 @media (max-width: 560px) { .qb { grid-template-columns: 1fr; justify-items: center; } .qb-side { margin-top: 0; justify-self: stretch; } }
 
@@ -216,7 +213,6 @@ const ticker = ["bKash checkout", "Nagad", "Cards", "Courier booking", "Order SM
 @media (max-width: 760px) { .scene-card { margin-top: -40px; } }
 @media (max-width: 480px) { .cod-stats { grid-template-columns: 1fr; } }
 
-.rates-sec { padding-top: clamp(76px, 9vw, 128px); }
 .rate-grid { display: grid; grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr); gap: clamp(28px, 5vw, 80px); align-items: start; }
 @media (max-width: 860px) { .rate-grid { grid-template-columns: 1fr; } }
 .rate-grid h2 { max-width: 12ch; }

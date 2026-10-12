@@ -2,6 +2,7 @@
 // the phone, confetti when it goes live, then the next business. Scripted; uses the demo's apps.
 // Copy rule: "our agent", never "AI".
 import { APPS, SCREENS, tk } from "./apps.js";
+import confettiLib from "canvas-confetti";
 
 const box = document.querySelector("[data-qb]");
 if (box && !box.dataset.ready) { box.dataset.ready = "1"; init(box); }
@@ -23,6 +24,9 @@ function init(box) {
     ["kitchen", "Orders for my home kitchen, with a delivery time", "Kacchi × 2", 960, "order"],
     ["book", "Bookings for my salon, with a deposit by bKash", "Hair colour", 300, "booking"],
     ["doctor", "Evening serials for my clinic, booking fee by bKash", "Serial 13", 200, "serial"],
+    ["pharmacy", "Medicine orders for my pharmacy, prescription upload and bKash", "3 items", 580, "order"],
+    ["event", "Tickets for our Friday music night, paid by bKash", "General × 2", 1000, "ticket"],
+    ["service", "Bookings for my AC servicing team, visit fee by bKash", "AC servicing", 500, "visit"],
     ["fees", "Monthly fees for my coaching centre, receipt by SMS", "BP-2071 · October", 2500, "payment"],
   ];
   const typeEl = $("[data-qb-type]");
@@ -74,15 +78,13 @@ function init(box) {
     return true;
   }
 
+  // A burst from the phone when the app opens, in the sign paints.
   function confetti() {
-    const colors = ["#e2261b", "#ffcc00", "#0b5d3b", "#1739a8", "#ffffff"];
-    for (let i = 0; i < 26; i++) {
-      const f = document.createElement("span");
-      f.className = "qb-confetti";
-      f.style.cssText = `--x:${45 + Math.random() * 50}%;--r:${Math.random() * 540}deg;--dx:${(Math.random() - .5) * 160}px;--t:${1.4 + Math.random()}s;background:${colors[i % colors.length]};animation-delay:${Math.random() * .3}s`;
-      box.append(f);
-      setTimeout(() => f.remove(), 3000);
-    }
+    const r = box.querySelector(".dev").getBoundingClientRect();
+    const origin = { x: (r.left + r.width / 2) / innerWidth, y: (r.top + r.height * 0.3) / innerHeight };
+    const opts = { origin, colors: ["#e2261b", "#ffcc00", "#0b5d3b", "#1739a8", "#ffffff"], disableForReducedMotion: true, zIndex: 40, ticks: 160 };
+    confettiLib({ ...opts, particleCount: 70, spread: 75, startVelocity: 38, scalar: 0.9 });
+    setTimeout(() => confettiLib({ ...opts, particleCount: 40, spread: 110, startVelocity: 26, scalar: 0.7 }), 180);
   }
 
   // One business: type the request, build the store, go live, first order. False if a chip cut it short.
