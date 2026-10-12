@@ -50,6 +50,31 @@ const ring = (list: Tile[], A: number, B: number, offset = 0, r = 0.45) => {
 };
 const INNER = { A: 320, B: 352 }, OUTER = { A: 535, B: 432 };
 const tiles = [...ring(innerRing, INNER.A, INNER.B), ...ring(outerRing, OUTER.A, OUTER.B, 0.5)];
+// Narrow screens: blocks packed like bricks either side of the phone, rows of one or two with ragged starts,
+// running off the screen's edges. The two sides mirror each other's rhythm, and left-hand blocks read mirrored
+// so every icon faces the phone. Each checkout part leads a row level with where it lands on the phone's screen.
+const est = (t: Tile) => Math.min(190, Math.max(60 + t.t.length * 7.4, 50 + (t.logos?.length ?? 0) * 44));
+const mobile = (() => {
+  const GAP = 148, STEP = 64, JAG = [0, 28, 10, 40, 4, 22, 34, 14, 46];
+  const per = [2, 1, 2, 2, 1, 2, 2, 1, 2];
+  const slots = [-1, 1].flatMap((side) => per.flatMap((n, r) => Array.from({ length: n }, (_, pos) => ({ side, r, pos, tile: -1 }))));
+  const at = [1, 3, 4, 5, 7];
+  tiles.forEach((t, i) => { if (t.part !== undefined) slots.find((sl) => sl.pos === 0 && sl.side === (t.part! % 2 ? 1 : -1) && sl.r === at[t.part!])!.tile = i; });
+  let n = 0;
+  tiles.forEach((t, i) => {
+    if (t.part !== undefined) return;
+    const free = slots.filter((sl) => sl.tile < 0), pos = Math.min(...free.map((sl) => sl.pos)), side = n++ % 2 ? 1 : -1;
+    (free.find((sl) => sl.pos === pos && sl.side === side) ?? free.find((sl) => sl.pos === pos)!).tile = i;
+  });
+  const out: { mx: number; my: number; mtx: string; side: string }[] = [];
+  for (const sl of slots) {
+    const jag = JAG[sl.r];
+    const lead = slots.find((o) => o.side === sl.side && o.r === sl.r && o.pos === 0)!;
+    const x = GAP + jag + (sl.pos ? est(tiles[lead.tile]) + 16 : 0);
+    out[sl.tile] = { mx: sl.side * x, my: (sl.r - 4) * STEP, mtx: sl.side < 0 ? "-100%" : "0%", side: sl.side < 0 ? "l" : "r" };
+  }
+  return out;
+})();
 // Outside the rings, faint unlinked blocks: other things a business might ask for.
 const more: [string, string][] = [
   ["Loyalty points", "star"], ["Pre-orders", "cal"], ["Flash sales", "percent"], ["Wholesale prices", "tag"], ["POS for the counter", "cash"],
@@ -101,6 +126,38 @@ const fieldTiles = (() => {
   }
   return out;
 })();
+// Tablet widths: unlinked blocks packed into the gaps beside and between the bricks, sweeping out from the phone.
+type Box = [number, number, number, number];
+const fieldMobile = (() => {
+  const taken: Box[] = tiles.map((t, i) => {
+    const m = mobile[i], w = est(t), h = t.logos ? 33 : 24;
+    return [m.side === "l" ? m.mx - w : m.mx, m.my - h, m.side === "l" ? m.mx : m.mx + w, m.my + h];
+  });
+  const fits = (b: Box) => !taken.some((o) => b[0] < o[2] + 10 && o[0] < b[2] + 10 && b[1] < o[3] + 6 && o[1] < b[3] + 6);
+  const out: { t?: string; i?: string; dx: number; dy: number; d: number; w?: number }[] = [];
+  let named = 0, placed = 0;
+  // Rows on the bricks' own rows and halfway between, so the gaps at row ends line up with something.
+  for (let y = -320; y <= 320; y += 32) {
+    for (const side of [-1, 1]) {
+      for (let edge = 150; edge < 720; edge += 8) {
+        // A named chip at its own width when it's due and fits; otherwise a blank one, shrunk to the gap.
+        const blanks = [3, 2, 1].map((k) => 46 + k * 14);
+        const sizes = placed % 3 === 0 && named < more.length ? [40 + more[named][0].length * 6.2, ...blanks] : blanks;
+        const pick = sizes.findIndex((sz) => { const x0 = side < 0 ? -edge - sz : edge; return fits([x0, y - 13, x0 + sz, y + 13]); });
+        if (pick < 0) continue;
+        const w = sizes[pick], isNamed = sizes.length > blanks.length && pick === 0;
+        const x0 = side < 0 ? -edge - w : edge;
+        taken.push([x0, y - 13, x0 + w, y + 13]);
+        const dx = Math.round(x0 + w / 2);
+        if (isNamed) { const [t, i] = more[named++]; out.push({ t, i, dx, dy: y, d: (placed * 7) % 23 }); }
+        else out.push({ dx, dy: y, d: (placed * 7) % 23, w: (w - 46) / 14 });
+        placed++;
+        edge += w;
+      }
+    }
+  }
+  return out;
+})();
 const groups = { store: "Store", pay: "Payments", ship: "Delivery", msg: "Messages", book: "Bookings and fees", owner: "Owner tools" };
 ---
 <figure class="asm" data-asm aria-label="Tested blocks around a phone; five of them assemble a checkout (animation)">
@@ -110,12 +167,17 @@ const groups = { store: "Store", pay: "Payments", ship: "Delivery", msg: "Messag
         ? <li style={`--dx:${f.dx}px;--dy:${f.dy}px;--t:${f.d}`}><span set:html={icon(f.i!)} />{f.t}</li>
         : <li class="ghost" style={`--dx:${f.dx}px;--dy:${f.dy}px;--t:${f.d};--w:${f.w}`}><i></i><b></b></li>)}
     </ul>
+    <ul class="field field-m" aria-hidden="true">
+      {fieldMobile.map((f) => f.t
+        ? <li style={`--dx:${f.dx}px;--dy:${f.dy}px;--t:${f.d}`}><span set:html={icon(f.i!)} />{f.t}</li>
+        : <li class="ghost" style={`--dx:${f.dx}px;--dy:${f.dy}px;--t:${f.d};--w:${f.w}`}><i></i><b></b></li>)}
+    </ul>
     <svg class="lines" aria-hidden="true">
       {tiles.map((t) => <line x1={t.dx} y1={t.dy} x2="0" y2="0" class:list={[t.g, { part: t.part !== undefined }]} />)}
     </svg>
     <ul class="tiles">
       {tiles.map((t, i) => (
-        <li class:list={["tile", t.g, { part: t.part !== undefined }]} data-part={t.part} style={`--dx:${t.dx}px;--dy:${t.dy}px;--d:${i}`}>
+        <li class:list={["tile", t.g, { part: t.part !== undefined }]} data-part={t.part} data-side={mobile[i].side} style={`--dx:${t.dx}px;--dy:${t.dy}px;--mx:${mobile[i].mx}px;--my:${mobile[i].my}px;--mtx:${mobile[i].mtx};--d:${i}`}>
           <span class="ti" set:html={icon(t.i)} />
           <span class="tx"><span class="tt">{t.t}</span>{t.logos && <span class="tl">{t.logos.map((id) => <Brand id={id as any} h={13} />)}</span>}</span>
         </li>
@@ -144,7 +206,10 @@ const groups = { store: "Store", pay: "Payments", ship: "Delivery", msg: "Messag
 .field li.ghost { width: calc(46px + var(--w) * 14px); height: 24px; padding: 0 8px; gap: 7px; border-style: dashed; border-color: rgb(255 255 255 / .12); background: transparent; animation: none; }
 .field li.ghost i { width: 14px; height: 14px; border-radius: 4px; background: rgb(255 255 255 / .1); flex: none; }
 .field li.ghost b { flex: 1; height: 6px; border-radius: 3px; background: rgb(255 255 255 / .1); }
-@media (max-width: 980px) { .field { display: none; } }
+.field-m { display: none; }
+@media (max-width: 980px) { .field { display: none; } .field-m { display: block; } }
+/* Phones: the phone and its bricks fill the width; nothing left to fill */
+@media (max-width: 600px) { .field-m { display: none; } }
 @media (prefers-reduced-motion: reduce) { .field li { animation: none; } }
 /* Full bleed; on narrower screens the whole constellation scales down evenly, blocks and gaps alike */
 .stage { --k: 1; position: relative; height: 940px; zoom: var(--k); width: calc(100vw / var(--k)); margin-left: 50%; translate: -50% 0; }
@@ -157,7 +222,7 @@ const groups = { store: "Store", pay: "Payments", ship: "Delivery", msg: "Messag
 .lines line { stroke: rgb(255 255 255 / .16); stroke-width: 1.2; vector-effect: non-scaling-stroke; stroke-dasharray: 3 5; }
 .lines line.part { stroke: rgb(255 204 0 / .55); }
 .tiles { list-style: none; margin: 0; padding: 0; }
-.tile { --c: #14213d; position: absolute; left: calc(50% + var(--dx)); top: calc(50% + var(--dy)); translate: -50% -50%; z-index: 1; display: flex; align-items: center; gap: 9px; padding: 6px 11px 6px 6px; width: max-content; max-width: 190px; background: #fff; color: #14213d; border-radius: 12px; border: 1px solid rgb(20 33 61 / .08); box-shadow: 0 1px 0 rgb(255 255 255 / .6) inset, 0 14px 30px -18px rgb(0 0 0 / .7); font-weight: 700; font-size: 0.82rem; line-height: 1.2; animation: drift 7s ease-in-out infinite; animation-delay: calc(var(--d) * -0.6s); transition: scale .25s, box-shadow .25s; }
+.tile { --c: #14213d; position: absolute; left: calc(50% + var(--dx)); top: calc(50% + var(--dy)); --tx: -50%; translate: var(--tx) -50%; z-index: 1; display: flex; align-items: center; gap: 9px; padding: 6px 11px 6px 6px; width: max-content; max-width: 190px; background: #fff; color: #14213d; border-radius: 12px; border: 1px solid rgb(20 33 61 / .08); box-shadow: 0 1px 0 rgb(255 255 255 / .6) inset, 0 14px 30px -18px rgb(0 0 0 / .7); font-weight: 700; font-size: 0.82rem; line-height: 1.2; animation: drift 7s ease-in-out infinite; animation-delay: calc(var(--d) * -0.6s); transition: scale .25s, box-shadow .25s; }
 .tile.store { --c: var(--green); } .tile.pay { --c: var(--red); } .tile.ship { --c: #d98f00; } .tile.msg { --c: #0b8ad9; } .tile.book { --c: #8b3fb5; } .tile.owner { --c: #14213d; }
 .ti { flex: none; display: grid; place-items: center; width: 30px; height: 30px; border-radius: 9px; background: var(--c); color: #fff; }
 .ti :global(.ic) { width: 17px; height: 17px; fill: none; stroke: currentColor; stroke-width: 1.9; stroke-linecap: round; stroke-linejoin: round; }
@@ -165,7 +230,7 @@ const groups = { store: "Store", pay: "Payments", ship: "Delivery", msg: "Messag
 .tile:hover { scale: 1.06; z-index: 3; }
 .tl { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
 .tl :global(.brand-word) { font-size: 9.5px !important; }
-@keyframes drift { 50% { translate: -50% calc(-50% - 6px); } }
+@keyframes drift { 50% { translate: var(--tx) calc(-50% - 6px); } }
 .tile.part.go { scale: 1.12; z-index: 3; box-shadow: 0 0 0 3px var(--yellow), 0 16px 30px -12px rgb(0 0 0 / .6); }
 .tile.part.done::after { content: "✓"; position: absolute; top: -9px; right: -9px; width: 20px; height: 20px; border-radius: 50%; background: var(--ok); color: #fff; font-size: 0.7rem; display: grid; place-items: center; }
 .asm-phone { position: absolute; left: 50%; top: 50%; translate: -50% -50%; z-index: 2; display: grid; justify-items: center; gap: 10px; }
@@ -178,13 +243,15 @@ const groups = { store: "Store", pay: "Payments", ship: "Delivery", msg: "Messag
 .asm :global(.b.asm-wait) { opacity: 0; }
 .asm :global(.b.asm-fly) { animation: asm-fly .6s cubic-bezier(.2,.75,.25,1) both; }
 @keyframes asm-fly { from { transform: translate(var(--dx), var(--dy)) scale(.3); opacity: 0; } 30% { opacity: 1; } to { transform: none; opacity: 1; } }
-/* Narrow screens: the phone first, the blocks as a wrapped shelf below it */
+/* Narrow screens: the linked blocks in columns either side of the phone, clipped at the screen's edges */
 @media (max-width: 980px) {
-  .stage { --k: 1; height: auto; width: auto; margin-left: 0; translate: none; display: flex; flex-direction: column; align-items: center; gap: 22px; }
+  .stage { --k: 1; height: 700px; overflow: clip; }
   .lines { display: none; }
-  .asm-phone { position: static; translate: none; order: -1; }
-  .tiles { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; }
-  .tile { position: relative; left: auto; top: auto; translate: none; min-width: 0; animation: none; }
+  .tile { left: calc(50% + var(--mx)); top: calc(50% + var(--my)); --tx: var(--mtx); }
+  .tile[data-side="l"] { flex-direction: row-reverse; padding: 6px 6px 6px 11px; }
+  .tile[data-side="l"] .tx { text-align: right; }
+  .tile[data-side="l"] .tl { justify-content: flex-end; }
 }
+@media (max-width: 560px) { .stage { --k: .84; } }
 @media (prefers-reduced-motion: reduce) { .tile { animation: none; } }
 </style>

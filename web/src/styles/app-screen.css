@@ -31,6 +31,8 @@
 .b.changed.ink { box-shadow: inset 0 0 0 3px #ffb81c; animation: flash 1.4s ease-out 2; z-index: 1; }
 @keyframes flash { 0% { box-shadow: inset 0 0 0 3px #ffb81c, 0 0 0 0 rgb(255 184 28 / .6); } 100% { box-shadow: inset 0 0 0 3px #ffb81c, 0 0 0 10px rgb(255 184 28 / 0); } }
 .screen .b:has(.tabbar), .screen .b:has(.paybar) { margin-top: auto; position: sticky; bottom: 0; z-index: 2; }
+/* A pinned block that carries more than the bar (the checkout's payment choice) is a bottom sheet over the page */
+.screen .b:has(> .sec + .paybar) { background: #fff; border-radius: 14px 14px 0 0; box-shadow: 0 -12px 22px -16px rgb(0 0 0 / .45); }
 
 /* Icons and marks */
 .screen .ic { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; flex: none; }
