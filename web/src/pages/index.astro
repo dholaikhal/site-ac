@@ -141,8 +141,9 @@ const ticker = ["bKash checkout", "Nagad", "Cards", "Courier booking", "Order SM
 
 <style>
 .hero { position: relative; padding-block: clamp(28px, 4vw, 56px) clamp(48px, 7vw, 96px); overflow: hidden; }
+.hero > .wrap { max-width: 1440px; }
 .hero-grid { position: relative; display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr); gap: clamp(28px, 4vw, 64px); align-items: center; }
-@media (max-width: 1300px) { .hero-grid { grid-template-columns: 1fr; } }
+@media (max-width: 1140px) { .hero-grid { grid-template-columns: 1fr; } }
 .hero-copy .signboard h1 { font-size: clamp(3.2rem, 1.8rem + 4.6vw, 6rem); }
 .hero-copy .lede { margin-top: 26px; max-width: 46ch; }
 /* The board's tube light comes on once, at dusk */
@@ -191,7 +192,7 @@ const ticker = ["bKash checkout", "Nagad", "Cards", "Courier booking", "Order SM
 .qb :global(.b.qb-wait) { opacity: 0; }
 .qb :global(.b.qb-fly) { animation: qb-fly .62s cubic-bezier(.2,.75,.25,1) both; }
 @keyframes qb-fly { from { transform: translate(var(--dx), var(--dy)) scale(.25); opacity: 0; } 30% { opacity: 1; } to { transform: none; opacity: 1; } }
-@media (max-width: 1300px) { .qb { max-width: 680px; } }
+@media (max-width: 1140px) { .qb { max-width: 680px; } }
 @media (max-width: 560px) { .qb { grid-template-columns: 1fr; justify-items: center; } .qb-side { margin-top: 0; justify-self: stretch; } }
 
 .head.center { margin-inline: auto; text-align: center; }
