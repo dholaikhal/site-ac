@@ -12,8 +12,8 @@ import "../styles/app-screen.css";
 import Device from "../components/Device.astro";
 import Brand from "../components/Brand.astro";
 import Showcase from "../components/Showcase.astro";
-// The last is the catch-all: whatever the idea is.
-const KINDS = ["Facebook page", "home kitchen", "salon", "clinic", "pharmacy", "event", "AC service", "coaching centre", "idea"];
+// Four kinds with example apps of their own, then the catch-all: whatever the idea is.
+const KINDS = ["Facebook page", "home kitchen", "salon", "clinic", "idea"];
 const m = facts.market;
 const starter = plan("starter"), business = plan("business");
 const rates: [string, string, string, string[]?][] = [

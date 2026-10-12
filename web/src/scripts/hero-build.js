@@ -26,10 +26,6 @@ function init(box) {
     ["kitchen", "Orders for my home kitchen, with a delivery time", "Kacchi × 2", 960, "order"],
     ["book", "Bookings for my salon, with a deposit by bKash", "Hair colour", 300, "booking"],
     ["doctor", "Evening serials for my clinic, booking fee by bKash", "Serial 13", 200, "serial"],
-    ["pharmacy", "Medicine orders for my pharmacy, prescription upload and bKash", "3 items", 580, "order"],
-    ["event", "Tickets for our Friday music night, paid by bKash", "General × 2", 1000, "ticket"],
-    ["service", "Bookings for my AC servicing team, visit fee by bKash", "AC servicing", 500, "visit"],
-    ["fees", "Monthly fees for my coaching centre, receipt by SMS", "BP-2071 · October", 2500, "payment"],
     ["idea", "Your idea, in one sentence", "", 0, ""],
   ];
   // The kinds of business on the board: a track drawn three times over. The chosen one is slid to the middle of
