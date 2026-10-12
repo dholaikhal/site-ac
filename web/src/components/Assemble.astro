@@ -30,13 +30,15 @@ const outerRing: Tile[] = [
   { t: "Reviews", g: "store", i: "star" }, { t: "Reminders", g: "book", i: "bell" }, { t: "Facebook catalogue", g: "owner", i: "grid", logos: ["facebook"] },
   { t: "Fee receipts", g: "book", i: "receipt" }, { t: "Staff logins", g: "owner", i: "users" }, { t: "Daily backups", g: "owner", i: "shield" },
 ];
-// A rounded-rectangle ring (superellipse) keeps blocks off the phone's corners.
-const ring = (list: Tile[], rx: number, ry: number, offset = 0) => list.map((tile, i) => {
+// Placed in pixels from the phone's centre so the rings hug the device at any stage width.
+// A squarish superellipse keeps blocks off the phone's corners.
+const ring = (list: Tile[], A: number, B: number, offset = 0, e = 0.4) => list.map((tile, i) => {
   const a = -Math.PI / 2 + ((i + offset) / list.length) * Math.PI * 2 + Math.PI / list.length;
-  const c = Math.cos(a), sn = Math.sin(a), e = 0.55;
-  return { ...tile, x: 50 + rx * Math.sign(c) * Math.abs(c) ** e, y: 50 + ry * Math.sign(sn) * Math.abs(sn) ** e };
+  const c = Math.cos(a), sn = Math.sin(a);
+  return { ...tile, dx: Math.round(A * Math.sign(c) * Math.abs(c) ** e), dy: Math.round(B * Math.sign(sn) * Math.abs(sn) ** e) };
 });
-const tiles = [...ring(innerRing, 30, 36), ...ring(outerRing, 45, 46.5, 0.5)];
+const INNER = { A: 320, B: 352 }, OUTER = { A: 535, B: 432 };
+const tiles = [...ring(innerRing, INNER.A, INNER.B), ...ring(outerRing, OUTER.A, OUTER.B, 0.5)];
 // In the gaps that are left, faint unlinked blocks: other things a business might ask for.
 const more: [string, string][] = [
   ["Loyalty points", "star"], ["Pre-orders", "cal"], ["Flash sales", "percent"], ["Wholesale prices", "tag"], ["POS for the counter", "cash"],
@@ -47,26 +49,26 @@ const more: [string, string][] = [
   ["Membership cards", "card"], ["Subscriptions", "cal"], ["Two-step login", "shield"], ["Live chat", "chat"], ["Photo gallery", "camera"],
   ["Service areas", "map"], ["Quotes", "receipt"], ["Multiple branches", "home"], ["Supplier orders", "truck"], ["Donations", "heart"],
 ];
+const inside = (x: number, y: number, A: number, B: number) => (Math.abs(x) / A) ** 5 + (Math.abs(y) / B) ** 5 < 1;
+const clear = (x: number, y: number, w: number) =>
+  !inside(x, y, INNER.A + 40, INNER.B + 20) && !tiles.some((t) => Math.abs(t.dx - x) < 95 + w / 2 && Math.abs(t.dy - y) < 46);
 const fieldTiles = (() => {
-  const out: { t?: string; i?: string; x: number; y: number; d: number; w?: number }[] = [];
+  const out: { t?: string; i?: string; dx: number; dy: number; d: number; w?: number }[] = [];
   let n = 0, row = 0;
-  for (let y = 3; y <= 97; y += 6.2, row++) {
-    for (let x = 3 + (row % 2 ? 4.7 : 0); x <= 97; x += 9.4) {
-      if (x > 36 && x < 64 && y > 6 && y < 94) continue; // the phone
-      if (tiles.some((t) => Math.abs(t.x - x) < 11.5 && Math.abs(t.y - y) < 5.5)) continue;
-      const k = out.length;
-      if (n < more.length) { const [t, i] = more[n++]; out.push({ t, i, x, y, d: (k * 7) % 23 }); }
+  for (let y = -440; y <= 440 && n < more.length; y += 58, row++) {
+    for (let x = -760 + (row % 2 ? 85 : 0); x <= 760 && n < more.length; x += 170) {
+      if (!clear(x, y, 150)) continue;
+      const [t, i] = more[n++];
+      out.push({ t, i, dx: x, dy: y, d: (out.length * 7) % 23 });
     }
   }
-  // Then a finer pass of blank template blocks in whatever space is still empty: more where these came from.
-  let fr = 0;
-  for (let y = 2.5; y <= 97.5; y += 4.4, fr++) {
-    for (let x = 2.5 + (fr % 2 ? 3.2 : 0); x <= 97.5; x += 6.4) {
-      if (x > 35 && x < 65 && y > 5 && y < 95) continue;
-      if (tiles.some((t) => Math.abs(t.x - x) < 9.5 && Math.abs(t.y - y) < 4.6)) continue;
-      if (out.some((o) => Math.abs(o.x - x) < (o.t ? 8.5 : 6) && Math.abs(o.y - y) < 3.8)) continue;
-      const k = out.length;
-      out.push({ x, y, d: (k * 7) % 23, w: 1 + (k % 3) });
+  // Blank template blocks in whatever space is still empty: more where these came from.
+  row = 0;
+  for (let y = -450; y <= 450; y += 40, row++) {
+    for (let x = -770 + (row % 2 ? 48 : 0); x <= 770; x += 96) {
+      if (!clear(x, y, 80)) continue;
+      if (out.some((o) => Math.abs(o.dx - x) < (o.t ? 125 : 90) && Math.abs(o.dy - y) < 34)) continue;
+      out.push({ dx: x, dy: y, d: (out.length * 7) % 23, w: 1 + (out.length % 3) });
     }
   }
   return out;
@@ -77,15 +79,15 @@ const groups = { store: "Store", pay: "Payments", ship: "Delivery", msg: "Messag
   <div class="stage">
     <ul class="field" aria-hidden="true">
       {fieldTiles.map((f) => f.t
-        ? <li style={`--x:${f.x}%;--y:${f.y}%;--t:${f.d}`}><span set:html={icon(f.i!)} />{f.t}</li>
-        : <li class="ghost" style={`--x:${f.x}%;--y:${f.y}%;--t:${f.d};--w:${f.w}`}><i></i><b></b></li>)}
+        ? <li style={`--dx:${f.dx}px;--dy:${f.dy}px;--t:${f.d}`}><span set:html={icon(f.i!)} />{f.t}</li>
+        : <li class="ghost" style={`--dx:${f.dx}px;--dy:${f.dy}px;--t:${f.d};--w:${f.w}`}><i></i><b></b></li>)}
     </ul>
-    <svg class="lines" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
-      {tiles.map((t) => <line x1={t.x} y1={t.y} x2="50" y2="50" class:list={[t.g, { part: t.part !== undefined }]} />)}
+    <svg class="lines" aria-hidden="true">
+      {tiles.map((t) => <line x1={t.dx} y1={t.dy} x2="0" y2="0" class:list={[t.g, { part: t.part !== undefined }]} />)}
     </svg>
     <ul class="tiles">
       {tiles.map((t, i) => (
-        <li class:list={["tile", t.g, { part: t.part !== undefined }]} data-part={t.part} style={`--x:${t.x.toFixed(2)}%;--y:${t.y.toFixed(2)}%;--d:${i}`}>
+        <li class:list={["tile", t.g, { part: t.part !== undefined }]} data-part={t.part} style={`--dx:${t.dx}px;--dy:${t.dy}px;--d:${i}`}>
           <span class="ti" set:html={icon(t.i)} />
           <span class="tx"><span class="tt">{t.t}</span>{t.logos && <span class="tl">{t.logos.map((id) => <Brand id={id as any} h={13} />)}</span>}</span>
         </li>
@@ -106,8 +108,8 @@ const groups = { store: "Store", pay: "Payments", ship: "Delivery", msg: "Messag
 <style>
 .asm { margin: 0; position: relative; }
 /* The wider shelf: faint chips across the whole section, a few lighting up in turn */
-.field { list-style: none; margin: 0; padding: 0; position: absolute; inset: 0; pointer-events: none; }
-.field li { position: absolute; left: var(--x); top: var(--y); translate: -50% -50%; display: inline-flex; align-items: center; gap: 6px; white-space: nowrap; padding: 5px 11px 5px 8px; border-radius: 999px; border: 1px solid rgb(255 255 255 / .14); color: rgb(255 255 255 / .42); font-size: 0.74rem; font-weight: 700; background: rgb(255 255 255 / .03); animation: twinkle 12s ease-in-out infinite; animation-delay: calc(var(--t) * -0.52s); }
+.field { list-style: none; margin: 0; padding: 0; position: absolute; inset: 0; pointer-events: none; overflow: hidden; }
+.field li { position: absolute; left: calc(50% + var(--dx) * var(--k)); top: calc(50% + var(--dy)); translate: -50% -50%; display: inline-flex; align-items: center; gap: 6px; white-space: nowrap; padding: 5px 11px 5px 8px; border-radius: 999px; border: 1px solid rgb(255 255 255 / .14); color: rgb(255 255 255 / .42); font-size: 0.74rem; font-weight: 700; background: rgb(255 255 255 / .03); animation: twinkle 12s ease-in-out infinite; animation-delay: calc(var(--t) * -0.52s); }
 .field li :global(.ic) { width: 13px; height: 13px; fill: none; stroke: currentColor; stroke-width: 1.9; stroke-linecap: round; stroke-linejoin: round; }
 @keyframes twinkle { 0%, 82%, 100% { color: rgb(255 255 255 / .42); border-color: rgb(255 255 255 / .14); } 88%, 94% { color: var(--yellow); border-color: rgb(255 204 0 / .55); background: rgb(255 204 0 / .08); } }
 /* Blank template blocks: an icon square and a text bar, outlines only */
@@ -117,11 +119,14 @@ const groups = { store: "Store", pay: "Payments", ship: "Delivery", msg: "Messag
 @media (max-width: 980px) { .field { display: none; } }
 @media (prefers-reduced-motion: reduce) { .field li { animation: none; } }
 .stage { position: relative; height: 940px; width: min(1440px, calc(100vw - 24px)); margin-left: 50%; translate: -50% 0; }
-.lines { position: absolute; inset: 0; width: 100%; height: 100%; }
+.stage { --k: 1; }
+@media (max-width: 1260px) { .stage { --k: .9; } }
+@media (max-width: 1120px) { .stage { --k: .8; } }
+.lines { position: absolute; left: 50%; top: 50%; width: 1px; height: 1px; overflow: visible; scale: var(--k) 1; }
 .lines line { stroke: rgb(255 255 255 / .16); stroke-width: 1.2; vector-effect: non-scaling-stroke; stroke-dasharray: 3 5; }
 .lines line.part { stroke: rgb(255 204 0 / .55); }
 .tiles { list-style: none; margin: 0; padding: 0; }
-.tile { --c: #14213d; position: absolute; left: var(--x); top: var(--y); translate: -50% -50%; z-index: 1; display: flex; align-items: center; gap: 9px; padding: 6px 11px 6px 6px; width: max-content; max-width: 190px; background: #fff; color: #14213d; border-radius: 12px; border: 1px solid rgb(20 33 61 / .08); box-shadow: 0 1px 0 rgb(255 255 255 / .6) inset, 0 14px 30px -18px rgb(0 0 0 / .7); font-weight: 700; font-size: 0.82rem; line-height: 1.2; animation: drift 7s ease-in-out infinite; animation-delay: calc(var(--d) * -0.6s); transition: scale .25s, box-shadow .25s; }
+.tile { --c: #14213d; position: absolute; left: calc(50% + var(--dx) * var(--k)); top: calc(50% + var(--dy)); translate: -50% -50%; z-index: 1; display: flex; align-items: center; gap: 9px; padding: 6px 11px 6px 6px; width: max-content; max-width: 190px; background: #fff; color: #14213d; border-radius: 12px; border: 1px solid rgb(20 33 61 / .08); box-shadow: 0 1px 0 rgb(255 255 255 / .6) inset, 0 14px 30px -18px rgb(0 0 0 / .7); font-weight: 700; font-size: 0.82rem; line-height: 1.2; animation: drift 7s ease-in-out infinite; animation-delay: calc(var(--d) * -0.6s); transition: scale .25s, box-shadow .25s; }
 .tile.store { --c: var(--green); } .tile.pay { --c: var(--red); } .tile.ship { --c: #d98f00; } .tile.msg { --c: #0b8ad9; } .tile.book { --c: #8b3fb5; } .tile.owner { --c: #14213d; }
 .ti { flex: none; display: grid; place-items: center; width: 30px; height: 30px; border-radius: 9px; background: var(--c); color: #fff; }
 .ti :global(.ic) { width: 17px; height: 17px; fill: none; stroke: currentColor; stroke-width: 1.9; stroke-linecap: round; stroke-linejoin: round; }
