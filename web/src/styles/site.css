@@ -373,3 +373,6 @@ body { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org
 .band .milestones .when { color: var(--yellow); }
 :root[data-theme="dark"] .team .role { color: var(--ok); }
 @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .team .role { color: var(--ok); } }
+/* Yellow bands: no glow behind navy text; the slogan keeps its red paint */
+.band.band-yellow :is(.lede, .band-link) { text-shadow: none; }
+.band.band-yellow .slogan { color: var(--red); }
