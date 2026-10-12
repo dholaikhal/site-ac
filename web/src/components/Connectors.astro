@@ -1,37 +1,46 @@
 ---
-// What every app comes connected to. Brand names are plain text only (no logos).
-const items = [
-  ["bKash", "Mobile-money checkout through your own merchant account.", "beta", "red"],
-  ["Nagad", "Mobile-money checkout, same flow as bKash.", "beta", "red"],
-  ["Cards", "Debit and credit cards through a licensed aggregator.", "beta", "red"],
-  ["Courier", "A delivery booked when you mark the order as sent. One courier in the beta.", "beta", "green"],
-  ["SMS", "Order confirmed, shipped, booking reminders and fee receipts.", "beta", "cobalt"],
-  ["Google Sheets", "Export orders, bookings and payments.", "planned", ""],
-  ["Facebook catalogue", "Keep your page's catalogue in sync with your store.", "planned", ""],
-  ["VAT invoices", "Invoices in the required VAT format.", "planned", ""],
+// What every app comes connected to, with each brand's logo (see data/brands.json).
+import Brand from "./Brand.astro";
+type Item = [string, string[], string, "beta" | "planned"];
+const items: Item[] = [
+  ["Mobile wallets", ["bkash", "nagad"], "Checkout through your own merchant account.", "beta"],
+  ["Cards", ["visa", "mastercard", "amex"], "Debit and credit cards through a licensed aggregator.", "beta"],
+  ["Courier", ["pathao"], "A delivery booked when you mark the order as sent. One courier in the beta.", "beta"],
+  ["SMS", [], "Order confirmed, shipped, booking reminders and fee receipts.", "beta"],
+  ["Google Sheets", ["googlesheets"], "Export orders, bookings and payments.", "planned"],
+  ["Facebook catalogue", ["facebook"], "Keep your page's catalogue in sync with your store.", "planned"],
+  ["WhatsApp and Messenger", ["whatsapp", "messenger"], "Order updates where your customers already chat.", "planned"],
+  ["VAT invoices", [], "Invoices in the required VAT format.", "planned"],
 ];
+const next = ["steadfast", "redx", "paperfly", "sslcommerz", "rocket", "upay", "brac", "dbbl", "ebl"] as const;
 ---
 <ul class="conn">
-  {items.map(([n, d, s, c]) => (
-    <li class:list={["conn-i", c, s]}>
+  {items.map(([n, logos, d, s]) => (
+    <li class:list={["conn-i", s]}>
+      <span class="logos">{logos.length ? logos.map((id) => <Brand id={id as any} h={24} />) : <span class="glyph" aria-hidden="true">{n === "SMS" ? "✉" : "Tk"}</span>}</span>
       <strong>{n}</strong><span>{d}</span><em>{s === "beta" ? "In the beta" : "Planned"}</em>
     </li>
   ))}
 </ul>
-<p class="next-up"><strong>Next, after the beta</strong> <span class="tag">Not yet integrated</span><br>Steadfast, RedX, Pathao and Paperfly couriers; SSLCommerz, aamarPay and ShurjoPay gateways; Rocket and Upay wallets.</p>
+<div class="next-up">
+  <p><strong>Next, after the beta</strong> <span class="tag">Not yet integrated</span></p>
+  <div class="next-logos">{next.map((id) => <span class="nl"><Brand id={id} h={22} /></span>)}</div>
+</div>
 
 <style>
 .conn { list-style: none; margin: 0; padding: 0; display: grid; gap: 16px; grid-template-columns: repeat(4, minmax(0, 1fr)); }
 @media (max-width: 960px) { .conn { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 @media (max-width: 520px) { .conn { grid-template-columns: 1fr; } }
-.conn-i { border: 2px solid var(--line); border-radius: 8px; padding: 18px; display: grid; gap: 4px; align-content: start; background: var(--card); }
+.conn-i { border: 2px solid var(--line); border-radius: 8px; padding: 18px; display: grid; gap: 4px; align-content: start; background: #fff; color: #14213d; }
+.logos { display: flex; align-items: center; gap: 12px; min-height: 30px; margin-bottom: 8px; }
+.glyph { font-size: 1.5rem; color: var(--green); }
 .conn-i strong { font-family: var(--display); font-weight: 800; font-size: 1.3rem; letter-spacing: -0.02em; }
 .conn-i span { font-size: 0.93rem; line-height: 1.45; }
-.conn-i em { font-style: normal; font-weight: 700; font-size: 0.75rem; justify-self: start; margin-top: 6px; padding: 3px 8px; border-radius: 999px; background: rgb(0 0 0 / .18); }
-.conn-i.red, .conn-i.green, .conn-i.cobalt { color: #fff; border-color: #14213d; }
-.conn-i.red { background: var(--red); } .conn-i.green { background: var(--green); } .conn-i.cobalt { background: var(--blue); }
-.conn-i.planned { background: transparent; border-style: dashed; box-shadow: none; }
-.conn-i.planned span { color: var(--ink-2); }
-.conn-i.planned em { background: var(--wash-2); }
-.next-up { margin-top: 22px; max-width: 72ch; }
+.conn-i em { font-style: normal; font-weight: 700; font-size: 0.75rem; justify-self: start; margin-top: 6px; padding: 3px 8px; border-radius: 999px; background: var(--green-wash); color: #0b5d3b; }
+.conn-i.planned { border-style: dashed; }
+.conn-i.planned em { background: #eef1f4; color: #4a5670; }
+.next-up { margin-top: 26px; }
+.next-up p { margin: 0 0 12px; }
+.next-logos { display: flex; flex-wrap: wrap; gap: 10px; }
+.nl { display: inline-flex; align-items: center; height: 46px; padding: 0 16px; background: #fff; border: 1.5px solid var(--rule); border-radius: 8px; filter: grayscale(.2); }
 </style>

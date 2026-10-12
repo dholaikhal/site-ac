@@ -2,6 +2,9 @@
 // Shared by the builder demo (demo.js) and the hero's quick build (hero-build.js).
 // Copy rule: the product is "our agent" / "our store agent", never "AI" or a model.
 import { icon, stars, heroArt } from "./app-art.js";
+import BRANDS from "../data/brands.json";
+// A brand logo inside an app screen (or its name if there is no file).
+export const logo = (id, h = 14) => { const b = BRANDS[id]; return b.logo ? `<img class="bl" src="assets/logos/${b.logo}" alt="${b.name}" style="height:${h}px">` : `<b class="bw">${b.name}</b>`; };
 // Product photos (Unsplash License; credits on the Sources page)
 import imgTote from "../assets/photos/bag-tote.jpg";
 import imgPrinted from "../assets/photos/bag-printed.jpg";
@@ -161,7 +164,8 @@ const hero = (st, title, sub, cta) => `<div class="hero-b"><div><span>${title}</
 const methods = (st, amount) => {
   const opts = PAY.map((p, i) => {
     const off = st.off && p === "bKash";
-    return `<label class="pm${i === 0 ? " sel" : ""}"><span class="radio"></span><span class="pm-name">${p}</span>${off ? '<span class="badge">10% off</span>' : `<span class="pm-note">${p === "Card" ? "Visa, Mastercard" : "Wallet"}</span>`}</label>`;
+    const mark = p === "Card" ? `${logo("visa", 10)}${logo("mastercard", 13)}${logo("amex", 13)}` : logo(p === "bKash" ? "bkash" : "nagad", p === "bKash" ? 18 : 16);
+    return `<label class="pm${i === 0 ? " sel" : ""}"><span class="radio"></span><span class="pm-logo">${mark}</span>${p === "Card" ? '<span class="pm-name">Card</span>' : ""}${off ? '<span class="badge">10% off</span>' : ""}</label>`;
   }).join("");
   const cod = st.cod && st.app === "shop" ? `<label class="pm"><span class="radio"></span><span class="pm-name">Cash on delivery</span><span class="pm-note">Dhaka only</span></label>` : "";
   return `<div class="sec"><h5>Pay with</h5>${opts}${cod}</div><div class="paybar"><div class="paybtn">Pay ${tk(amount)}</div></div>`;

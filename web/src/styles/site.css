@@ -310,3 +310,11 @@ body { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org
 /* Paint band over a street photo: the photo in greyscale, multiplied into the band's paint (a duotone) */
 .band.has-photo { position: relative; isolation: isolate; overflow: hidden; }
 .band.has-photo > .band-photo { position: absolute; inset: 0; z-index: -1; width: 100%; height: 100%; object-fit: cover; filter: grayscale(1) contrast(1.15) brightness(1.05); mix-blend-mode: multiply; opacity: .55; }
+
+/* Brand logos and wordmarks (data/brands.json) */
+.brand-logo { display: inline-block; width: auto; vertical-align: middle; }
+.brand-word { display: inline-block; vertical-align: middle; font-family: var(--sans); font-weight: 800; letter-spacing: -0.01em; color: #14213d; }
+.parts-band .parts-head { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 12px 48px; align-items: end; margin-bottom: 10px; }
+@media (max-width: 860px) { .parts-band .parts-head { grid-template-columns: 1fr; } }
+.parts-band .ticks { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px 28px; margin: 18px 0 0; }
+@media (max-width: 860px) { .parts-band .ticks { grid-template-columns: 1fr; } }

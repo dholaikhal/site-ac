@@ -1,0 +1,10 @@
+---
+// A brand's logo from public/assets/logos (see data/brands.json), or its name as a wordmark if we have no file.
+import brands from "../data/brands.json";
+interface Props { id: keyof typeof brands; h?: number; class?: string }
+const { id, h = 22, class: cls } = Astro.props;
+const b = (brands as any)[id];
+---
+{b.logo
+  ? <img class:list={["brand-logo", cls]} src={`assets/logos/${b.logo}`} alt={b.name} title={b.name} style={`height:${h}px`} loading="lazy" />
+  : <span class:list={["brand-word", cls]} style={`font-size:${Math.round(h * 0.62)}px`}>{b.name}</span>}

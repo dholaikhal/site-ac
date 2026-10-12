@@ -1,0 +1,22 @@
+{
+  "_about": "Brand logos in public/assets/logos/. Taken from each brand's own website (bKash, Nagad, BRAC Bank, Dutch-Bangla Bank, Eastern Bank, Pathao, SSLCommerz) or Simple Icons (CC0 artwork; Visa, Amex, Facebook, Messenger, WhatsApp, Google Sheets); Mastercard drawn. Brands without a file show as a wordmark. Logos are trademarks of their owners: clear their use with each brand before launch.",
+  "bkash": { "name": "bKash", "logo": "bkash.svg", "kind": "wallet" },
+  "nagad": { "name": "Nagad", "logo": "nagad.png", "kind": "wallet" },
+  "rocket": { "name": "Rocket", "kind": "wallet" },
+  "upay": { "name": "Upay", "kind": "wallet" },
+  "visa": { "name": "Visa", "logo": "visa.svg", "kind": "card" },
+  "mastercard": { "name": "Mastercard", "logo": "mastercard.svg", "kind": "card" },
+  "amex": { "name": "American Express", "logo": "amex.svg", "kind": "card" },
+  "brac": { "name": "BRAC Bank", "logo": "brac-bank.svg", "kind": "bank" },
+  "dbbl": { "name": "Dutch-Bangla Bank", "logo": "dbbl.png", "kind": "bank" },
+  "ebl": { "name": "Eastern Bank", "logo": "ebl.png", "kind": "bank" },
+  "sslcommerz": { "name": "SSLCommerz", "logo": "sslcommerz.png", "kind": "gateway" },
+  "pathao": { "name": "Pathao", "logo": "pathao.svg", "kind": "courier" },
+  "steadfast": { "name": "Steadfast", "kind": "courier" },
+  "redx": { "name": "RedX", "kind": "courier" },
+  "paperfly": { "name": "Paperfly", "kind": "courier" },
+  "facebook": { "name": "Facebook", "logo": "facebook.svg", "kind": "channel" },
+  "messenger": { "name": "Messenger", "logo": "messenger.svg", "kind": "channel" },
+  "whatsapp": { "name": "WhatsApp", "logo": "whatsapp.svg", "kind": "channel" },
+  "googlesheets": { "name": "Google Sheets", "logo": "googlesheets.svg", "kind": "tool" }
+}

@@ -1,4 +1,4 @@
-import { APPS, COMMON, PAY, amount, SCREENS, tk, esc } from "./apps.js";
+import { APPS, COMMON, PAY, amount, SCREENS, tk, esc, logo } from "./apps.js";
 import confettiLib from "canvas-confetti";
 // Amader Cloud builder demo. Scripted entirely in the browser: no agent is called, nothing is published.
 // Copy rule: the product is "our agent" / "our store agent", never "AI" or a model.
@@ -324,7 +324,7 @@ function initDemo(root) {
     paint("pay"); await wait(900); if (token !== run) return;
     const sheet = document.createElement("div");
     sheet.className = "paysheet";
-    sheet.innerHTML = `<b>bKash payment</b><span class="row"><span>Merchant</span><span>${esc(app.name)}</span></span><span class="row"><span>Amount</span><strong>${tk(amt)}</strong></span><span class="fld">Wallet number · 01•••••••••</span><span class="fld">PIN · ••••</span><span class="paybtn">Confirm</span>`;
+    sheet.innerHTML = `<b class="ps-head">${logo("bkash", 26)} Payment</b><span class="row"><span>Merchant</span><span>${esc(app.name)}</span></span><span class="row"><span>Amount</span><strong>${tk(amt)}</strong></span><span class="fld">Wallet number · 01•••••••••</span><span class="fld">PIN · ••••</span><span class="paybtn">Confirm</span>`;
     screen.append(sheet);
     await wait(1500); if (token !== run) return;
     sheet.classList.add("paid");
