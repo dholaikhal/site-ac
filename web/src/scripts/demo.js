@@ -162,6 +162,18 @@ function initDemo(root) {
     notifEl.classList.remove("show"); void notifEl.offsetWidth; notifEl.classList.add("show");
   }
   function hideNotif() { notifEl.classList.remove("show"); }
+  // The camera leans in: the phone zooms onto the part that just changed (or the notification that just
+  // arrived), holds, and eases back out. The stage clips it, so it reads as a close-up, not a pop-out.
+  let zoomTimer = 0;
+  function focusZoom(el, hold = 1700) {
+    const wrap = devBox.closest(".dev-wrap");
+    if (!el || !wrap || matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const w = wrap.getBoundingClientRect(), r = el.getBoundingClientRect();
+    wrap.style.transformOrigin = `${r.left - w.left + r.width / 2}px ${r.top - w.top + r.height / 2}px`;
+    wrap.classList.add("zoom");
+    clearTimeout(zoomTimer);
+    zoomTimer = setTimeout(() => wrap.classList.remove("zoom"), hold);
+  }
   function celebrate() {
     openSign.hidden = false;
     openSign.classList.remove("swing"); void openSign.offsetWidth; openSign.classList.add("swing");
@@ -274,6 +286,7 @@ function initDemo(root) {
     st.flash = e.key;
     paint(e.screen);
     screen.querySelectorAll(".b.changed").forEach((el) => el.classList.add("paint"));
+    focusZoom(screen.querySelector(".b.changed"));
     doneLog(list);
     if (!(await stream(`<p>${lang === "bn" ? e.bnReply : e.reply}</p>`, "Amader Cloud", token))) return;
     setStatus(st.published ? "Live · updated" : "Preview updated");
@@ -311,6 +324,7 @@ function initDemo(root) {
       await wait(1800); if (token !== run || !st?.published) return;
       const amt = method === "bKash" && st.off ? price - Math.round(price * 0.1) : price;
       notify("✓", `<b>New ${{ fees: "payment", book: "booking", doctor: "serial", event: "ticket", service: "visit" }[st.app] || "order"}</b> ${tk(amt)} · ${method}`, "ok");
+      focusZoom(notifEl, 1500);
       sale(what, amt, method);
     }
   }

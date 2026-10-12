@@ -66,20 +66,21 @@ const ticker = ["bKash checkout", "Nagad", "Cards", "Courier booking", "Order SM
   </div>
 </section>
 
-<Ticker items={ticker} />
-
-<CustomerLogos />
-
 <section class="band band-green demo-band has-photo fade-low" id="demo">
   <Photo id="street" class="bg-photo" sizes="100vw" widths={[800, 1200, 1600]} />
   <div class="wrap">
     <div class="band-head band-split" data-reveal>
-      <h2 class="slogan">Try it.<br>Build one now.</h2>
+      <h2 class="slogan">Try it.<br> Build one now.</h2>
       <p class="lede">Pick a kind of business, or write what you want, how you want. Then open it to customers and watch the orders come in.</p>
     </div>
     <Demo />
   </div>
 </section>
+
+
+<Ticker items={ticker} />
+
+<CustomerLogos />
 
 <Showcase />
 
@@ -129,7 +130,7 @@ const ticker = ["bKash checkout", "Nagad", "Cards", "Courier booking", "Order SM
 </section>
 
 <style>
-.hero { position: relative; padding-block: clamp(28px, 4vw, 56px) clamp(48px, 7vw, 96px); overflow: hidden; --h1: clamp(2.3rem, 1.4rem + 3.4vw, 4.2rem); }
+.hero { position: relative; padding-block: clamp(28px, 4vw, 56px) clamp(28px, 4vw, 48px); overflow: hidden; --h1: clamp(2.5rem, 1.3rem + 4.4vw, 5.6rem); }
 /* One column tells it top to bottom (headline, kind of business, the sentence, the action); the phone beside
    it is scaled to the same height, tops and bottoms level */
 .hero-grid { position: relative; display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: clamp(32px, 5vw, 72px); align-items: stretch; }
@@ -268,7 +269,7 @@ const ticker = ["bKash checkout", "Nagad", "Cards", "Courier booking", "Order SM
 /* The sentence, in a message bar; its sections fly from here into the phone */
 .qb-bar { position: relative; display: grid; grid-template-columns: minmax(0, 1fr) auto; grid-template-areas: "in send"; align-items: center; column-gap: 14px; padding: 14px 14px 14px 18px; background: var(--card); border: 1.5px solid var(--line); border-radius: 14px; box-shadow: 0 18px 36px -28px rgb(20 33 61 / .55); }
 .qb-in { grid-area: in; }
-.qb-bar p { font-size: 1.08rem; font-weight: 600; line-height: 1.35; margin: 2px 0 0; min-height: 2.7em; }
+.qb-bar p { font-size: 1.22rem; font-weight: 600; line-height: 1.35; margin: 2px 0 0; min-height: 2.7em; }
 .qb-cap { display: block; font-size: 0.78rem; font-weight: 700; color: var(--ink-2); }
 /* The caption tells the stage in place: You type, then the agent at work (a moving sweep of the sign paints), then Done! */
 .qb-cap[data-st="busy"] { background: linear-gradient(90deg, var(--red), #d98f00, var(--blue), var(--green), var(--red)) 0 0 / 300% 100%; -webkit-background-clip: text; background-clip: text; color: transparent; animation: capflow 2s linear infinite; }
@@ -290,7 +291,7 @@ const ticker = ["bKash checkout", "Nagad", "Cards", "Courier booking", "Order SM
 /* The phone, as tall as the column beside it */
 .qb { position: relative; margin: 0; display: grid; align-content: start; justify-items: center; }
 .qb-phone { position: relative; display: grid; justify-items: center; }
-.qb { --pz: .68; }
+.qb { --pz: .8; }
 .qb :global(.dev) { --z: var(--pz); }
 /* Live at: a badge on the phone's bottom bezel */
 .qb-live { text-decoration: none; position: absolute; left: 50%; bottom: 14px; z-index: 3; white-space: nowrap; box-shadow: 0 10px 24px -10px rgb(0 0 0 / .5); display: inline-flex; align-items: center; gap: 8px; font-weight: 800; font-size: 0.86rem; padding: 6px 14px; border-radius: 999px; background: var(--green); color: #fff; opacity: 0; translate: -50% 8px; transition: opacity .3s, translate .4s cubic-bezier(.2,.8,.2,1.4); }

@@ -38,7 +38,7 @@
   --fs-small: 0.94rem;
 
   --gutter: clamp(16px, 4vw, 48px);
-  --max: 1200px;
+  --max: 1380px;
   --header-h: 66px;
   color-scheme: light;
 }
@@ -310,9 +310,19 @@ body { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org
 .band .switch { border-color: #fff; }
 .band .vs-rows li { color: var(--ink); }
 /* The demo on the green band: a navy stage so the device stands out, and a smaller slogan to keep it high */
-.demo-band { padding-block: clamp(48px, 6vw, 80px); }
-.demo-band .slogan { font-size: clamp(2.6rem, 1.6rem + 3.4vw, 4.6rem); }
-.demo-band .band-head { margin-bottom: 28px; align-items: end; }
+.demo-band { padding-block: clamp(28px, 3vw, 44px) clamp(48px, 6vw, 80px); }
+/* The demo is the centrepiece: nearly edge to edge, and it zooms up into place as it scrolls in */
+.demo-band > .wrap { max-width: 1680px; }
+@supports (animation-timeline: view()) {
+  .demo-band .demo { animation: demo-in linear both; animation-timeline: view(); animation-range: entry 0% cover 30%; transform-origin: 50% 0; }
+  @keyframes demo-in { from { scale: .86; opacity: .55; } to { scale: 1; opacity: 1; } }
+}
+@media (prefers-reduced-motion: reduce) { .demo-band .demo { animation: none; } }
+/* On wide screens the demo's phone is bigger, frame and app scaled together */
+@media (min-width: 1100px) { .demo-band .demo .dev[data-kind="phone"] { --z: .8; --s: 1.19; } }
+.demo-band .slogan { font-size: clamp(2rem, 1.4rem + 2vw, 3.2rem); }
+.demo-band .slogan br { display: none; }
+.demo-band .band-head { margin-bottom: 20px; align-items: center; }
 .demo-band .demo-stage { background: #14213d; box-shadow: inset 0 0 0 10px #14213d, inset 0 0 0 12px var(--yellow); }
 .band .ticks li::before { border-color: var(--yellow); }
 
