@@ -258,9 +258,16 @@
 .dev.live-pop { animation: live-pop .7s cubic-bezier(.2, 1.6, .4, 1); }
 @keyframes live-pop { 0% { transform: scale(1); filter: drop-shadow(0 0 0 rgb(255 204 0 / 0)); } 35% { transform: scale(1.035); filter: drop-shadow(0 0 28px rgb(255 204 0 / .55)); } 100% { transform: scale(1); filter: drop-shadow(0 0 0 rgb(255 204 0 / 0)); } }
 @media (prefers-reduced-motion: reduce) { .dev.live-pop { animation: none; } }
-/* The "rings" launch: soft rings out from the phone (src/scripts/celebrate.js) */
-.ring-fx { position: fixed; z-index: 39; width: 0; height: 0; pointer-events: none; }
-.ring-fx i { position: absolute; left: 0; top: 0; width: var(--d); height: var(--d); margin: calc(var(--d) / -2) 0 0 calc(var(--d) / -2); border-radius: 50%; border: 3px solid rgb(255 204 0 / .7); box-shadow: 0 0 24px rgb(255 204 0 / .35), inset 0 0 18px rgb(255 204 0 / .2); scale: .2; opacity: 0; animation: ring-out 1.3s cubic-bezier(.2, .7, .3, 1) forwards; }
-.ring-fx i:nth-child(2) { animation-delay: .18s; border-color: rgb(226 38 27 / .55); }
-.ring-fx i:nth-child(3) { animation-delay: .36s; border-color: rgb(11 93 59 / .5); }
-@keyframes ring-out { 0% { scale: .2; opacity: .9; } 100% { scale: 1; opacity: 0; } }
+/* Launch effects behind the phone (src/scripts/celebrate.js): the phone sits above them */
+.dev { position: relative; z-index: 1; }
+.fx { position: absolute; z-index: 0; pointer-events: none; }
+/* Halo: phone-shaped outlines swelling outward on all sides */
+.fx-halo i { position: absolute; inset: 0; border-radius: 13% / 6.5%; border: 3px solid var(--c, #ffcc00); box-shadow: 0 0 22px color-mix(in srgb, var(--c, #ffcc00) 45%, transparent); opacity: 0; animation: halo-out 1.4s cubic-bezier(.2, .7, .3, 1) forwards; }
+.fx-halo i:nth-child(2) { --c: #e2261b; animation-delay: .16s; }
+.fx-halo i:nth-child(3) { --c: #0b5d3b; animation-delay: .32s; }
+.fx-halo i:nth-child(4) { --c: #1739a8; animation-delay: .48s; }
+@keyframes halo-out { 0% { scale: 1; opacity: .95; } 100% { scale: 1.75 1.4; opacity: 0; } }
+/* Sunburst: rays opening out behind the phone, turning as they fade */
+.fx-sun i { position: absolute; left: 50%; top: 45%; width: 260%; aspect-ratio: 1; translate: -50% -50%; border-radius: 50%; background: repeating-conic-gradient(from 0deg, rgb(255 204 0 / .55) 0 6deg, transparent 6deg 18deg); -webkit-mask-image: radial-gradient(closest-side, transparent 22%, #000 38%, transparent 100%); mask-image: radial-gradient(closest-side, transparent 22%, #000 38%, transparent 100%); scale: .3; opacity: 0; animation: sun-out 1.7s cubic-bezier(.2, .7, .3, 1) forwards; }
+@keyframes sun-out { 0% { scale: .3; rotate: 0deg; opacity: 0; } 25% { opacity: 1; } 100% { scale: 1; rotate: 40deg; opacity: 0; } }
+@media (prefers-reduced-motion: reduce) { .fx { display: none; } }
