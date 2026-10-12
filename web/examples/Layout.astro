@@ -25,10 +25,13 @@ const nav = { shop: [["#items", "Shop"], ["#story", "Our story"], ["#visit", "Co
 <style set:html={`:root{--brand:${app.brand};--brand-ink:${app.ink};--tint:${app.tint};--r:${app.radius};--head:"${app.head}",Georgia,serif;--body:"${app.body}",system-ui,sans-serif}`} />
 </head>
 <body class={`k-${app.kind}`}>
-<div class="ex-ribbon">
-  <span><b>Example app</b> by <a href="https://amader.cloud">Amader Cloud</a>. The business is invented and nothing here is for sale.</span>
-  <a class="ex-cta" href="https://amader.cloud/contact.html?topic=beta#form">Build one like it →</a>
-</div>
+<aside class="ex-banner" aria-label="About this example">
+  <div class="ex-in">
+    <a class="ex-back" href="https://amader.cloud/#examples"><span aria-hidden="true">←</span> Back to amader.cloud</a>
+    <p class="ex-msg"><span class="ex-mark" aria-hidden="true">a</span><span><b>Example app, made agentically with <a href="https://amader.cloud">amader.cloud</a></b><small>The business is invented and nothing here is for sale.</small></span></p>
+    <a class="ex-cta" href="https://amader.cloud/contact.html?topic=beta#form">Build one like it →</a>
+  </div>
+</aside>
 <header class="top">
   <div class="wrap">
     <a class="logo" href="/"><span class="mk">{app.name[0]}</span>{app.name}</a>
@@ -49,7 +52,7 @@ const nav = { shop: [["#items", "Shop"], ["#story", "Our story"], ["#visit", "Co
     <div><h4>Pay with</h4><p class="paylogos"><img src="/assets/logos/bkash.svg" alt="bKash" height="20"><img src="/assets/logos/nagad.png" alt="Nagad" height="18"><img src="/assets/logos/visa.svg" alt="Visa" height="12"><img src="/assets/logos/mastercard.svg" alt="Mastercard" height="18"></p></div>
   </div>
   <div class="wrap made">
-    <a href="https://amader.cloud" class="made-by"><b>a</b>An example app by Amader Cloud</a>
+    <a href="https://amader.cloud" class="made-by"><b>a</b>Example app, made agentically with amader.cloud</a>
     <span>The request it answers: “{app.prompt}”</span>
   </div>
 </footer>
