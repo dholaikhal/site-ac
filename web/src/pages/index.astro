@@ -143,7 +143,7 @@ const ticker = ["bKash checkout", "Nagad", "Cards", "Courier booking", "Order SM
 <style>
 .hero { position: relative; padding-block: clamp(28px, 4vw, 56px) clamp(48px, 7vw, 96px); overflow: hidden; }
 .hero-grid { position: relative; display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr); gap: clamp(28px, 4vw, 64px); align-items: center; }
-@media (max-width: 1000px) { .hero-grid { grid-template-columns: 1fr; } }
+@media (max-width: 1240px) { .hero-grid { grid-template-columns: 1fr; } }
 .hero-copy .signboard h1 { font-size: clamp(3.2rem, 1.8rem + 4.6vw, 6rem); }
 .hero-copy .lede { margin-top: 26px; max-width: 46ch; }
 /* The board's tube light comes on once, at dusk */
@@ -154,9 +154,9 @@ const ticker = ["bKash checkout", "Nagad", "Cards", "Courier booking", "Order SM
 .qb { position: relative; margin: 0; display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 14px 20px; align-items: center; }
 /* "Do you want an app for your …?": the kinds of business on a vertical reel; the active one sits in line,
    the ones before and after fade above and below. Click any to jump to it. */
-.qb-q { grid-column: 1 / -1; display: flex; align-items: center; gap: 0.28em; font-family: var(--display); font-weight: 800; font-size: clamp(1.5rem, 1.1rem + 1vw, 2rem); line-height: 1.1; }
+.qb-q { grid-column: 1 / -1; display: flex; flex-wrap: nowrap; width: max-content; max-width: none; align-items: center; gap: 0 0.28em; font-family: var(--display); font-weight: 800; font-size: clamp(1.5rem, 1.1rem + 1vw, 2rem); line-height: 1.1; }
 .qb-lead { flex: none; white-space: nowrap; }
-.qb-drum { --row: 1.25em; position: relative; flex: 1; min-width: 0; height: calc(var(--row) * 3); overflow: hidden; -webkit-mask-image: linear-gradient(180deg, transparent 0, #000 38%, #000 62%, transparent 100%); mask-image: linear-gradient(180deg, transparent 0, #000 38%, #000 62%, transparent 100%); }
+.qb-drum { --row: 1.25em; position: relative; flex: none; height: calc(var(--row) * 3); overflow-x: visible; overflow-y: clip; -webkit-mask-image: linear-gradient(180deg, transparent 0, #000 38%, #000 62%, transparent 100%); mask-image: linear-gradient(180deg, transparent 0, #000 38%, #000 62%, transparent 100%); }
 .qb-reel { list-style: none; margin: 0; padding: 0; transition: translate .55s cubic-bezier(.3,1.3,.5,1); translate: 0 calc(var(--row) * (1 - var(--i, 0))); }
 .qb-reel li { height: var(--row); display: flex; align-items: center; white-space: nowrap; }
 @media (max-width: 560px) { .qb-q { flex-direction: column; align-items: flex-start; gap: 0; } .qb-drum { width: 100%; margin-top: -0.3em; } }
@@ -183,7 +183,7 @@ const ticker = ["bKash checkout", "Nagad", "Cards", "Courier booking", "Order SM
 .qb :global(.b.qb-wait) { opacity: 0; }
 .qb :global(.b.qb-fly) { animation: qb-fly .62s cubic-bezier(.2,.75,.25,1) both; }
 @keyframes qb-fly { from { transform: translate(var(--dx), var(--dy)) scale(.25); opacity: 0; } 30% { opacity: 1; } to { transform: none; opacity: 1; } }
-@media (max-width: 1000px) { .qb { max-width: 620px; } }
+@media (max-width: 1240px) { .qb { max-width: 680px; } }
 @media (max-width: 560px) { .qb { grid-template-columns: 1fr; justify-items: center; } .qb-side { margin-top: 0; justify-self: stretch; } }
 
 .head.center { margin-inline: auto; text-align: center; }
