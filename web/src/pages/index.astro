@@ -6,6 +6,8 @@ import BetaButton from "../components/BetaButton.astro";
 import ProblemScene from "../components/ProblemScene.astro";
 import Photo from "../components/Photo.astro";
 import SafeBase from "../components/SafeBase.astro";
+import CustomerLogos from "../components/CustomerLogos.astro";
+import Stories from "../components/Stories.astro";
 import Faq from "../components/Faq.astro";
 import facts, { tk, plan } from "../data/facts";
 import "../styles/app-screen.css";
@@ -66,6 +68,8 @@ const ticker = ["bKash checkout", "Nagad", "Cards", "Courier booking", "Order SM
 
 <Ticker items={ticker} />
 
+<CustomerLogos />
+
 <section class="band band-green demo-band has-photo fade-low" id="demo">
   <Photo id="street" class="bg-photo" sizes="100vw" widths={[800, 1200, 1600]} />
   <div class="wrap">
@@ -82,6 +86,8 @@ const ticker = ["bKash checkout", "Nagad", "Cards", "Courier booking", "Order SM
 <ProblemScene />
 
 <SafeBase />
+
+<Stories />
 
 <section class="band band-yellow has-photo fade-right">
   <Photo id="facades" class="bg-photo" sizes="100vw" widths={[800, 1200, 1600]} />

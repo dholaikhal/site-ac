@@ -364,6 +364,9 @@ body { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org
 .page-hero.band .signboard { box-shadow: inset 0 0 0 8px var(--board), inset 0 0 0 10px var(--pin), 0 24px 50px -28px rgb(0 0 0 / .7); }
 /* Light tint: a pale wash with a Dhaka photo at low strength, for sections that carry dark text */
 .has-photo.tint { background-color: var(--wash-2); }
+/* A warm cream tint, for a light section on a page that already has a cool one */
+.has-photo.tint.warm { background-color: #f6ecdc; }
+:root[data-theme="dark"] .has-photo.tint.warm { background-color: #2a2218; }
 .has-photo.tint > .bg-photo { opacity: .16; }
 :root[data-theme="dark"] .has-photo.tint > .bg-photo { mix-blend-mode: luminosity; opacity: .1; }
 @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .has-photo.tint > .bg-photo { mix-blend-mode: luminosity; opacity: .1; } }

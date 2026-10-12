@@ -1,0 +1,48 @@
+---
+// Owners in their own words, from a tea stall to a three-branch pharmacy. Shown only while `live` is set in
+// data/proof.ts, or in the dev preview, where it's tagged as placeholder (see the note in data/proof.ts).
+import Photo from "./Photo.astro";
+import { live, stories } from "../data/proof";
+const show = live || import.meta.env.DEV;
+const initials = (n: string) => n.replace(/^Dr\.\s*/, "").split(/\s+/).map((w) => w[0]).slice(0, 2).join("");
+---
+{show && (
+<section class="section has-photo tint warm stories" id="stories">
+  <Photo id="night-market" class="bg-photo" sizes="100vw" widths={[800, 1200, 1600]} />
+  <div class="wrap">
+    <div class="head">
+      <h2>From a tea stall to three pharmacies.{!live && <span class="ph">Placeholder</span>}</h2>
+      <p class="lede">Owners on what changed when the inbox stopped being the shop.</p>
+    </div>
+    <ul class="story-grid">
+      {stories.map((s, i) => (
+        <li class="story" data-reveal style={`--d:${i % 3};--t:${s.tone}`}>
+          <span class="scale">{s.scale}</span>
+          <blockquote>{s.quote}</blockquote>
+          <span class="who">
+            <span class="av" aria-hidden="true">{initials(s.name)}</span>
+            <span><strong>{s.name}</strong><small>{s.role}, {s.business} · {s.area}</small></span>
+          </span>
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>
+)}
+
+<style>
+.ph { display: inline-block; vertical-align: middle; margin-left: 12px; padding: 3px 9px; border-radius: 3px; background: var(--yellow); color: #14213d; font-family: var(--sans); font-size: 0.8rem; font-weight: 800; letter-spacing: .04em; text-transform: uppercase; }
+.story-grid { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; }
+@media (max-width: 960px) { .story-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 600px) { .story-grid { grid-template-columns: 1fr; } }
+.story { position: relative; display: flex; flex-direction: column; gap: 14px; padding: 22px 22px 20px; background: var(--card); color: var(--ink); border-radius: 8px; border-top: 4px solid var(--t); box-shadow: 0 20px 40px -30px rgb(20 33 61 / .55); }
+.scale { align-self: flex-start; font-size: 0.72rem; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; color: var(--t); }
+:root[data-theme="dark"] .scale { color: color-mix(in srgb, var(--t) 45%, #fff); }
+blockquote { margin: 0; font-size: 1.04rem; line-height: 1.55; quotes: "“" "”"; }
+blockquote::before { content: open-quote; display: block; height: .5em; font-family: var(--display); font-size: 3.2rem; line-height: 1; color: var(--t); }
+blockquote::after { content: close-quote; }
+.who { margin-top: auto; display: flex; align-items: center; gap: 12px; padding-top: 14px; border-top: 1px solid var(--rule); }
+.av { display: grid; place-items: center; width: 40px; height: 40px; flex: none; border-radius: 50%; background: var(--t); color: #fff; font-weight: 800; font-size: 0.9rem; }
+.who strong { display: block; font-size: 0.98rem; }
+.who small { display: block; color: var(--ink-2); font-size: 0.84rem; line-height: 1.35; }
+</style>
