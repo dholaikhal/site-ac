@@ -1,0 +1,122 @@
+// The hero's quick build: a one-sentence request types itself, the store's sections fly from it into
+// the phone, confetti when it goes live, then the next business. Scripted; uses the demo's apps.
+// Copy rule: "our agent", never "AI".
+import { APPS, SCREENS, tk } from "./apps.js";
+
+const box = document.querySelector("[data-qb]");
+if (box && !box.dataset.ready) { box.dataset.ready = "1"; init(box); }
+
+function init(box) {
+  const $ = (s) => box.querySelector(s);
+  const text = $("[data-qb-text]");
+  const status = $("[data-qb-status]");
+  const screen = $("[data-qb-screen]");
+  const url = $("[data-qb-url]");
+  const url2 = $("[data-qb-url-2]");
+  const live = $("[data-qb-live]");
+  const notif = $("[data-qb-notif]");
+  const app = box.querySelector(".app");
+  const still = matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  const SHOW = [
+    ["shop", "A store for my jute bags, with bKash payment and delivery", "Market tote", 1450, "order"],
+    ["kitchen", "Orders for my home kitchen, with a delivery time", "Kacchi × 2", 960, "order"],
+    ["book", "Bookings for my salon, with a deposit by bKash", "Hair colour", 300, "booking"],
+    ["doctor", "Evening serials for my clinic, booking fee by bKash", "Serial 13", 200, "serial"],
+    ["fees", "Monthly fees for my coaching centre, receipt by SMS", "BP-2071 · October", 2500, "payment"],
+  ];
+  const typeEl = $("[data-qb-type]");
+  const chips = [...box.querySelectorAll("[data-qb-pick]")];
+  let jump = null;
+  chips.forEach((c) => c.addEventListener("click", () => { jump = +c.dataset.qbPick; run++; }));
+  const pick = (i) => {
+    chips.forEach((c, n) => c.setAttribute("aria-pressed", String(n === i)));
+    typeEl.classList.remove("swap"); void typeEl.offsetWidth; typeEl.textContent = chips[i].dataset.word; typeEl.classList.add("swap");
+  };
+  const state = (k) => ({ app: k, off: false, green: false, cod: false, remind: false, late: false, cutoff: false, near: false, flash: null, built: true, published: true, tab: "home", undo: [] });
+
+  let visible = true, run = 0;
+  new IntersectionObserver(([e]) => { visible = e.isIntersecting; }, { threshold: 0.2 }).observe(box);
+  const wait = (ms) => new Promise((r) => {
+    const t0 = performance.now();
+    const tick = () => (visible && !document.hidden ? (performance.now() - t0 >= ms ? r() : requestAnimationFrame(tick)) : setTimeout(tick, 200));
+    tick();
+  });
+
+  function paint(k) {
+    const a = APPS[k];
+    screen.style.setProperty("--brand", a.color);
+    screen.innerHTML = SCREENS[k].home(state(k));
+    screen.querySelectorAll(".b").forEach((el) => el.classList.add("ink"));
+    url.textContent = url2.textContent = `${a.slug}.amader.cloud`;
+  }
+
+  if (still) {
+    paint("shop"); text.textContent = SHOW[0][1]; status.hidden = true; live.classList.add("on");
+    chips.forEach((c) => c.addEventListener("click", () => { const i = +c.dataset.qbPick; pick(i); paint(SHOW[i][0]); text.textContent = SHOW[i][1]; }));
+    return;
+  }
+
+  // Each section starts at the request bubble and flies to its place in the phone.
+  async function fly(token) {
+    const from = text.getBoundingClientRect();
+    const scale = parseFloat(getComputedStyle(box.querySelector(".dev")).getPropertyValue("--s")) || 1;
+    const blocks = [...screen.querySelectorAll(".b")];
+    blocks.forEach((el) => el.classList.add("qb-wait"));
+    for (const el of blocks) {
+      const r = el.getBoundingClientRect();
+      const dx = (from.left + from.width / 2 - (r.left + r.width / 2)) / scale;
+      const dy = (from.top + from.height / 2 - (r.top + r.height / 2)) / scale;
+      el.style.setProperty("--dx", `${dx}px`); el.style.setProperty("--dy", `${dy}px`);
+      el.classList.remove("qb-wait"); el.classList.add("qb-fly", "paint");
+      await wait(330); if (token !== run) return false;
+    }
+    return true;
+  }
+
+  function confetti() {
+    const colors = ["#e2261b", "#ffcc00", "#0b5d3b", "#1739a8", "#ffffff"];
+    for (let i = 0; i < 26; i++) {
+      const f = document.createElement("span");
+      f.className = "qb-confetti";
+      f.style.cssText = `--x:${45 + Math.random() * 50}%;--r:${Math.random() * 540}deg;--dx:${(Math.random() - .5) * 160}px;--t:${1.4 + Math.random()}s;background:${colors[i % colors.length]};animation-delay:${Math.random() * .3}s`;
+      box.append(f);
+      setTimeout(() => f.remove(), 3000);
+    }
+  }
+
+  // One business: type the request, build the store, go live, first order. False if a chip cut it short.
+  async function play(i, token) {
+    const [k, prompt, first, amt, noun] = SHOW[i];
+    const ok = () => token === run;
+    pick(i);
+    live.classList.remove("on"); notif.classList.remove("show");
+    screen.innerHTML = ""; url.textContent = "…"; text.textContent = ""; text.classList.add("caret");
+    status.hidden = true; box.classList.remove("building");
+    await wait(450); if (!ok()) return false;
+    for (let n = 1; n <= prompt.length; n += 2) { text.textContent = prompt.slice(0, n); await wait(26); if (!ok()) return false; }
+    text.textContent = prompt; text.classList.remove("caret");
+    await wait(300); if (!ok()) return false;
+    status.hidden = false; box.classList.add("building");
+    paint(k);
+    if (!(await fly(token))) return false;
+    await wait(450); if (!ok()) return false;
+    box.classList.remove("building"); status.hidden = true;
+    live.classList.add("on"); confetti();
+    await wait(900); if (!ok()) return false;
+    notif.innerHTML = `<span class="ni">✓</span><span><b>New ${noun}</b>${first} · ${tk(amt)} · bKash</span>`;
+    notif.classList.add("show");
+    await wait(3600);
+    return ok();
+  }
+  async function loop() {
+    let i = 0;
+    for (;;) {
+      const token = ++run;
+      const done = await play(i, token);
+      if (jump !== null) { i = jump; jump = null; continue; }
+      if (done) i = (i + 1) % SHOW.length;
+    }
+  }
+  loop();
+}

@@ -10,15 +10,9 @@ import Compare from "../components/Compare.astro";
 import Faq from "../components/Faq.astro";
 import facts, { tk, plan } from "../data/facts";
 import "../styles/app-screen.css";
-import { icon } from "../scripts/app-art.js";
-import imgTote from "../assets/photos/bag-tote.jpg";
-import imgPrinted from "../assets/photos/bag-printed.jpg";
-import imgWoven from "../assets/photos/bag-woven.jpg";
-import imgPouch from "../assets/photos/bag-pouch.jpg";
+import Device from "../components/Device.astro";
 const m = facts.market;
 const starter = plan("starter"), business = plan("business");
-// Static "after" screen: the same fictional store the demo builds.
-const products: [string, number, ImageMetadata][] = [["Market tote", 1450, imgTote], ["Printed tote", 1250, imgPrinted], ["Woven handbag", 1850, imgWoven], ["Jute pouch", 350, imgPouch]];
 const rates: [string, string, string][] = [
   ["Checkout by bKash, Nagad or card", "Paid into your own merchant account", "Included"],
   ["Courier booking", "The courier charges its own delivery fee", "Included"],
@@ -35,37 +29,31 @@ const ticker = ["bKash checkout", "Nagad", "Cards", "Courier booking", "Order SM
   <div class="wrap hero-grid">
     <div class="hero-copy">
       <div class="signboard lit">
-        <h1>Describe your store. Our agent builds&nbsp;it.</h1>
+        <h1>Describe your business. Our agent builds&nbsp;it.</h1>
         <span class="address">Open at <span class="url">yourname.amader.cloud</span></span>
       </div>
-      <p class="lede">Tell Amader Cloud what you sell in one sentence. It builds a working online store, booking page or fee collection, with bKash, Nagad and card payments already set up.</p>
+      <p class="lede">A Facebook store, a home kitchen, a salon, a clinic, a coaching centre: say what you need in one sentence. Our agent builds the app, with bKash, Nagad and card payments already set up.</p>
       <div class="btn-row"><BetaButton /><a class="btn btn-quiet" href="#demo">Try the builder</a></div>
       <p class="cta-note"><span>Free while you build</span><span>Pay by bKash when you go live</span><span>Cancel any time</span></p>
     </div>
 
-    <figure class="before-after" aria-label="Before: a one-sentence request. After: the finished store on a phone, taking a paid order.">
-      <div class="ba-before">
-        <span class="ba-cap">What you type</span>
-        <p class="ba-request">A store for my handmade bags, with bKash payment and delivery.</p>
+    <figure class="qb" data-qb aria-label="Our agent building an app from one sentence, for different kinds of business (animation)">
+      <p class="qb-q">Do you want an app for your <b data-qb-type>Facebook store</b>?</p>
+      <div class="qb-types" role="group" aria-label="Kind of business">
+        {[["Facebook store", "Facebook store"], ["Home kitchen", "home kitchen"], ["Salon", "salon"], ["Clinic", "clinic"], ["Coaching centre", "coaching centre"]].map(([label, word], i) =>
+          <button type="button" data-qb-pick={i} data-word={word} aria-pressed={i === 0 ? "true" : "false"}>{label}</button>)}
       </div>
-      <svg class="ba-arrow" viewBox="0 0 130 100" aria-hidden="true"><path pathLength="1" d="M14 6 C 8 58, 48 84, 116 72" fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round"/><path pathLength="1" d="M98 58 L118 72 L100 88" fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      <div class="ba-after">
-        <div class="phone">
-          <div class="phone-notch" aria-hidden="true"></div>
-          <div class="phone-url"><span>goldweave.amader.cloud</span></div>
-          <div class="screen">
-            <div class="b ink" style="--s:0"><div class="ah"><span class="mark">J</span><strong>Goldweave</strong><span class="ah-ic"><span class="ib" set:html={icon("search")}></span><span class="ib"><Fragment set:html={icon("bag")} /></span></span></div></div>
-            <div class="b ink" style="--s:1"><div class="hero-b photo"><img class="ph bg" src={imgPrinted.src} alt="" /><div><span>Handmade jute bags</span><small>Delivery across Bangladesh</small><em>Shop now</em></div></div></div>
-            <div class="b ink" style="--s:2"><div class="cats"><span class="on">All</span><span>Totes</span><span>Handbags</span><span>Pouches</span></div></div>
-            <div class="b ink" style="--s:3"><div class="pgrid">{products.map(([n, p, img], i) => <div class="pc"><div class="pimg"><img class="ph" src={img.src} alt="" /><span class="fav" set:html={icon("heart")}></span>{i === 0 && <span class="new">New</span>}</div><span class="pn">{n}</span><b>{tk(p)}</b></div>)}</div></div>
-          </div>
-        </div>
-        <ul class="pings" aria-hidden="true">
-          <li style="--p:0"><span class="ico ok">✓</span>Order paid by bKash · {tk(1530)}</li>
-          <li style="--p:1"><span class="ico go">⟶</span>Courier booked</li>
-          <li style="--p:2"><span class="ico sms">SMS</span>Buyer told it's on the way</li>
-        </ul>
-        <figcaption class="ba-cap">What you get</figcaption>
+      <div class="qb-side">
+        <div class="qb-prompt"><span class="qb-cap">You type</span><p data-qb-text></p></div>
+        <div class="qb-status" data-qb-status hidden><span class="spark" aria-hidden="true">✦</span> Our agent is building</div>
+      </div>
+      <div class="qb-phone">
+        <Device kind="phone">
+          <div class="notif qb-notif" data-qb-notif></div>
+          <div class="phone-url"><span data-qb-url>…</span></div>
+          <div class="screen" data-qb-screen></div>
+        </Device>
+        <span class="qb-live" data-qb-live><i></i>Live at <span class="url" data-qb-url-2></span></span>
       </div>
     </figure>
   </div>
@@ -176,7 +164,6 @@ const ticker = ["bKash checkout", "Nagad", "Cards", "Courier booking", "Order SM
 
 <style>
 .hero { position: relative; padding-block: clamp(28px, 4vw, 56px) clamp(48px, 7vw, 96px); overflow: hidden; }
-.hero::before { content: ""; position: absolute; inset: auto -10% -30% 40%; height: 70%; background: radial-gradient(closest-side, color-mix(in srgb, var(--yellow) 26%, transparent), transparent); pointer-events: none; }
 .hero-grid { position: relative; display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr); gap: clamp(28px, 4vw, 64px); align-items: center; }
 @media (max-width: 1000px) { .hero-grid { grid-template-columns: 1fr; } }
 .hero-copy .signboard h1 { font-size: clamp(3.2rem, 1.8rem + 4.6vw, 6rem); }
@@ -185,33 +172,37 @@ const ticker = ["bKash checkout", "Nagad", "Cards", "Courier booking", "Order SM
 .lit { animation: tube 1.6s steps(1, end) .3s both; }
 @keyframes tube { 0% { filter: brightness(.55); } 12% { filter: brightness(1.05); } 18% { filter: brightness(.6); } 26%, 100% { filter: none; } }
 
-.before-after { margin: 0; display: grid; grid-template-columns: minmax(0, 1fr) auto; grid-template-rows: auto auto; gap: 0 4px; align-items: start; }
-.ba-before { grid-column: 1; grid-row: 1; position: relative; z-index: 1; background: var(--card); border: 1.5px solid var(--line); border-radius: 18px 18px 18px 4px; padding: 14px 18px 16px; max-width: 280px; margin-top: 28px; animation: rise .5s ease .2s both; }
-.ba-request { font-size: 1.15rem; font-weight: 600; line-height: 1.35; margin: 4px 0 0; }
-.ba-cap { display: block; font-size: 0.85rem; font-weight: 600; color: var(--ink-2); }
-.ba-arrow { grid-column: 1; grid-row: 2; width: 130px; justify-self: end; color: var(--red); margin: 6px 6px 0 0; }
-.ba-arrow path { stroke-dasharray: 1; stroke-dashoffset: 1; animation: draw .7s ease .8s forwards; }
-.ba-arrow path + path { animation-delay: 1.35s; animation-duration: .3s; }
-@keyframes draw { to { stroke-dashoffset: 0; } }
-@keyframes rise { from { opacity: 0; translate: 0 12px; } }
-.ba-after { position: relative; grid-column: 2; grid-row: 1 / 3; display: grid; justify-items: center; gap: 12px; }
-.ba-after .phone { width: 248px; }
-.ba-after .b { animation: rise .45s ease both; animation-delay: calc(1.5s + var(--s) * .25s); }
-.ba-after .ba-cap { text-align: center; max-width: 248px; }
-.pings { list-style: none; margin: 0; padding: 0; position: absolute; left: -48px; bottom: 34px; display: grid; gap: 8px; z-index: 2; }
-.pings li { display: flex; align-items: center; gap: 8px; width: max-content; max-width: 240px; padding: 7px 12px 7px 7px; background: #fff; color: #14213d; border: 2px solid #14213d; border-radius: 10px; font-size: 0.8rem; font-weight: 700; box-shadow: 0 10px 22px -12px rgb(0 0 0 / .45); animation: ping-in .45s cubic-bezier(.2,.8,.2,1.3) both; animation-delay: calc(2.6s + var(--p) * .7s); }
-.pings li:nth-child(2) { margin-left: 18px; } .pings li:nth-child(3) { margin-left: 36px; }
-.pings .ico { flex: none; display: grid; place-items: center; width: 24px; height: 24px; border-radius: 6px; color: #fff; font-size: 0.75rem; font-weight: 900; }
-.pings .ok { background: var(--green); } .pings .go { background: var(--blue); } .pings .sms { background: var(--red); font-size: 0.5rem; }
-@keyframes ping-in { from { opacity: 0; translate: -14px 6px; scale: .9; } }
-@media (max-width: 1000px) { .before-after { max-width: 620px; } }
-@media (max-width: 560px) {
-  .before-after { grid-template-columns: 1fr; justify-items: center; }
-  .ba-before { grid-column: 1; grid-row: 1; justify-self: stretch; max-width: none; margin: 0; }
-  .ba-arrow { grid-row: 2; width: 70px; justify-self: center; transform: rotate(60deg); margin: 0; }
-  .ba-after { grid-column: 1; grid-row: 3; }
-  .pings { left: -10px; }
-}
+/* Quick build: the request types, sections fly into the phone, confetti when it's live */
+.qb { position: relative; margin: 0; display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 14px 20px; align-items: center; }
+.qb-q { grid-column: 1 / -1; margin: 0; font-family: var(--display); font-weight: 800; font-size: clamp(1.6rem, 1.2rem + 1.2vw, 2.2rem); line-height: 1.05; }
+.qb-q b { color: var(--red); display: inline-block; }
+.qb-q b.swap { animation: swap .45s cubic-bezier(.2,.8,.2,1.3); }
+@keyframes swap { from { opacity: 0; translate: 0 .4em; } }
+.qb-types { grid-column: 1 / -1; display: flex; flex-wrap: wrap; gap: 6px; }
+.qb-types button { font: inherit; font-size: 0.84rem; font-weight: 700; padding: 5px 12px; border-radius: 999px; border: 1.5px solid var(--line); background: var(--card); color: var(--ink); cursor: pointer; }
+.qb-types button[aria-pressed="true"] { background: var(--ink); color: var(--wash); }
+.qb-side { display: grid; gap: 12px; align-self: start; margin-top: 40px; }
+.qb-prompt { position: relative; z-index: 1; background: var(--card); border: 1.5px solid var(--line); border-radius: 18px 18px 4px 18px; padding: 14px 18px 16px; box-shadow: 0 16px 30px -22px rgb(20 33 61 / .5); }
+.qb-prompt p { font-size: 1.12rem; font-weight: 600; line-height: 1.35; margin: 4px 0 0; min-height: 3.1em; }
+.qb-cap { display: block; font-size: 0.85rem; font-weight: 600; color: var(--ink-2); }
+.qb-prompt .caret::after { content: "▍"; color: var(--red); animation: blink 1s steps(1) infinite; }
+@keyframes blink { 50% { opacity: 0; } }
+.qb-status { justify-self: start; display: inline-flex; align-items: center; gap: 8px; font-weight: 800; font-size: 0.9rem; color: #14213d; padding: 7px 14px; border-radius: 999px; border: 2px solid transparent; background: linear-gradient(var(--yellow), var(--yellow)) padding-box, linear-gradient(90deg, var(--yellow), var(--red), var(--blue), var(--green), var(--yellow)) 0 0 / 300% 100% border-box; animation: aiflow 2s linear infinite; }
+.qb-status .spark { color: var(--red); }
+@keyframes aiflow { to { background-position: 0 0, 300% 0; } }
+.qb-phone { display: grid; justify-items: center; gap: 12px; }
+.qb-live { display: inline-flex; align-items: center; gap: 8px; font-weight: 800; font-size: 0.86rem; padding: 6px 14px; border-radius: 999px; background: var(--green); color: #fff; opacity: 0; translate: 0 8px; transition: opacity .3s, translate .4s cubic-bezier(.2,.8,.2,1.4); }
+.qb-live i { width: 8px; height: 8px; border-radius: 50%; background: var(--yellow); }
+.qb-live.on { opacity: 1; translate: 0 0; }
+.qb-live .url { color: var(--yellow); }
+.qb :global(.qb-notif) { top: 46px; }
+.qb :global(.b.qb-wait) { opacity: 0; }
+.qb :global(.b.qb-fly) { animation: qb-fly .62s cubic-bezier(.2,.75,.25,1) both; }
+@keyframes qb-fly { from { transform: translate(var(--dx), var(--dy)) scale(.25); opacity: 0; } 30% { opacity: 1; } to { transform: none; opacity: 1; } }
+.qb :global(.qb-confetti) { position: absolute; top: 18%; left: var(--x); width: 10px; height: 13px; clip-path: polygon(0 0, 100% 0, 50% 100%); z-index: 4; pointer-events: none; animation: qb-fall var(--t) cubic-bezier(.2,.6,.4,1) forwards; }
+@keyframes qb-fall { 0% { translate: 0 0; opacity: 1; } 15% { translate: calc(var(--dx) * .4) -60px; } 100% { translate: var(--dx) 420px; rotate: var(--r); opacity: 0; } }
+@media (max-width: 1000px) { .qb { max-width: 620px; } }
+@media (max-width: 560px) { .qb { grid-template-columns: 1fr; justify-items: center; } .qb-side { margin-top: 0; justify-self: stretch; } }
 
 .head.center { margin-inline: auto; text-align: center; }
 .head.center .lede { margin-inline: auto; }
@@ -238,6 +229,7 @@ const ticker = ["bKash checkout", "Nagad", "Cards", "Courier booking", "Order SM
 @media (max-width: 860px) { .closing { grid-template-columns: 1fr; } }
 .closing .signboard h2 { font-size: clamp(2.4rem, 1.6rem + 2.6vw, 3.8rem); }
 
-@media (prefers-reduced-motion: reduce) { .lit, .ba-before, .ba-after .b, .pings li { animation: none; } .ba-arrow path { animation: none; stroke-dashoffset: 0; } }
+@media (prefers-reduced-motion: reduce) { .lit, .qb-status { animation: none; } }
 </style>
+<script src="../scripts/hero-build.js"></script>
 </Base>

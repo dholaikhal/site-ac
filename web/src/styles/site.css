@@ -237,13 +237,13 @@ body { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org
 .js [data-reveal].in { opacity: 1; translate: 0 0; }
 
 /* The beta button: a painted plate with a price sticker, and a glint that crosses it now and then. */
-.btn-beta { position: relative; overflow: visible; font-size: 1.12rem; padding: 16px 26px 16px 24px; isolation: isolate; }
+.btn-beta { position: relative; overflow: visible; font-size: 1.12rem; padding: 16px 24px 16px 40px; isolation: isolate; }
 .btn-beta::after { content: ""; position: absolute; inset: 0; border-radius: 4px; z-index: -1; background: linear-gradient(105deg, transparent 40%, rgb(255 255 255 / .38) 50%, transparent 60%) -150% 0 / 250% 100% no-repeat; animation: glint 6s ease-in-out 1.2s infinite; mix-blend-mode: soft-light; }
 .btn-beta .arrow { transition: translate .2s; }
 .btn-beta:hover .arrow { translate: 4px 0; }
 @keyframes glint { 0%, 70% { background-position: -150% 0; } 85%, 100% { background-position: 150% 0; } }
-.sticker { position: absolute; top: -16px; right: -18px; display: grid; place-items: center; width: 54px; height: 54px; border-radius: 50%; background: var(--yellow); color: #14213d; font-family: var(--display); font-weight: 900; font-size: 0.92rem; line-height: 0.9; text-align: center; rotate: 12deg; box-shadow: inset 0 0 0 3px var(--yellow), inset 0 0 0 4.5px #14213d; transition: rotate .3s; }
-.btn-beta:hover .sticker { rotate: -6deg; }
+.sticker { position: absolute; top: -20px; left: -22px; display: grid; place-items: center; width: 54px; height: 54px; border-radius: 50%; background: var(--yellow); color: #14213d; font-family: var(--display); font-weight: 900; font-size: 0.92rem; line-height: 0.9; text-align: center; rotate: -12deg; box-shadow: inset 0 0 0 3px var(--yellow), inset 0 0 0 4.5px #14213d; transition: rotate .3s; }
+.btn-beta:hover .sticker { rotate: 6deg; }
 .cta-note { display: flex; flex-wrap: wrap; gap: 4px 16px; margin-top: 14px; font-size: 0.9rem; color: var(--ink-2); }
 .cta-note span::before { content: "✓"; color: var(--ok); font-weight: 800; margin-right: 6px; }
 .nav .btn-go .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--yellow); box-shadow: 0 0 0 0 rgb(255 204 0 / .7); animation: beacon 2.4s ease-out infinite; }
