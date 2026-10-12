@@ -1,0 +1,79 @@
+---
+import { Image } from "astro:assets";
+import Layout from "../Layout.astro";
+import { APPS } from "../data";
+import { icon } from "../../src/scripts/app-art.js";
+const app = APPS[process.env.APP!];
+if (!app) throw new Error(`No example app "${process.env.APP}"`);
+const photos = import.meta.glob<{ default: ImageMetadata }>("../../src/assets/photos/*.jpg", { eager: true });
+const photo = (id: string) => photos[`../../src/assets/photos/${id}.jpg`].default;
+const tk = (n: number) => "Tk " + n.toLocaleString("en-IN");
+const book = app.kind === "salon" || app.kind === "clinic";
+---
+<Layout app={app}>
+  <section class:list={["hero", { "has-photo": app.hero.photo }]}>
+    {app.hero.photo && <Image src={photo(app.hero.photo)} alt="" class="hero-img" widths={[600, 1000, 1600]} sizes="100vw" loading="eager" format="webp" quality={78} />}
+    <div class="wrap">
+      <div class="hero-text">
+        <p class="eyebrow">{app.area}</p>
+        <h1>{app.hero.title}</h1>
+        <p>{app.hero.sub}</p>
+        {book ? <button type="button" class="btn big" data-open="book">{app.hero.cta}</button> : <a class="btn big" href="#items">{app.hero.cta}</a>}
+      </div>
+      {!app.hero.photo && <div class="hero-art" aria-hidden="true">{app.items.slice(0, 4).map((it, i) => <span class:list={["chip-art", `n${i}`]}>{app.kind === "clinic" ? <b>{it.icon}</b> : <Fragment set:html={icon(it.icon!)} />}<em>{app.kind === "clinic" ? it.meta : it.name}</em></span>)}</div>}
+    </div>
+  </section>
+
+  <ul class="notes wrap">{app.notes.map(([t, d]) => <li><b>{t}</b><span>{d}</span></li>)}</ul>
+
+  <section class="items wrap" id="items">
+    <div class="sec-head">
+      <h2>{app.intro}</h2>
+      {app.cats && <div class="cats" role="group" aria-label="Filter">{app.cats.map((c, i) => <button type="button" data-cat={c} aria-pressed={i === 0 ? "true" : "false"}>{c}</button>)}</div>}
+    </div>
+
+    {app.kind === "shop" && (
+      <div class="grid">{app.items.map((it) => (
+        <article class="card prod" data-item={it.id} data-c={it.cat}>
+          <a href={`/p/${it.id}.html`} class="pimg"><Image src={photo(it.photo!)} alt={it.name} widths={[400, 700]} sizes="(max-width: 700px) 50vw, 25vw" format="webp" quality={78} /></a>
+          <div class="pbody"><a href={`/p/${it.id}.html`} class="pname">{it.name}</a><span class="pmeta">{it.meta}</span><b class="price">{tk(it.price)}</b></div>
+          <button type="button" class="add" data-add={it.id}>Add to bag</button>
+        </article>))}
+      </div>)}
+
+    {app.kind === "kitchen" && (
+      <div class="menu">{app.items.map((it) => (
+        <article class="card dish" data-item={it.id} data-c={it.cat}>
+          {it.photo ? <Image src={photo(it.photo)} alt={it.name} class="dimg" widths={[300, 600]} sizes="160px" format="webp" quality={78} /> : <span class="dimg glyph" set:html={icon(it.icon!)} />}
+          <div class="dbody"><h3>{it.name}</h3><p>{it.desc}</p><span class="pmeta">{it.meta}</span></div>
+          <div class="dside"><b class="price">{tk(it.price)}</b><button type="button" class="add sm" data-add={it.id} aria-label={`Add ${it.name}`}>Add</button></div>
+        </article>))}
+      </div>)}
+
+    {app.kind === "salon" && (
+      <div class="rows">{app.items.map((it) => (
+        <article class="row-card">
+          <span class="ic" set:html={icon(it.icon!)} />
+          <div><h3>{it.name}</h3><p>{it.desc}</p></div>
+          <span class="pmeta">{it.meta}</span><b class="price">{tk(it.price)}</b>
+          <button type="button" class="btn ghost" data-open="book" data-pick={it.id}>Book</button>
+        </article>))}
+      </div>)}
+
+    {app.kind === "clinic" && (
+      <div class="docs">{app.items.map((it) => (
+        <article class="card doc">
+          <span class="av">{it.icon}</span>
+          <div><h3>{it.name}</h3><span class="pmeta">{it.meta}</span><p>{it.desc}</p></div>
+          <div class="doc-foot"><span>Consultation {tk(it.price)} <small>at the chamber</small></span><button type="button" class="btn" data-open="book" data-pick={it.id}>Get a serial</button></div>
+        </article>))}
+      </div>)}
+  </section>
+
+  <section class="story" id="story">
+    <div class="wrap">
+      <h2>{app.kind === "clinic" ? "How serials work" : app.kind === "salon" ? "Good to know" : app.kind === "kitchen" ? "How it works" : "Our story"}</h2>
+      <div class="story-grid">{app.story.map(([t, d], i) => <div><span class="n">{i + 1}</span><h3>{t}</h3><p>{d}</p></div>)}</div>
+    </div>
+  </section>
+</Layout>

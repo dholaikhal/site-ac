@@ -1,0 +1,63 @@
+---
+// Finished example apps, each on its own subdomain (built from examples/, published by
+// tools/build_examples.sh). Shown only once LIVE is set in examples/data.ts, so the live site never
+// links to a subdomain that doesn't answer yet.
+import Photo from "./Photo.astro";
+import { APPS, LIVE } from "../../examples/data";
+import { icon } from "../scripts/app-art.js";
+const KIND = { shop: "Online store", kitchen: "Food orders", salon: "Salon bookings", clinic: "Clinic serials" };
+const apps = Object.values(APPS);
+---
+{LIVE && (
+<section class="section has-photo tint showcase" id="examples">
+  <Photo id="cloth-shop" class="bg-photo" sizes="100vw" widths={[800, 1200, 1600]} />
+  <div class="wrap">
+    <div class="sc-head">
+      <h2>Open a finished one.</h2>
+      <p class="lede">Four example businesses, with the kind of app our agent builds. They work like the real thing: fill a bag, pick a time, check out. No money changes hands.</p>
+    </div>
+    <ul class="sc-grid">
+      {apps.map((a) => (
+        <li>
+          <a class="sc-card" href={`https://${a.slug}.amader.cloud`} target="_blank" rel="noopener" style={`--b:${a.brand};--bi:${a.ink};--bt:${a.tint}`}>
+            <span class="sc-top">
+              {a.hero.photo
+                ? <Photo id={a.hero.photo as any} class="sc-img" sizes="(max-width: 600px) 100vw, 25vw" widths={[400, 700]} />
+                : <span class="sc-art" aria-hidden="true">{a.items.slice(0, 3).map((it) => <span>{a.kind === "clinic" ? <b>{it.icon}</b> : <Fragment set:html={icon(it.icon!)} />}<em>{a.kind === "clinic" ? it.meta : it.name}</em></span>)}</span>}
+              <span class="sc-tag">Example</span>
+            </span>
+            <span class="sc-body">
+              <span class="sc-kind">{KIND[a.kind]}</span>
+              <strong>{a.name}</strong>
+              <span class="sc-q">“{a.prompt}”</span>
+              <span class="sc-url">{a.slug}.amader.cloud <span aria-hidden="true">↗</span></span>
+            </span>
+          </a>
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>
+)}
+
+<style>
+.sc-head { max-width: 720px; margin-bottom: clamp(24px, 4vw, 40px); }
+.sc-grid { list-style: none; margin: 0; padding: 0; display: grid; gap: 20px; grid-template-columns: repeat(4, minmax(0, 1fr)); }
+@media (max-width: 1080px) { .sc-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 560px) { .sc-grid { grid-template-columns: 1fr; } }
+.sc-card { display: flex; flex-direction: column; height: 100%; background: #fff; color: #14213d; text-decoration: none; border-radius: 10px; overflow: hidden; border: 1.5px solid var(--line); box-shadow: 0 24px 50px -36px rgb(20 33 61 / .55); transition: translate .25s, box-shadow .25s; }
+.sc-card:hover { translate: 0 -4px; box-shadow: 0 30px 60px -34px rgb(20 33 61 / .6); }
+.sc-top { position: relative; display: block; height: 170px; background: var(--bt); overflow: hidden; }
+.sc-top :global(.sc-img) { width: 100%; height: 100%; object-fit: cover; }
+.sc-art { position: absolute; inset: 0; display: grid; align-content: center; gap: 8px; padding: 18px; background: linear-gradient(135deg, var(--bt), color-mix(in srgb, var(--b) 22%, var(--bt))); }
+.sc-art > span { display: inline-flex; align-items: center; gap: 10px; justify-self: start; padding: 6px 12px 6px 6px; background: #fff; border-radius: 999px; font-weight: 700; font-size: 0.82rem; box-shadow: 0 8px 18px -12px rgb(0 0 0 / .45); }
+.sc-art > span:nth-child(2) { justify-self: center; } .sc-art > span:nth-child(3) { justify-self: end; }
+.sc-art :global(svg), .sc-art b { display: grid; place-items: center; width: 26px; height: 26px; padding: 5px; border-radius: 50%; background: var(--b); color: #fff; fill: none; stroke: currentColor; stroke-width: 1.9; font-size: 0.68rem; }
+.sc-art em { font-style: normal; }
+.sc-tag { position: absolute; top: 12px; left: 12px; padding: 3px 9px; border-radius: 3px; background: var(--yellow); color: #14213d; font-weight: 800; font-size: 0.72rem; letter-spacing: .02em; }
+.sc-body { display: grid; gap: 6px; padding: 16px 18px 18px; flex: 1; align-content: start; }
+.sc-kind { font-size: 0.75rem; font-weight: 800; text-transform: uppercase; letter-spacing: .08em; color: var(--b); }
+.sc-body strong { font-family: var(--display); font-weight: 800; font-size: 1.6rem; line-height: 1; letter-spacing: -0.01em; color: var(--bi); }
+.sc-q { font-size: 0.9rem; line-height: 1.45; color: #4a5670; }
+.sc-url { margin-top: auto; padding-top: 10px; white-space: nowrap; font-family: var(--code); font-size: 0.8rem; font-weight: 700; color: var(--b); }
+</style>

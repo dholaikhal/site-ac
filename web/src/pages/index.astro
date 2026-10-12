@@ -11,6 +11,7 @@ import facts, { tk, plan } from "../data/facts";
 import "../styles/app-screen.css";
 import Device from "../components/Device.astro";
 import Brand from "../components/Brand.astro";
+import Showcase from "../components/Showcase.astro";
 const m = facts.market;
 const starter = plan("starter"), business = plan("business");
 const rates: [string, string, string, string[]?][] = [
@@ -75,6 +76,8 @@ const ticker = ["bKash checkout", "Nagad", "Cards", "Courier booking", "Order SM
     <Demo />
   </div>
 </section>
+
+<Showcase />
 
 <ProblemScene />
 

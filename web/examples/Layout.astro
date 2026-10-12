@@ -1,0 +1,60 @@
+---
+// Shell for every example app: the business's own colours and type, an "example" ribbon that can't be
+// missed, and one sheet (bag, booking, checkout) that app.js fills in.
+import type { App } from "./data";
+import "./app.css";
+interface Props { app: App; title?: string; description?: string }
+const { app, title = `${app.name} · ${app.tagline}`, description = app.hero.sub } = Astro.props;
+const mark = `data:image/svg+xml,${encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><rect width="32" height="32" rx="8" fill="${app.brand}"/><text x="16" y="23" text-anchor="middle" font-family="Georgia,serif" font-size="20" font-weight="700" fill="#fff">${app.name[0]}</text></svg>`)}`;
+const cart = app.kind === "shop" || app.kind === "kitchen";
+const nav = { shop: [["#items", "Shop"], ["#story", "Our story"], ["#visit", "Contact"]], kitchen: [["#items", "Menu"], ["#story", "How it works"], ["#visit", "Contact"]], salon: [["#items", "Services"], ["#story", "Good to know"], ["#visit", "Find us"]], clinic: [["#items", "Doctors"], ["#story", "How serials work"], ["#visit", "Find us"]] }[app.kind];
+---
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{title}</title>
+<meta name="description" content={description}>
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content={app.brand}>
+<link rel="icon" href={mark}>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href={`https://fonts.googleapis.com/css2?${app.fonts}&display=swap`} rel="stylesheet">
+<style set:html={`:root{--brand:${app.brand};--brand-ink:${app.ink};--tint:${app.tint};--r:${app.radius};--head:"${app.head}",Georgia,serif;--body:"${app.body}",system-ui,sans-serif}`} />
+</head>
+<body class={`k-${app.kind}`}>
+<div class="ex-ribbon">
+  <span><b>Example app</b> by <a href="https://amader.cloud">Amader Cloud</a>. The business is invented and nothing here is for sale.</span>
+  <a class="ex-cta" href="https://amader.cloud/contact.html?topic=beta#form">Build one like it →</a>
+</div>
+<header class="top">
+  <div class="wrap">
+    <a class="logo" href="/"><span class="mk">{app.name[0]}</span>{app.name}</a>
+    <nav class="links">{nav.map(([h, l]) => <a href={`/${h}`}>{l}</a>)}</nav>
+    {cart
+      ? <button type="button" class="bag-btn" data-open="bag" aria-label="Open bag"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 8h14l-1.2 12H6.2z"/><path d="M9 8V6.5a3 3 0 0 1 6 0V8"/></svg><span>Bag</span><i data-count hidden>0</i></button>
+      : <button type="button" class="btn" data-open="book">{app.kind === "clinic" ? "Get a serial" : "Book now"}</button>}
+  </div>
+</header>
+<main><slot /></main>
+<footer class="foot" id="visit">
+  <div class="wrap">
+    <div>
+      <a class="logo" href="/"><span class="mk">{app.name[0]}</span>{app.name}</a>
+      <p>{app.tagline}.</p>
+    </div>
+    <div><h4>Visit</h4><p>{app.address}<br>{app.hours}</p></div>
+    <div><h4>Pay with</h4><p class="paylogos"><img src="/assets/logos/bkash.svg" alt="bKash" height="20"><img src="/assets/logos/nagad.png" alt="Nagad" height="18"><img src="/assets/logos/visa.svg" alt="Visa" height="12"><img src="/assets/logos/mastercard.svg" alt="Mastercard" height="18"></p></div>
+  </div>
+  <div class="wrap made">
+    <a href="https://amader.cloud" class="made-by"><b>a</b>An example app by Amader Cloud</a>
+    <span>The request it answers: “{app.prompt}”</span>
+  </div>
+</footer>
+<dialog class="sheet" data-sheet aria-label={app.name}><div class="sheet-in" data-sheet-body></div></dialog>
+<script type="application/json" data-app set:html={JSON.stringify(app)} />
+<script src="./app.js"></script>
+</body>
+</html>

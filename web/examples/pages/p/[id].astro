@@ -1,0 +1,42 @@
+---
+// Product pages, for the shop only.
+import { Image } from "astro:assets";
+import Layout from "../../Layout.astro";
+import { APPS } from "../../data";
+export function getStaticPaths() {
+  const app = APPS[process.env.APP!];
+  return app?.kind === "shop" ? app.items.map((it) => ({ params: { id: it.id } })) : [];
+}
+const app = APPS[process.env.APP!];
+const it = app.items.find((i) => i.id === Astro.params.id)!;
+const others = app.items.filter((i) => i.id !== it.id).slice(0, 3);
+const photos = import.meta.glob<{ default: ImageMetadata }>("../../../src/assets/photos/*.jpg", { eager: true });
+const photo = (id: string) => photos[`../../../src/assets/photos/${id}.jpg`].default;
+const tk = (n: number) => "Tk " + n.toLocaleString("en-IN");
+---
+<Layout app={app} title={`${it.name} · ${app.name}`} description={it.desc}>
+  <div class="wrap crumbs"><a href="/">{app.name}</a> / <a href="/#items">{it.cat}</a> / <span>{it.name}</span></div>
+  <section class="wrap product" data-item={it.id}>
+    <div class="pp-img"><Image src={photo(it.photo!)} alt={it.name} widths={[500, 900, 1200]} sizes="(max-width: 800px) 100vw, 50vw" loading="eager" format="webp" quality={80} /></div>
+    <div class="pp-body">
+      <h1>{it.name}</h1>
+      <b class="price big">{tk(it.price)}</b>
+      <p>{it.desc}</p>
+      <dl class="facts"><dt>Size</dt><dd>{it.meta}</dd><dt>Material</dt><dd>Jute, cotton lining</dd><dt>Made in</dt><dd>Bangladesh, by hand</dd></dl>
+      {it.options && it.options.length > 1 && (
+        <fieldset class="opts"><legend>Colour</legend>{it.options.map((o, i) => <label><input type="radio" name="opt" value={o} checked={i === 0}><span>{o}</span></label>)}</fieldset>
+      )}
+      <div class="buy"><div class="qty" data-qty><button type="button" aria-label="One less">−</button><output>1</output><button type="button" aria-label="One more">+</button></div><button type="button" class="btn big" data-add={it.id}>Add to bag</button></div>
+      <ul class="ship">{app.delivery!.map((d) => <li>{d.label}: {tk(d.price)}</li>)}<li>Pay by bKash, Nagad or card</li></ul>
+    </div>
+  </section>
+  <section class="wrap items">
+    <div class="sec-head"><h2>You may also like</h2></div>
+    <div class="grid three">{others.map((o) => (
+      <article class="card prod">
+        <a href={`/p/${o.id}.html`} class="pimg"><Image src={photo(o.photo!)} alt={o.name} widths={[400, 700]} sizes="(max-width: 700px) 50vw, 33vw" format="webp" quality={78} /></a>
+        <div class="pbody"><a href={`/p/${o.id}.html`} class="pname">{o.name}</a><span class="pmeta">{o.meta}</span><b class="price">{tk(o.price)}</b></div>
+      </article>))}
+    </div>
+  </section>
+</Layout>
