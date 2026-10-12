@@ -3,6 +3,7 @@
 // Copy rule: "our agent", never "AI".
 import { APPS, SCREENS, tk } from "./apps.js";
 import { celebrate } from "./celebrate.js";
+import { ideaLayout, shuffledIdeas } from "./idea-apps.js";
 import { APPS as EXAMPLES, LIVE as EXAMPLES_LIVE } from "../../examples/data";
 
 const box = document.querySelector("[data-qb]");
@@ -69,12 +70,18 @@ function init(box) {
     tick();
   });
 
-  // The catch-all has no app of its own: a placeholder app in shuffling colours, at yourname.amader.cloud.
-  const SWATCH = ["#e2261b", "#ffcc00", "#0b5d3b", "#1739a8", "#9a4a24", "#6a3d8f", "#0f7a6c", "#b03a2e", "#a21caf", "#0369a1", "#f6ece2", "#e8f4f1", "#f3edf8"];
-  const skeleton = () => `<div class="skel"><div class="sk-bar"><i></i><i></i><i></i></div><div class="sk-hero"></div><div class="sk-row"><i></i><i></i><i></i></div><div class="sk-grid"><i></i><i></i><i></i><i></i></div><div class="sk-btn"></div></div>`;
-  const shuffle = () => screen.querySelectorAll(".skel i, .sk-hero, .sk-btn").forEach((el) => { el.style.backgroundColor = SWATCH[Math.floor(Math.random() * SWATCH.length)]; });
+  // The catch-all has no app of its own: the phone composes a different placeholder app each step, each one
+  // fading in over the last (fast, but never a flash), at yourname.amader.cloud.
+  const showLayout = () => {
+    const holder = document.createElement("div");
+    holder.innerHTML = ideaLayout();
+    const layer = holder.firstElementChild;
+    const old = [...screen.querySelectorAll(".gx")];
+    screen.append(layer); void layer.offsetWidth; layer.classList.add("in");
+    setTimeout(() => old.forEach((o) => o.remove()), 340);
+  };
   function paint(k) {
-    if (k === "idea") { screen.style.removeProperty("--brand"); screen.innerHTML = skeleton(); url.textContent = url2.textContent = "yourname.amader.cloud"; live.removeAttribute("href"); return; }
+    if (k === "idea") { screen.style.removeProperty("--brand"); screen.innerHTML = ""; showLayout(); url.textContent = url2.textContent = "yourname.amader.cloud"; live.removeAttribute("href"); return; }
     const a = APPS[k];
     screen.style.setProperty("--brand", a.color);
     screen.innerHTML = SCREENS[k].home(state(k));
@@ -86,7 +93,7 @@ function init(box) {
 
   if (still) {
     paint("shop"); text.textContent = SHOW[0][1]; status.hidden = true; live.classList.add("on");
-    chips.forEach((c) => c.addEventListener("click", () => { const i = +c.dataset.qbPick; pick(i); paint(SHOW[i][0]); if (SHOW[i][0] === "idea") shuffle(); text.textContent = SHOW[i][1]; }));
+    chips.forEach((c) => c.addEventListener("click", () => { const i = +c.dataset.qbPick; pick(i); paint(SHOW[i][0]); text.textContent = SHOW[i][1]; }));
     return;
   }
 
@@ -109,27 +116,27 @@ function init(box) {
 
 
   // One business: type the request, build the store, go live, first order. False if a chip cut it short.
-  // The catch-all: a few quick ideas typed and wiped, then "your idea"; the placeholder app shuffles its colours
-  // while it's built, settles, and goes live.
-  const IDEAS = ["A booking app for my rooftop futsal turf", "Pre-orders for our mango orchard in Rajshahi"];
+  // The catch-all stays once it's chosen: an idea is typed, its app is composed (a few layouts fading through),
+  // it goes live, and the next idea follows, until someone picks another kind of business.
   async function playIdea(token) {
     const ok = () => token === run;
-    for (const idea of IDEAS) {
-      for (let n = 1; n <= idea.length; n += 3) { text.textContent = idea.slice(0, n); await wait(16); if (!ok()) return false; }
-      await wait(650); if (!ok()) return false;
-      for (let n = idea.length; n >= 0; n -= 6) { text.textContent = idea.slice(0, n); await wait(12); if (!ok()) return false; }
+    const ideas = shuffledIdeas();
+    for (let n = 0; ; n++) {
+      const idea = ideas[n % ideas.length];
+      live.classList.remove("on"); status.hidden = true; text.classList.add("caret");
+      for (let c = 1; c <= idea.length; c += 2) { text.textContent = idea.slice(0, c); await wait(24); if (!ok()) return false; }
+      text.textContent = idea; text.classList.remove("caret");
+      await wait(300); if (!ok()) return false;
+      status.hidden = false; box.classList.add("building"); url.textContent = "…";
+      if (!screen.querySelector(".gx")) screen.innerHTML = "";
+      for (let step = 0; step < 7; step++) { showLayout(); await wait(420); if (!ok()) return false; }
+      box.classList.remove("building"); status.hidden = true;
+      url.textContent = url2.textContent = "yourname.amader.cloud"; live.removeAttribute("href");
+      live.classList.add("on"); celebrate(box.querySelector(".qb .dev"));
+      await wait(3000); if (!ok()) return false;
+      text.classList.add("caret");
+      for (let c = idea.length; c >= 0; c -= 4) { text.textContent = idea.slice(0, c); await wait(10); if (!ok()) return false; }
     }
-    const last = SHOW[SHOW.length - 1][1];
-    for (let n = 1; n <= last.length; n += 2) { text.textContent = last.slice(0, n); await wait(26); if (!ok()) return false; }
-    text.classList.remove("caret");
-    await wait(300); if (!ok()) return false;
-    status.hidden = false; box.classList.add("building");
-    paint("idea");
-    for (let n = 0; n < 22; n++) { shuffle(); await wait(110); if (!ok()) return false; }
-    box.classList.remove("building"); status.hidden = true;
-    live.classList.add("on"); celebrate(box.querySelector(".qb .dev"));
-    await wait(3600);
-    return ok();
   }
 
   async function play(i, token) {
