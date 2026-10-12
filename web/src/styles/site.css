@@ -296,3 +296,17 @@ body { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org
 .demo-band .demo-stage { background: #14213d; box-shadow: inset 0 0 0 10px #14213d, inset 0 0 0 12px var(--yellow); }
 .band .ticks li::before { border-color: var(--yellow); }
 .band .split .slogan { font-size: clamp(2.8rem, 1.6rem + 4vw, 5.4rem); margin-bottom: 18px; }
+
+/* Photo treatment: street photos toned to the site's paints — a little less colour, a navy cast in the
+   shadows, the plaster grain on top. Applied to every photo container with .treat. */
+.treat { isolation: isolate; }
+.treat img { filter: saturate(.82) contrast(1.05) sepia(.06); }
+.treat::after { content: ""; position: absolute; inset: 0; z-index: 0; pointer-events: none;
+  background: linear-gradient(180deg, rgb(20 33 61 / .04) 0%, rgb(20 33 61 / .28) 100%), linear-gradient(90deg, rgb(11 93 59 / .1), transparent 55%);
+  mix-blend-mode: multiply; }
+.treat::before { content: ""; position: absolute; inset: 0; z-index: 1; pointer-events: none; opacity: .5; mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.55'/%3E%3C/svg%3E"); }
+
+/* Paint band over a street photo: the photo in greyscale, multiplied into the band's paint (a duotone) */
+.band.has-photo { position: relative; isolation: isolate; overflow: hidden; }
+.band.has-photo > .band-photo { position: absolute; inset: 0; z-index: -1; width: 100%; height: 100%; object-fit: cover; filter: grayscale(1) contrast(1.15) brightness(1.05); mix-blend-mode: multiply; opacity: .55; }

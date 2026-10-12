@@ -4,7 +4,7 @@ import Demo from "../components/Demo.astro";
 import Ticker from "../components/Ticker.astro";
 import BetaButton from "../components/BetaButton.astro";
 import ProblemScene from "../components/ProblemScene.astro";
-import StreetScene from "../components/StreetScene.astro";
+import Photo from "../components/Photo.astro";
 import InboxVsStore from "../components/InboxVsStore.astro";
 import Faq from "../components/Faq.astro";
 import facts, { tk, plan } from "../data/facts";
@@ -72,21 +72,8 @@ const ticker = ["bKash checkout", "Nagad", "Cards", "Courier booking", "Order SM
 
 <ProblemScene />
 
-<section class="scene-sec">
-  <StreetScene />
-  <div class="wrap">
-    <div class="scene-card" data-reveal>
-      <h2>Prepaid orders rarely come back.</h2>
-      <p class="lede">Most online orders here are paid in cash at the door, and many are refused when the courier arrives. Your own checkout lets buyers pay first, while your Facebook page keeps bringing them in.</p>
-      <div class="cod-stats">
-        <div class="stat"><span class="n" data-count>{m.codShare.text}</span><span class="l">{m.codShare.label}.</span></div>
-        <div class="stat"><span class="n red" data-count>{m.codReturns.text}</span><span class="l">{m.codReturns.label}.</span></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="band band-red">
+<section class="band band-red has-photo">
+  <Photo id="bazar" class="band-photo" sizes="100vw" widths={[800, 1200, 1600]} />
   <div class="wrap band-split">
     <h2 class="slogan" data-reveal>Your store.<br>Your money.</h2>
     <div data-reveal style="--d:1">
@@ -96,7 +83,8 @@ const ticker = ["bKash checkout", "Nagad", "Cards", "Courier booking", "Order SM
   </div>
 </section>
 
-<section class="band band-blue">
+<section class="band band-blue has-photo">
+  <Photo id="rainlane" class="band-photo" sizes="100vw" widths={[800, 1200, 1600]} />
   <div class="wrap">
     <div class="band-head" data-reveal>
       <h2 class="slogan">Less typing.<br>More orders.</h2>
@@ -185,14 +173,6 @@ const ticker = ["bKash checkout", "Nagad", "Cards", "Courier booking", "Order SM
 .head.center { margin-inline: auto; text-align: center; }
 .head.center .lede { margin-inline: auto; }
 
-.scene-sec { position: relative; }
-.scene-card { position: relative; z-index: 1; margin-top: clamp(-160px, -12vw, -60px); max-width: 760px; background: var(--card); border: 1.5px solid var(--line); border-radius: 6px; padding: clamp(24px, 4vw, 44px); box-shadow: 0 30px 60px -40px rgb(20 33 61 / .5); }
-.scene-card h2 { max-width: 14ch; }
-.cod-stats { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(20px, 3vw, 40px); margin-top: 28px; }
-.cod-stats .stat { border-left: 3px solid var(--yellow); padding-left: 20px; }
-.cod-stats .n.red { color: var(--red); }
-@media (max-width: 760px) { .scene-card { margin-top: -40px; } }
-@media (max-width: 480px) { .cod-stats { grid-template-columns: 1fr; } }
 
 .rate-grid { display: grid; grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr); gap: clamp(28px, 5vw, 80px); align-items: start; }
 @media (max-width: 860px) { .rate-grid { grid-template-columns: 1fr; } }

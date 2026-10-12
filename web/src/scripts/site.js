@@ -116,7 +116,9 @@ document.querySelectorAll("[data-tabs]").forEach((box) => {
       const on = t === tab;
       t.setAttribute("aria-selected", String(on));
       t.tabIndex = on ? 0 : -1;
-      document.getElementById(t.getAttribute("aria-controls")).hidden = !on;
+      const panel = document.getElementById(t.getAttribute("aria-controls"));
+      panel.hidden = !on;
+      if (on) panel.dispatchEvent(new CustomEvent("tabshow"));
     }
     if (focus) tab.focus();
   };
@@ -144,4 +146,21 @@ document.querySelectorAll("[data-vs]").forEach((box) => {
   const set = (on) => { box.classList.toggle("on", on); sw.setAttribute("aria-checked", String(on)); };
   sw.addEventListener("click", () => set(sw.getAttribute("aria-checked") !== "true"));
   box.querySelectorAll(".side").forEach((s) => s.addEventListener("click", () => set(s.classList.contains("b"))));
+});
+
+// ---------- Photo hotspots: pins open one after another when their photo shows; tap or hover to toggle ----------
+document.querySelectorAll("[data-hotspots]").forEach((panel) => {
+  const pins = [...panel.querySelectorAll(".hs")];
+  let timers = [];
+  const play = () => {
+    timers.forEach(clearTimeout); timers = [];
+    pins.forEach((p) => { p.classList.remove("open"); p.querySelector("button").setAttribute("aria-expanded", "false"); });
+    pins.forEach((p, i) => timers.push(setTimeout(() => { p.classList.add("open"); p.querySelector("button").setAttribute("aria-expanded", "true"); }, still ? 0 : 500 + i * 700)));
+  };
+  pins.forEach((p) => p.querySelector("button").addEventListener("click", () => {
+    const open = p.classList.toggle("open");
+    p.querySelector("button").setAttribute("aria-expanded", String(open));
+  }));
+  panel.addEventListener("tabshow", play);
+  if (!panel.hidden) new IntersectionObserver(([e], o) => { if (e.isIntersecting) { play(); o.disconnect(); } }, { threshold: 0.3 }).observe(panel);
 });

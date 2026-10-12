@@ -17,7 +17,7 @@
       "photographer": "SajidulBari Mahmud",
       "profile": "https://unsplash.com/@sajidulbari",
       "source": "https://unsplash.com/photos/people-are-shopping-for-bananas-at-a-night-market-lVIzrh1IkMc",
-      "usedOn": "How it works",
+      "usedOn": "Home and How it works",
       "licence": "unsplash",
       "site": "Unsplash"
     },
@@ -117,6 +117,26 @@
       "licence": "unsplash",
       "site": "Unsplash",
       "usedOn": "the Home demo"
+    },
+    "inbox-phone": {
+      "file": "inbox-phone.jpg",
+      "alt": "Hands holding a phone in the evening.",
+      "photographer": "Priscilla Du Preez",
+      "profile": "https://unsplash.com/@priscilladupreez",
+      "source": "https://unsplash.com/photos/person-using-smartphone-BjhUu6BpUZA",
+      "licence": "unsplash",
+      "site": "Unsplash",
+      "usedOn": "Home"
+    },
+    "card-laptop": {
+      "file": "card-laptop.jpg",
+      "alt": "Hands holding a bank card over a laptop keyboard.",
+      "photographer": "rupixen",
+      "profile": "https://unsplash.com/@rupixen",
+      "source": "https://unsplash.com/photos/person-using-laptop-computer-holding-card-Q59HmzK38eQ",
+      "licence": "unsplash",
+      "site": "Unsplash",
+      "usedOn": "Home"
     }
   },
   "licences": {
