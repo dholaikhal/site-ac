@@ -29,13 +29,14 @@ function init(box) {
     ["service", "Bookings for my AC servicing team, visit fee by bKash", "AC servicing", 500, "visit"],
     ["fees", "Monthly fees for my coaching centre, receipt by SMS", "BP-2071 · October", 2500, "payment"],
   ];
-  const typeEl = $("[data-qb-type]");
+  const reel = $("[data-qb-reel]");
   const chips = [...box.querySelectorAll("[data-qb-pick]")];
   let jump = null;
   chips.forEach((c) => c.addEventListener("click", () => { jump = +c.dataset.qbPick; run++; }));
+  // Roll the reel so the picked kind of business sits in line with "Do you want an app for your".
   const pick = (i) => {
     chips.forEach((c, n) => c.setAttribute("aria-pressed", String(n === i)));
-    typeEl.classList.remove("swap"); void typeEl.offsetWidth; typeEl.textContent = chips[i].dataset.word; typeEl.classList.add("swap");
+    reel.style.setProperty("--i", String(i));
   };
   const state = (k) => ({ app: k, off: false, green: false, cod: false, remind: false, late: false, cutoff: false, near: false, flash: null, built: true, published: true, tab: "home", undo: [] });
 

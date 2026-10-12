@@ -1,4 +1,4 @@
-import { APPS, COMMON, PAY, amount, SCREENS, tk, esc, logo } from "./apps.js";
+import { APPS, COMMON, PAY, amount, SCREENS, tk, esc, logo, ASK } from "./apps.js";
 import confettiLib from "canvas-confetti";
 // Amader Cloud builder demo. Scripted entirely in the browser: no agent is called, nothing is published.
 // Copy rule: the product is "our agent" / "our store agent", never "AI" or a model.
@@ -41,11 +41,11 @@ function initDemo(root) {
   let lang = "en";
   const ROMAN_BN = /\b(amar|ami|chai|lagbe|dokan|kore|koro|korle|korbo|dao|jonno|nibo|nite|hobe|jabe|ekta|rong|shobuj|chhar|tarikh\w*|mashik|ager|pathao|rakho|shudhu|bhitore|hishebe|kori|notun|ferot)\b/i;
   const T = {
-    en: { ask: "What should we build?", plan: (a) => `Plan: a <strong>${a.kind}</strong> called ${esc(a.name)}.`, ready: (u) => `Your store is ready at <span class="url">${u}</span>. Ask for any change, or open it to customers.`,
+    en: { ask: "What should we build?", plan: (a) => `Got it. Plan: a <strong>${a.kind}</strong> called ${esc(a.name)}.`, ready: (u) => `Your store is ready at <span class="url">${u}</span>. Ask for any change, or open it to customers.`,
       live: "Live. Payments go to your own merchant account.", undone: "Undone.", unknown: "Try one of the changes below.",
       undo: "Undo last change", publish: "Publish", over: "Start over", customer: "Try it as a customer", publishSay: "Publish it",
       after: "That's your customer's side. The money went straight to your merchant account." },
-    bn: { ask: "Ki toiri korbo?", plan: (a) => `Bujhechi. ${esc(a.name)} er jonno ei plan:`, ready: (u) => `Preview toiri: <span class="url">${u}</span>. Ja bodlate chan bolun, ba publish korun.`,
+    bn: { ask: "Ki toiri korbo?", plan: (a) => `Thik ache. ${esc(a.name)} er jonno ei plan:`, ready: (u) => `Preview toiri: <span class="url">${u}</span>. Ja bodlate chan bolun, ba publish korun.`,
       live: "Live! Taka shoja apnar merchant account e jabe.", undone: "Ager obosthay ferot gelam.", unknown: "Nicher kono ekta change try korun.",
       undo: "Ager ta ferot ano", publish: "Publish kore dao", over: "Notun kore shuru", customer: "Customer hishebe try kori", publishSay: "Publish kore dao",
       after: "Customer eta dekhe. Taka shoja apnar merchant account e geche." },
@@ -225,6 +225,15 @@ function initDemo(root) {
     setStatus("Reading your request", true);
     if (!(await typeUser(text, token))) return;
     await wait(450); if (token !== run) return;
+
+    // A short back and forth before building: the agent asks, the owner answers.
+    for (const [q, a, bq, ba] of ASK[key]) {
+      setStatus("Our agent has a question", true, true);
+      if (!(await stream(`<p>${lang === "bn" ? bq : q}</p>`, AGENT("question"), token))) return;
+      await wait(500); if (token !== run) return;
+      if (!(await typeUser(lang === "bn" ? ba : a, token))) return;
+      await wait(350); if (token !== run) return;
+    }
 
     setStatus("Our agent is planning", true, true);
     if (!(await stream(`<p>${t().plan(app)}</p><ul>${app.plan.map((p) => `<li>${p}</li>`).join("")}</ul>`, AGENT("plan"), token))) return;
