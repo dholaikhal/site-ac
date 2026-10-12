@@ -3,7 +3,7 @@ layout: ../layouts/Legal.astro
 title: "Privacy policy · Amader Cloud"
 description: "What Amader Cloud collects, why, who we share it with, where it is stored, how long we keep it, and your rights under Bangladesh's Personal Data Protection Act, 2026."
 h1: "Privacy policy"
-intro: "We collect what we need to build and run your app, and nothing else. We don't sell data, we don't run ads, and the AI services we use don't train on your app."
+intro: "We collect what we need to build and run your app, and nothing else. We don't sell data, we don't run ads, and the service our agent runs on doesn't train on your app."
 ---
 import { company as C } from "../data/facts";
 
@@ -20,7 +20,7 @@ Questions about privacy go to <a href={`mailto:${C.email.privacy}`}>{C.email.pri
 
 - **From this website's forms:** your name, business or firm, email, phone or WhatsApp number, and your message.
 - **Your account:** name, phone, email, business name and the subdomain you choose. If you apply for the verified-business badge, the trade licence or other document you send us.
-- **What you build:** the requests you type or speak to the builder, the files and photos you upload, and the app the AI builds from them, with every version.
+- **What you build:** the requests you type or speak to the builder, the files and photos you upload, and the app our agent builds from them, with every version.
 - **Billing:** your plan, amounts, dates and bKash or Nagad transaction IDs. Never your PIN or OTP.
 - **Support:** messages you send us by email, WhatsApp or the builder.
 - **Logs:** IP address, device and browser type, pages and actions in the builder, and your app's error and payment-callback logs.
@@ -29,16 +29,16 @@ Questions about privacy go to <a href={`mailto:${C.email.privacy}`}>{C.email.pri
 ## How we use it
 
 - **To provide the service you signed up for:** building, previewing, publishing and hosting your app, sending its SMS, booking its deliveries, and support.
-- **To build with AI:** your requests, files and app are sent to our AI provider to plan, build and change the app. See [AI and your data](#ai-and-your-data).
+- **To build your app:** your requests, files and app are sent to the service our agent runs on, to plan, build and change the app. See [Our agent and your data](#our-agent-and-your-data).
 - **To keep people safe:** reviewing apps against impersonation, scams and prohibited goods, and investigating reports.
 - **To meet legal duties:** tax and accounting records, and lawful requests from authorities.
 - **To send you product news,** only if you opt in. You can opt out at any time.
 
 We don't sell personal information and we don't use it for advertising.
 
-## AI and your data
+## Our agent and your data
 
-Amader Cloud builds apps with Anthropic's Claude models, through Anthropic's commercial API. Under Anthropic's commercial terms, what we send is not used to train their models. We send only what the task needs: your request, the parts of your app being changed, and the files you attached.
+Our agent runs on Anthropic's commercial API. Under Anthropic's commercial terms, Anthropic does not train on what we send. We send only what the task needs: your request, the parts of your app being changed, and the files you attached.
 
 Don't put passwords, PINs, national ID numbers or other people's private details into a build request. The builder doesn't need them.
 
@@ -46,7 +46,7 @@ Don't put passwords, PINs, national ID numbers or other people's private details
 
 Only the providers we need, each for its own part of the service:
 
-- **Anthropic,** our AI provider, for building and editing apps.
+- **Anthropic,** whose API our agent runs on, for building and changing apps.
 - **Our cloud hosting provider,** for running apps, the builder and backups.
 - **The payment partner** you connect, for your merchant onboarding and your customers' payments. Card numbers and wallet PINs go to the partner, never to us.
 - **SMS gateways and couriers,** for the messages your app sends and the deliveries you book: only the phone number, name and address each one needs.
@@ -56,7 +56,7 @@ Only the providers we need, each for its own part of the service:
 
 ## Where it is stored
 
-Apps, the builder and backups run in {C.hosting}. AI requests are processed by Anthropic, in the United States. Transfers outside Bangladesh follow the Personal Data Protection Act, 2026 and its rules on restricted data.
+Apps, the builder and backups run in {C.hosting}. Our agent's requests are processed by Anthropic, in the United States. Transfers outside Bangladesh follow the Personal Data Protection Act, 2026 and its rules on restricted data.
 
 ## How long we keep it
 

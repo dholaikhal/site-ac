@@ -3,13 +3,13 @@ import Base from "../layouts/Base.astro";
 import Photo from "../components/Photo.astro";
 import { plan } from "../data/facts";
 import Connectors from "../components/Connectors.astro";
-// Who does each step. AI steps glow on the track; no model or provider names on this page.
+// Who does each step. Agent steps glow on the track. Copy rule: "our agent", never "AI", a model or a provider.
 const steps = [
   { t: "Describe it", d: "Write what you want, how you want. “A store for my handmade bags with bKash payment and an SMS when the order ships.”", who: "you" },
-  { t: "AI builds it", d: "The AI plans your app, lays out the pages, adds your products or services, and connects payments, courier and SMS. Minutes, not weeks.", who: "ai" },
+  { t: "Our agent builds it", d: "Our store agent plans your app, lays out the pages, adds your products or services, and connects payments, courier and SMS. Minutes, not weeks.", who: "ai" },
   { t: "Try it", d: "A preview on your phone, with test payments, before anything is public. Look around, place a test order, read the SMS.", who: "you" },
-  { t: "Change it by asking", d: "“Add 10% off for bKash payments.” “Make it green.” The AI makes the change, you see it first, and any change can be undone.", who: "ai" },
-  { t: "AI checks it", d: "Before it goes live, and while it runs, every app is checked for scams, fake bank or wallet pages and prohibited goods.", who: "ai" },
+  { t: "Change it by asking", d: "“Add 10% off for bKash payments.” “Make it green.” Our agent makes the change, you see it first, and any change can be undone.", who: "ai" },
+  { t: "Our agent checks it", d: "Before it goes live, and while it runs, every app is checked for scams, fake bank or wallet pages and prohibited goods.", who: "ai" },
   { t: "Get paid", d: "Live at yourname.amader.cloud. Customers pay into your own merchant accounts; we never hold your money.", who: "you" },
 ];
 const run = [
@@ -17,17 +17,17 @@ const run = [
   ["Database and backups", "Orders, customers and payments are stored and backed up for you."],
   ["Security updates", "We keep the stack, libraries and certificates up to date."],
   ["Connectors", "When a payment, courier or SMS provider changes its system, we update the connector, not you."],
-  ["Safety review", "Every published app is checked by AI and rules, before publishing and continuously."],
-  ["Support", "Ask “Why didn't my bKash payment show?” and the AI looks it up in your store's records. People answer on WhatsApp too."],
+  ["Safety review", "Every published app is checked by our agent and by rules, before publishing and continuously."],
+  ["Support", "Ask “Why didn't my bKash payment show?” and our agent looks it up in your store's records. People answer on WhatsApp too."],
 ];
 ---
-<Base title="How it works · Amader Cloud" description="Describe, build, preview, change by asking, publish, get paid. What the AI does at each step, and what we run for you.">
+<Base title="How it works · Amader Cloud" description="Describe, build, preview, change by asking, publish, get paid. What our agent does at each step, and what we run for you.">
 
 <section class="page-hero">
   <div class="wrap">
     <div class="signboard sign-blue">
       <h1>From a sentence to a working app.</h1>
-      <span class="address">Six steps. The AI does three of them.</span>
+      <span class="address">Six steps. Our agent does three of them.</span>
     </div>
   </div>
 </section>
@@ -35,21 +35,21 @@ const run = [
 <section class="section">
   <div class="wrap">
     <div class="flow" data-tabs data-auto>
-      <p class="legend"><span class="ai-dot" aria-hidden="true">✦</span> The AI does the glowing steps. You do the rest.</p>
+      <p class="legend"><span class="ai-dot" aria-hidden="true">✦</span> Our cloud agent does the glowing steps. You do the rest.</p>
       <ol class="track" role="tablist" aria-label="Steps">
         {steps.map((s, i) => (
           <li class:list={["station", s.who]}>
             <button type="button" role="tab" id={`st-${i}`} aria-controls={`sp-${i}`} aria-selected={i === 0 ? "true" : "false"} tabindex={i === 0 ? 0 : -1}>
               <span class="disc">{s.who === "ai" ? "✦" : i + 1}</span>
               <span class="name">{s.t}</span>
-              <span class="tag">{s.who === "ai" ? "AI" : "You"}</span>
+              <span class="tag">{s.who === "ai" ? "Our agent" : "You"}</span>
             </button>
           </li>
         ))}
       </ol>
       {steps.map((s, i) => (
         <div class:list={["stop", s.who]} role="tabpanel" id={`sp-${i}`} aria-labelledby={`st-${i}`} hidden={i !== 0}>
-          <span class="stop-n">Step {i + 1} of {steps.length}{s.who === "ai" ? " · done by AI" : ""}</span>
+          <span class="stop-n">Step {i + 1} of {steps.length}{s.who === "ai" ? " · done by our agent" : ""}</span>
           <h2>{s.t}</h2>
           <p class="lede">{s.d}</p>
         </div>
@@ -62,7 +62,7 @@ const run = [
   <div class="wrap split">
     <div>
       <h2>Built from parts that already work.</h2>
-      <p class="lede">The AI doesn't start from a blank page. It puts your app together from pieces we've already tested.</p>
+      <p class="lede">Our agent doesn't start from a blank page. It puts your app together from pieces we've already tested.</p>
       <ul class="ticks">
         <li><strong>Tested building blocks:</strong> product grids, calendars, checkouts and receipts that already work.</li>
         <li><strong>Ready connections:</strong> bKash, Nagad, cards, couriers and SMS are plugged in, not written from scratch.</li>
@@ -70,7 +70,7 @@ const run = [
       </ul>
     </div>
     <div class="rails" aria-hidden="true">
-      <div class="rail ai"><span>✦</span> AI puts it together</div>
+      <div class="rail ai"><span>✦</span> Our agent puts it together</div>
       <div class="rail-row"><div class="rail">Tested building blocks</div><div class="rail">Ready connections</div></div>
       <div class="rail">Checked, previewed, undoable</div>
       <div class="rail out">Your store</div>
@@ -115,7 +115,7 @@ const run = [
       <ol class="aw">
         <li>Client brief in a sentence or two</li>
         <li>First build and preview the same day</li>
-        <li>Client asks for changes; you, or they, ask the AI</li>
+        <li>Client asks for changes; you, or they, ask our agent</li>
         <li>Publish on the client's subdomain or own domain</li>
         <li>Payments go to the client's own accounts</li>
       </ol>
@@ -130,7 +130,7 @@ const run = [
 .legend { display: flex; align-items: center; gap: 10px; font-weight: 700; margin: 0 0 22px; }
 .ai-dot { display: inline-grid; place-items: center; width: 28px; height: 28px; border-radius: 50%; color: #fff; background: conic-gradient(var(--yellow), var(--red), var(--blue), var(--green), var(--yellow)); animation: spin-ai 4s linear infinite; }
 @keyframes spin-ai { to { rotate: 360deg; } }
-/* The track: six stations on a line; a token rides the line, and AI stations run with colour */
+/* The track: six stations on a line; a token rides the line, and agent stations run with colour */
 .track { list-style: none; margin: 0; padding: 0; position: relative; display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 8px; }
 .track::before { content: ""; position: absolute; left: 8%; right: 8%; top: 31px; height: 4px; background: repeating-linear-gradient(90deg, var(--line) 0 10px, transparent 10px 18px); animation: flow-line 1.2s linear infinite; }
 @keyframes flow-line { to { background-position: 18px 0; } }

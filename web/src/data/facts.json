@@ -215,7 +215,7 @@
         "sms": 0,
         "includes": [
           "Build and preview one app",
-          "5 AI edits",
+          "5 changes by asking",
           "Amader Cloud watermark",
           "No live payments"
         ]
@@ -230,7 +230,7 @@
         "includes": [
           "1 live app at yourname.amader.cloud",
           "Payments switched on",
-          "10 AI edits a month"
+          "10 changes by asking a month"
         ]
       },
       {
@@ -243,7 +243,7 @@
         "includes": [
           "3 live apps",
           "Your own domain (after the beta)",
-          "30 AI edits a month",
+          "30 changes by asking a month",
           "200 SMS a month"
         ]
       },
@@ -256,7 +256,7 @@
         "sms": 0,
         "includes": [
           "10 client apps",
-          "80 AI edits a month",
+          "80 changes by asking a month",
           "Built for developers who deliver for clients"
         ]
       }

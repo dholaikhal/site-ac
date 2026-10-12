@@ -8,7 +8,7 @@ const yes = "✓";
 const rows: [string, (p: (typeof plans)[number]) => string][] = [
   ["Price a month", (p) => (p.tk ? `${tk(p.tk)} (≈ ${usdOf(p.tk)})` : tk(0))],
   ["Apps", (p) => (p.id === "free" ? "1, preview only" : `${p.apps} live`)],
-  ["AI edits included", (p) => (p.id === "free" ? `${p.edits} in total` : `${p.edits} a month`)],
+  ["Changes by asking", (p) => (p.id === "free" ? `${p.edits} in total` : `${p.edits} a month`)],
   ["Live payments", (p) => (p.id === "free" ? "–" : yes)],
   ["yourname.amader.cloud", (p) => yes],
   ["Your own domain", (p) => (p.id === "business" || p.id === "agency" ? "after the beta" : "–")],
@@ -51,11 +51,11 @@ const rows: [string, (p: (typeof plans)[number]) => string][] = [
 <section class="section">
   <div class="wrap faq">
     <div class="head"><h2>Questions</h2></div>
-    <details><summary>What counts as an AI edit?</summary><p>One request that changes your app, such as “add 10% off for bKash” or “add a size option to every product”. Undoing a change is free.</p></details>
+    <details><summary>What counts as a change?</summary><p>One request that changes your app, such as “add 10% off for bKash” or “add a size option to every product”. Undoing a change is free.</p></details>
     <details><summary>Who charges the payment fees?</summary><p>Your payment provider charges its own fees, under your merchant account with them. Our plans are a flat monthly price; we don't take a percentage of your sales.</p></details>
     <details><summary>Do I need a bKash or Nagad merchant account?</summary><p>Yes, payments go to your own accounts. We help with the paperwork through our licensed payment partner, so you can start with test payments while it's approved.</p></details>
     <details><summary>Can I leave?</summary><p>Yes. Export your orders, customers and payments at any time. Plans are monthly.</p></details>
-    <details><summary>Why is it cheaper than a custom website?</summary><p>The AI builds from tested templates and connectors on one stack, so building and running your app costs us little. We pass that on.</p></details>
+    <details><summary>Why is it cheaper than a custom website?</summary><p>Our agent builds from tested templates and connectors on one stack, so building and running your app costs us little. We pass that on.</p></details>
   </div>
 </section>
 

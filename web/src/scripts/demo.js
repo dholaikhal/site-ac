@@ -1,5 +1,6 @@
 import { icon, bag, stars, heroArt } from "./app-art.js";
-// Amader Cloud builder demo. Scripted entirely in the browser: no AI is called, nothing is published.
+// Amader Cloud builder demo. Scripted entirely in the browser: no agent is called, nothing is published.
+// Copy rule: the product is "our agent" / "our store agent", never "AI" or a model.
 // Businesses, products, prices and orders below are fictional demonstration content, not facts.
 // Requests can be typed or picked, in English or in Bangla written in English letters; replies follow the visitor's words.
 
@@ -300,7 +301,7 @@ function initDemo(root) {
     body.classList.remove("caret"); body.innerHTML = html; scrollMsgs();
     return true;
   }
-  const AI = (what) => `<span class="spark" aria-hidden="true">✦</span> AI · ${what}`;
+  const AGENT = (what) => `<span class="spark" aria-hidden="true">✦</span> Store agent · ${what}`;
   async function typeUser(text, token) {
     const li = say("user", "");
     for (let i = 1; i <= text.length; i += 3) { li.textContent = text.slice(0, i); scrollMsgs(); await wait(14); if (token !== run) return false; }
@@ -393,12 +394,12 @@ function initDemo(root) {
     if (!(await typeUser(text, token))) return;
     await wait(450); if (token !== run) return;
 
-    setStatus("AI is planning", true, true);
-    if (!(await stream(`<p>${t().plan(app)}</p><ul>${app.plan.map((p) => `<li>${p}</li>`).join("")}</ul>`, AI("plan"), token))) return;
+    setStatus("Our agent is planning", true, true);
+    if (!(await stream(`<p>${t().plan(app)}</p><ul>${app.plan.map((p) => `<li>${p}</li>`).join("")}</ul>`, AGENT("plan"), token))) return;
     await wait(500); if (token !== run) return;
 
-    setStatus("AI is building", true, true);
-    const list = logList(AI("build"));
+    setStatus("Our agent is building", true, true);
+    const list = logList(AGENT("build"));
     paint("home", { draft: true }); ink(token);
     if (!(await step(list, "Designing your front page", token, 1500))) return;
     paint("item", { draft: true }); ink(token);
@@ -428,8 +429,8 @@ function initDemo(root) {
     busy(true);
     if (!(await typeUser(text, token))) return;
     await wait(350); if (token !== run) return;
-    setStatus("AI is changing it", true, true);
-    const list = logList(AI("change"));
+    setStatus("Our agent is changing it", true, true);
+    const list = logList(AGENT("change"));
     if (!(await step(list, `Updating ${e.touched}`, token, 900))) return;
     st.undo.push({ ...st, undo: undefined });
     st[e.key] = true;
