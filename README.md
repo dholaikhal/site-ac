@@ -16,6 +16,7 @@ The site is served locally on port **8425** once it exists.
 Pushing `idea/banao` deploys https://amader.cloud. These are placeholders on the site today:
 
 - [ ] `company` in `web/src/data/facts.json` is `"mock": true`: legal name, Banani address, WhatsApp (not shown on any page), social profiles, RJSC number, trade licence, BIN. Replace them and set `mock` to false (social links only become links then; the phone is already real and a link).
+- [ ] The "Come by" map on the About page is drawn around the mock Banani address: redraw it for the real office with `python3 tools/static_map.py LAT LON web/src/assets/maps/office.svg`.
 - [ ] `funding` in the same file is mock.
 - [ ] Privacy policy and terms (`web/src/pages/privacy.mdx`, `terms.mdx`) are drafts for lawyer review, written against the Personal Data Protection Act, 2026 (from a law firm's summary; check the gazetted text). The refund rule in the terms (first month back if the first app isn't live in 7 days) and the 7-day grace on failed payments are proposals.
 - [ ] Native-speaker check of the Bangla written in English letters in the demo (`web/src/scripts/demo.js`: `bn` prompts and replies).
