@@ -9,4 +9,4 @@ const { id, class: cls, sizes = "(max-width: 860px) 100vw, 50vw", widths = [480,
 const p = data.photos[id];
 const src = files[`../assets/photos/${p.file}`].default;
 ---
-<Image src={src} alt={p.alt} title={`Photo: ${p.photographer}, Unsplash`} class={cls} widths={widths} sizes={sizes} loading={loading} format="webp" quality={78} />
+<Image src={src} alt={p.alt} title={`Photo: ${p.photographer}, ${(p as any).site}`} class={cls} widths={widths} sizes={sizes} loading={loading} format="webp" quality={78} />

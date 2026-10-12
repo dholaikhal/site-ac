@@ -1,12 +1,13 @@
 ---
 // Footnote list of photo credits (the only place credits are shown in full).
 import data from "../data/photos.json";
+const lic = data.licences as Record<string, { name: string; url: string }>;
 ---
 <aside class="sources" id="photo-credits" aria-label="Photo credits">
   <strong>Photo credits</strong>
   <ol>
-    {Object.values(data.photos).map((p) => (
-      <li><a href={p.source} rel="noopener" target="_blank">Photo</a> by <a href={p.profile} rel="noopener" target="_blank">{p.photographer}</a> on Unsplash, used on {p.usedOn}. <a href={data.licence.url} rel="noopener" target="_blank">{data.licence.name}</a>.</li>
+    {Object.values(data.photos).map((p: any) => (
+      <li><a href={p.source} rel="noopener" target="_blank">Photo</a> by {p.profile ? <a href={p.profile} rel="noopener" target="_blank">{p.photographer}</a> : p.photographer} on {p.site}, used on {p.usedOn}. <a href={lic[p.licence].url} rel="noopener" target="_blank">{lic[p.licence].name}</a>.</li>
     ))}
   </ol>
 </aside>

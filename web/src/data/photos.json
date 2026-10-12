@@ -1,9 +1,5 @@
 {
-  "_about": "Photographs used on the site. All are under the Unsplash License (free; none are Unsplash+ or premium). Credits render on the Sources page and in each image's title attribute, never as captions.",
-  "licence": {
-    "name": "Unsplash License",
-    "url": "https://unsplash.com/license"
-  },
+  "_about": "Photographs used on the site, under the Unsplash License or the Pexels License (free; none are Unsplash+ or premium). Credits render on the Sources page and in each image's title attribute, never as captions. rainlane, office and bazar are copied from main.",
   "photos": {
     "delivery-van": {
       "file": "delivery-van.jpg",
@@ -11,7 +7,9 @@
       "photographer": "Ashikul Islam Anik",
       "profile": "https://unsplash.com/@anikphotography",
       "source": "https://unsplash.com/photos/a-man-riding-a-bike-down-a-street-next-to-a-pile-of-bags-d7bfM9FSCW8",
-      "usedOn": "Home"
+      "usedOn": "Home",
+      "licence": "unsplash",
+      "site": "Unsplash"
     },
     "night-market": {
       "file": "night-market.jpg",
@@ -19,7 +17,46 @@
       "photographer": "SajidulBari Mahmud",
       "profile": "https://unsplash.com/@sajidulbari",
       "source": "https://unsplash.com/photos/people-are-shopping-for-bananas-at-a-night-market-lVIzrh1IkMc",
-      "usedOn": "How it works"
+      "usedOn": "How it works",
+      "licence": "unsplash",
+      "site": "Unsplash"
+    },
+    "rainlane": {
+      "file": "rainlane.jpg",
+      "alt": "A rain-wet lane in Mirpur, Dhaka, in the evening, with a CNG auto-rickshaw at the kerb.",
+      "photographer": "Najmul Huda",
+      "source": "https://unsplash.com/photos/v5FymWLSKAg",
+      "licence": "unsplash",
+      "site": "Unsplash",
+      "usedOn": "Home"
+    },
+    "office": {
+      "file": "office.jpg",
+      "alt": "An office building in Gulshan, Dhaka, at night, with its floors lit.",
+      "photographer": "Towfiq Islam",
+      "source": "https://unsplash.com/photos/EyBgE1pPS6s",
+      "licence": "unsplash",
+      "site": "Unsplash",
+      "usedOn": "Home"
+    },
+    "bazar": {
+      "file": "bazar.jpg",
+      "alt": "A Dhaka market street under tangled cables, with umbrella stalls and a mosque minaret at the end.",
+      "photographer": "Ferdous Hasan",
+      "source": "https://www.pexels.com/photo/bustling-dhaka-street-market-with-mosque-in-view-36525029/",
+      "licence": "pexels",
+      "site": "Pexels",
+      "usedOn": "Home"
+    }
+  },
+  "licences": {
+    "unsplash": {
+      "name": "Unsplash License",
+      "url": "https://unsplash.com/license"
+    },
+    "pexels": {
+      "name": "Pexels License",
+      "url": "https://www.pexels.com/license/"
     }
   }
 }
