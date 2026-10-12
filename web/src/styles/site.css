@@ -90,6 +90,9 @@ p { margin: 0 0 1em; }
 .sign-red { --board: var(--red); --letter: var(--yellow); --shade: #14213d; --pin: #ffffff; }
 .sign-yellow { --board: var(--yellow); --letter: var(--red); --shade: #14213d; --pin: var(--red); }
 .sign-navy { --board: #14213d; --letter: var(--yellow); --shade: var(--red); --pin: var(--yellow); }
+/* The small address line needs body-text contrast, which the display lettering doesn't on red and yellow boards */
+.sign-red .address { color: #fff; }
+.sign-yellow .address { color: #14213d; }
 
 /* ---------- Header ---------- */
 .site-header { position: sticky; top: 0; z-index: 30; background: var(--wash); border-bottom: 1px solid var(--rule); }
@@ -112,7 +115,9 @@ p { margin: 0 0 1em; }
   .nav.open { display: flex; }
   .nav a:not(.btn) { padding: 13px 0; border-bottom: 1px solid var(--rule); }
   .nav .btn { margin-top: 14px; }
-  .nav .theme-toggle { margin-top: 14px; }
+  /* The theme switch stays in the bar, beside Menu, not inside the collapsed menu */
+  .theme-toggle { margin-left: auto; }
+  .nav-toggle { order: 2; margin-left: 0; }
 }
 
 /* ---------- Buttons: small painted plates with their own pinstripe ---------- */
