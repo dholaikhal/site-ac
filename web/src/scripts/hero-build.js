@@ -32,20 +32,19 @@ function init(box) {
   const reel = $("[data-qb-reel]");
   const chips = [...box.querySelectorAll("[data-qb-pick]")];
   let jump = null;
-  chips.forEach((c) => c.addEventListener("click", () => { jump = +c.dataset.qbPick; run++; }));
-  // Turn the circular reel in the board's window: each choice moves to its distance from the picked one,
-  // wrapping round the list; the ones either side peek in, the rest are out of sight and out of the tab order.
+  // A tap answers at once (chip, row and headline); the build for it starts as soon as the current step stops.
+  chips.forEach((c) => c.addEventListener("click", () => { jump = +c.dataset.qbPick; run++; pick(jump); }));
+  // Pick a kind of business: its chip lights up and slides to the middle of the row (the row scrolls, not
+  // the page), and the headline's middle line becomes its name.
+  const word = $("[data-qb-word]");
   const pick = (i) => {
-    const N = chips.length;
-    chips.forEach((c, n) => {
-      let o = (((n - i) % N) + N) % N;
-      if (o > N / 2) o -= N;
-      const li = c.parentElement;
-      li.style.setProperty("--o", String(o));
-      li.dataset.d = Math.abs(o) > 1 ? "far" : String(Math.abs(o));
-      c.setAttribute("aria-pressed", String(o === 0));
-      c.tabIndex = Math.abs(o) > 1 ? -1 : 0;
-    });
+    chips.forEach((c, n) => c.setAttribute("aria-pressed", String(n === i)));
+    const c = chips[i];
+    reel.scrollTo({ left: c.offsetLeft - (reel.clientWidth - c.offsetWidth) / 2, behavior: still ? "auto" : "smooth" });
+    if (word.textContent !== c.dataset.word) {
+      word.textContent = c.dataset.word;
+      word.classList.remove("swap"); void word.offsetWidth; word.classList.add("swap");
+    }
   };
   const state = (k) => ({ app: k, off: false, green: false, cod: false, remind: false, late: false, cutoff: false, near: false, flash: null, built: true, published: true, tab: "home", undo: [] });
 

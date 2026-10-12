@@ -31,34 +31,31 @@ const ticker = ["bKash checkout", "Nagad", "Cards", "Courier booking", "Order SM
   <div class="wrap hero-grid">
     <div class="hero-copy">
       <div class="signboard lit">
-        <!-- The kind of business turns in a window on the board; the ones before and after peek in. Click one to build it. -->
-        <h1><span class="hl">An app for your</span>
-          <span class="slot"><ol class="qb-reel" data-qb-reel aria-label="Kind of business">
-            {[["Facebook store"], ["home kitchen"], ["salon"], ["clinic"], ["pharmacy"], ["event"], ["AC service"], ["coaching centre"]].map(([word], i) =>
-              <li style={`--o:${((i + 4) % 8) - 4}`} data-d={Math.abs(((i + 4) % 8) - 4) > 1 ? "far" : String(Math.abs(((i + 4) % 8) - 4))}><button type="button" data-qb-pick={i} aria-pressed={i === 0 ? "true" : "false"} tabindex={Math.abs(((i + 4) % 8) - 4) > 1 ? -1 : 0}>{word}</button></li>)}
-          </ol></span>
-          <span class="hl">from one sentence.</span></h1>
+        <h1><span class="hl">An app for your</span> <span class="hl hw"><span data-qb-word>Facebook store</span></span> <span class="hl">from one sentence.</span></h1>
         <span class="address">Payments by <Brand id="bkash" h={18} />, Nagad and card, built in</span>
+      </div>
+      <!-- The kinds of business, a row that scrolls sideways; the chosen one is built in the phone -->
+      <div class="qb-chips" data-qb-reel role="group" aria-label="Kind of business">
+        {["Facebook store", "home kitchen", "salon", "clinic", "pharmacy", "event", "AC service", "coaching centre"].map((word, i) =>
+          <button type="button" data-qb-pick={i} data-word={word} aria-pressed={i === 0 ? "true" : "false"}>{word}</button>)}
+      </div>
+      <div class="qb-bar">
+        <div class="qb-in"><span class="qb-cap">You type</span><p data-qb-text></p></div>
+        <span class="qb-status" data-qb-status hidden><span class="spark" aria-hidden="true">✦</span> Our agent is building</span>
+        <span class="qb-send" aria-hidden="true">→</span>
       </div>
       <div class="btn-row"><BetaButton sticker="" /><a class="btn btn-quiet" href="#demo">Try the builder</a></div>
       <p class="cta-line"><span>Free while you build</span><span>Pay when you go live</span><span>Cancel any time</span></p>
     </div>
 
     <figure class="qb" aria-label="Our agent building an app from one sentence, for different kinds of business (animation)">
-      <div class="qb-stage">
-        <div class="qb-bubble">
-          <span class="qb-cap">You type</span>
-          <p data-qb-text></p>
-          <span class="qb-status" data-qb-status hidden><span class="spark" aria-hidden="true">✦</span> Our agent is building</span>
-        </div>
-        <div class="qb-phone">
-          <Device kind="phone">
-            <div class="notif qb-notif" data-qb-notif></div>
-            <div class="phone-url"><span data-qb-url>…</span></div>
-            <div class="screen" data-qb-screen></div>
-          </Device>
-          <span class="qb-live" data-qb-live><i></i>Live at <span class="url" data-qb-url-2></span></span>
-        </div>
+      <div class="qb-phone">
+        <Device kind="phone">
+          <div class="notif qb-notif" data-qb-notif></div>
+          <div class="phone-url"><span data-qb-url>…</span></div>
+          <div class="screen" data-qb-screen></div>
+        </Device>
+        <span class="qb-live" data-qb-live><i></i>Live at <span class="url" data-qb-url-2></span></span>
       </div>
     </figure>
   </div>
@@ -143,14 +140,19 @@ const ticker = ["bKash checkout", "Nagad", "Cards", "Courier booking", "Order SM
 </section>
 
 <style>
-.hero { position: relative; padding-block: clamp(28px, 4vw, 56px) clamp(48px, 7vw, 96px); overflow: hidden; }
-.hero-grid { position: relative; display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr); gap: clamp(28px, 4vw, 64px); align-items: start; }
-
-.hero { --h1: clamp(2.3rem, 1.4rem + 3.6vw, 4.4rem); --pad: clamp(26px, 3.4vw, 44px); }
-.hero-copy .signboard h1 { font-size: var(--h1); line-height: 1; }
+.hero { position: relative; padding-block: clamp(28px, 4vw, 56px) clamp(48px, 7vw, 96px); overflow: hidden; --h1: clamp(2.3rem, 1.4rem + 3.4vw, 4.2rem); }
+/* One column tells it top to bottom (headline, kind of business, the sentence, the action); the phone beside
+   it is scaled to the same height, tops and bottoms level */
+.hero-grid { position: relative; display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: clamp(32px, 5vw, 72px); align-items: stretch; }
+.hero-copy { display: flex; flex-direction: column; gap: 18px; min-width: 0; }
+.hero-copy .signboard h1 { font-size: var(--h1); line-height: 1.02; }
 .hl { display: block; }
-.hero-copy .btn-row { margin-top: 30px; }
-.cta-line { display: flex; flex-wrap: wrap; column-gap: 0.55em; margin: 14px 0 0; font-size: 0.92rem; color: var(--ink-2); }
+.hw { color: #fff; }
+.hw [data-qb-word] { display: inline-block; }
+.hw .swap { animation: wordin .45s cubic-bezier(.2,.8,.2,1) both; }
+@keyframes wordin { from { opacity: 0; translate: 0 .35em; } }
+.hero-copy .btn-row { margin-top: auto; padding-top: 6px; }
+.cta-line { display: flex; flex-wrap: wrap; column-gap: 0.55em; margin: -6px 0 0; font-size: 0.92rem; color: var(--ink-2); }
 .cta-line span { white-space: nowrap; }
 .cta-line span + span::before { content: "·"; margin-right: 0.55em; }
 /* Narrow phones: the phrases wrap as a centred group, without separators left hanging */
@@ -159,35 +161,35 @@ const ticker = ["bKash checkout", "Nagad", "Cards", "Courier booking", "Order SM
 .lit { animation: tube 1.6s steps(1, end) .3s both; }
 @keyframes tube { 0% { filter: brightness(.55); } 12% { filter: brightness(1.05); } 18% { filter: brightness(.6); } 26%, 100% { filter: none; } }
 
-/* The window on the board: a recessed slot where the kinds of business turn like a drum */
-.slot { --row: 1.08em; position: relative; display: block; height: calc(var(--row) * 2.2); margin: 0.12em -0.2em; border-radius: 6px; background: rgb(0 0 0 / .32); box-shadow: inset 0 0 0 2px var(--pin), inset 0 4px 10px rgb(0 0 0 / .45); overflow: clip; }
-/* Soft edges top and bottom so the neighbours fade into the frame */
-.slot::before, .slot::after { content: ""; position: absolute; left: 2px; right: 2px; height: 22%; z-index: 1; pointer-events: none; }
-.slot::before { top: 2px; background: linear-gradient(rgb(6 40 26 / .85), transparent); border-radius: 4px 4px 0 0; }
-.slot::after { bottom: 2px; background: linear-gradient(transparent, rgb(6 40 26 / .85)); border-radius: 0 0 4px 4px; }
-.qb-reel { list-style: none; margin: 0; padding: 0; position: absolute; inset: 0; }
-.qb-reel li { position: absolute; left: 0.22em; top: calc(50% - var(--row) / 2); height: var(--row); display: flex; align-items: center; white-space: nowrap; translate: 0 calc(var(--o) * var(--row) * 0.8); transition: translate .6s cubic-bezier(.3,1.2,.5,1), opacity .35s; }
-.qb-reel li[data-d="far"] { opacity: 0; pointer-events: none; }
-.qb-reel button { font: inherit; letter-spacing: inherit; padding: 0; border: 0; background: none; cursor: pointer; color: inherit; text-shadow: inherit; opacity: .6; scale: .48; transform-origin: left center; transition: color .3s, opacity .3s, scale .45s; }
-.qb-reel li[data-d="0"] button { color: #fff; opacity: 1; scale: 1; }
-.qb-reel button:hover, .qb-reel button:focus-visible { opacity: 1; }
+/* Kinds of business: a sideways row that snaps; the chosen one is a little green board */
+.qb-chips { position: relative; display: flex; gap: 8px; overflow-x: auto; scroll-snap-type: x proximity; scrollbar-width: none; padding: 2px 24px 2px 2px; margin-right: -2px; -webkit-mask-image: linear-gradient(90deg, #000 85%, transparent); mask-image: linear-gradient(90deg, #000 85%, transparent); }
+.qb-chips::-webkit-scrollbar { display: none; }
+.qb-chips button { flex: none; scroll-snap-align: center; font: inherit; font-weight: 700; font-size: 0.95rem; padding: 8px 15px; border-radius: 999px; border: 1.5px solid var(--line); background: var(--card); color: var(--ink); cursor: pointer; transition: background-color .25s, color .25s, border-color .25s; }
+.qb-chips button:hover { border-color: var(--green); }
+.qb-chips button[aria-pressed="true"] { background: var(--green); border-color: var(--green); color: var(--yellow); box-shadow: inset 0 0 0 2px var(--green), inset 0 0 0 3.5px var(--yellow); }
 
-/* Quick build: the request is a chat bubble beside the phone; its sections fly from it into the phone */
-.qb { position: relative; margin: 0; display: grid; justify-items: end; }
-.qb-stage { position: relative; display: grid; grid-template-columns: 210px auto; align-items: start; }
-.qb-bubble { position: relative; z-index: 2; margin-top: calc(var(--pad) + var(--h1) * 2.31 - 64px); margin-right: -14px; background: var(--card); border: 1.5px solid var(--line); border-radius: 18px 18px 4px 18px; padding: 14px 18px 16px; box-shadow: 0 18px 36px -22px rgb(20 33 61 / .55); }
-.qb-bubble p { font-size: 1.02rem; font-weight: 600; line-height: 1.35; margin: 4px 0 0; min-height: 4.05em; }
-.qb-cap { display: block; font-size: 0.8rem; font-weight: 700; color: var(--ink-2); }
-.qb-bubble .caret::after { content: "▍"; color: var(--red); animation: blink 1s steps(1) infinite; }
+/* The sentence, in a message bar; its sections fly from here into the phone */
+.qb-bar { position: relative; display: grid; grid-template-columns: minmax(0, 1fr) auto; grid-template-areas: "in send" "st send"; align-items: center; column-gap: 14px; padding: 14px 14px 14px 18px; background: var(--card); border: 1.5px solid var(--line); border-radius: 14px; box-shadow: 0 18px 36px -28px rgb(20 33 61 / .55); }
+.qb-in { grid-area: in; }
+.qb-bar p { font-size: 1.08rem; font-weight: 600; line-height: 1.35; margin: 2px 0 0; min-height: 2.7em; }
+.qb-cap { display: block; font-size: 0.78rem; font-weight: 700; color: var(--ink-2); }
+.qb-bar .caret::after { content: "▍"; color: var(--red); animation: blink 1s steps(1) infinite; }
 @keyframes blink { 50% { opacity: 0; } }
-.qb-status { display: inline-flex; align-items: center; gap: 6px; margin-top: 10px; font-weight: 800; font-size: 0.82rem; color: #14213d; padding: 5px 12px; border-radius: 999px; border: 2px solid transparent; background: linear-gradient(var(--yellow), var(--yellow)) padding-box, linear-gradient(90deg, var(--yellow), var(--red), var(--blue), var(--green), var(--yellow)) 0 0 / 300% 100% border-box; animation: aiflow 2s linear infinite; }
+.qb-send { grid-area: send; display: grid; place-items: center; width: 44px; height: 44px; border-radius: 10px; background: var(--red); color: #fff; font-weight: 800; font-size: 1.2rem; }
+.qb-status { grid-area: st; justify-self: start; display: inline-flex; align-items: center; gap: 6px; margin-top: 8px; font-weight: 800; font-size: 0.82rem; color: #14213d; padding: 5px 12px; border-radius: 999px; border: 2px solid transparent; background: linear-gradient(var(--yellow), var(--yellow)) padding-box, linear-gradient(90deg, var(--yellow), var(--red), var(--blue), var(--green), var(--yellow)) 0 0 / 300% 100% border-box; animation: aiflow 2s linear infinite; }
 .qb-status[hidden] { display: none; }
 .qb-status .spark { color: var(--red); }
 @keyframes aiflow { to { background-position: 0 0, 300% 0; } }
-.qb-phone { position: relative; z-index: 1; display: grid; justify-items: center; gap: 14px; }
-.qb-live { display: inline-flex; align-items: center; gap: 8px; font-weight: 800; font-size: 0.86rem; padding: 6px 14px; border-radius: 999px; background: var(--green); color: #fff; opacity: 0; translate: 0 8px; transition: opacity .3s, translate .4s cubic-bezier(.2,.8,.2,1.4); }
+
+/* The phone, as tall as the column beside it */
+.qb { position: relative; margin: 0; display: grid; align-content: start; justify-items: center; }
+.qb-phone { position: relative; display: grid; justify-items: center; }
+.qb { --pz: .745; }
+.qb :global(.dev) { --z: var(--pz); }
+/* Live at: a badge on the phone's bottom bezel */
+.qb-live { position: absolute; left: 50%; bottom: 14px; z-index: 3; white-space: nowrap; box-shadow: 0 10px 24px -10px rgb(0 0 0 / .5); display: inline-flex; align-items: center; gap: 8px; font-weight: 800; font-size: 0.86rem; padding: 6px 14px; border-radius: 999px; background: var(--green); color: #fff; opacity: 0; translate: -50% 8px; transition: opacity .3s, translate .4s cubic-bezier(.2,.8,.2,1.4); }
 .qb-live i { width: 8px; height: 8px; border-radius: 50%; background: var(--yellow); }
-.qb-live.on { opacity: 1; translate: 0 0; }
+.qb-live.on { opacity: 1; translate: -50% 0; }
 .qb-live .url { color: var(--yellow); }
 .qb :global(.qb-notif) { top: 46px; }
 .qb :global(.b.qb-wait) { opacity: 0; }
@@ -212,24 +214,15 @@ const ticker = ["bKash checkout", "Nagad", "Cards", "Courier booking", "Order SM
 @media (max-width: 860px) { .closing { grid-template-columns: 1fr; } }
 .closing .signboard h2 { font-size: clamp(2.4rem, 1.6rem + 2.6vw, 3.8rem); }
 
-/* Tablets and phones: one centred axis. The board, the buttons and the terms line stack on it, and the
-   phone sits centred below with the request bubble on its left shoulder. */
-@media (max-width: 1140px) {
-  .hero-grid { grid-template-columns: 1fr; justify-items: center; gap: clamp(36px, 6vw, 56px); }
-  .hero-copy { width: 100%; max-width: 680px; display: grid; justify-items: center; }
-  .hero-copy .signboard { width: 100%; }
-  .hero-copy .btn-row { justify-content: center; }
+/* Tablets and phones: one centred column, the phone after it */
+@media (max-width: 1000px) {
+  .hero-grid { grid-template-columns: minmax(0, 1fr); justify-items: center; gap: 36px; }
+  .hero-copy { width: 100%; max-width: 640px; }
+  .hero-copy .btn-row { justify-content: center; margin-top: 0; }
   .cta-line { justify-content: center; text-align: center; }
-  .qb { justify-items: center; }
-  .qb-stage { display: block; }
-  .qb-bubble { position: absolute; top: 96px; right: calc(100% - 16px); width: 220px; margin: 0; }
+  .qb { --pz: .66; }
 }
-/* Too narrow for the shoulder: the bubble sits on top of the phone instead */
-@media (max-width: 720px) {
-  .qb-stage { display: grid; grid-template-columns: minmax(0, 1fr); justify-items: center; }
-  .qb-bubble { position: relative; top: auto; right: auto; width: auto; justify-self: stretch; margin: 0 0 -28px; border-radius: 18px 18px 18px 4px; }
-  .qb-bubble p { min-height: 2.7em; }
-}
+@media (max-width: 560px) { .qb { --pz: .6; } }
 @media (prefers-reduced-motion: reduce) { .lit, .qb-status { animation: none; } }
 </style>
 <script src="../scripts/hero-build.js"></script>
