@@ -2,7 +2,7 @@
 // the phone, confetti when it goes live, then the next business. Scripted; uses the demo's apps.
 // Copy rule: "our agent", never "AI".
 import { APPS, SCREENS, tk } from "./apps.js";
-import { celebrate } from "./celebrate.js";
+import { celebrate, STYLE_NAMES } from "./celebrate.js";
 import { ideaLayout, shuffledIdeas } from "./idea-apps.js";
 import { APPS as EXAMPLES, LIVE as EXAMPLES_LIVE } from "../../examples/data";
 
@@ -62,6 +62,9 @@ function init(box) {
   addEventListener("resize", () => place(false));
   const state = (k) => ({ app: k, off: false, green: false, cod: false, remind: false, late: false, cutoff: false, near: false, flash: null, built: true, published: true, tab: "home", undo: [] });
 
+  // Each launch in the hero gets the next way of celebrating, themed to the business
+  let launches = 0;
+  const launch = (kind) => celebrate(box.querySelector(".qb .dev"), { style: STYLE_NAMES[launches++ % STYLE_NAMES.length], kind });
   let visible = true, run = 0;
   new IntersectionObserver(([e]) => { visible = e.isIntersecting; }, { threshold: 0.2 }).observe(box);
   const wait = (ms) => new Promise((r) => {
@@ -142,7 +145,7 @@ function init(box) {
       box.classList.remove("building"); status.hidden = true;
       url.textContent = url2.textContent = "yourname.amader.cloud"; live.removeAttribute("href");
       await wait(350); if (!ok()) return false;
-      live.classList.add("on"); celebrate(box.querySelector(".qb .dev"));
+      live.classList.add("on"); launch("idea");
       await wait(3200); if (!ok()) return false;
       text.classList.remove("landed");
     }
@@ -172,7 +175,7 @@ function init(box) {
     if (!(await fly(token))) return false;
     await wait(450); if (!ok()) return false;
     box.classList.remove("building"); status.hidden = true;
-    live.classList.add("on"); celebrate(box.querySelector(".qb .dev"));
+    live.classList.add("on"); launch(k);
     await wait(900); if (!ok()) return false;
     notif.innerHTML = `<span class="ni">✓</span><span><b>New ${noun}</b>${first} · ${tk(amt)} · bKash</span>`;
     notif.classList.add("show");

@@ -165,7 +165,7 @@ function initDemo(root) {
   function celebrate() {
     openSign.hidden = false;
     openSign.classList.remove("swing"); void openSign.offsetWidth; openSign.classList.add("swing");
-    burst(devBox);
+    burst(devBox, { kind: st?.app });
   }
 
   function setChips(items) {
