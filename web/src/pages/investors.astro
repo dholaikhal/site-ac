@@ -1,5 +1,6 @@
 ---
 import Base from "../layouts/Base.astro";
+import Photo from "../components/Photo.astro";
 import facts from "../data/facts";
 import SignAvatar from "../components/SignAvatar.astro";
 import forms from "../data/forms.json";
@@ -12,7 +13,8 @@ const figures = [
 ---
 <Base title="Investors · Amader Cloud" description="Amader Cloud is raising a pre-seed round. Store agents for markets that pay by mobile money. Request the deck.">
 
-<section class="page-hero">
+<section class="page-hero has-photo fade-right" style="--hc: #14213d">
+  <Photo id="skyline" class="bg-photo" sizes="100vw" widths={[800, 1200, 1600]} />
   <div class="wrap inv-top">
     <div>
       <div class="signboard sign-navy">
@@ -51,7 +53,8 @@ const figures = [
   </div>
 </section>
 
-<section class="section">
+<section class="band band-red has-photo fade-right">
+  <Photo id="facades" class="bg-photo" sizes="100vw" widths={[800, 1200, 1600]} />
   <div class="wrap">
     <h2>The opportunity</h2>
     <div class="figures">
@@ -60,7 +63,7 @@ const figures = [
   </div>
 </section>
 
-<section class="section alt">
+<section class="band band-green">
   <div class="wrap split">
     <div>
       <h2>What we're building</h2>
@@ -82,7 +85,9 @@ const figures = [
   </div>
 </section>
 
-<section class="section ink-band" id="deck">
+<section class="section ink-band has-photo fade-right" id="deck">
+  <Photo id="rooftops" class="bg-photo" sizes="100vw" widths={[800, 1200, 1600]} />
+
   <div class="wrap split">
     <div>
       <h2>Request the deck</h2>

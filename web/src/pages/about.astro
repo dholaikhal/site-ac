@@ -1,5 +1,6 @@
 ---
 import Base from "../layouts/Base.astro";
+import Photo from "../components/Photo.astro";
 import SignAvatar from "../components/SignAvatar.astro";
 import Social from "../components/Social.astro";
 import BetaButton from "../components/BetaButton.astro";
@@ -13,7 +14,8 @@ const beliefs: [string, string][] = [
 ---
 <Base title="About · Amader Cloud" description="Amader means ours. Amader Cloud builds stores, bookings and fee collection for Bangladeshi businesses with its store agents, from an office in Banani, Dhaka.">
 
-<section class="page-hero">
+<section class="page-hero has-photo fade-right" style="--hc: var(--blue)">
+  <Photo id="rooftops" class="bg-photo" sizes="100vw" widths={[800, 1200, 1600]} />
   <div class="wrap">
     <div class="signboard sign-blue">
       <h1>Amader means ours.</h1>
@@ -23,7 +25,8 @@ const beliefs: [string, string][] = [
   </div>
 </section>
 
-<section class="section tight">
+<section class="band band-red has-photo fade-right">
+  <Photo id="tea-stall" class="bg-photo" sizes="100vw" widths={[800, 1200, 1600]} />
   <div class="wrap">
     <h2 data-reveal>What we hold to</h2>
     <ol class="beliefs">
@@ -44,7 +47,7 @@ const beliefs: [string, string][] = [
   </div>
 </section>
 
-<section class="section">
+<section class="band band-green">
   <div class="wrap office">
     <div class="shopfront" data-reveal aria-hidden="true">
       <div class="sf-sign"><span>Amader Cloud</span><small>{c.address[1]}</small></div>
@@ -60,7 +63,7 @@ const beliefs: [string, string][] = [
   </div>
 </section>
 
-<section class="section">
+<section class="band band-yellow">
   <div class="wrap closing">
     <h2>Want your store on this street?</h2>
     <div class="btn-row"><BetaButton /><a class="btn" href="investors.html">For investors</a></div>

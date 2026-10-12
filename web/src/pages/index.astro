@@ -10,11 +10,12 @@ import Faq from "../components/Faq.astro";
 import facts, { tk, plan } from "../data/facts";
 import "../styles/app-screen.css";
 import Device from "../components/Device.astro";
+import Brand from "../components/Brand.astro";
 const m = facts.market;
 const starter = plan("starter"), business = plan("business");
-const rates: [string, string, string][] = [
-  ["Checkout by bKash, Nagad or card", "Paid into your own merchant account", "Included"],
-  ["Courier booking", "The courier charges its own delivery fee", "Included"],
+const rates: [string, string, string, string[]?][] = [
+  ["Checkout by bKash, Nagad or card", "Paid into your own merchant account", "Included", ["bkash", "nagad", "visa", "mastercard"]],
+  ["Courier booking", "The courier charges its own delivery fee", "Included", ["pathao", "steadfast", "redx"]],
   ["Your web address", "yourname.amader.cloud", "Included"],
   ["Hosting, backups and updates", "We keep it running", "Included"],
   ["Changes by asking", `On Starter; extra changes ${tk(facts.pricing.extraEditTk)} each`, `${starter.edits} a month`],
@@ -33,7 +34,7 @@ const ticker = ["bKash checkout", "Nagad", "Cards", "Courier booking", "Order SM
       </div>
       <p class="lede">Say what you need in one sentence. Our agent builds the app, with bKash, Nagad and card payments already set up.</p>
       <div class="btn-row"><BetaButton /><a class="btn btn-quiet" href="#demo">Try the builder</a></div>
-      <p class="cta-note"><span>Free while you build</span><span>Pay by bKash when you go live</span><span>Cancel any time</span></p>
+      <p class="cta-note"><span>Free while you build</span><span>Pay by <Brand id="bkash" h={16} /> when you go live</span><span>Cancel any time</span></p>
     </div>
 
     <figure class="qb" data-qb aria-label="Our agent building an app from one sentence, for different kinds of business (animation)">
@@ -60,7 +61,8 @@ const ticker = ["bKash checkout", "Nagad", "Cards", "Courier booking", "Order SM
 
 <Ticker items={ticker} />
 
-<section class="band band-green demo-band" id="demo">
+<section class="band band-green demo-band has-photo fade-low" id="demo">
+  <Photo id="street" class="bg-photo" sizes="100vw" widths={[800, 1200, 1600]} />
   <div class="wrap">
     <div class="band-head band-split" data-reveal>
       <h2 class="slogan">Try it.<br>Build one now.</h2>
@@ -73,7 +75,7 @@ const ticker = ["bKash checkout", "Nagad", "Cards", "Courier booking", "Order SM
 <ProblemScene />
 
 <section class="band band-red has-photo">
-  <Photo id="tea-stall" class="band-photo" sizes="100vw" widths={[800, 1200, 1600]} />
+  <Photo id="tea-stall" class="bg-photo" sizes="100vw" widths={[800, 1200, 1600]} />
   <div class="wrap band-split">
     <h2 class="slogan" data-reveal>Your store.<br>Your money.</h2>
     <div data-reveal style="--d:1">
@@ -84,7 +86,7 @@ const ticker = ["bKash checkout", "Nagad", "Cards", "Courier booking", "Order SM
 </section>
 
 <section class="band band-blue has-photo">
-  <Photo id="cloth-shop" class="band-photo" sizes="100vw" widths={[800, 1200, 1600]} />
+  <Photo id="cloth-shop" class="bg-photo" sizes="100vw" widths={[800, 1200, 1600]} />
   <div class="wrap">
     <div class="band-head" data-reveal>
       <h2 class="slogan">Less typing.<br>More orders.</h2>
@@ -94,7 +96,8 @@ const ticker = ["bKash checkout", "Nagad", "Cards", "Courier booking", "Order SM
   </div>
 </section>
 
-<section class="band band-yellow">
+<section class="band band-yellow has-photo fade-right">
+  <Photo id="facades" class="bg-photo" sizes="100vw" widths={[800, 1200, 1600]} />
   <div class="wrap rate-grid">
     <div data-reveal>
       <h2 class="slogan">All in.<br>No setup.</h2>
@@ -102,7 +105,7 @@ const ticker = ["bKash checkout", "Nagad", "Cards", "Courier booking", "Order SM
       <a class="band-link" href="pricing.html">See the plans →</a>
     </div>
     <ul class="rates board" data-reveal style="--d:1">
-      {rates.map(([item, note, val]) => <li><span class="item">{item}<small>{note}</small></span><span class="lead" aria-hidden="true"></span><span class="val">{val}</span></li>)}
+      {rates.map(([item, note, val, logos]) => <li><span class="item">{item}<small>{note}</small>{logos && <span class="rl">{logos.map((id) => <Brand id={id as any} h={18} />)}</span>}</span><span class="lead" aria-hidden="true"></span><span class="val">{val}</span></li>)}
     </ul>
   </div>
 </section>
@@ -117,7 +120,8 @@ const ticker = ["bKash checkout", "Nagad", "Cards", "Courier booking", "Order SM
   </div>
 </section>
 
-<section class="band band-navy">
+<section class="band band-navy has-photo fade-left">
+  <Photo id="sunset" class="bg-photo" sizes="100vw" widths={[800, 1200, 1600]} />
   <div class="wrap closing">
     <div class="signboard sign-yellow" data-reveal>
       <h2>Free to build. {tk(starter.tk)} a month to go&nbsp;live.</h2>
@@ -177,6 +181,7 @@ const ticker = ["bKash checkout", "Nagad", "Cards", "Courier booking", "Order SM
 .rate-grid { display: grid; grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr); gap: clamp(28px, 5vw, 80px); align-items: start; }
 @media (max-width: 860px) { .rate-grid { grid-template-columns: 1fr; } }
 .rate-grid h2 { max-width: 12ch; }
+.rl { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin-top: 6px; }
 .board { background: var(--card); border-radius: 4px; padding: 10px 28px; box-shadow: inset 0 0 0 6px var(--card), inset 0 0 0 8px var(--green); }
 
 .faq-grid { display: grid; grid-template-columns: minmax(0, 0.7fr) minmax(0, 1.3fr); gap: clamp(24px, 4vw, 64px); align-items: start; }

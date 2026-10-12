@@ -1,5 +1,6 @@
 ---
 import Base from "../layouts/Base.astro";
+import Photo from "../components/Photo.astro";
 import BetaButton from "../components/BetaButton.astro";
 import PlanCards from "../components/PlanCards.astro";
 import facts, { tk, usdOf } from "../data/facts";
@@ -18,7 +19,8 @@ const rows: [string, (p: (typeof plans)[number]) => string][] = [
 ---
 <Base title="Pilot pricing · Amader Cloud" description="Pilot plans in taka with USD equivalents: free to build and preview, then Starter, Business and Agency plans when you go live.">
 
-<section class="page-hero">
+<section class="page-hero has-photo fade-right" style="--hc: var(--red)">
+  <Photo id="towers" class="bg-photo" sizes="100vw" widths={[800, 1200, 1600]} />
   <div class="wrap">
     <div class="signboard sign-red">
       <h1>Build for free. Pay when you're live.</h1>
@@ -34,7 +36,7 @@ const rows: [string, (p: (typeof plans)[number]) => string][] = [
   </div>
 </section>
 
-<section class="section alt">
+<section class="band band-yellow">
   <div class="wrap">
     <div class="head"><h2>Compare plans</h2></div>
     <div class="table-wrap">
@@ -60,7 +62,9 @@ const rows: [string, (p: (typeof plans)[number]) => string][] = [
 </section>
 
 
-<section class="section tight ink-band">
+<section class="section tight ink-band has-photo fade-right">
+  <Photo id="street" class="bg-photo" sizes="100vw" widths={[800, 1200, 1600]} />
+
   <div class="wrap split">
     <h2 style="margin:0">Build your first app free in the beta.</h2>
     <div class="btn-row" style="margin:0"><BetaButton /><a class="btn" href="contact.html?topic=agency">Agency enquiry</a></div>

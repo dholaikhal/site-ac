@@ -1,5 +1,6 @@
 ---
 import Base from "../layouts/Base.astro";
+import Photo from "../components/Photo.astro";
 import Social from "../components/Social.astro";
 import forms from "../data/forms.json";
 import { company as c, live } from "../data/facts";
@@ -13,7 +14,8 @@ const topics = [
 ---
 <Base title="Contact · Amader Cloud" description="Join the beta, make an agency enquiry, report an app, or contact the founders. Office in Banani, Dhaka.">
 
-<section class="page-hero">
+<section class="page-hero has-photo fade-right" style="--hc: var(--green)">
+  <Photo id="sunset" class="bg-photo" sizes="100vw" widths={[800, 1200, 1600]} />
   <div class="wrap">
     <div class="signboard">
       <h1>Build with us.</h1>

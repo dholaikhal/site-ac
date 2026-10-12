@@ -1,5 +1,5 @@
 {
-  "_about": "Photographs used on the site, under the Unsplash License or the Pexels License (free; none are Unsplash+ or premium). Credits render on the Sources page and in each image's title attribute, never as captions. office is copied from main.",
+  "_about": "Photographs used on the site, under the Unsplash License or the Pexels License (free; none are Unsplash+ or premium). Credits render on the Sources page and in each image's title attribute, never as captions. office, sunset, street, skyline, rooftops, facades and towers are copied from main.",
   "photos": {
     "delivery-van": {
       "file": "delivery-van.jpg",
@@ -139,6 +139,60 @@
       "licence": "unsplash",
       "site": "Unsplash",
       "usedOn": "Home"
+    },
+    "sunset": {
+      "file": "sunset.jpg",
+      "alt": "Dhaka rooftops at sunset, with houses, water tanks and a distant telecom tower.",
+      "photographer": "Hasnan Monir",
+      "source": "https://unsplash.com/photos/7JRlvjYK0m0",
+      "licence": "unsplash",
+      "site": "Unsplash",
+      "usedOn": "page backgrounds"
+    },
+    "street": {
+      "file": "street.jpg",
+      "alt": "A Dhaka street on a rainy night: a lit shoe shop, a shuttered shop and a pharmacy sign.",
+      "photographer": "MD Shaha Riaz Rimon",
+      "source": "https://www.pexels.com/photo/rainy-night-street-scene-in-dhaka-bangladesh-36922835/",
+      "licence": "pexels",
+      "site": "Pexels",
+      "usedOn": "page backgrounds"
+    },
+    "skyline": {
+      "file": "skyline.jpg",
+      "alt": "Dhaka's skyline of apartment and office towers under monsoon clouds.",
+      "photographer": "Al Amin Mir",
+      "source": "https://unsplash.com/photos/jkW9ES-w79Q",
+      "licence": "unsplash",
+      "site": "Unsplash",
+      "usedOn": "page backgrounds"
+    },
+    "rooftops": {
+      "file": "rooftops.jpg",
+      "alt": "Apartment rooftops in Bibir Bagicha, Dhaka, at dusk, with a few windows lit.",
+      "photographer": "Ahmed Hasan",
+      "source": "https://unsplash.com/photos/ioA9B-RAFHE",
+      "licence": "unsplash",
+      "site": "Unsplash",
+      "usedOn": "page backgrounds"
+    },
+    "facades": {
+      "file": "facades.jpg",
+      "alt": "Apartment buildings in Uttara, Dhaka, at dusk: balconies, air conditioners and solar panels.",
+      "photographer": "Ahmed Reyasat",
+      "source": "https://unsplash.com/photos/3E-IHaunEdY",
+      "licence": "unsplash",
+      "site": "Unsplash",
+      "usedOn": "page backgrounds"
+    },
+    "towers": {
+      "file": "towers.jpg",
+      "alt": "Rajuk Uttara apartment towers in Dhaka, with hundreds of flat windows.",
+      "photographer": "Robiul Islam Pailot",
+      "source": "https://www.pexels.com/photo/apartment-buildings-in-the-residential-district-of-dhaka-built-as-part-of-the-rajuk-uttara-apartment-project-18340726/",
+      "licence": "pexels",
+      "site": "Pexels",
+      "usedOn": "page backgrounds"
     }
   },
   "licences": {

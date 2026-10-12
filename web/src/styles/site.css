@@ -307,9 +307,6 @@ body { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org
 .treat::before { content: ""; position: absolute; inset: 0; z-index: 1; pointer-events: none; opacity: .5; mix-blend-mode: overlay;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.55'/%3E%3C/svg%3E"); }
 
-/* Paint band over a street photo: the photo in greyscale, multiplied into the band's paint (a duotone) */
-.band.has-photo { position: relative; isolation: isolate; overflow: hidden; }
-.band.has-photo > .band-photo { position: absolute; inset: 0; z-index: -1; width: 100%; height: 100%; object-fit: cover; filter: grayscale(1) contrast(1.15) brightness(1.05); mix-blend-mode: multiply; opacity: .55; }
 
 /* Brand logos and wordmarks (data/brands.json) */
 .brand-logo { display: inline-block; width: auto; vertical-align: middle; }
@@ -318,3 +315,22 @@ body { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org
 @media (max-width: 860px) { .parts-band .parts-head { grid-template-columns: 1fr; } }
 .parts-band .ticks { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px 28px; margin: 18px 0 0; }
 @media (max-width: 860px) { .parts-band .ticks { grid-template-columns: 1fr; } }
+
+/* ---------- Duotone photos ----------
+   A street photo in greyscale, multiplied into the section's colour. A mask fades it away where the
+   section's text sits (.fade-right shows it on the right, .fade-left on the left, .fade-low at the bottom). */
+.has-photo { position: relative; isolation: isolate; overflow: hidden; }
+.has-photo > .bg-photo { position: absolute; inset: 0; z-index: -1; width: 100%; height: 100%; object-fit: cover; filter: grayscale(1) contrast(1.15) brightness(1.05); mix-blend-mode: multiply; opacity: .55; }
+.band-navy.has-photo > .bg-photo, .ink-band.has-photo > .bg-photo { mix-blend-mode: screen; opacity: .22; filter: grayscale(1) contrast(1.2) brightness(.8); }
+.fade-right > .bg-photo { -webkit-mask-image: linear-gradient(90deg, transparent 28%, #000 72%); mask-image: linear-gradient(90deg, transparent 28%, #000 72%); }
+.fade-left > .bg-photo { -webkit-mask-image: linear-gradient(90deg, #000 30%, transparent 68%); mask-image: linear-gradient(90deg, #000 30%, transparent 68%); }
+.fade-low > .bg-photo { -webkit-mask-image: linear-gradient(180deg, transparent 22%, #000 75%); mask-image: linear-gradient(180deg, transparent 22%, #000 75%); }
+@media (max-width: 760px) { .fade-right > .bg-photo, .fade-left > .bg-photo { -webkit-mask-image: linear-gradient(180deg, transparent 35%, #000 90%); mask-image: linear-gradient(180deg, transparent 35%, #000 90%); } }
+/* Inner-page heads: a tinted wall with the page's photo on the right, behind the signboard's neighbour */
+.page-hero.has-photo { background-color: color-mix(in srgb, var(--hc, var(--green)) 15%, var(--wash)); }
+.page-hero.has-photo > .bg-photo { opacity: .5; }
+/* Content inside paint bands keeps its own ink */
+.band .card, .band .table-wrap, .band details, .band .beliefs li, .band .team li { color: var(--ink); }
+.band.band-yellow h2, .band.band-yellow h3 { color: #14213d; }
+.band .head .lede, .band .head p { color: inherit; }
+.band-yellow .small, .band-yellow .small a { color: #14213d; }
