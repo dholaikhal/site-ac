@@ -1,17 +1,20 @@
 ---
-// Short answers to what owners ask first. Native <details>, so it works without script.
+// Short answers to what owners ask, on cards. Native <details>, so it works without script. Pass `items` for
+// another page's questions (pricing does); the home page's are the default.
 import { tk, plan } from "../data/facts";
+interface Props { items?: [string, string][] }
 const starter = plan("starter");
-const qa: [string, string][] = [
+const home: [string, string][] = [
   ["Do I need to know anything about websites?", "No. You describe your business in a sentence, in your own words, and answer a few questions. You can change anything later the same way."],
   ["Where does the money from my customers go?", "Straight into your own bKash, Nagad or card merchant account, through a licensed payment partner. We never hold your sales."],
   ["Can I keep selling on my Facebook page?", "Yes. Share your store's link in posts and replies; your page keeps bringing people in and the store takes the order and the payment."],
   ["What if our agent gets something wrong?", "You see every change in a preview before it goes live, every change is tested, and any change can be undone in one click."],
   ["What does it cost?", `Building and trying it is free. Going live starts at ${tk(starter.tk)} a month on the pilot pricing, paid by bKash.`],
 ];
+const { items = home } = Astro.props;
 ---
 <div class="faq">
-  {qa.map(([q, a], i) => (
+  {items.map(([q, a], i) => (
     <details open={i === 0}>
       <summary>{q}</summary>
       <p>{a}</p>
