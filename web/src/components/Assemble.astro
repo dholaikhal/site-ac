@@ -48,15 +48,25 @@ const more: [string, string][] = [
   ["Service areas", "map"], ["Quotes", "receipt"], ["Multiple branches", "home"], ["Supplier orders", "truck"], ["Donations", "heart"],
 ];
 const fieldTiles = (() => {
-  const out: { t: string; i: string; x: number; y: number; d: number }[] = [];
+  const out: { t?: string; i?: string; x: number; y: number; d: number; w?: number }[] = [];
   let n = 0, row = 0;
-  for (let y = 3; y <= 97 && n < more.length; y += 6.2, row++) {
-    for (let x = 3 + (row % 2 ? 4.7 : 0); x <= 97 && n < more.length; x += 9.4) {
+  for (let y = 3; y <= 97; y += 6.2, row++) {
+    for (let x = 3 + (row % 2 ? 4.7 : 0); x <= 97; x += 9.4) {
       if (x > 36 && x < 64 && y > 6 && y < 94) continue; // the phone
       if (tiles.some((t) => Math.abs(t.x - x) < 11.5 && Math.abs(t.y - y) < 5.5)) continue;
-      const [t, i] = more[n];
-      out.push({ t, i, x, y, d: (n * 7) % 23 });
-      n++;
+      const k = out.length;
+      if (n < more.length) { const [t, i] = more[n++]; out.push({ t, i, x, y, d: (k * 7) % 23 }); }
+    }
+  }
+  // Then a finer pass of blank template blocks in whatever space is still empty: more where these came from.
+  let fr = 0;
+  for (let y = 2.5; y <= 97.5; y += 4.4, fr++) {
+    for (let x = 2.5 + (fr % 2 ? 3.2 : 0); x <= 97.5; x += 6.4) {
+      if (x > 35 && x < 65 && y > 5 && y < 95) continue;
+      if (tiles.some((t) => Math.abs(t.x - x) < 9.5 && Math.abs(t.y - y) < 4.6)) continue;
+      if (out.some((o) => Math.abs(o.x - x) < (o.t ? 8.5 : 6) && Math.abs(o.y - y) < 3.8)) continue;
+      const k = out.length;
+      out.push({ x, y, d: (k * 7) % 23, w: 1 + (k % 3) });
     }
   }
   return out;
@@ -66,7 +76,9 @@ const groups = { store: "Store", pay: "Payments", ship: "Delivery", msg: "Messag
 <figure class="asm" data-asm aria-label="Tested blocks around a phone; five of them assemble a checkout (animation)">
   <div class="stage">
     <ul class="field" aria-hidden="true">
-      {fieldTiles.map((f) => <li style={`--x:${f.x}%;--y:${f.y}%;--t:${f.d}`}><span set:html={icon(f.i)} />{f.t}</li>)}
+      {fieldTiles.map((f) => f.t
+        ? <li style={`--x:${f.x}%;--y:${f.y}%;--t:${f.d}`}><span set:html={icon(f.i!)} />{f.t}</li>
+        : <li class="ghost" style={`--x:${f.x}%;--y:${f.y}%;--t:${f.d};--w:${f.w}`}><i></i><b></b></li>)}
     </ul>
     <svg class="lines" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
       {tiles.map((t) => <line x1={t.x} y1={t.y} x2="50" y2="50" class:list={[t.g, { part: t.part !== undefined }]} />)}
@@ -98,6 +110,10 @@ const groups = { store: "Store", pay: "Payments", ship: "Delivery", msg: "Messag
 .field li { position: absolute; left: var(--x); top: var(--y); translate: -50% -50%; display: inline-flex; align-items: center; gap: 6px; white-space: nowrap; padding: 5px 11px 5px 8px; border-radius: 999px; border: 1px solid rgb(255 255 255 / .14); color: rgb(255 255 255 / .42); font-size: 0.74rem; font-weight: 700; background: rgb(255 255 255 / .03); animation: twinkle 12s ease-in-out infinite; animation-delay: calc(var(--t) * -0.52s); }
 .field li :global(.ic) { width: 13px; height: 13px; fill: none; stroke: currentColor; stroke-width: 1.9; stroke-linecap: round; stroke-linejoin: round; }
 @keyframes twinkle { 0%, 82%, 100% { color: rgb(255 255 255 / .42); border-color: rgb(255 255 255 / .14); } 88%, 94% { color: var(--yellow); border-color: rgb(255 204 0 / .55); background: rgb(255 204 0 / .08); } }
+/* Blank template blocks: an icon square and a text bar, outlines only */
+.field li.ghost { width: calc(46px + var(--w) * 14px); height: 24px; padding: 0 8px; gap: 7px; border-style: dashed; border-color: rgb(255 255 255 / .12); background: transparent; animation: none; }
+.field li.ghost i { width: 14px; height: 14px; border-radius: 4px; background: rgb(255 255 255 / .1); flex: none; }
+.field li.ghost b { flex: 1; height: 6px; border-radius: 3px; background: rgb(255 255 255 / .1); }
 @media (max-width: 980px) { .field { display: none; } }
 @media (prefers-reduced-motion: reduce) { .field li { animation: none; } }
 .stage { position: relative; height: 940px; width: min(1440px, calc(100vw - 24px)); margin-left: 50%; translate: -50% 0; }
