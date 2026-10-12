@@ -16,7 +16,7 @@ const initials = (n: string) => n.replace(/^Dr\.\s*/, "").split(/\s+/).map((w) =
       <h2>From a tea stall to three pharmacies.</h2>
       <p class="lede">Owners on what changed when the inbox stopped being the shop.</p>
     </div>
-    <ul class="story-grid strip">
+    <ul class="story-grid strip pinned">
       {stories.map((s, i) => (
         <li class="story" data-reveal style={`--d:${i % 3};--t:${tone(s)}`}>
           <span class="scale">{s.scale}</span>
