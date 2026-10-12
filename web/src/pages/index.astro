@@ -12,7 +12,8 @@ import "../styles/app-screen.css";
 import Device from "../components/Device.astro";
 import Brand from "../components/Brand.astro";
 import Showcase from "../components/Showcase.astro";
-const KINDS = ["Facebook store", "home kitchen", "salon", "clinic", "pharmacy", "event", "AC service", "coaching centre"];
+// The last is the catch-all: whatever the idea is.
+const KINDS = ["Facebook store", "home kitchen", "salon", "clinic", "pharmacy", "event", "AC service", "coaching centre", "idea"];
 const m = facts.market;
 const starter = plan("starter"), business = plan("business");
 const rates: [string, string, string, string[]?][] = [
@@ -37,7 +38,7 @@ const ticker = ["bKash checkout", "Nagad", "Cards", "Courier booking", "Order SM
                is drawn three times so it can turn either way without an end; only the middle copy is read out. -->
           <span class="hl hw"><span class="hw-track" data-qb-reel role="group" aria-label="Kind of business">
             {[0, 1, 2].flatMap((copy) => KINDS.map((word, i) =>
-              <button type="button" data-qb-pick={i} data-word={word} aria-pressed={copy === 1 && i === 0 ? "true" : "false"} tabindex={copy === 1 ? 0 : -1} aria-hidden={copy === 1 ? undefined : "true"} class:list={{ on: copy === 1 && i === 0 }}>{word}</button>))}
+              <button type="button" data-qb-pick={i} data-word={word} aria-pressed={copy === 1 && i === 0 ? "true" : "false"} tabindex={copy === 1 ? 0 : -1} aria-hidden={copy === 1 ? undefined : "true"} class:list={{ on: copy === 1 && i === 0, idea: word === "idea" }}>{word === "idea" ? <><span class="spk" aria-hidden="true">✦</span> idea <span class="spk" aria-hidden="true">✦</span></> : word}</button>))}
           </span></span>
           <span class="hl">from one sentence.</span></h1>
         <span class="address">Payments by <Brand id="bkash" h={18} />, Nagad and card, built in</span>
@@ -159,6 +160,22 @@ const ticker = ["bKash checkout", "Nagad", "Cards", "Courier booking", "Order SM
 .hw-track button { flex: none; font: inherit; letter-spacing: inherit; line-height: inherit; padding: 0; border: 0; background: none; color: inherit; text-shadow: inherit; opacity: .32; cursor: pointer; transition: color .35s, opacity .35s; }
 .hw-track button:hover, .hw-track button:focus-visible { opacity: .7; }
 .hw-track button.on { color: #fff; opacity: 1; }
+.hw-track .spk { display: inline-block; font-size: 0.55em; vertical-align: 0.5em; color: var(--yellow); animation: twinkle-spk 1.6s ease-in-out infinite; }
+.hw-track .spk:last-child { animation-delay: -.8s; }
+@keyframes twinkle-spk { 50% { opacity: .35; scale: .7; rotate: 25deg; } }
+/* The catch-all's phone: a placeholder app whose colours shuffle while it's "built" */
+.qb :global(.skel) { display: grid; gap: 10px; padding: 12px; }
+.qb :global(.skel i), .qb :global(.skel > div) { display: block; border-radius: 8px; background: #e9e4dc; transition: background-color .1s; }
+.qb :global(.sk-bar) { display: flex !important; align-items: center; gap: 8px; height: 34px; background: transparent !important; }
+.qb :global(.sk-bar i:first-child) { width: 30px; height: 30px; border-radius: 8px; }
+.qb :global(.sk-bar i:nth-child(2)) { width: 46%; height: 12px; }
+.qb :global(.sk-bar i:last-child) { width: 22px; height: 22px; margin-left: auto; border-radius: 50%; }
+.qb :global(.sk-hero) { height: 120px; border-radius: 14px !important; }
+.qb :global(.sk-row) { display: flex !important; gap: 8px; background: transparent !important; }
+.qb :global(.sk-row i) { height: 24px; flex: 1; border-radius: 999px; }
+.qb :global(.sk-grid) { display: grid !important; grid-template-columns: 1fr 1fr; gap: 10px; background: transparent !important; }
+.qb :global(.sk-grid i) { height: 96px; border-radius: 12px; }
+.qb :global(.sk-btn) { height: 40px; border-radius: 10px !important; }
 .hero-copy .btn-row { margin-top: auto; padding-top: 6px; }
 .cta-line { display: flex; flex-wrap: wrap; column-gap: 0.55em; margin: -6px 0 0; font-size: 0.92rem; color: var(--ink-2); }
 .cta-line span { white-space: nowrap; }

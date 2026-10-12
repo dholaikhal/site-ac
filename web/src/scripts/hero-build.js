@@ -28,6 +28,7 @@ function init(box) {
     ["event", "Tickets for our Friday music night, paid by bKash", "General × 2", 1000, "ticket"],
     ["service", "Bookings for my AC servicing team, visit fee by bKash", "AC servicing", 500, "visit"],
     ["fees", "Monthly fees for my coaching centre, receipt by SMS", "BP-2071 · October", 2500, "payment"],
+    ["idea", "Your idea, in one sentence", "", 0, ""],
   ];
   // The kinds of business on the board: a track drawn three times over. The chosen one is slid to the middle of
   // the board and lit; after each glide the track quietly resets to the middle copy, so it never runs out.
@@ -64,7 +65,12 @@ function init(box) {
     tick();
   });
 
+  // The catch-all has no app of its own: a placeholder app in shuffling colours, at yourname.amader.cloud.
+  const SWATCH = ["#e2261b", "#ffcc00", "#0b5d3b", "#1739a8", "#9a4a24", "#6a3d8f", "#0f7a6c", "#b03a2e", "#a21caf", "#0369a1", "#f6ece2", "#e8f4f1", "#f3edf8"];
+  const skeleton = () => `<div class="skel"><div class="sk-bar"><i></i><i></i><i></i></div><div class="sk-hero"></div><div class="sk-row"><i></i><i></i><i></i></div><div class="sk-grid"><i></i><i></i><i></i><i></i></div><div class="sk-btn"></div></div>`;
+  const shuffle = () => screen.querySelectorAll(".skel i, .sk-hero, .sk-btn").forEach((el) => { el.style.backgroundColor = SWATCH[Math.floor(Math.random() * SWATCH.length)]; });
   function paint(k) {
+    if (k === "idea") { screen.style.removeProperty("--brand"); screen.innerHTML = skeleton(); url.textContent = url2.textContent = "yourname.amader.cloud"; return; }
     const a = APPS[k];
     screen.style.setProperty("--brand", a.color);
     screen.innerHTML = SCREENS[k].home(state(k));
@@ -74,7 +80,7 @@ function init(box) {
 
   if (still) {
     paint("shop"); text.textContent = SHOW[0][1]; status.hidden = true; live.classList.add("on");
-    chips.forEach((c) => c.addEventListener("click", () => { const i = +c.dataset.qbPick; pick(i); paint(SHOW[i][0]); text.textContent = SHOW[i][1]; }));
+    chips.forEach((c) => c.addEventListener("click", () => { const i = +c.dataset.qbPick; pick(i); paint(SHOW[i][0]); if (SHOW[i][0] === "idea") shuffle(); text.textContent = SHOW[i][1]; }));
     return;
   }
 
@@ -97,9 +103,40 @@ function init(box) {
 
 
   // One business: type the request, build the store, go live, first order. False if a chip cut it short.
+  // The catch-all: a few quick ideas typed and wiped, then "your idea"; the placeholder app shuffles its colours
+  // while it's built, settles, and goes live.
+  const IDEAS = ["A booking app for my rooftop futsal turf", "Pre-orders for our mango orchard in Rajshahi"];
+  async function playIdea(token) {
+    const ok = () => token === run;
+    for (const idea of IDEAS) {
+      for (let n = 1; n <= idea.length; n += 3) { text.textContent = idea.slice(0, n); await wait(16); if (!ok()) return false; }
+      await wait(650); if (!ok()) return false;
+      for (let n = idea.length; n >= 0; n -= 6) { text.textContent = idea.slice(0, n); await wait(12); if (!ok()) return false; }
+    }
+    const last = SHOW[SHOW.length - 1][1];
+    for (let n = 1; n <= last.length; n += 2) { text.textContent = last.slice(0, n); await wait(26); if (!ok()) return false; }
+    text.classList.remove("caret");
+    await wait(300); if (!ok()) return false;
+    status.hidden = false; box.classList.add("building");
+    paint("idea");
+    for (let n = 0; n < 22; n++) { shuffle(); await wait(110); if (!ok()) return false; }
+    box.classList.remove("building"); status.hidden = true;
+    live.classList.add("on"); celebrate(box.querySelector(".qb .dev"));
+    await wait(3600);
+    return ok();
+  }
+
   async function play(i, token) {
     const [k, prompt, first, amt, noun] = SHOW[i];
     const ok = () => token === run;
+    if (k === "idea") {
+      pick(i);
+      live.classList.remove("on"); notif.classList.remove("show");
+      screen.innerHTML = ""; url.textContent = "…"; text.textContent = ""; text.classList.add("caret");
+      status.hidden = true; box.classList.remove("building");
+      await wait(450); if (!ok()) return false;
+      return playIdea(token);
+    }
     pick(i);
     live.classList.remove("on"); notif.classList.remove("show");
     screen.innerHTML = ""; url.textContent = "…"; text.textContent = ""; text.classList.add("caret");
