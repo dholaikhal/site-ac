@@ -13,7 +13,7 @@ import Device from "../components/Device.astro";
 import Brand from "../components/Brand.astro";
 import Showcase from "../components/Showcase.astro";
 // The last is the catch-all: whatever the idea is.
-const KINDS = ["Facebook store", "home kitchen", "salon", "clinic", "pharmacy", "event", "AC service", "coaching centre", "idea"];
+const KINDS = ["Facebook page", "home kitchen", "salon", "clinic", "pharmacy", "event", "AC service", "coaching centre", "idea"];
 const m = facts.market;
 const starter = plan("starter"), business = plan("business");
 const rates: [string, string, string, string[]?][] = [
@@ -33,7 +33,7 @@ const ticker = ["bKash checkout", "Nagad", "Cards", "Courier booking", "Order SM
   <div class="wrap hero-grid">
     <div class="hero-copy">
       <div class="signboard lit">
-        <h1><span class="hl">An app for your</span>
+        <h1><span class="hl">A store for your</span>
           <!-- The kinds of business slide sideways along the board; the chosen one sits in the middle, lit. The list
                is drawn three times so it can turn either way without an end; only the middle copy is read out. -->
           <span class="hl hw"><span class="hw-track" data-qb-reel role="group" aria-label="Kind of business">
@@ -152,9 +152,9 @@ const ticker = ["bKash checkout", "Nagad", "Cards", "Courier booking", "Order SM
 .hero-copy .signboard h1 { font-size: var(--h1); line-height: 1.02; }
 .hl { display: block; }
 /* The middle line is a track the kinds of business slide along, reaching the board's pinstripe: the chosen
-   one lit and in line with the other lines, the next ones muted to its right, the last one a sliver to its left */
-.hw { --hp: calc(clamp(24px, 4vw, 52px) - 12px); position: relative; overflow: hidden; margin-inline: calc(-1 * var(--hp)); padding-block: 0.04em; -webkit-mask-image: linear-gradient(90deg, transparent, #000 var(--hp), #000 78%, transparent); mask-image: linear-gradient(90deg, transparent, #000 var(--hp), #000 78%, transparent); }
-.hw-track { display: flex; gap: 0.45em; width: max-content; will-change: transform; }
+   one lit and in line with the other lines, the next ones muted to its right, a sliver of the last one to its left */
+.hw { --hp: calc(clamp(24px, 4vw, 52px) - 12px); position: relative; overflow: hidden; margin-inline: calc(-1 * var(--hp)); padding-block: 0.04em; -webkit-mask-image: linear-gradient(90deg, rgb(0 0 0 / .2), #000 var(--hp), #000 78%, transparent); mask-image: linear-gradient(90deg, rgb(0 0 0 / .2), #000 var(--hp), #000 78%, transparent); }
+.hw-track { display: flex; gap: 0.32em; width: max-content; will-change: transform; }
 .hw-track.glide { transition: transform .62s cubic-bezier(.3,1.15,.4,1); }
 .hw-track button { flex: none; font: inherit; letter-spacing: inherit; line-height: inherit; padding: 0; border: 0; background: none; color: inherit; text-shadow: inherit; opacity: .32; cursor: pointer; transition: color .35s, opacity .35s; }
 .hw-track button:hover, .hw-track button:focus-visible { opacity: .7; }
