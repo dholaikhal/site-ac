@@ -309,7 +309,7 @@ body { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org
 
 /* Brand logos and wordmarks (data/brands.json) */
 .brand-logo { display: inline-block; width: auto; vertical-align: middle; }
-.brand-word { display: inline-block; vertical-align: middle; font-family: var(--sans); font-weight: 800; letter-spacing: -0.01em; color: #14213d; }
+.brand-word { display: inline-block; vertical-align: middle; font-family: var(--sans); font-weight: 800; letter-spacing: -0.01em; color: inherit; }
 
 /* ---------- Duotone photos ----------
    A street photo in greyscale, multiplied into the section's colour. A mask fades it away where the
@@ -347,3 +347,29 @@ body { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org
 .has-photo.tint > .bg-photo { opacity: .16; }
 :root[data-theme="dark"] .has-photo.tint > .bg-photo { mix-blend-mode: luminosity; opacity: .1; }
 @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .has-photo.tint > .bg-photo { mix-blend-mode: luminosity; opacity: .1; } }
+
+/* ---------- Readability inside paint bands and photo heads ----------
+   A band's text is white (navy on yellow). Anything on a white surface inside a band keeps the page's ink;
+   small text, figures, buttons and tags get colours that read on the paint, with a backing where needed. */
+.band :is(.card, .round, .table-wrap, details, .sheet, .board, .plan, .pcard, .beliefs li, .vs-rows li) { color: var(--ink); }
+.band .small, .band .small a, .band .muted, .band .addr, .band address { color: rgb(255 255 255 / .88); }
+.band.band-yellow :is(.small, .small a, .muted) { color: #14213d; }
+.band .stat .n, .band .figures .n { color: #fff; }
+.band .stat .l { color: rgb(255 255 255 / .88); }
+.band.band-yellow .stat .n { color: var(--red); }
+.band.band-yellow .stat .l { color: #14213d; }
+.band .btn:not(.btn-go):not(.btn-quiet) { color: #fff; border-color: rgb(255 255 255 / .9); background: rgb(0 0 0 / .2); }
+.band .btn:not(.btn-go):not(.btn-quiet):hover { background: rgb(0 0 0 / .32); }
+.band.band-yellow .btn:not(.btn-go):not(.btn-quiet) { color: #14213d; border-color: #14213d; background: rgb(255 255 255 / .6); }
+.band .btn-quiet { color: inherit; }
+.band-red .btn-go { box-shadow: inset 0 0 0 3px var(--red), inset 0 0 0 4.5px #fff, 0 0 0 2px #fff; }
+.band .tag, .plan-top .tag { display: inline-block; background: #fff; color: var(--red); padding: 3px 9px; border-radius: 3px; }
+.band.has-photo:not(.tint) :is(.lede, .band-link) { text-shadow: 0 1px 14px rgb(0 0 0 / .35); }
+.band .social a { color: inherit; }
+/* Investors' milestones on the green band: white lines and dots */
+.band .milestones { border-left-color: rgb(255 255 255 / .6); }
+.band .milestones li::before { background: #fff; }
+.band .milestones li:first-child::before { background: var(--yellow); }
+.band .milestones .when { color: var(--yellow); }
+:root[data-theme="dark"] .team .role { color: var(--ok); }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .team .role { color: var(--ok); } }

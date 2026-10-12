@@ -130,6 +130,8 @@ const figures = [
 .figures .stat { border-left: 3px solid var(--yellow); padding-left: 20px; }
 .figures .n { color: var(--green); }
 :root[data-theme="dark"] .figures .n { color: var(--yellow); }
+.band .figures .n { color: #fff; }
+.band .figures .l { color: rgb(255 255 255 / .88); }
 
 .milestones { list-style: none; margin: 0; padding: 0; border-left: 3px solid var(--green); }
 .milestones li { display: grid; gap: 2px; padding: 0 0 22px 22px; position: relative; }
@@ -143,6 +145,8 @@ const figures = [
 .team :global(.sign-avatar) { width: 96px; height: 96px; margin-bottom: 12px; }
 .team strong { font-size: 1.1rem; }
 .team .role { color: var(--green); font-weight: 600; }
+:global(:root[data-theme="dark"]) .team .role { color: var(--ok); }
+@media (prefers-color-scheme: dark) { :global(:root:not([data-theme="light"])) .team .role { color: var(--ok); } }
 
 .deck-form { max-width: 460px; }
 .deck-form .field input { border-color: rgb(255 255 255 / .3); }
