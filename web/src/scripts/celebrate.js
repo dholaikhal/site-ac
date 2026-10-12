@@ -1,5 +1,5 @@
-// The moment an app goes live, shared by the hero and the demo. Five ways to mark it, so launches don't all look
-// alike: confetti, fireworks, marigold petals, pieces themed to the business, and rings. The phone itself always
+// The moment an app goes live, shared by the hero and the demo. Four ways to mark it, so launches don't all look
+// alike: confetti, fireworks, pieces themed to the business, and rings. The phone itself always
 // gives a small spring. Sign-paint colours. Nothing at all with reduced motion.
 import confetti from "canvas-confetti";
 
@@ -7,10 +7,9 @@ const PAINT = ["#e2261b", "#ffcc00", "#0b5d3b", "#1739a8", "#ffffff", "#ff8a00"]
 const reduced = () => matchMedia("(prefers-reduced-motion: reduce)").matches;
 const base = { colors: PAINT, zIndex: 40, disableForReducedMotion: true };
 
-// A marigold petal, and the pieces for each kind of business (emoji as shapes)
-let petal, themed;
+// The pieces for each kind of business (emoji as shapes)
+let themed;
 const shapes = () => {
-  petal ??= confetti.shapeFromPath({ path: "M6 0C9 3 10 7 6 12C2 7 3 3 6 0Z" });
   themed ??= Object.fromEntries(Object.entries({
     shop: ["🛍️", "🧺"], kitchen: ["🍛", "🍰"], book: ["💇", "💅"], doctor: ["🩺", "💙"], pharmacy: ["💊", "🩹"],
     event: ["🎟️", "🎶"], service: ["❄️", "🔧"], fees: ["📚", "✏️"], idea: ["✨", "💡"],
@@ -32,11 +31,6 @@ const STYLES = {
     const shells = [[0.15, 0.08, ["#ffcc00", "#e2261b"]], [0.85, 0.02, ["#ffffff", "#1739a8"]], [0.5, -0.06, ["#ff8a00", "#ffcc00"]]];
     shells.forEach(([x, y, colors], n) => setTimeout(() =>
       confetti({ ...base, colors, origin: at(x, y), particleCount: 48, spread: 360, startVelocity: 24, gravity: 0.55, decay: 0.92, ticks: 170, scalar: 0.8, shapes: ["circle"] }), n * 260));
-  },
-  // Marigold petals drifting down over the phone, as on a garland at an opening
-  petals(at) {
-    for (let n = 0; n < 4; n++) setTimeout(() =>
-      confetti({ ...base, colors: ["#ff8a00", "#ffb000", "#ffcc00", "#e2261b"], shapes: [petal], origin: at(0.15 + n * 0.23, -0.04), angle: 270, spread: 40, particleCount: 14, startVelocity: 8, gravity: 0.4, drift: n % 2 ? 0.6 : -0.6, decay: 0.95, ticks: 420, scalar: 1.4, flat: false }), n * 140);
   },
   // Pieces of the business itself (bags, biryani, tickets…) and a few coins
   themed(at, kind) {
