@@ -40,7 +40,7 @@ const ticker = ["bKash checkout", "Nagad", "Cards", "Courier booking", "Order SM
         <span class="address">Payments by <Brand id="bkash" h={18} />, Nagad and card, built in</span>
       </div>
       <div class="btn-row"><BetaButton sticker="" /><a class="btn btn-quiet" href="#demo">Try the builder</a></div>
-      <p class="cta-line"><span>Free while you build</span> · <span>Pay when you go live</span> · <span>Cancel any time</span></p>
+      <p class="cta-line"><span>Free while you build</span><span>Pay when you go live</span><span>Cancel any time</span></p>
     </div>
 
     <figure class="qb" aria-label="Our agent building an app from one sentence, for different kinds of business (animation)">
@@ -144,13 +144,16 @@ const ticker = ["bKash checkout", "Nagad", "Cards", "Courier booking", "Order SM
 <style>
 .hero { position: relative; padding-block: clamp(28px, 4vw, 56px) clamp(48px, 7vw, 96px); overflow: hidden; }
 .hero-grid { position: relative; display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr); gap: clamp(28px, 4vw, 64px); align-items: start; }
-@media (max-width: 1140px) { .hero-grid { grid-template-columns: 1fr; } .qb { justify-items: center; } .qb-bubble { margin-top: 70px; } }
+
 .hero { --h1: clamp(2.3rem, 1.4rem + 3.6vw, 4.4rem); --pad: clamp(26px, 3.4vw, 44px); }
 .hero-copy .signboard h1 { font-size: var(--h1); line-height: 1; }
 .hl { display: block; }
 .hero-copy .btn-row { margin-top: 30px; }
-.cta-line { margin: 14px 0 0; font-size: 0.92rem; color: var(--ink-2); }
+.cta-line { display: flex; flex-wrap: wrap; column-gap: 0.55em; margin: 14px 0 0; font-size: 0.92rem; color: var(--ink-2); }
 .cta-line span { white-space: nowrap; }
+.cta-line span + span::before { content: "·"; margin-right: 0.55em; }
+/* Narrow phones: the phrases wrap as a centred group, without separators left hanging */
+@media (max-width: 480px) { .cta-line { column-gap: 1em; } .cta-line span + span::before { content: none; } }
 /* The board's tube light comes on once, at dusk */
 .lit { animation: tube 1.6s steps(1, end) .3s both; }
 @keyframes tube { 0% { filter: brightness(.55); } 12% { filter: brightness(1.05); } 18% { filter: brightness(.6); } 26%, 100% { filter: none; } }
@@ -208,10 +211,22 @@ const ticker = ["bKash checkout", "Nagad", "Cards", "Courier booking", "Order SM
 @media (max-width: 860px) { .closing { grid-template-columns: 1fr; } }
 .closing .signboard h2 { font-size: clamp(2.4rem, 1.6rem + 2.6vw, 3.8rem); }
 
-/* Phones: headline and button first; the bubble sits on the phone's shoulder */
-@media (max-width: 560px) {
-  .qb-stage { grid-template-columns: 1fr; justify-items: center; }
-  .qb-bubble { margin: 0 0 -28px; justify-self: stretch; border-radius: 18px 18px 18px 4px; }
+/* Tablets and phones: one centred axis. The board, the buttons and the terms line stack on it, and the
+   phone sits centred below with the request bubble on its left shoulder. */
+@media (max-width: 1140px) {
+  .hero-grid { grid-template-columns: 1fr; justify-items: center; gap: clamp(36px, 6vw, 56px); }
+  .hero-copy { width: 100%; max-width: 680px; display: grid; justify-items: center; }
+  .hero-copy .signboard { width: 100%; }
+  .hero-copy .btn-row { justify-content: center; }
+  .cta-line { justify-content: center; text-align: center; }
+  .qb { justify-items: center; }
+  .qb-stage { display: block; }
+  .qb-bubble { position: absolute; top: 96px; right: calc(100% - 16px); width: 220px; margin: 0; }
+}
+/* Too narrow for the shoulder: the bubble sits on top of the phone instead */
+@media (max-width: 720px) {
+  .qb-stage { display: grid; grid-template-columns: minmax(0, 1fr); justify-items: center; }
+  .qb-bubble { position: relative; top: auto; right: auto; width: auto; justify-self: stretch; margin: 0 0 -28px; border-radius: 18px 18px 18px 4px; }
   .qb-bubble p { min-height: 2.7em; }
 }
 @media (prefers-reduced-motion: reduce) { .lit, .qb-status { animation: none; } }
