@@ -19,3 +19,4 @@ Pushing `idea/banao` deploys https://amader.cloud. These are placeholders on the
 - [ ] `funding` in the same file is mock.
 - [ ] Privacy policy and terms (`web/src/pages/privacy.mdx`, `terms.mdx`) are drafts for lawyer review, written against the Personal Data Protection Act, 2026 (from a law firm's summary; check the gazetted text). The refund rule in the terms (first month back if the first app isn't live in 7 days) and the 7-day grace on failed payments are proposals.
 - [ ] Native-speaker check of the Bangla written in English letters in the demo (`web/src/scripts/demo.js`: `bn` prompts and replies).
+- [ ] Brand logos (bKash, Nagad, cards, banks, couriers, `web/public/assets/logos/`, listed in `web/src/data/brands.json`) are used without agreements: clear each brand's logo use, or switch back to names, before pushing. The connectors still say which are not yet integrated.
